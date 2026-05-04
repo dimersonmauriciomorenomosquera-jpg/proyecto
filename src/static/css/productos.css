@@ -1,0 +1,148 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#e8e3dc;
+}
+
+/* TOPBAR */
+.topbar{
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 30px;
+}
+
+.left-top{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:32px;
+    color:#c7a85d;
+    font-family:cursive;
+}
+
+/* MENU */
+.menu-container{
+    position:relative;
+}
+
+.menu-btn{
+    background:none;
+    border:none;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.menu-dropdown{
+    display:none;
+    position:absolute;
+    top:40px;
+    left:0;
+    background:black;
+    border:1px solid #c7a85d;
+}
+
+.menu-dropdown a{
+    display:block;
+    padding:10px 20px;
+    text-decoration:none;
+    color:white;
+}
+
+.menu-dropdown a:hover{
+    background:#333;
+}
+
+/* SEARCH */
+.search-box{
+    background:white;
+    border-radius:20px;
+    padding:5px 15px;
+    display:flex;
+    align-items:center;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+}
+
+/* SIDEBAR */
+.container{
+    display:flex;
+}
+
+.sidebar{
+    width:220px;
+    background:black;
+    color:white;
+    min-height:100vh;
+    padding:30px 20px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:15px 10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+
+.sidebar li.active{
+    background:#dcdcdc;
+    color:black;
+    border-radius:20px;
+}
+
+.version{
+    margin-top:40px;
+    font-size:12px;
+}
+
+/* PRODUCTS */
+.products{
+    flex:1;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+    padding:40px;
+}
+
+.card{
+    background:#f2ede6;
+    padding:20px;
+    border-radius:20px;
+}
+
+.card img{
+    width:100%;
+    border-radius:20px;
+    margin-bottom:10px;
+}
+
+.price{
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.counter{
+    background:#c7a85d;
+    color:white;
+    padding:5px 15px;
+    border-radius:20px;
+}

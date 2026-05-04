@@ -1,0 +1,42 @@
+
+{% extends "layout.html" %}
+    {%block contenido%}
+    <head>
+        <title>Inicio</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+    </head>
+    <div class="line">
+        </div>
+        <div class="serenity_mode" class="menu">Serenity <br> Mode <br> <p class="frase">“Crea tu estilo, vive Serenity Mode.”</p></div>
+        <div class="ropa-container">
+    <div class="ropa-texto">
+        <h2>Ropa</h2>
+        <p>"Viste con elegancia, camina <br> con confianza. Tu estilo <br> comienza aquí."</p>
+    </div>
+    <img src="https://st4.depositphotos.com/2931363/22195/i/450/depositphotos_221951462-stock-photo-confident-full-length-trendy-fashionable.jpg" class="ropa-img">
+    <img src="https://ocasojeans.com.co/cdn/shop/files/PantalonJeanCargoAnchoOversize-Azulclarofrost-3.jpg?v=1756243649&width=1946" class="ropa-img">
+    <img src="https://http2.mlstatic.com/D_NQ_NP_877543-MLM85418519851_052025-O.webp" class="ropa-img" >
+    <button class="boton-ver-catalogo" onclick="irInicio()"> Ver todo el catálogo</button>
+</div>
+        <div class="line2"></div>
+        <div class="zapatos-container">
+    <div class="zapatos-texto">
+        <h2>Zapatos</h2>
+        <p>Cada paso cuenta, haz que el <br> tuyo hable de ti."</p>
+    </div>
+    <img src="https://tenisi.co/cdn/shop/files/0C0B8F1C-840D-4CEB-A89E-7D44A98483DA.png?v=1721969224" class="zapatos-img">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ645Ihzs_cY2rdbabmeVclv0OigE37Ju3OA&s" class="zapatos-img">
+    <img src="https://i0.wp.com/urbancollectionoficial.com/wp-content/uploads/2021/05/Air-Jordan-4-Retro-Metallic-Red2.jpg?fit=1202%2C1140&ssl=1" class="zapatos-img">
+    <button class="boton-ver-catalogo" onclick="irInicio()"> Ver todo el catálogo</button>
+
+        <script>
+                function irInicio() {
+                window.location.href = "Pagina de inicio.html";
+                }
+        </script>
+        
+
+
+    </div>
+
+    {%endblock%}

@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+    {%block contenido%}
+<head>
+    <title>Carro de Compras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito.css') }}">
+</head>
+    <div class="frase">“Crea tu estilo, vive Serenity Mode.”</div>
+
+    <div class="container">
+
+        
+        <aside class="sidebar">
+            <h1>Carro de compras</h1>
+
+            <div class="carrito-img">
+                <img src="https://img.freepik.com/vector-premium/plantilla-vector-icono-carrito-compras-color-dorado_917138-3031.jpg">
+            </div>
+
+            <div class="total">
+                TOTAL: 280.000
+            </div>
+
+            <div class="pagar">
+                PAGAR
+            </div>
+        </aside>
+
+        
+        <main class="productos">
+
+            <!-- Producto 1 -->
+            <div class="producto">
+                <div class="imagen">
+                    <img src="https://nikeco.vtexassets.com/arquivos/ids/197130/125144900049.jpg?v=638343774195200000">
+                </div>
+                <div class="info">
+                    <p class="descripcion">
+                        Nike Air Force One – Clásicos que nunca fallan.
+                        Estilo urbano, comodidad total y materiales duraderos.
+                        Ideales para destacar tu look sin perder comodidad.
+                    </p>
+
+                    <div class="detalle">
+                        <div>
+                            Cantidad: 1 <br>
+                            talla:36 <br>
+                            precio:80.000
+                        </div>
+                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
+                    </div>
+                </div>
+            </div>
+
+        
+            <div class="producto">
+                <div class="imagen">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR74wK3B0POrxmnSLmoSCoa8xOXXXfbbiTg7g&s">
+                </div>
+                <div class="info">
+                    <p class="descripcion">
+                        Cadena de plata 925 – Estilo que perdura.
+                        Brillo, elegancia y autenticidad en cada detalle.
+                        Ideal para realzar tu outfit con clase.
+                    </p>
+
+                    <div class="detalle">
+                        <div>
+                            Cantidad: 1 <br>
+                            precio:10.000
+                        </div>
+                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="producto3">
+                <div class="imagen">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbitXew0c8cjtGbh-H-Dceh4dYYNizGAFQEg&s">
+                </div>
+                <div class="info">
+                    <p class="descripcion">
+                        Pantalón cargo Serenity – Comodidad y estilo urbano.
+                        Perfecto para destacar con actitud y funcionalidad.
+                        El básico infaltable en tu armario.
+                    </p>
+
+                    <div class="detalle">
+                        <div>
+                            Cantidad: 1 <br>
+                            talla:36 <br>
+                            precio:90.000
+                        </div>
+                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
+                    </div>
+                </div>
+            </div>
+            <script>
+                function toggleMenu(){
+                const menu = document.getElementById("menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+                }
+            </script>
+
+        </main>
+
+    </div>
+{%endblock%}

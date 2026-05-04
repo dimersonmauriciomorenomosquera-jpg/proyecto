@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+</head>
+<body>
+    <header class="topbar">
+            <div class="left-top">
+                <div class="menu-container">
+                    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+                    <div class="menu-dropdown" id="menu">
+                    <a href="carrito">Carrito de Compra</a>
+                    <a href="productos">Productos</a>
+                    <a href="pago">Metodo de Pago</a>
+                    <a href="registro">Registrarse</a>
+                    <a href="login">Login</a>
+                    </div>
+                </div>
+            </div>
+
+        <div class="user">👤</div>
+        </header>
+        <script>
+                function toggleMenu(){
+                const menu = document.getElementById("menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+                }
+        </script>
+        </div>
+
+    {%block contenido%}
+    {%endblock%}
+</body>
+</html>

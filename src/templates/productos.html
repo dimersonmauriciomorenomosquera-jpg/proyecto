@@ -1,0 +1,79 @@
+
+{% extends "layout.html" %}
+    {%block contenido%}
+<head>
+<title>Serenity Mode</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/productos.css') }}">
+</head>
+<body>
+<div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <ul>
+            <li class="active">Home</li>
+            <li>Olivia Wilson</li>
+            <li>Delivery</li>
+            <li>Settings</li>
+            <li>Cart</li>
+            <li>Message</li>
+            <li>Logout</li>
+        </ul>
+        <div class="version">V. 3.05</div>
+    </aside>
+
+    <!-- PRODUCTOS -->
+    <main class="products">
+
+        <div class="card">
+            <img src="https://blackmountain.com.co/cdn/shop/files/Capturadepantalla2024-05-03ala_s_3.35.56a.m..png?v=1714759361&width=1445">
+            <p>Saco par dama</p>
+            <div class="price">$ 99.999
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk5rH81Q7cfG_bvGE5ByuWxbsG7ekO86FFcw&s">
+            <p>Reloj hombre</p>
+            <div class="price">$ 120.999
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3uIKZe9e32YWo20uRl7HC6BNKBP_yTTx50Q&s">
+            <p>Cadena cubana</p>
+            <div class="price">$ 150.000
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/36b6c2eebd7a447297b297afede5e97a_9366/Tenis_adidas_Grand_Court_TD_Lifestyle_Court_Casual_Blanco_GW9250_HM1.jpg">
+            <p>Adidas oggy</p>
+            <div class="price">$ 100.000
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://www.sportline.com.co/media/catalog/product/u/5/u530sma_frontf1-01.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:">
+            <p>Adidas Campus</p>
+            <div class="price">$ 110.999
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8g6E0Zz4XA8f5X5ElMs-lEJvnBnJDeAYFfw&s">
+            <p>Chaqueta North Face</p>
+            <div class="price">$ 130.000
+                <div class="counter">- 1 +</div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+{%endblock%}

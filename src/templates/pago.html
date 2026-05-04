@@ -1,0 +1,48 @@
+
+{% extends "layout.html" %}
+    {%block contenido%}
+
+<head>    
+    <title>Forma de Pago</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pago.css') }}">
+</head>
+
+        <div class="frase">“Crea tu estilo, vive Serenity Mode.”</div>
+        </header>
+
+    <div class="container">
+
+        
+        <aside class="sidebar">
+            <h1>Forma de pago</h1>
+
+            <div class="carrito-img">
+                <img src="https://img.freepik.com/vector-premium/plantilla-tienda-descuento-cartel-colgante-oro-venta_917138-4983.jpg">
+            </div>
+
+            <div class="total">
+            <h1>TOTAL: 280.000</h1>
+
+        </aside>
+    <div class="principal">
+        <div class="fondo"></div>
+        <div class="recuadro">
+            <h2 >Metodo de Pagos</h2>
+            <div class="targeta">
+            <img src="https://thumbs.dreamstime.com/b/oro-tarjeta-de-cr%C3%A9dito-icono-aislado-sobre-fondo-negro-pago-en-l%C3%ADnea-retirada-efectivo-operaciones-financieras-se%C3%B1al-compra-216214384.jpg " class="imagentarjeta" alt="Tarjeta">
+            <div class="aa">Tarjeta</div>
+            <img src="https://img.freepik.com/vector-gratis/plantilla-tarjeta-vip-realista-detalles-dorados_23-2149125076.jpg" class="imagen2"> <img src="https://www.bancolombia.com/wcm/connect/www.bancolombia.com-26918/c7656f31-3780-4592-9d98-fd446dd16627/visa+infinite.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_9O44G4S049MAD06H7SNS78IMS1-c7656f31-3780-4592-9d98-fd446dd16627-nXmdCdH" class="imagen3">
+            <img src="https://cdn.sanity.io/images/whc4dqyy/production/0fa6eafd16661f74ea42758573a9e72d21812ab7-1712x1080.png/NU.png?w=800&fit=max&auto=format" class="imagen4">
+            </div>
+            <h3>Datos de Tarjeta</h3>
+            <h4 class="numero">Numero de Tarjeta</h4>
+            <input type="number" placeholder="💳 1234 5678 8912 3456" class="container2">
+            <h4 class="numero">Nombre del Titular </h4>
+            <input type="text" placeholder="Juan Perez" class="titular"><input type="text" placeholder="Fecha de Expedición" class="titular">
+            <h3>Otros Métodos</h3>
+            <input type="button" value="🅿️ PayPal" class="metodos"> <input type="button" value="🄽equi" class="metodos"> 
+            <input type="submit" value="Pagar 280.000" class="paga">
+        </div>
+    </div>
+
+{%endblock%}
