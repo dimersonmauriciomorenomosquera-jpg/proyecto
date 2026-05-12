@@ -1,0 +1,106 @@
+{% extends "layout.html" %}
+    {%block contenido%}
+<head>
+    <title>Perfil Persona</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
+</head>
+
+
+
+<div class="container">
+
+    
+    <div class="perfil-card">
+        <img src="https://picsum.photos/300/300" alt="Foto Perfil">
+
+        <h1>MAITE ALLENDE</h1>
+
+        <div class="lineas"></div>
+
+        <p class="subtitulo">PERFIL DE USER PERSONA</p>
+
+        <div class="info">
+            <p>Edad: 30 años</p>
+            <p>Profesión: Arquitecta</p>
+            <p>Ciudad: Barcelona</p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DERECHO -->
+    <div class="contenido">
+
+        <!-- CARD PERFIL -->
+        <div class="card perfil">
+            <h2>• MI PERFIL</h2>
+
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi.
+            </p>
+
+            <h2>• IDIOMAS</h2>
+
+            <div class="idioma">
+                <div class="texto">
+                    <span>Inglés</span>
+                    <span>85 %</span>
+                </div>
+
+                <div class="barra">
+                    <div class="progreso ingles"></div>
+                </div>
+            </div>
+
+            <div class="idioma">
+                <div class="texto">
+                    <span>Francés</span>
+                    <span>64 %</span>
+                </div>
+
+                <div class="barra">
+                    <div class="progreso frances"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="lado-derecho">
+
+            <div class="card personalidad">
+                <h2>• PERSONALIDAD</h2>
+
+                <ul>
+                    <li>Independiente</li>
+                    <li>Viajera</li>
+                    <li>Sensible</li>
+                </ul>
+            </div>
+
+            <div class="card metas">
+                <h2>• METAS</h2>
+
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- FRASE -->
+        <div class="frases">
+            <p>
+                “Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”
+            </p>
+
+            <img src="https://picsum.photos/100/100" alt="Mini Foto">
+        </div>
+
+    </div>
+
+</div>
+
+
+{%endblock%}

@@ -7,42 +7,269 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pago.css') }}">
 </head>
 
-        <div class="frase">“Crea tu estilo, vive Serenity Mode.”</div>
+<body>
+
+    <div class="checkout-container">
+
+        <button class="volver" onclick="window.history.back()">
+            ← Volver
+        </button>
+
+        <header class="top-bar">
+            <div class="logo">
+                <h1>SERENITY</h1>
+                <span>MODE</span>
+            </div>
+
+            <div class="secure">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                    <p>PAGO 100% SEGURO</p>
+                    <small>Tu información está protegida</small>
+                </div>
+            </div>
         </header>
 
-    <div class="container">
+        <main class="payment-layout">
 
-        
-        <aside class="sidebar">
-            <h1>Forma de pago</h1>
+            <section class="summary">
 
-            <div class="carrito-img">
-                <img src="https://img.freepik.com/vector-premium/plantilla-tienda-descuento-cartel-colgante-oro-venta_917138-4983.jpg">
+                <h2>RESUMEN DE TU PEDIDO</h2>
+
+                <div class="product">
+
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop" alt="producto">
+
+                    <div class="product-info">
+                        <h3>Conjunto Serenity Linen</h3>
+                        <p>Talla: M </p>
+                        <p>Color: Beige</p>
+                        <span>$89.90</span>
+                    </div>
+
+                </div>
+
+                <div class="totals">
+
+                    <div class="row">
+                        <p>Subtotal</p>
+                        <span>$89.90</span>
+                    </div>
+
+                    <div class="row">
+                        <p>Envío</p>
+                        <span class="gold">Gratis</span>
+                    </div>
+
+                    <div class="row">
+                        <p>Impuestos</p>
+                        <span>$0.00</span>
+                    </div>
+
+                </div>
+
+                <div class="final-total">
+
+                    <p>TOTAL</p>
+                    <span>$89.90 USD</span>
+
+                </div>
+
+                <div class="message-box">
+
+                    <i class="fa-solid fa-gift"></i>
+
+                    <div>
+                        <p>En Serenity Mode, cada detalle está pensado para ti.</p>
+                        <small>Gracias por elegirnos.</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="payment-method">
+
+                <h2>MÉTODO DE PAGO</h2>
+                <p class="subtitle">
+                    Elige la opción que prefieras para completar tu compra.
+                </p>
+
+                <div class="method active">
+
+                    <div class="left">
+                        <input type="radio" checked>
+                        <i class="fa-regular fa-credit-card"></i>
+
+                        <div>
+                            <h3>Tarjeta de crédito o débito</h3>
+                            <p>Visa, Mastercard, American Express</p>
+                        </div>
+                    </div>
+
+                    <div class="brands">
+                        <span>VISA</span>
+                        <span>MC</span>
+                        <span>AMEX</span>
+                    </div>
+
+                </div>
+
+                <div class="method">
+
+                    <div class="left">
+                        <input type="radio">
+                        <i class="fa-brands fa-paypal"></i>
+
+                        <div>
+                            <h3>PayPal</h3>
+                            <p>Paga de forma rápida y segura</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="method">
+
+                    <div class="left">
+                        <input type="radio">
+                        <i class="fa-brands fa-apple"></i>
+
+                        <div>
+                            <h3>Apple Pay</h3>
+                            <p>Paga fácilmente con Apple Pay</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="method">
+
+                    <div class="left">
+                        <input type="radio">
+                        <i class="fa-brands fa-google"></i>
+
+                        <div>
+                            <h3>Google Pay</h3>
+                            <p>Paga fácilmente con Google Pay</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="pay-btn">
+                    <i class="fa-solid fa-lock"></i>
+                    PAGAR AHORA
+                </button>
+
+                <p class="terms">
+                    Al continuar, aceptas nuestros Términos y Condiciones y Política de Privacidad.
+                </p>
+
+            </section>
+
+        </main>
+
+        <footer class="features">
+
+            <div class="feature">
+                <i class="fa-solid fa-truck"></i>
+                <div>
+                    <h4>ENVÍO GRATIS</h4>
+                    <p>En todos los pedidos</p>
+                </div>
             </div>
 
-            <div class="total">
-            <h1>TOTAL: 280.000</h1>
-
-        </aside>
-    <div class="principal">
-        <div class="fondo"></div>
-        <div class="recuadro">
-            <h2 >Metodo de Pagos</h2>
-            <div class="targeta">
-            <img src="https://thumbs.dreamstime.com/b/oro-tarjeta-de-cr%C3%A9dito-icono-aislado-sobre-fondo-negro-pago-en-l%C3%ADnea-retirada-efectivo-operaciones-financieras-se%C3%B1al-compra-216214384.jpg " class="imagentarjeta" alt="Tarjeta">
-            <div class="aa">Tarjeta</div>
-            <img src="https://img.freepik.com/vector-gratis/plantilla-tarjeta-vip-realista-detalles-dorados_23-2149125076.jpg" class="imagen2"> <img src="https://www.bancolombia.com/wcm/connect/www.bancolombia.com-26918/c7656f31-3780-4592-9d98-fd446dd16627/visa+infinite.jpg?MOD=AJPERES&CACHEID=ROOTWORKSPACE.Z18_9O44G4S049MAD06H7SNS78IMS1-c7656f31-3780-4592-9d98-fd446dd16627-nXmdCdH" class="imagen3">
-            <img src="https://cdn.sanity.io/images/whc4dqyy/production/0fa6eafd16661f74ea42758573a9e72d21812ab7-1712x1080.png/NU.png?w=800&fit=max&auto=format" class="imagen4">
+            <div class="feature">
+                <i class="fa-solid fa-box"></i>
+                <div>
+                    <h4>DEVOLUCIONES FÁCILES</h4>
+                    <p>30 días para cambios</p>
+                </div>
             </div>
-            <h3>Datos de Tarjeta</h3>
-            <h4 class="numero">Numero de Tarjeta</h4>
-            <input type="number" placeholder="💳 1234 5678 8912 3456" class="container2">
-            <h4 class="numero">Nombre del Titular </h4>
-            <input type="text" placeholder="Juan Perez" class="titular"><input type="text" placeholder="Fecha de Expedición" class="titular">
-            <h3>Otros Métodos</h3>
-            <input type="button" value="🅿️ PayPal" class="metodos"> <input type="button" value="🄽equi" class="metodos"> 
-            <input type="submit" value="Pagar 280.000" class="paga">
-        </div>
+
+            <div class="feature">
+                <i class="fa-regular fa-star"></i>
+                <div>
+                    <h4>CALIDAD PREMIUM</h4>
+                    <p>Seleccionamos lo mejor para ti</p>
+                </div>
+            </div>
+
+        </footer>
+
     </div>
+
+</body>
+        
+ <script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+function mostrarResumen() {
+
+    let contenedor = document.querySelector(".summary");
+
+    let subtotal = 0;
+
+    let html = `<h2>RESUMEN DE TU PEDIDO</h2>`;
+
+    carrito.forEach(item => {
+
+        let totalProducto = item.precio * item.cantidad;
+        subtotal += totalProducto;
+
+        html += `
+        <div class="product">
+
+            <img src="${item.imagen}" alt="producto">
+
+            <div class="product-info">
+                <h3>${item.nombre}</h3>
+                <p>Talla: ${item.talla || "Sin talla"} | Cantidad: ${item.cantidad}</p>
+                <span>$ ${item.precio.toLocaleString('es-CO')}</span>
+            </div>
+
+        </div>
+        `;
+    });
+
+    html += `
+    <div class="totals">
+
+    <div class="row">
+        <p>Subtotal</p>
+        <span>$ ${subtotal.toLocaleString('es-CO')}</span>
+    </div>
+
+    <div class="row">
+        <p>Envío</p>
+        <span class="gold">Gratis</span>
+    </div>
+
+    <div class="row">
+        <p>Impuestos</p>
+        <span>$ ${iva.toLocaleString('es-CO')}</span>
+    </div>
+
+</div>
+
+<div class="final-total">
+    <p>TOTAL</p>
+    <span> ${total.toLocaleString('es-CO')}</span>
+</div>
+    `;
+
+    contenedor.innerHTML = html;
+}
+let subtotal = 0;
+
+carrito.forEach(item => {
+    subtotal += item.precio * item.cantidad;
+});
+
+let iva = subtotal * 0.19;
+let total = subtotal + iva;
+window.onload = mostrarResumen;
+</script>   
 
 {%endblock%}

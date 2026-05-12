@@ -5,80 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
-    background:#e8e3dc;
-}
 
-/* TOPBAR */
-.topbar{
-    background:black;
-    color:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 30px;
-}
-
-.left-top{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.logo{
-    font-size:32px;
-    color:#c7a85d;
-    font-family:cursive;
-}
-
-/* MENU */
-.menu-container{
-    position:relative;
-}
-
-.menu-btn{
-    background:none;
-    border:none;
-    color:white;
-    font-size:24px;
-    cursor:pointer;
-}
-
-.menu-dropdown{
-    display:none;
-    position:absolute;
-    top:40px;
-    left:0;
-    background:black;
-    border:1px solid #c7a85d;
-}
-
-.menu-dropdown a{
-    display:block;
-    padding:10px 20px;
-    text-decoration:none;
-    color:white;
-}
-
-.menu-dropdown a:hover{
-    background:#333;
-}
-
-/* SEARCH */
-.search-box{
-    background:white;
-    border-radius:20px;
-    padding:5px 15px;
-    display:flex;
-    align-items:center;
-}
-
-.search-box input{
-    border:none;
-    outline:none;
-}
-
-/* SIDEBAR */
 .container{
     display:flex;
 }
@@ -107,18 +34,14 @@ body{
     border-radius:20px;
 }
 
-.version{
-    margin-top:40px;
-    font-size:12px;
-}
 
-/* PRODUCTS */
+
 .products{
     flex:1;
     display:grid;
     grid-template-columns:repeat(3, 1fr);
     gap:30px;
-    padding:40px;
+    
 }
 
 .card{
@@ -127,22 +50,212 @@ body{
     border-radius:20px;
 }
 
-.card img{
-    width:100%;
-    border-radius:20px;
-    margin-bottom:10px;
+.card img {
+    width: 100%;
+    height: 200px;       /* 🔥 altura fija */
+    object-fit: cover;   /* 🔥 recorta sin deformar */
+    border-radius: 20px;
+    margin-bottom: 10px;
 }
 
 .price{
-    margin-top:10px;
+    font-size: 25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    
 }
 
-.counter{
+.producto{
     background:#c7a85d;
     color:white;
-    padding:5px 15px;
+    padding:5px 30px;
     border-radius:20px;
+    font-size: 25px;
+}
+.producto button {
+    background: none;   
+    border: none;       
+    color: white;       
+    font-size: 25px;
+    cursor: pointer;
+}
+.carrito{
+padding: 10px 60px;
+background:#c7a85d;
+color: white;
+margin-top: 20px;
+margin-left: 110px;
+font-size: 20px;
+border-radius: 20px;
+}
+h2{
+    padding: 0;
+    margin: 0;
+}
+.frase{
+    margin-left: 50%;
+}
+
+.usuario{
+    padding: 10px;
+    width: 180px;
+    font-size: 18px;
+    border-radius: 20px;
+    text-align:start;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 10px;
+}
+.usuario-container{
+    position:absolute;
+    z-index: 1000;
+}
+
+.menu-btn {
+    background:none;
+    border:none;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    margin: 15px;
+    margin-left: 30px;
+    
+}
+.menu-dropdown{
+    display:none;
+    position:absolute;
+    top:40px;
+    left:0px;
+    background:black;
+    border:1px solid #c7a85d;
+}
+
+.usuario-menu {
+    display:none;
+    position:absolute;
+    top:40px;
+    margin-left: 50px;
+    background:black;
+    border:1px solid #c7a85d;
+}
+.usuario-menu a{
+    display:block;
+    padding:10px 20px;
+    text-decoration:none;
+    color:white;
+}
+
+.usuario-menu a:hover{
+    background:#333;
+}
+
+.menu-dropdown a{
+    display:block;
+    padding:10px 20px;
+    text-decoration:none;
+    color:white;
+    z-index: 1000;
+}
+
+.menu-dropdown a:hover{
+    background:#333;
+}
+
+.menu, .user{
+    font-size:22px;
+}
+.home{
+    padding: 10px 70%;
+    font-size: 18px;
+    border-radius: 20px;
+    text-align:start;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 20px;
+}
+.home-container{
+    position:absolute;
+    z-index: 1000;
+}
+.home-menu {
+    display:none;
+    position:absolute;
+    top:0px;
+    margin-left: 190px;
+    background:black;
+    border:1px solid #c7a85d;
+
+}
+.home-menu a{
+    display:block;
+    padding:10px 20px;
+    text-decoration:none;
+    color:white;
+}
+
+.home-menu a:hover{
+    background:#333;
+}
+.menu-container{
+    position:absolute;
+    z-index: 1000;
+
+}
+.user-container{
+    position:absolute;
+    z-index: 1000;
+}
+
+
+.user-menu{
+    visibility: hidden;
+}
+.user-menu a{
+    visibility: hidden;
+}
+
+.user-menu a:hover{
+    visibility: hidden;
+}
+
+
+.menu, .user{
+    visibility: hidden;
+}
+
+.user{
+    visibility: hidden;
+}
+.todos, .dama , .caballero, .accesorios, .zapatos{
+    padding: 10px;
+    width: 180px;
+    font-size: 18px;
+    border-radius: 20px;
+    text-align:start;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 20px;
+    background:  #c7a85d;
+}
+.frase{
+    visibility: hidden;
+}
+.zapatos{
+    margin-bottom: 20px;
+}
+.opinion{
+    color: black;
+    font-size: 20px;
+
+}
+.estrellas {
+    color: gold;
+    font-size:35px;
+    align-items: center;
 }

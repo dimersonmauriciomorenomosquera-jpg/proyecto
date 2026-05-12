@@ -4,7 +4,8 @@
     <title>Carro de Compras</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito.css') }}">
 </head>
-    <div class="frase">“Crea tu estilo, vive Serenity Mode.”</div>
+
+    
 
     <div class="container">
 
@@ -15,94 +16,153 @@
             <div class="carrito-img">
                 <img src="https://img.freepik.com/vector-premium/plantilla-vector-icono-carrito-compras-color-dorado_917138-3031.jpg">
             </div>
-
+            
             <div class="total">
-                TOTAL: 280.000
-            </div>
+    TOTAL: <span id="total">0</span>
+</div>
+            
 
-            <div class="pagar">
-                PAGAR
-            </div>
+        <button class="pagar" onclick="irAPago()">
+    PAGAR
+</button>
         </aside>
 
         
-        <main class="productos">
-
-            <!-- Producto 1 -->
-            <div class="producto">
-                <div class="imagen">
-                    <img src="https://nikeco.vtexassets.com/arquivos/ids/197130/125144900049.jpg?v=638343774195200000">
-                </div>
-                <div class="info">
-                    <p class="descripcion">
-                        Nike Air Force One – Clásicos que nunca fallan.
-                        Estilo urbano, comodidad total y materiales duraderos.
-                        Ideales para destacar tu look sin perder comodidad.
-                    </p>
-
-                    <div class="detalle">
-                        <div>
-                            Cantidad: 1 <br>
-                            talla:36 <br>
-                            precio:80.000
-                        </div>
-                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
-                    </div>
-                </div>
-            </div>
-
         
-            <div class="producto">
-                <div class="imagen">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR74wK3B0POrxmnSLmoSCoa8xOXXXfbbiTg7g&s">
-                </div>
-                <div class="info">
-                    <p class="descripcion">
-                        Cadena de plata 925 – Estilo que perdura.
-                        Brillo, elegancia y autenticidad en cada detalle.
-                        Ideal para realzar tu outfit con clase.
-                    </p>
 
-                    <div class="detalle">
-                        <div>
-                            Cantidad: 1 <br>
-                            precio:10.000
-                        </div>
-                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
-                    </div>
-                </div>
-            </div>
+        <main class="productos">
+    <div id="carrito"></div>
+</main>
 
-            
-            <div class="producto3">
-                <div class="imagen">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbitXew0c8cjtGbh-H-Dceh4dYYNizGAFQEg&s">
-                </div>
-                <div class="info">
-                    <p class="descripcion">
-                        Pantalón cargo Serenity – Comodidad y estilo urbano.
-                        Perfecto para destacar con actitud y funcionalidad.
-                        El básico infaltable en tu armario.
-                    </p>
 
-                    <div class="detalle">
-                        <div>
-                            Cantidad: 1 <br>
-                            talla:36 <br>
-                            precio:90.000
-                        </div>
-                        <img src="https://thumbs.dreamstime.com/b/basura-estilo-caricatura-con-tapa-parcialmente-abierta-en-blanco-dibujo-de-un-cubo-metal-gris-la-aislada-fondo-ideal-para-el-378376000.jpg">
-                    </div>
-                </div>
-            </div>
-            <script>
-                function toggleMenu(){
-                const menu = document.getElementById("menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-            </script>
 
         </main>
+<script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    </div>
+// MOSTRAR
+function mostrarCarrito() {
+    let contenedor = document.getElementById("carrito");
+    contenedor.innerHTML = "";
+
+    let total = 0;
+
+    carrito.forEach((item, index) => {
+
+        if(!item.cantidad){
+        item.cantidad = 1;
+    }
+
+    let subtotal = item.precio * item.cantidad;
+
+    total += subtotal;
+
+
+        contenedor.innerHTML += `
+            <div class="producto">
+
+                <div class="imagen">
+                    <img src="${item.imagen}" width="120">
+                </div>
+
+                <div class="info">
+
+                    <h3 class="nombre">${item.nombre}</h3>
+
+                    <p>${item.descripcion}</p>
+
+                    <p class="precio" >Precio: ${formatear(item.precio)}</p>
+
+                    <p class="sub">Subtotal: ${formatear(subtotal)}</p>
+
+                    <p><strong>Talla:</strong> ${item.talla ? item.talla : "Sin talla"}</p>
+
+                    <div class="cantidad">
+                        <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                        <span>${item.cantidad}</span>
+                        <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                    </div>
+
+                    <button class="eliminar" onclick="eliminar(${index})">Eliminar</button>
+
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = formatear(total);
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+// AGREGAR
+function agregarCarrito(nombre, precio, imagen, descripcion) {
+
+    let productoExistente = carrito.find(item => item.nombre === nombre &&
+    item.talla === tallas);
+
+    if (productoExistente) {
+        productoExistente.cantidad += 1;
+    } else {
+        carrito.push({
+            nombre,
+            precio: Number(precio),
+            imagen,
+            descripcion,
+            talla: talla  || "sin talla",
+            cantidad: 1
+            
+        });
+    }
+
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+// CAMBIAR CANTIDAD
+function cambiarCantidad(index, valor) {
+
+    carrito[index].cantidad += valor;
+
+    if (carrito[index].cantidad < 1) {
+        carrito.splice(index, 1);
+    }
+
+    mostrarCarrito();
+}
+
+// ELIMINAR
+function eliminar(index) {
+    carrito.splice(index, 1);
+    mostrarCarrito();
+}
+
+// FORMATO
+function formatear(valor) {
+    return valor.toLocaleString('es-CO');
+}
+
+// INICIAR
+mostrarCarrito();
+function formatear(valor) {
+    return Number(valor).toLocaleString('es-CO');
+}
+function formatear(valor) {
+    return "$ " + Number(valor).toLocaleString('es-CO');
+}
+
+function irAPago(){
+
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    if(carrito.length === 0){
+        alert("Tu carrito está vacío");
+        return;
+    }
+
+    window.location.href = "/pago";
+}
+</script>
+
+
 {%endblock%}

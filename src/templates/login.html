@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
+    {%block contenido%}
 <head>
     <title>login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     </div>
 </head>
 <body>
     <aside class="menu">
         <div class="serenity">Serenity Mode</div>
-        <img src="serenity.PNG" alt="logo serenity mode" class="img">
-        <div class="frase">Crea tu estilo, Vive Serenity Mode</div>
-        <img src="fondo.jpg" class="fondo"></a>
+        <img src="{{ url_for('static', filename='img/serenity.png') }}" class="img"> 
+        <div class="frases">Crea tu estilo, Vive Serenity Mode</div>
     </aside>    
             <form>
                 <h1>login</h1>
@@ -26,5 +25,5 @@
             </form>
 
     </main>
-</body>
-</html>
+    
+{%endblock%}

@@ -33,20 +33,26 @@
     height: 120%;
 }
 
+#total{
+    font-size:35px;
+    text-align: center;
+}
 .total{
-    font-size:28px;
-    margin-top:20px;
+    font-size: 35px;
     text-align: center;
 }
 
 .pagar{
-    margin-top:50px;
+    margin-top:60px;
     font-size:28px;
-    text-align:center;
     cursor:pointer;
-    background: #000;
+    background:#c7a85d;
+    color: #eee;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-left: 35%;
 }
-
 .productos{
     width:70%;
     padding:40px;
@@ -65,40 +71,94 @@
 .imagen{
     border:2px solid black;
     width:300px;
-    height:200px;
     display:flex;
     align-items:center;
     justify-content:center;
     background:white;
+    overflow:hidden;
 }
 
 .imagen img{
-    max-width:100%;
-    max-height:100%;
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
+
 
 .info{
     margin-left:30px;
     width:100%;
+    background:black;
+    color:white;
+    padding:20px;
+    border-radius:15px;
+    line-height:30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
+
 
 .descripcion{
     font-size:15px;
     margin-bottom:15px;
 }
 
-.detalle{
-    background:black;
-    color:white;
-    padding:20px;
-    border-radius:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:400px;
+
+
+.precio , .nombre{
+    color: #c7a85d;
+    font-size: 20px;
 }
 
-.detalle img{
-    width:70px;
+
+.frase{
+    margin-left: 750px;
+    position: absolute;
+}
+.Serenity{
+    visibility: hidden;
+}
+.search-box{
+    visibility: hidden;
+}
+.cantidad button{
+    width:45px;
+    height:45px;
+    border:none;
+    background:#eee;
+    border-radius:8px;
     cursor:pointer;
+    font-size:30px;
+}
+.cantidad{
+    display:flex;
+    align-items:center;
+    gap:30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 0 250px;
+}
+
+.eliminar{
+    height:40px;
+    padding:0 45px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background: #c7a85d;
+    color:white;
+    
+}
+.sub{
+    font-size: 15px;
+}
+h1{
+    font-style: italic;
+}
+span , .total{
+    font-style: italic;
+}
+.total{
+    font-size: 30px;
 }

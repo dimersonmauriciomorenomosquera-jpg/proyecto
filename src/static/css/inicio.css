@@ -2,7 +2,10 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+body{
+    background:#e8e3dc;
+}
 }
 .line{
     background: white;
@@ -39,15 +42,18 @@
 p{
     text-align: justify;
     margin-top: 5px;
+    font-style: italic;
+
 }
 .line2{
     background: grey;
-    width: 1160px;
+    width: 1260px;
     height: 3px;
-    margin-left: 110px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 100px ;
 }
-.frase{
+.frases{
     font-size: 20px;
     color: white;
     text-align: center;
@@ -85,5 +91,38 @@ font-weight: bold;
 transition: background-color 0.3s;
 
 }
+.frase{
+    visibility: hidden;
+}
 
-
+.accesorios {
+    display: flex;
+    align-items: center; 
+    gap: 80px;
+    margin-left: 100px;
+    margin-top: 80px;
+    position: absolute;
+}
+.line3{
+    background: grey;
+    width: 1260px;
+    height: 3px;
+    margin-left: 100px;
+    position:absolute;
+    margin-top: 50px;
+}
+.accesorios-texto{
+    padding-right: 30px;
+}
+.user{
+    position:absolute;
+    top:3%;
+    left:55%;
+    transform:translate(-50%, -50%);
+}
+.Serenity{
+    visibility: hidden;
+}
+.search-box{
+    visibility: hidden;
+}

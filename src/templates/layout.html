@@ -3,22 +3,49 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
 </head>
-<body>
+<body >
     <header class="topbar">
             <div class="left-top">
                 <div class="menu-container">
                     <button class="menu-btn" onclick="toggleMenu()">☰</button>
                     <div class="menu-dropdown" id="menu">
-                    <a href="carrito">Carrito de Compra</a>
-                    <a href="productos">Productos</a>
-                    <a href="pago">Metodo de Pago</a>
-                    <a href="registro">Registrarse</a>
-                    <a href="login">Login</a>
-                    </div>
+
+    {% if request.path != '/carrito' %}
+    <a href="{{ url_for('carrito') }}">Carrito</a>
+    {% endif %}
+
+    {% if request.path != '/productos' %}
+    <a href="{{ url_for('productos') }}">Productos</a>
+    {% endif %}
+
+    {% if request.path != '/pago' %}
+    <a href="{{ url_for('pago') }}">Metodo de Pago</a>
+    {% endif %}
+
+    {% if request.path != '/inicio' and request.path != '/' %}
+    <a href="{{ url_for('inicio') }}">Inicio</a>
+    {% endif %}
+
+</div>
                 </div>
             </div>
+        <div class="frase">"Crea tu Estilo, Vive Serenity Mode"</div>
+        <div class="Serenity">Serenity Mode</div>
+        <div class="left-top">
+                <div class="user-container">
+                    <button class="user" onclick="toggleUser()">👤</button>
+                    <div class="user-menu" id="ingreso">
+                    <a href="registro">Registrarse</a>
+                    <a href="login">Login</a>
+                    <a href="usuario">Informacion</a>
+                    </div>
+                </div>
+        <div class="search-box">
+    <input type="text" id="buscador" placeholder="Buscar productos...">
+    
+    <i class="fa-solid fa-magnifying-glass"></i>
+</div>
 
-        <div class="user">👤</div>
         </header>
         <script>
                 function toggleMenu(){
@@ -26,8 +53,43 @@
                 menu.style.display = menu.style.display === "block" ? "none" : "block";
                 }
         </script>
+        <script>
+                function toggleUser(){
+                const menu = document.getElementById("ingreso");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+                }
+        </script>
         </div>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
 
+    const buscador = document.getElementById("buscador");
+    const productos = document.querySelectorAll(".card");
+
+    if(buscador){
+
+        buscador.addEventListener("keyup", () => {
+
+            let texto = buscador.value.toLowerCase();
+
+            productos.forEach(producto => {
+
+                let contenido = producto.innerText.toLowerCase();
+
+                if(contenido.includes(texto)) {
+                    producto.style.display = "block";
+                } else {
+                    producto.style.display = "none";
+                }
+
+            });
+
+        });
+
+    }
+
+});
+</script>
     {%block contenido%}
     {%endblock%}
 </body>

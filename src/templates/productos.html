@@ -8,72 +8,486 @@
 <body>
 <div class="container">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-        <ul>
-            <li class="active">Home</li>
-            <li>Olivia Wilson</li>
-            <li>Delivery</li>
-            <li>Settings</li>
-            <li>Cart</li>
-            <li>Message</li>
-            <li>Logout</li>
-        </ul>
-        <div class="version">V. 3.05</div>
+        
+    <div class="filtros">
+
+    <button class="todos" onclick="filtrarProductos('todos')">Home</button>
+
+    <button class="dama"  onclick="filtrarProductos('dama')">Dama</button>
+
+    <button class="caballero"  onclick="filtrarProductos('caballero')">Caballero</button>
+
+    <button class="accesorios" onclick="filtrarProductos('accesorios')">Accesorios</button>
+
+    <button class="zapatos" onclick="filtrarProductos('zapatos')">Zapatos</button>
+
+    </div>
+            <div class="usuario-container">
+                    <button class="usuario" onclick="toggleUser()">👤</button>
+                    <div class="usuario-menu" id="usuario">
+                    <a href="usuario">Informacion</a>    
+                    <a href="login">Cerrar Sesión</a>
+                    </div>
+                </div>
+            
+        
     </aside>
 
-    <!-- PRODUCTOS -->
-    <main class="products">
 
-        <div class="card">
+    <main class="products">  
+
+        <div  class="card"  data-categoria=" dama ropa" onclick="verDescripcion('saco-dama')">
             <img src="https://blackmountain.com.co/cdn/shop/files/Capturadepantalla2024-05-03ala_s_3.35.56a.m..png?v=1714759361&width=1445">
-            <p>Saco par dama</p>
+            <h2>Saco para dama</h2>
             <div class="price">$ 99.999
-                <div class="counter">- 1 +</div>
+
             </div>
+        <div class="estrellas">
+
+            <span id="estrellas-saco-dama">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-saco-dama">(0 opiniones)</span>
+        </div>
         </div>
 
-        <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk5rH81Q7cfG_bvGE5ByuWxbsG7ekO86FFcw&s">
-            <p>Reloj hombre</p>
+        <div class="card" data-categoria="accesorios" onclick="verDescripcion('reloj-hombre')" >
+            <img src="https://exitocol.vtexassets.com/arquivos/ids/18895297/reloj-hombre-megir-plateado-formal-meg-8.jpg?v=638219432937530000">
+            <h2>Reloj Hombre</h2>
             <div class="price">$ 120.999
-                <div class="counter">- 1 +</div>
             </div>
+            <div class="estrellas">
+
+        <span id="estrellas-reloj-hombre">☆☆☆☆☆</span>
+
+        <span class="opinion" id="cantidad-reloj-hombre">(0 opiniones)</span>
+
+    </div>
         </div>
 
-        <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3uIKZe9e32YWo20uRl7HC6BNKBP_yTTx50Q&s">
-            <p>Cadena cubana</p>
+        <div class="card" data-categoria="accesorios" onclick="verDescripcion('cadena-cubana')">
+            <img src="https://m.media-amazon.com/images/I/81X8Hb05PvL._AC_UY1000_.jpg">
+            <h2>Cadena cubana</h2>
             <div class="price">$ 150.000
-                <div class="counter">- 1 +</div>
             </div>
+            <div class="estrellas">
+
+            <span id="estrellas-cadena-cubana">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-cadena-cubana">(0 opiniones)</span>
+        </div>
         </div>
 
-        <div class="card">
-            <img src="https://assets.adidas.com/images/w_600,f_auto,q_auto/36b6c2eebd7a447297b297afede5e97a_9366/Tenis_adidas_Grand_Court_TD_Lifestyle_Court_Casual_Blanco_GW9250_HM1.jpg">
-            <p>Adidas oggy</p>
+        <div class="card"  data-categoria="zapatos"  onclick="verDescripcion('force-one')" >
+            <img src="https://fenixstore.com.co/wp-content/uploads/2023/08/WhatsApp-Image-2021-01-09-at-18.33.26-1-1.jpeg">
+            <h2>Nike Force One</h2>
             <div class="price">$ 100.000
-                <div class="counter">- 1 +</div>
-            </div>
-        </div>
+                </div>
+                <div class="estrellas">
 
-        <div class="card">
+            <span id="estrellas-force-one">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-force-one">(0 opiniones)</span>
+        </div>
+            </div>
+
+        <div class="card"   data-categoria="zapatos"  onclick="verDescripcion('new-balance')">
             <img src="https://www.sportline.com.co/media/catalog/product/u/5/u530sma_frontf1-01.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=&width=&canvas=:">
-            <p>Adidas Campus</p>
+            <h2>New Balance</h2>
             <div class="price">$ 110.999
-                <div class="counter">- 1 +</div>
             </div>
+            <div class="estrellas">
+
+            <span id="estrellas-new-balance">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-new-balance">(0 opiniones)</span>
+        </div>
         </div>
 
-        <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8g6E0Zz4XA8f5X5ElMs-lEJvnBnJDeAYFfw&s">
-            <p>Chaqueta North Face</p>
+        <div class="card"  data-categoria=" ropa caballero" onclick="verDescripcion('north-face')">
+            <img src="https://www.bfgcdn.com/1500_1500_90/004-5262-0811/the-north-face-aconcagua-3-hoodie-chaqueta-de-plumas.jpg">
+            <h2>Chaqueta North Face</h2>
             <div class="price">$ 130.000
-                <div class="counter">- 1 +</div>
             </div>
+            <div class="estrellas">
+
+            <span id="estrellas-north-face">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-north-face">(0 opiniones)</span>
+        </div>
         </div>
 
-    </main>
+        <div class="card"  data-categoria="dama ropa" onclick="verDescripcion('vestido-corto')">
+            <img src="https://m.media-amazon.com/images/I/710OozkVprL._AC_UF894,1000_QL80_.jpg">
+            <h2>Vestido Corto</h2>
+            <div class="price">$ 150.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-vestido-corto">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-vestido-corto">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="ropa dama" onclick="verDescripcion('levis-basica')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp1RThgHtNKoWHIUXSho-uuh0g9QXybey3DA&s">
+            <h2>Camiseta levis Basica</h2>
+            <div class="price">$ 100.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-levis-basica">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-levis-basica">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card"  data-categoria="ropa caballero" onclick="verDescripcion('manga-larga')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs_A2K2H-7kZ4tMv-ANDEDPJ9cZTaS8G7dOQ&s">
+            <h2>Camisa Manga Larga</h2>
+            <div class="price">$ 110.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-manga-larga">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-manga-larga">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card"  data-categoria="ropa caballero" onclick="verDescripcion('manga-corta')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTUTm5_mcDNHnT96PZG7Z2ErcOWkI-CPTOiQ&s">
+            <h2>Camisa Manga Corta</h2>
+            <div class="price">$ 100.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-manga-corta">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-manga-corta">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="zapatos" onclick="verDescripcion('zapatillas')">
+            <img src="https://www.quest.com.co/cdn/shop/files/QUE116250027-0-1.jpg?v=1761177681">
+            <h2>Zapatillas Caballero</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-zapatillas">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-zapatillas">(0 opiniones)</span>
+        </div>
+        </div>
+        <div class="card" data-categoria="zapatos" onclick="verDescripcion('zapatillas-plataforma')">
+            <img src="https://down-co.img.susercontent.com/file/17123d0e53d3436e04171704dd215180">
+            <h2>Zapatillas en Plataforma</h2>
+            <div class="price">$ 150.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-zapatillas-plataforma">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-zapatillas-plataforma">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="accesorios"  onclick="verDescripcion('arretes-esmeralda')" >
+            <img src="https://esmeraldascolombia.com/cdn/shop/files/medidas_Aretes_Celeste.jpg?v=1759355225&width=1024">
+            <h2>Arretes Esmeralda</h2>
+            <div class="price">$ 180.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-arretes-esmeralda">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-arretes-esmeralda">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="accesorios"  onclick="verDescripcion('arretes-dorados')" >
+            <img src="https://opalodesigns.com/storage/product/ON2ZGfSKx4JU6F3RgefqnHLgipu57qmObmfR7xDv.jpg">
+            <h2>Arretes Dorados</h2>
+            <div class="price">$ 80.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-arretes-dorados">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-arretes-dorados">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="accesorios" onclick="verDescripcion('arretes-hombre')" >
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1sQgT00b8BZ-tDr2rbcyPxfJoa3cXiTo4og&s">
+            <h2>Arretes para Hombre</h2>
+            <div class="price">$ 100.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-arretes-hombre">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-arretes-hombre">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="accesorios"  onclick="verDescripcion('anillos')" >
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2zZ_pHtDOW5AXKM2QbnuwfO-U7dJ5Gl9sKA&s">
+            <h2>Anillos</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-anillos">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-anillos">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="ropa dama"  onclick="verDescripcion('blusa-escotada')">
+            <img src="https://pinkrose.com.co/cdn/shop/files/BLM16341WHTM1.jpg?v=1771271374&width=1024">
+            <h2>Blusa Escotada</h2>
+            <div class="price">$ 110.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-blusa-escotada">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-blusa-escotada">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card"  data-categoria=" ropa caballero"  onclick="verDescripcion('baggy-hombre')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfyhX9NSEIBpeUscDjTVALddhDTTvjosUB5w&s">
+            <h2>Pantalon Baggy Hombre</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-baggy-hombre">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-baggy-hombre">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="ropa dama"  onclick="verDescripcion('cargo-negro')">
+            <img src="https://system.costaldeanzuelos.com/assets/img/multimedia/109417389410007/jean-manual-lilith-cargo-mujer-negro-1.webp">
+            <h2>Pantalon Cargo Negro</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-cargo-negro">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-cargo-negro">(0 opiniones)</span>
+        </div>
+        </div>
+        <div class="card" data-categoria="ropa dama"  onclick="verDescripcion('cargo-gris')">
+            <img src="https://backstakeclo.com/cdn/shop/files/Cargo_gris_humo_multipockets_hombre_1.jpg?v=1744444744&width=1946">
+            <h2>Pantalon Cargo Gris Humo</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-cargo-gris">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-cargo-gris">(0 opiniones)</span>
+        </div>
+        </div>
+        <div class="card"  data-categoria=" ropa caballero"  onclick="verDescripcion('polo-negra')">
+            <img src="https://www.gef.co/cdn/shop/files/new-tod-negro-799-730593_000799-1.jpg?v=1767192741">
+            <h2>Camisa Polo Negra</h2>
+            <div class="price">$ 100.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-polo-negra">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-polo-negra">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card"  data-categoria=" ropa caballero"  onclick="verDescripcion('pantalon-clasico')">
+            <img src="https://marcacedro.com/cdn/shop/files/pantalon_tipo_sastre_para_hombre_corte_regular_fit_de_la_marca_cedro_color_mocca_hecho_con_fibra_inteligente_de_alta_resistencia_frontal_2b504019-f07d-4b1c-a84f-c70b23cf582a.webp?v=1758317104&width=2048">
+            <h2>Pantalon Clasico</h2>
+            <div class="price">$ 130.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-pantalon-clasico">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-pantalon-clasico">(0 opiniones)</span>
+        </div>
+        </div>
+        <div class="card" data-categoria="zapatos"  onclick="verDescripcion('zamba')">
+            <img src="https://freemans.scene7.com/is/image/OttoUK/355w/adidas-Originals-Samba-XLG-Lace-Up-Trainers~25152534FRSC.jpg">
+            <h2>Adidas Zamba</h2>
+            <div class="price">$ 150.000
+            </div>
+            <div class="estrellas">
+
+            <span id="estrellas-zamba">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-zamba">(0 opiniones)</span>
+        </div>
+        </div>
+
+        <div class="card" data-categoria="zapatos"  onclick="verDescripcion('botas')">
+            <img src="https://pisandofuertecol.com/cdn/shop/files/bota-cuero-hombre-unisex-alvines-montanismo-brahma-amarilla-caterpillar-2.jpg?v=1761590727&width=1445">
+            <h2>Botas para Caballero</h2>
+            <div class="price">$ 180.000
+            </div>
+             <div class="estrellas">
+
+            <span id="estrellas-botas">☆☆☆☆☆</span>
+
+            <span class="opinion" id="cantidad-botas">(0 opiniones)</span>
+        </div>
+        </div>
+</main>
+
+<script>
+
+function cargarOpiniones(producto){
+
+    let opiniones = JSON.parse(localStorage.getItem("opiniones")) || {};
+
+    let lista = opiniones[producto] || [];
+
+    let total = 0;
+
+    lista.forEach(opinion => {
+        total += opinion.estrellas;
+    });
+
+    let promedio = 0;
+
+    if(lista.length > 0){
+        promedio = Math.round(total / lista.length);
+    }
+
+    let estrellas = "";
+
+    for(let i = 1; i <= 5; i++){
+
+        if(i <= promedio){
+            estrellas += "★";
+        } else {
+            estrellas += "☆";
+        }
+
+    }
+
+    let estrellasElemento = document.getElementById("estrellas-" + producto);
+    let cantidadElemento = document.getElementById("cantidad-" + producto);
+
+    if(estrellasElemento && cantidadElemento){
+
+        estrellasElemento.innerText = estrellas;
+
+        cantidadElemento.innerText =
+            "(" + lista.length + " opiniones)";
+    }
+}
+
+</script>
+
+
+<script>
+                function toggleUser(){
+                const menu = document.getElementById("usuario");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+                }
+        </script>
+        <script>
+                function togglehome(){
+                const menu = document.getElementById("home");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+                }
+
+        </script>
+    
+
+<script>
+
+function filtrarProductos(categoria){
+
+    let productos = document.querySelectorAll(".card");
+
+    productos.forEach(producto => {
+
+        let categorias = producto.dataset.categoria;
+
+        if(categoria === "todos"){
+
+            producto.style.display = "block";
+
+        } else if(categorias.includes(categoria)){
+
+            producto.style.display = "block";
+
+        } else {
+
+            producto.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+<script>
+
+window.onload = function(){
+
+    cargarOpiniones("saco-dama");
+    cargarOpiniones("reloj-hombre");
+    cargarOpiniones("cadena-cubana");
+    cargarOpiniones("force-one");
+    cargarOpiniones("new-balance");
+    cargarOpiniones("north-face");
+    cargarOpiniones("vestido-corto");
+    cargarOpiniones("levis-basica");
+    cargarOpiniones("manga-larga");
+    cargarOpiniones("manga-corta");
+    cargarOpiniones("zapatillas");
+    cargarOpiniones("zapatillas-plataforma");
+    cargarOpiniones("arretes-esmeralda");
+    cargarOpiniones("arretes-dorados");
+    cargarOpiniones("arretes-hombre");
+    cargarOpiniones("anillos");
+    cargarOpiniones("blusa-escotada");
+    cargarOpiniones("baggy-hombre");
+    cargarOpiniones("cargo-negro");
+    cargarOpiniones("cargo-gris");
+    cargarOpiniones("polo-negra");
+    cargarOpiniones("pantalon-clasico");
+    cargarOpiniones("zamba");
+    cargarOpiniones("botas");
+    
+
+
+    let categoria = "{{ categoria }}";
+
+    if(categoria){
+        filtrarProductos(categoria);
+    }
+
+}
+
+</script>
+
+<script>
+
+function verDescripcion(producto){
+    window.location.href = "/descripcion/" + producto;
+}
+
+</script>
 
 </div>
 {%endblock%}
