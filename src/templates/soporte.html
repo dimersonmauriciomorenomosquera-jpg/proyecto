@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+    {%block contenido%}
+<head>
+    <title>Contacto | Serenity Mode</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/soporte.css') }}">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="top-bar">
+        ✦ ENVÍO GRATIS EN COMPRAS SUPERIORES A $300.000
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <p class="mini-title">CONTÁCTANOS</p>
+
+        <h2>Estamos para <span>ayudarte</span></h2>
+
+        <p class="description">
+            ¿Tienes alguna pregunta, sugerencia o necesitas ayuda con tu pedido?
+            Escríbenos, nuestro equipo de Serenity Mode estará encantado de atenderte.
+        </p>
+
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact-container">
+
+        <!-- INFORMACIÓN -->
+        <div class="contact-info">
+
+            <h3>Información de <span>contacto</span></h3>
+
+            <div class="info-box">
+                <i class="fa-regular fa-envelope"></i>
+
+                <div>
+                    <h4>Email</h4>
+                    <p>hola@serenitymode.com</p>
+                    <span>Respondemos en menos de 24h.</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-brands fa-whatsapp"></i>
+
+                <div>
+                    <h4>WhatsApp</h4>
+                    <p>+57 300 123 4567</p>
+                    <span>Lunes a Viernes de 9:00 a.m. a 6:00 p.m.</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div>
+                    <h4>Dirección</h4>
+                    <p>Carrera 15 # 88 - 21</p>
+                    <span>Bogotá, Colombia</span>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <i class="fa-regular fa-clock"></i>
+
+                <div>
+                    <h4>Horario</h4>
+                    <p>Lunes a Viernes: 9:00 a.m. - 6:00 p.m.</p>
+                    <span>Sábados: 10:00 a.m. - 2:00 p.m.</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="contact-form">
+
+            <h3>Envíanos un <span>mensaje</span></h3>
+
+            <form>
+
+                <div class="input-row">
+                    <input type="text" placeholder="Nombre completo">
+                    <input type="email" placeholder="Correo electrónico">
+                </div>
+
+                <input type="text" placeholder="Asunto">
+
+                <textarea placeholder="Mensaje"></textarea>
+
+                <button type="submit">
+                    ENVIAR MENSAJE
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- FRASE -->
+    <section class="message">
+
+        <div class="circle-logo">
+            <i class="fa-brands fa-pagelines"></i>
+        </div>
+
+        <div>
+            <h3>Tu satisfacción es nuestra prioridad</h3>
+            <p>Gracias por ser parte de Serenity Mode.</p>
+        </div>
+
+    </section>
+
+
+</body>
+{%endblock%}

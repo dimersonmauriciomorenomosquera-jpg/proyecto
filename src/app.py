@@ -284,6 +284,29 @@ def descripcion(producto):
         "descripcion.html",
         producto=producto_actual
     )
+
+
+
+
+@app.route("/soporte", methods=["GET", "POST"])
+def soporte():
+
+    if request.method == "POST":
+
+        nombre = request.form["nombre"]
+        correo = request.form["correo"]
+        asunto = request.form["asunto"]
+        mensaje = request.form["mensaje"]
+
+        print(nombre)
+        print(correo)
+        print(asunto)
+        print(mensaje)
+
+        return "Mensaje enviado correctamente"
+
+    return render_template("soporte.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
 

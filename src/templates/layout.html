@@ -47,6 +47,7 @@
 </div>
 
         </header>
+
         <script>
                 function toggleMenu(){
                 const menu = document.getElementById("menu");
@@ -90,7 +91,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
+    <main class="contenido">
     {%block contenido%}
     {%endblock%}
+    </main>
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-box">
+                <h2>SERENITY <span>MODE</span></h2>
+                <p>
+                    Moda que te acompaña,
+                    estilo que te representa,
+                    serenidad que te define.
+                    </p>
+                    <a href="{{ url_for('soporte') }}" class="soporte">
+                        CONTACTAR SOPORTE
+                    </a>
+                
+                <div class="socials">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                    <i class="fa-brands fa-pinterest"></i>
+                </div>
+            </div>
+
+
+            <div class="footer-box">
+                <h3>AYUDA</h3>
+
+                <a href="#">Preguntas frecuentes</a>
+                <a href="#">Envíos y entregas</a>
+                <a href="#">Cambios y devoluciones</a>
+                <a href="#">Términos y condiciones</a>
+            </div>
+
+            <div class="footer-box">
+                <h3>CONTÁCTANOS</h3>
+
+                <p>hola@serenitymode.com</p>
+                <p>+57 300 123 4567</p>
+                <p>Carrera 15 # 88 - 21</p>
+                <p>Bogotá, Colombia</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Serenity Mode. Todos los derechos reservados.
+        </div>
+
+    </footer>
+
 </body>
 </html>

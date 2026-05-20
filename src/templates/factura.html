@@ -1,0 +1,330 @@
+{% extends "layout.html" %}
+    {%block contenido%}
+<head>
+    <title>Factura | Serenity Mode</title>
+
+    <link rel="stylesheet" href="factura.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="factura-container">
+
+        </header>
+        <section class="hero-factura">
+
+    <div class="factura-top">
+
+        <div class="factura-header">
+
+            <div class="factura-icon">
+                <i class="fa-regular fa-file-lines"></i>
+            </div>
+
+            <div>
+                <h1>FACTURA</h1>
+                <span>SM-2026-000154</span>
+            </div>
+
+        </div>
+
+        <div class="factura-fecha">
+
+            <div class="fecha-item">
+                <i class="fa-regular fa-calendar"></i>
+                <p>Fecha de emisión: 25 de mayo de 2026</p>
+            </div>
+
+            <div class="fecha-item">
+                <i class="fa-regular fa-clock"></i>
+                <p>Hora: 14:35 PM</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-content">
+
+        <div class="hero-left">
+
+            <div class="hero-text">
+
+                <h2>Gracias por tu compra, Valeria García</h2>
+
+                <p>
+                    Tu pedido ha sido recibido correctamente.
+                </p>
+
+            </div>
+
+            <div class="hero-info">
+
+                <div class="hero-product">
+
+                    <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
+                    alt="Producto">
+
+                </div>
+
+                <div class="hero-benefits">
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-shield"></i>
+
+                        <div>
+                            <h3>Compra segura</h3>
+                            <p>Tu información está protegida</p>
+                        </div>
+
+                    </div>
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-box"></i>
+
+                        <div>
+                            <h3>Calidad garantizada</h3>
+                            <p>Seleccionamos lo mejor para ti</p>
+                        </div>
+
+                    </div>
+
+                    <div class="benefit">
+
+                        <i class="fa-solid fa-headset"></i>
+
+                        <div>
+                            <h3>Atención personalizada</h3>
+                            <p>Estamos aquí para ayudarte</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hero-right">
+
+            <div class="status-card">
+
+                <div class="status-top">
+
+                    <div class="status-title">
+
+                        <div class="circle gold"></div>
+
+                        <h3>ESTADO DEL PEDIDO</h3>
+
+                    </div>
+
+                    <span class="status proceso">
+                        EN PROCESO
+                    </span>
+
+                </div>
+
+                <p>
+                    Estamos preparando tu pedido para enviarlo pronto.
+                </p>
+
+            </div>
+
+            <div class="status-card">
+
+                <div class="status-top">
+
+                    <div class="status-title">
+
+                        <div class="circle green">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+
+                        <h3>ESTADO DEL PAGO</h3>
+
+                    </div>
+
+                    <span class="status pagado">
+                        PAGO REALIZADO
+                    </span>
+
+                </div>
+
+                <p>
+                    El pago de tu pedido ha sido confirmado exitosamente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+            <div class="detalle-pedido">
+
+                <h2>DETALLE DE TU PEDIDO</h2>
+
+                <div class="tabla-head">
+
+                    <span>PRODUCTO</span>
+                    <span>PRECIO</span>
+                    <span>CANTIDAD</span>
+                    <span>TOTAL</span>
+
+                </div>
+
+                <div class="producto">
+
+                    <div class="producto-info">
+
+                        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop">
+
+                        <div>
+                            <h4>Conjunto Serenity Linen</h4>
+                            <p>Talla: M | Color: Beige</p>
+                        </div>
+
+                    </div>
+
+                    <span>$89.900 COP</span>
+                    <span>1</span>
+                    <span>$89.900 COP</span>
+
+                </div>
+
+                <div class="producto">
+
+                    <div class="producto-info">
+
+                        <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=800&auto=format&fit=crop">
+
+                        <div>
+                            <h4>Scrunchie de Seda</h4>
+                            <p>Color: Champán</p>
+                        </div>
+
+                    </div>
+
+                    <span>$9.900 COP</span>
+                    <span>1</span>
+                    <span>$9.900 COP</span>
+
+                </div>
+
+                <div class="producto">
+
+                    <div class="producto-info">
+
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop">
+
+                        <div>
+                            <h4>Bolsa Tote Serenity</h4>
+                            <p>Color: Beige</p>
+                        </div>
+
+                    </div>
+
+                    <span>$24.900 COP</span>
+                    <span>1</span>
+                    <span>$24.900 COP</span>
+
+                </div>
+
+            </div>
+
+            <div class="totales">
+
+                <div class="fila">
+                    <p>Subtotal</p>
+                    <span>$124.700 COP</span>
+                </div>
+
+                <div class="fila">
+                    <p>Envío</p>
+                    <span class="gold">GRATIS</span>
+                </div>
+
+                <div class="fila">
+                    <p>Impuestos (IVA 19%)</p>
+                    <span>$0 COP</span>
+                </div>
+
+            </div>
+
+            <div class="total-final">
+
+                <h2>TOTAL</h2>
+                <span>COP $124.700</span>
+
+            </div>
+
+            <div class="extra-info">
+
+                <div class="empresa">
+
+                    <div class="info-title">
+                        <i class="fa-solid fa-building"></i>
+                        <h3>INFORMACIÓN COMERCIAL</h3>
+                    </div>
+
+                    <p>Serenity Mode S.A.S</p>
+                    <p>NIT: 901.234.567-8</p>
+                    <p>Email: hola@serenitymode.com</p>
+                    <p>Teléfono: +57 601 123 4567</p>
+
+                </div>
+
+                <div class="politicas">
+
+                    <div class="info-title">
+                        <i class="fa-solid fa-shield"></i>
+                        <h3>POLÍTICA DE DEVOLUCIONES</h3>
+                    </div>
+
+                    <p>
+                        Puedes solicitar cambios o devoluciones dentro de los
+                        30 días posteriores a la entrega del pedido.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="acciones">
+
+                <button>
+                    <i class="fa-solid fa-download"></i>
+                    DESCARGAR FACTURA PDF
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-truck"></i>
+                    RASTREAR PEDIDO
+                </button>
+
+                <button>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    SEGUIR COMPRANDO
+                </button>
+
+                <button class="outline">
+                    <i class="fa-solid fa-headset"></i>
+                    CONTACTAR SOPORTE
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+{%endblock%}

@@ -3,13 +3,14 @@
     padding:0;
     box-sizing:border-box;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 body{
     background:#e8e3dc;
-}
+
 }
 .line{
     background: white;
-    width: 1460px;
+    width: 80%;
     height: 1px;
 }
 .line-imag{
@@ -47,11 +48,11 @@ p{
 }
 .line2{
     background: grey;
-    width: 1260px;
+    width: 80%;
     height: 3px;
     margin-top: 30px;
     margin-bottom: 30px;
-    margin-left: 100px ;
+    margin-left: 180px ;
 }
 .frases{
     font-size: 20px;
@@ -62,7 +63,7 @@ p{
     display: flex;
     align-items: center; 
     gap: 80px;
-    margin-left: 100px; 
+    margin-left: 180px; 
 }
 .zapatos-img {
     width: 150px; 
@@ -72,7 +73,7 @@ p{
     display: flex;
     align-items: center;
     gap: 80px;
-    margin-left: 100px;
+    margin-left: 180px;
     margin-top:20px ;
 
 }
@@ -80,45 +81,50 @@ p{
     width:150px ;
     height:120px ;
 }
-.boton-ver-catalogo {
-display: inline-block;
-padding: 10px 100px;
-background-color: red;
-color: #fff; 
-text-decoration: none; 
-border-radius: 10px; 
-font-weight: bold;
-transition: background-color 0.3s;
-
+.boton-ver-catalogo{
+    display:inline-block;
+    padding:14px 40px;
+    background:#c7a85d;
+    color:black;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
 }
+
+.boton-ver-catalogo:hover{
+    background:black;
+    color:white;
+}
+
+
 .frase{
     visibility: hidden;
 }
-
-.accesorios {
-    display: flex;
-    align-items: center; 
-    gap: 80px;
-    margin-left: 100px;
-    margin-top: 80px;
-    position: absolute;
+.accesorios{
+    display:flex;
+    align-items:center;
+    gap:80px;
+    margin-left:180px;
+    margin-top:20px;
+    margin-bottom:80px;
 }
 .line3{
-    background: grey;
-    width: 1260px;
-    height: 3px;
-    margin-left: 100px;
-    position:absolute;
-    margin-top: 50px;
+    background:grey;
+    width:80%;
+    height:3px;
+    margin-left:180px;
+    margin-top:50px;
+    margin-bottom:50px;
 }
 .accesorios-texto{
     padding-right: 30px;
 }
 .user{
     position:absolute;
-    top:3%;
     left:55%;
-    transform:translate(-50%, -50%);
+    transform:translate(-50%, -120%);
 }
 .Serenity{
     visibility: hidden;
