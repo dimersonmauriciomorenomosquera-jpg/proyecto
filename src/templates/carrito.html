@@ -1,48 +1,85 @@
 {% extends "layout.html" %}
-    {%block contenido%}
+{% block contenido %}
+
 <head>
     <title>Carro de Compras</title>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrito.css') }}">
 </head>
 
-    
+<div class="container">
 
-    <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-        
-        <aside class="sidebar">
-            <h1 class="h1">Carro de compras</h1>
+        <h1 class="titulo-carrito">
+            CARRO<span> COMPRAS</span>
+        </h1>
 
-            <div class="carrito-img">
-                <img src="https://img.freepik.com/vector-premium/plantilla-vector-icono-carrito-compras-color-dorado_917138-3031.jpg">
-            </div>
-            
-            <div class="total">
-    TOTAL: <span id="total">0</span>
-</div>
-            
+        <p class="resumen">
+            Tu estilo comienza aquí
+        </p>
+
+        <div class="carrito-img">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="total">
+            <p>TOTAL</p>
+            <h2 id="total">$0</h2>
+        </div>
 
         <button class="pagar" onclick="irAPago()">
-    PAGAR
-</button>
-        </aside>
+            <i class="fa-solid fa-lock"></i>
+            FINALIZAR COMPRA
+        </button>
 
-        
-        
+        <!-- BOTON SOPORTE -->
+        <a href="{{ url_for('soporte') }}" class="link-soporte">
 
-        <main class="productos">
-    <div id="carrito"></div>
-</main>
+            <button class="soporte">
 
+                <i class="fa-solid fa-headset"></i>
+                CONTACTAR SOPORTE
 
+            </button>
 
-        </main>
+        </a>
+
+        <div class="seguro">
+            <i class="fa-solid fa-shield"></i>
+            <span>Compra 100% segura</span>
+        </div>
+
+    </aside>
+
+    <!-- PRODUCTOS -->
+    <main class="productos">
+
+        <h2 class="titulo-productos">
+            PRODUCTOS EN TU CARRITO
+        </h2>
+
+        <div id="carrito"></div>
+
+    </main>
+
+</div>
+
 <script>
+
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 // MOSTRAR
 function mostrarCarrito() {
+
     let contenedor = document.getElementById("carrito");
+
     contenedor.innerHTML = "";
 
     let total = 0;
@@ -50,73 +87,89 @@ function mostrarCarrito() {
     carrito.forEach((item, index) => {
 
         if(!item.cantidad){
-        item.cantidad = 1;
-    }
+            item.cantidad = 1;
+        }
 
-    let subtotal = item.precio * item.cantidad;
+        let subtotal = item.precio * item.cantidad;
 
-    total += subtotal;
-
+        total += subtotal;
 
         contenedor.innerHTML += `
-            <div class="producto">
 
-                <div class="imagen">
-                    <img src="${item.imagen}" width="120">
-                </div>
+        <div class="producto">
 
-                <div class="info">
+            <div class="imagen">
+                <img src="${item.imagen}">
+            </div>
 
-                    <h3 class="nombre">${item.nombre}</h3>
+            <div class="info">
 
-                    <p>${item.descripcion}</p>
+                <div class="info-top">
 
-                    <p class="precio" >Precio: ${formatear(item.precio)}</p>
+                    <div>
 
-                    <p class="sub">Subtotal: ${formatear(subtotal)}</p>
+                        <h3 class="nombre">${item.nombre}</h3>
 
-                    <p><strong>Talla:</strong> ${item.talla ? item.talla : "Sin talla"}</p>
+                        <p class="descripcion">
+                            ${item.descripcion}
+                        </p>
 
-                    <div class="cantidad">
-                        <button onclick="cambiarCantidad(${index}, -1)">-</button>
-                        <span>${item.cantidad}</span>
-                        <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                        <p class="talla">
+                            <strong>Talla:</strong>
+                            ${item.talla ? item.talla : "Sin talla"}
+                        </p>
+
                     </div>
 
-                    <button class="eliminar" onclick="eliminar(${index})">Eliminar</button>
+                    <button class="eliminar"
+                    onclick="eliminar(${index})">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
 
                 </div>
+
+                <div class="info-bottom">
+
+                    <div class="precios">
+
+                        <p class="precio">
+                            Precio: ${formatear(item.precio)}
+                        </p>
+
+                        <p class="sub">
+                            Subtotal: ${formatear(subtotal)}
+                        </p>
+
+                    </div>
+
+                    <div class="cantidad">
+
+                        <button onclick="cambiarCantidad(${index}, -1)">
+                            -
+                        </button>
+
+                        <span>${item.cantidad}</span>
+
+                        <button onclick="cambiarCantidad(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
+
+        </div>
+
         `;
     });
 
     document.getElementById("total").innerText = formatear(total);
 
     localStorage.setItem("carrito", JSON.stringify(carrito));
-}
-
-// AGREGAR
-function agregarCarrito(nombre, precio, imagen, descripcion) {
-
-    let productoExistente = carrito.find(item => item.nombre === nombre &&
-    item.talla === tallas);
-
-    if (productoExistente) {
-        productoExistente.cantidad += 1;
-    } else {
-        carrito.push({
-            nombre,
-            precio: Number(precio),
-            imagen,
-            descripcion,
-            talla: talla  || "sin talla",
-            cantidad: 1
-            
-        });
-    }
-
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    mostrarCarrito();
 }
 
 // CAMBIAR CANTIDAD
@@ -133,36 +186,36 @@ function cambiarCantidad(index, valor) {
 
 // ELIMINAR
 function eliminar(index) {
+
     carrito.splice(index, 1);
+
     mostrarCarrito();
 }
 
 // FORMATO
 function formatear(valor) {
-    return valor.toLocaleString('es-CO');
+
+    return "$ " + Number(valor).toLocaleString('es-CO');
 }
 
 // INICIAR
 mostrarCarrito();
-function formatear(valor) {
-    return Number(valor).toLocaleString('es-CO');
-}
-function formatear(valor) {
-    return "$ " + Number(valor).toLocaleString('es-CO');
-}
 
+// IR A PAGO
 function irAPago(){
 
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     if(carrito.length === 0){
+
         alert("Tu carrito está vacío");
+
         return;
     }
 
     window.location.href = "/pago";
 }
+
 </script>
 
-
-{%endblock%}
+{% endblock %}
