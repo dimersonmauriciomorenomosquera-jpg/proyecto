@@ -178,26 +178,25 @@ function cargarTallas(){
 
     let tallas = [];
 
-    // 👕 ROPA
-    if(categoria.includes("ropa") || categoria.includes("dama") || categoria.includes("caballero")){
-        tallas = ["S", "M", "L", "XL"];
-    }
-
     // 👟 ZAPATOS
-    else if(categoria.includes("zapatos")){
-        tallas = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
-    }
+if(categoria.includes("zapatos")){
+    tallas = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
+}
 
-    // 💍 ACCESORIOS
-    else if(categoria.includes("accesorios")){
-        contenedor.innerHTML = "";
-        tallaSeleccionada = "sin talla";
-        return;
-    }
+// 👕 ROPA
+else if(categoria.includes("ropa")){
+    tallas = ["S", "M", "L", "XL"];
+}
 
+// 💍 ACCESORIOS
+else if(categoria.includes("accesorios")){
+    contenedor.innerHTML = "";
+    tallaSeleccionada = "sin talla";
+    return;
+}
     // 🧨 SI NO HAY CATEGORÍA
     if(tallas.length === 0){
-        tallas = ["S", "M", "L"];
+        tallas = ["S", "M", "L","XL"];
     }
 
     contenedor.innerHTML = "";

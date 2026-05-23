@@ -238,7 +238,7 @@ body{
 }
 .sin-talla{
     display:none;
-    visibility: hidden;
+    
 }
 .tallas button{
     transition: 0.2s ease;
@@ -250,6 +250,7 @@ body{
 }
 .cantidad2{
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 h3{
     margin-bottom: 25px;

@@ -121,7 +121,7 @@ def descripcion(producto):
         },
 
         "levis-basica": {
-            "categoria": "zapatos",
+            "categoria": "ropa",
             "id": "levis-basica",
             "nombre": "Camiseta Levis Basica",
             "precio": 100000, 
@@ -130,7 +130,7 @@ def descripcion(producto):
         },
 
         "manga-larga": {
-            "categoria": "zapatos",
+            "categoria": "ropa",
             "id": "manga-larga",
             "nombre": "Camisa Manga Larga",
             "precio": 110000, 
@@ -139,7 +139,7 @@ def descripcion(producto):
         },
 
         "manga-corta": {
-            "categoria": "zapatos",
+            "categoria": "ropa",
             "id": "manga-corta",
             "nombre": "Camisa Manga Corta",
             "precio": 100000, 
