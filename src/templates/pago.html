@@ -98,7 +98,7 @@
                 <div class="method active">
 
                     <div class="left">
-                        <input type="radio" checked>
+                        <input type="radio" checked onclick="abrirModal('tarjeta')">
                         <i class="fa-regular fa-credit-card"></i>
 
                         <div>
@@ -118,7 +118,7 @@
                 <div class="method">
 
                     <div class="left">
-                        <input type="radio">
+                        <input type="radio" onclick="abrirModal('paypal')">
                         <i class="fa-brands fa-paypal"></i>
 
                         <div>
@@ -132,12 +132,12 @@
                 <div class="method">
 
                     <div class="left">
-                        <input type="radio">
+                        <input type="radio" onclick="abrirModal('nequi')">
                         <i class="fa-brands fa-apple"></i>
 
                         <div>
-                            <h3>Apple Pay</h3>
-                            <p>Paga fácilmente con Apple Pay</p>
+                            <h3>Nequi</h3>
+                            <p>Paga fácilmente con Nequi</p>
                         </div>
                     </div>
 
@@ -146,7 +146,7 @@
                 <div class="method">
 
                     <div class="left">
-                        <input type="radio">
+                        <input type="radio" onclick="abrirModal('googlepay')">
                         <i class="fa-brands fa-google"></i>
 
                         <div>
@@ -200,76 +200,20 @@
 
     </div>
 
+
+    <!-- MODAL -->
+<div class="modal-overlay" id="modalPago">
+
+    <div class="modal-content">
+
+        <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+
+        <div id="contenidoModal"></div>
+
+    </div>
+
+</div>
+
 </body>
-        
- <script>
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-function mostrarResumen() {
-
-    let contenedor = document.querySelector(".summary");
-
-    let subtotal = 0;
-
-    let html = `<h2>RESUMEN DE TU PEDIDO</h2>`;
-
-    carrito.forEach(item => {
-
-        let totalProducto = item.precio * item.cantidad;
-        subtotal += totalProducto;
-
-        html += `
-        <div class="product">
-
-            <img src="${item.imagen}" alt="producto">
-
-            <div class="product-info">
-                <h3>${item.nombre}</h3>
-                <p>Talla: ${item.talla || "Sin talla"} | Cantidad: ${item.cantidad}</p>
-                <span>$ ${item.precio.toLocaleString('es-CO')}</span>
-            </div>
-
-        </div>
-        `;
-    });
-
-    html += `
-    <div class="totals">
-
-    <div class="row">
-        <p>Subtotal</p>
-        <span>$ ${subtotal.toLocaleString('es-CO')}</span>
-    </div>
-
-    <div class="row">
-        <p>Envío</p>
-        <span class="gold">Gratis</span>
-    </div>
-
-    <div class="row">
-        <p>Impuestos</p>
-        <span>$ ${iva.toLocaleString('es-CO')}</span>
-    </div>
-
-</div>
-
-<div class="final-total">
-    <p>TOTAL</p>
-    <span> ${total.toLocaleString('es-CO')}</span>
-</div>
-    `;
-
-    contenedor.innerHTML = html;
-}
-let subtotal = 0;
-
-carrito.forEach(item => {
-    subtotal += item.precio * item.cantidad;
-});
-
-let iva = subtotal * 0.19;
-let total = subtotal + iva;
-window.onload = mostrarResumen;
-</script>   
-
+    <script src="{{ url_for('static', filename='js/pago.js') }}"></script>
 {%endblock%}

@@ -48,49 +48,7 @@
 
         </header>
 
-        <script>
-                function toggleMenu(){
-                const menu = document.getElementById("menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-        </script>
-        <script>
-                function toggleUser(){
-                const menu = document.getElementById("ingreso");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-        </script>
         </div>
-        <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const buscador = document.getElementById("buscador");
-    const productos = document.querySelectorAll(".card");
-
-    if(buscador){
-
-        buscador.addEventListener("keyup", () => {
-
-            let texto = buscador.value.toLowerCase();
-
-            productos.forEach(producto => {
-
-                let contenido = producto.innerText.toLowerCase();
-
-                if(contenido.includes(texto)) {
-                    producto.style.display = "block";
-                } else {
-                    producto.style.display = "none";
-                }
-
-            });
-
-        });
-
-    }
-
-});
-</script>
 
     <main class="contenido">
     {%block contenido%}
@@ -146,6 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
 
     </footer>
+
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
 
 </body>
 </html>

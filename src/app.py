@@ -15,9 +15,8 @@ def inicio():
 def productos():
     return render_template("productos.html")
 
-
 @app.route("/productos/<categoria>")
-def categoria_productos(categoria):
+def productos_categoria(categoria):
 
     return render_template(
         "productos.html",

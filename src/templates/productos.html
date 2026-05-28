@@ -37,7 +37,7 @@
 
     <main class="products">  
 
-        <div  class="card"  data-categoria=" dama ropa" onclick="verDescripcion('saco-dama')">
+        <div  class="card"  data-categoria="dama ropa"  onclick="verDescripcion('saco-dama')">
             <img src="https://blackmountain.com.co/cdn/shop/files/Capturadepantalla2024-05-03ala_s_3.35.56a.m..png?v=1714759361&width=1445">
             <h2>Saco para dama</h2>
             <div class="price">$ 99.999
@@ -348,146 +348,15 @@
         </div>
 </main>
 
+<script src="{{ url_for('static', filename='js/productos.js') }}"></script>
+
 <script>
 
-function cargarOpiniones(producto){
+    let categoriaActual = "{{ categoria }}";
 
-    let opiniones = JSON.parse(localStorage.getItem("opiniones")) || {};
-
-    let lista = opiniones[producto] || [];
-
-    let total = 0;
-
-    lista.forEach(opinion => {
-        total += opinion.estrellas;
-    });
-
-    let promedio = 0;
-
-    if(lista.length > 0){
-        promedio = Math.round(total / lista.length);
+    if (categoriaActual) {
+        filtrarProductos(categoriaActual);
     }
 
-    let estrellas = "";
-
-    for(let i = 1; i <= 5; i++){
-
-        if(i <= promedio){
-            estrellas += "★";
-        } else {
-            estrellas += "☆";
-        }
-
-    }
-
-    let estrellasElemento = document.getElementById("estrellas-" + producto);
-    let cantidadElemento = document.getElementById("cantidad-" + producto);
-
-    if(estrellasElemento && cantidadElemento){
-
-        estrellasElemento.innerText = estrellas;
-
-        cantidadElemento.innerText =
-            "(" + lista.length + " opiniones)";
-    }
-}
-
 </script>
-
-
-<script>
-                function toggleUser(){
-                const menu = document.getElementById("usuario");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-        </script>
-        <script>
-                function togglehome(){
-                const menu = document.getElementById("home");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-
-        </script>
-    
-
-<script>
-
-function filtrarProductos(categoria){
-
-    let productos = document.querySelectorAll(".card");
-
-    productos.forEach(producto => {
-
-        let categorias = producto.dataset.categoria;
-
-        if(categoria === "todos"){
-
-            producto.style.display = "block";
-
-        } else if(categorias.includes(categoria)){
-
-            producto.style.display = "block";
-
-        } else {
-
-            producto.style.display = "none";
-
-        }
-
-    });
-
-}
-
-</script>
-
-<script>
-
-window.onload = function(){
-
-    cargarOpiniones("saco-dama");
-    cargarOpiniones("reloj-hombre");
-    cargarOpiniones("cadena-cubana");
-    cargarOpiniones("force-one");
-    cargarOpiniones("new-balance");
-    cargarOpiniones("north-face");
-    cargarOpiniones("vestido-corto");
-    cargarOpiniones("levis-basica");
-    cargarOpiniones("manga-larga");
-    cargarOpiniones("manga-corta");
-    cargarOpiniones("zapatillas");
-    cargarOpiniones("zapatillas-plataforma");
-    cargarOpiniones("arretes-esmeralda");
-    cargarOpiniones("arretes-dorados");
-    cargarOpiniones("arretes-hombre");
-    cargarOpiniones("anillos");
-    cargarOpiniones("blusa-escotada");
-    cargarOpiniones("baggy-hombre");
-    cargarOpiniones("cargo-negro");
-    cargarOpiniones("cargo-gris");
-    cargarOpiniones("polo-negra");
-    cargarOpiniones("pantalon-clasico");
-    cargarOpiniones("zamba");
-    cargarOpiniones("botas");
-    
-
-
-    let categoria = "{{ categoria }}";
-
-    if(categoria){
-        filtrarProductos(categoria);
-    }
-
-}
-
-</script>
-
-<script>
-
-function verDescripcion(producto){
-    window.location.href = "/descripcion/" + producto;
-}
-
-</script>
-
-</div>
 {%endblock%}
