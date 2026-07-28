@@ -3,7 +3,7 @@
 <head>
     <title>Factura | Serenity Mode</title>
 
-    <link rel="stylesheet" href="factura.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/factura.css') }}">
 
     <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -305,19 +305,17 @@
                     DESCARGAR FACTURA PDF
                 </button>
 
-                <button>
-                    <i class="fa-solid fa-truck"></i>
-                    RASTREAR PEDIDO
-                </button>
+                <button class="pay-btn" onclick="abrirModalEnvio()">
+    <i class="fa-solid fa-truck"></i>
+    RASTREAR PEDIDO
+</button>
+
 
                 <button>
+                    <a href="{{ url_for('inicio.index') }}">
                     <i class="fa-solid fa-bag-shopping"></i>
                     SEGUIR COMPRANDO
-                </button>
-
-                <button class="outline">
-                    <i class="fa-solid fa-headset"></i>
-                    CONTACTAR SOPORTE
+                    </a>
                 </button>
 
             </div>
@@ -326,5 +324,138 @@
 
     </div>
 
+
+
+    <!-- ==========================
+        MODAL RASTREAR ENVÍO
+=========================== -->
+
+<div class="modal-envio" id="modalEnvio">
+
+    <div class="contenido-modal">
+
+        <span class="cerrar-modal" onclick="cerrarModalEnvio()">
+            &times;
+        </span>
+
+        <h2>
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            Rastrear Pedido
+
+        </h2>
+
+        <div class="info-envio">
+
+            <div class="fila-envio">
+
+                <span>Número de guía</span>
+
+                <strong>SM-2026-000154</strong>
+
+            </div>
+
+            <div class="fila-envio">
+
+                <span>Transportadora</span>
+
+                <strong>Servientrega</strong>
+
+            </div>
+
+            <div class="fila-envio">
+
+                <span>Destino</span>
+
+                <strong>Bogotá D.C.</strong>
+
+            </div>
+
+            <div class="fila-envio">
+
+                <span>Entrega estimada</span>
+
+                <strong>28 Mayo 2026</strong>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-envio">
+
+            <div class="paso completado">
+
+                <div class="circulo">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div>
+
+                    <h4>Pedido confirmado</h4>
+
+                    <p>El pago fue aprobado correctamente.</p>
+
+                </div>
+
+            </div>
+
+            <div class="paso completado">
+
+                <div class="circulo">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <div>
+
+                    <h4>Pedido empacado</h4>
+
+                    <p>Tu pedido ya fue preparado.</p>
+
+                </div>
+
+            </div>
+
+            <div class="paso activo">
+
+                <div class="circulo">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+
+                <div>
+
+                    <h4>En camino</h4>
+
+                    <p>Tu paquete se dirige hacia la ciudad destino.</p>
+
+                </div>
+
+            </div>
+
+            <div class="paso">
+
+                <div class="circulo">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <div>
+
+                    <h4>Entregado</h4>
+
+                    <p>Pendiente</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/factura.js') }}"></script>
+
 </body>
+
 {%endblock%}

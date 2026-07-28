@@ -32,13 +32,18 @@
             <h2 id="total">$0</h2>
         </div>
 
-        <button class="pagar" onclick="irAPago()">
+        
+
+        
+        <button class="pagar">                       
+            <a href="{{ url_for('envio.index') }}">
             <i class="fa-solid fa-lock"></i>
-            FINALIZAR COMPRA
+                CONTINUAR CON EL PAGO
+            </a>
         </button>
 
         <!-- BOTON SOPORTE -->
-        <a href="{{ url_for('soporte') }}" class="link-soporte">
+        <a  class="link-soporte"></a>
 
             <button class="soporte">
 

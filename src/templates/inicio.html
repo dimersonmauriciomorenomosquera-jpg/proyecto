@@ -1,55 +1,456 @@
-
 {% extends "layout.html" %}
     {%block contenido%}
-    <head>
-        <title>Inicio</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
-    </head>
-    <div class="line">
-        </div>
-        <div class="serenity_mode" class="menu">Serenity <br> Mode <br> <p class="frases">“Crea tu estilo, vive Serenity Mode.”</p></div>
-        <div class="ropa-container">
-    <div class="ropa-texto">
-        <h2>Ropa</h2>
-        <p>"Viste con elegancia, camina <br> con confianza. Tu estilo <br> comienza aquí."</p>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<!--======================
+        HERO
+=======================-->
+
+<section class="hero">
+
+    <div class="hero-texto">
+
+        
+
+        <h1>
+            Haz del estilo <br>
+            tu mejor versión.
+        </h1>
+
+        <p>
+            Descubre prendas que combinan 
+            con tu estilo y tu actitud. ⭐
+        </p>
+
+        
+        <button class="btn-principal" onclick="irCatalogo('p')">
+            Comprar ahora
+        </button>
+
     </div>
-    <img src="https://tiendasoa.com/cdn/shop/files/2_3feb603c-31ef-42b2-895b-d5a4db843fb6.png?v=1705077951&width=1946" class="ropa-img">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8MbrPtBSDWVq_HRJGBjhuk6b7AGmzZ-bB0A&s" class="ropa-img">
-    <img src="https://http2.mlstatic.com/D_NQ_NP_877543-MLM85418519851_052025-O.webp" class="ropa-img" >
-    <button class="boton-ver-catalogo" onclick="irCatalogo('ropa')">
-    Ver todo el catálogo
-</button>
-</div>
-        <div class="line2"></div>
-        <div class="zapatos-container">
-    <div class="zapatos-texto">
-        <h2>Zapatos</h2>
-        <p>Cada paso cuenta, haz que el <br> tuyo hable de ti."</p>
+
+    <div class="hero-imagen">
+
+
+        <img src="{{ url_for('static', filename='img/inicio_hombre.png') }}" alt="Hero">
+        <img src="{{ url_for('static', filename='img/inicio_mujer.png') }}" alt="Hero">
+        <img src="{{ url_for('static', filename='img/inicio_zapatos.png') }}" alt="Hero">
+
     </div>
-    <img src="https://tenisi.co/cdn/shop/files/0C0B8F1C-840D-4CEB-A89E-7D44A98483DA.png?v=1721969224" class="zapatos-img">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ645Ihzs_cY2rdbabmeVclv0OigE37Ju3OA&s" class="zapatos-img">
-    <img src="https://i0.wp.com/urbancollectionoficial.com/wp-content/uploads/2021/05/Air-Jordan-4-Retro-Metallic-Red2.jpg?fit=1202%2C1140&ssl=1" class="zapatos-img">
-    <button class="boton-ver-catalogo" onclick="irCatalogo('zapatos')">
-    Ver todo el catálogo
-</button>
+
+</section>
+
+
+
+<!--====================================
+        BANNER
+=====================================-->
+
+<section class="banner">
+
+    <div class="banner-contenido">
+
+        <span>COLECCIÓN PREMIUM</span>
+
+        <h2>
+            Cada detalle refleja tu estilo..
+        </h2>
+
+        <p>
+
+            En Serenity Mode encuentras  accesorios para expresar tu estilo con confianza
+
+        </p>
+
+        <button class="btn-principal" onclick="irCatalogo('accesorios')">
+            Accesorios
+        </button>
+
+
+    </div>
+
+    <div class="hero2-imagen">
+
+        <img class="img-baner" src="{{ url_for('static', filename='img/accesorio_reloj (1).png') }}" alt="Hero">
+        <img class="img-baner" src="{{ url_for('static', filename='img/accesorio_reloj (2).png') }}" alt="Hero">
+        <img class="img-baner" src="{{ url_for('static', filename='img/accesorio_reloj (3).png') }}" alt="Hero">
+        
+
+    </div>
+
+</section>
+
+<!--====================================
+        PRODUCTOS DESTACADOS
+=====================================-->
+
+<section class="productos">
+
+    <div class="titulo-seccion">
+
+        <span>DESTACADOS</span>
+
+        <h2>Nuestros favoritos</h2>
+
+        <p>
+            Descubre las prendas y accesorios más populares de Serenity Mode.
+        </p>
+
+    </div>
+
+    <div class="contenedor-productos">
+
+        <!-- Producto 1 -->
+
+        <div class="card-producto">
+
+            <span class="etiqueta">Nuevo</span>
+
+            <button class="favorito">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <img src="{{ url_for('static', filename='img/producto1.jpg') }}" alt="Sudadera">
+
+            <div class="info-producto">
+
+                <span class="categoria-producto">
+                    Ropa
+                </span>
+
+                <h3>Sudadera Premium</h3>
+
+                <div class="estrellas">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+
+                </div>
+
+                <div class="precio">
+
+                    <span class="nuevo">$48</span>
+
+                    <span class="anterior">$60</span>
+
+                </div>
+
+                <button class="btn-carrito">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+            </div>
+
         </div>
 
-    <div class="line3"></div>
-    <div class="accesorios">
-    <div class="accesorios-texto">
-        <h2>Accesorios</h2>
-        <p>"No es solo un accesorio, <br> es tu esencia."</p>
-    </div>
-    <img src="https://belcorpcolombia.vtexassets.com/arquivos/ids/946272-800-800?v=638415558335630000&width=800&height=800&aspect=true" class="zapatos-img">
-    <img src="https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/bevelledgourmet4-75mm-c/alloycolour/yellow.jpg" class="zapatos-img">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJf-4oTAJt4_SZgUrH-zkcAQ2li_uJSYQ63A&s" class="zapatos-img">
-    <button class="boton-ver-catalogo" onclick="irCatalogo('accesorios')">
-    Ver todo el catálogo
-    </button>
-</div>
+        <!-- Producto 2 -->
+
+        <div class="card-producto">
+
+            <span class="etiqueta oferta">Oferta</span>
+
+            <button class="favorito">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <img src="{{ url_for('static', filename='img/producto2.jpg') }}" alt="Zapatos">
+
+            <div class="info-producto">
+
+                <span class="categoria-producto">
+
+                    Zapatos
+
+                </span>
+
+                <h3>Tenis Urban</h3>
+
+                <div class="estrellas">
+
+                    ★★★★★
+
+                </div>
+
+                <div class="precio">
+
+                    <span class="nuevo">$75</span>
+
+                    <span class="anterior">$90</span>
+
+                </div>
+
+                <button class="btn-carrito">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Producto 3 -->
+
+        <div class="card-producto">
+
+            <button class="favorito">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <img src="{{ url_for('static', filename='img/producto3.jpg') }}" alt="Reloj">
+
+            <div class="info-producto">
+
+                <span class="categoria-producto">
+
+                    Accesorios
+
+                </span>
+
+                <h3>Reloj Luxury</h3>
+
+                <div class="estrellas">
+
+                    ★★★★★
+
+                </div>
+
+                <div class="precio">
+
+                    <span class="nuevo">$120</span>
+
+                </div>
+
+                <button class="btn-carrito">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Producto 4 -->
+
+        <div class="card-producto">
+
+            <button class="favorito">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <img src="{{ url_for('static', filename='img/producto4.jpg') }}" alt="Bolso">
+
+            <div class="info-producto">
+
+                <span class="categoria-producto">
+
+                    Bolsos
+
+                </span>
+
+                <h3>Bolso Elegance</h3>
+
+                <div class="estrellas">
+
+                    ★★★★★
+
+                </div>
+
+                <div class="precio">
+
+                    <span class="nuevo">$82</span>
+
+                </div>
+
+                <button class="btn-carrito">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
+
+</section>
+
+<!--====================================
+        EXPERIENCIA SERENITY
+=====================================-->
+
+<section class="experiencia">
+
+    <div class="experiencia-overlay"></div>
+
+    <div class="experiencia-contenido">
+
+        <span>EXCLUSIVIDAD</span>
+
+        <h2>Más que una tienda,<br>una experiencia de estilo.</h2>
+
+        <p>
+            En Serenity Mode creemos que cada detalle cuenta.
+            Descubre prendas, calzado y accesorios cuidadosamente seleccionados
+            para reflejar elegancia, calidad y personalidad.
+        </p>
+
+        <a  href="{{ url_for('productos.index') }}" class="btn-principal">
+            Descubrir Productos
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!--====================================
+        BENEFICIOS
+=====================================-->
+
+<section class="beneficios">
+
+    <div class="titulo-seccion">
+
+        <span>¿POR QUÉ ELEGIRNOS?</span>
+
+        <h2>Comprometidos contigo</h2>
+
+    </div>
+
+    <div class="contenedor-beneficios">
+
+        <div class="beneficio1">
+
+            <i class="fa-solid fa-credit-card"></i>
+
+            <h3>Pago Seguro</h3>
+
+            <p>
+                Compra con confianza mediante métodos de pago protegidos.
+            </p>
+
+        </div>
+
+
+        <div class="beneficio">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <h3>Atención Personalizada</h3>
+
+            <p>
+                Nuestro equipo está disponible para ayudarte en cada compra.
+            </p>
+
+        </div>
+
+        <div class="beneficio">
+
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+
+            <h3>Devoluciones</h3>
+
+            <p>
+                Compra con tranquilidad gracias a nuestro proceso de devolución.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--====================================
+        ESTADÍSTICAS
+=====================================-->
+
+<section class="estadisticas">
+
+    <div class="estadistica">
+
+        <i class="fa-solid fa-shirt"></i>
+
+        <h2>500+</h2>
+
+        <p>Productos</p>
+
+    </div>
+
+    <div class="estadistica">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h2>15K+</h2>
+
+        <p>Clientes felices</p>
+
+    </div>
+
+    <div class="estadistica">
+
+        <i class="fa-solid fa-truck-fast"></i>
+
+        <h2>24H</h2>
+
+        <p>Envíos rápidos</p>
+
+    </div>
+
+    <div class="estadistica">
+
+        <i class="fa-solid fa-award"></i>
+
+        <h2>100%</h2>
+
+        <p>Calidad garantizada</p>
+
+    </div>
+
+</section>
+
+
+
+
 
     <script src="{{ url_for('static', filename='js/inicio.js') }}"></script>
+</body>
 
-    {%endblock%}
+{%endblock%}

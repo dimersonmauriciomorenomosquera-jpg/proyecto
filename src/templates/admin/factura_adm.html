@@ -1,0 +1,543 @@
+{% extends "admin/layaout_adm.html" %}
+{% block contenido %}
+<head>
+
+
+    <title>Facturas | Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/factura_adm.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+<!--==================== CONTENIDO ====================-->
+
+<main class="contenido">
+
+<header>
+
+<div>
+
+<h1>Gestión de Facturas</h1>
+
+<p>Consulta todas las facturas generadas en Serenity Mode.</p>
+
+</div>
+
+<button class="exportar">
+
+<i class="fa-solid fa-file-export"></i>
+
+Exportar
+
+</button>
+
+</header>
+
+<!--==================== TARJETAS ====================-->
+
+<section class="estadisticas">
+
+<div class="card">
+
+<h3>Facturas Emitidas</h3>
+
+<h2>1.245</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Ventas del Día</h3>
+
+<h2>$5.420.000</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Ingresos del Mes</h3>
+
+<h2>$82.350.000</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Pendientes</h3>
+
+<h2>18</h2>
+
+</div>
+
+</section>
+
+<!--==================== FILTROS ====================-->
+
+<section class="barra">
+
+<input
+type="text"
+placeholder="Buscar factura...">
+
+<select>
+
+<option>Estado</option>
+
+<option>Pagada</option>
+
+<option>Pendiente</option>
+
+<option>Anulada</option>
+
+</select>
+
+<select>
+
+<option>Método de pago</option>
+
+<option>PSE</option>
+
+<option>Nequi</option>
+
+<option>Daviplata</option>
+
+<option>Tarjeta</option>
+
+</select>
+
+<button>
+
+Buscar
+
+</button>
+
+</section>
+
+<!--==================== TABLA ====================-->
+
+<section class="tabla">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Factura</th>
+
+<th>Cliente</th>
+
+<th>Fecha</th>
+
+<th>Método</th>
+
+<th>Total</th>
+
+<th>Estado</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>SM-000125</td>
+
+<td>Mauricio Moreno</td>
+
+<td>12/06/2026</td>
+
+<td>PSE</td>
+
+<td>$420.000</td>
+
+<td>
+
+<span class="pagada">
+
+Pagada
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+<button class="pdf">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</button>
+
+<button class="imprimir">
+
+<i class="fa-solid fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>SM-000126</td>
+
+<td>Laura Gómez</td>
+
+<td>12/06/2026</td>
+
+<td>Nequi</td>
+
+<td>$185.000</td>
+
+<td>
+
+<span class="pagada">
+
+Pagada
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+<button class="pdf">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</button>
+
+<button class="imprimir">
+
+<i class="fa-solid fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>SM-000127</td>
+
+<td>Andrés Ruiz</td>
+
+<td>13/06/2026</td>
+
+<td>Visa</td>
+
+<td>$650.000</td>
+
+<td>
+
+<span class="pendiente">
+
+Pendiente
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+<button class="pdf">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+</button>
+
+<button class="imprimir">
+
+<i class="fa-solid fa-print"></i>
+
+</button>
+
+</td>
+
+</tr>
+                <tr>
+
+                    <td>SM-000128</td>
+
+                    <td>Sofía Martínez</td>
+
+                    <td>13/06/2026</td>
+
+                    <td>Daviplata</td>
+
+                    <td>$295.000</td>
+
+                    <td>
+
+                        <span class="pagada">
+
+                            Pagada
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button class="ver">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                        <button class="pdf">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                        </button>
+
+                        <button class="imprimir">
+
+                            <i class="fa-solid fa-print"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>SM-000129</td>
+
+                    <td>Daniel Torres</td>
+
+                    <td>14/06/2026</td>
+
+                    <td>MasterCard</td>
+
+                    <td>$980.000</td>
+
+                    <td>
+
+                        <span class="anulada">
+
+                            Anulada
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button class="ver">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                        <button class="pdf">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                        </button>
+
+                        <button class="imprimir">
+
+                            <i class="fa-solid fa-print"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>SM-000130</td>
+
+                    <td>Camila Rodríguez</td>
+
+                    <td>14/06/2026</td>
+
+                    <td>PSE</td>
+
+                    <td>$510.000</td>
+
+                    <td>
+
+                        <span class="pagada">
+
+                            Pagada
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button class="ver">
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                        <button class="pdf">
+
+                            <i class="fa-solid fa-file-pdf"></i>
+
+                        </button>
+
+                        <button class="imprimir">
+
+                            <i class="fa-solid fa-print"></i>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!--==================== PAGINACIÓN ====================-->
+
+    <section class="paginacion">
+
+        <button>
+
+            <i class="fa-solid fa-angle-left"></i>
+
+        </button>
+
+        <button class="activo">1</button>
+
+        <button>2</button>
+
+        <button>3</button>
+
+        <button>4</button>
+
+        <button>
+
+            <i class="fa-solid fa-angle-right"></i>
+
+        </button>
+
+    </section>
+
+    <!--==================== RESUMEN ====================-->
+
+    <section class="resumen">
+
+        <div class="resumen-card">
+
+            <h2>
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                Resumen de Facturación
+
+            </h2>
+
+            <div class="estadistica">
+
+                <p>Enero</p>
+
+                <span>$12.500.000</span>
+
+            </div>
+
+            <div class="estadistica">
+
+                <p>Febrero</p>
+
+                <span>$18.400.000</span>
+
+            </div>
+
+            <div class="estadistica">
+
+                <p>Marzo</p>
+
+                <span>$21.350.000</span>
+
+            </div>
+
+            <div class="estadistica">
+
+                <p>Abril</p>
+
+                <span>$25.600.000</span>
+
+            </div>
+
+            <div class="estadistica">
+
+                <p>Mayo</p>
+
+                <span>$29.850.000</span>
+
+            </div>
+
+            <div class="estadistica">
+
+                <p>Junio</p>
+
+                <span>$32.700.000</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--==================== FOOTER ====================-->
+
+    <footer>
+
+        <p>
+
+            © 2026 Serenity Mode | Gestión de Facturas
+
+        </p>
+
+    </footer>
+
+</main>
+
+</body>
+{% endblock %}
+
+
+</html>

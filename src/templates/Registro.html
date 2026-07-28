@@ -1,36 +1,196 @@
-{% extends "layout.html" %}
-    {%block contenido%}
-    <head>
-        <meta charset="UTF-8">
-        <title>Registro</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
-    </head>
-    <body>
-        <aside class="menu">
-            <div class="serenity">Serenity Mode</div>
-            <img src="{{ url_for('static', filename='img/serenity.png') }}" class="img"  alt="logo serenity mode" class="img">
-            <div class="frases">Crea tu estilo, Vive Serenity Mode</div>
-        </aside>
-        <main>
-            <h1>Registro</h1>
-            <h3 class="nombre">Nombre</h3>
-            <input type="placeholder" class="nombres" required >
-            <h3 class="apellido">Apellido</h3>
-            <input type="placeholder" class="apellidos" required >
-            <h3 class="nacimiento">Fecha de Nacimiento</h3>
-            <input type="date" class="fecha" required >
-            <h3 class="contraseña">Contraseña</h3>
-            <input type="password" class="password" required >
-            <h3 class="terminos">Acepto los Terminos y Condiciones</h3>
-            <input type="checkbox" class="checkbox" required >
-            <input type="button" class="ingresar" value="Ingresar">
-            <input type="button" class="cancelar" value="Cancelar">           
-            <h2 class="registrasecon"> O Registrate con</h2>
-            <input value="Google" type="button" class="g">
-            <input value="Facebook" type="button" class="f">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Serenity Mode</title>
 
-        </main>    
+    <link rel="stylesheet" href="../static/css/registro.css">
 
-    </body>
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
 
-{%endblock%}
+<body>
+
+<div class="contenedor">
+
+    <!--=====================
+            LOGO
+    ======================-->
+
+    <div class="lado-izquierdo">
+
+        <img src="../static/img/registro1.jpeg"
+        alt="Serenity Mode">
+
+    </div>
+
+    <!--=====================
+            FORMULARIO
+    ======================-->
+
+    <div class="lado-derecho">
+
+        <h1>Serenity Mode</h1>
+
+        <p class="subtitulo">
+            Crea tu estilo, vive Serenity Mode
+        </p>
+
+        <h2>Crear Cuenta</h2>
+
+        <form action="" method="POST">
+
+            <!-- Nombre -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-user"></i>
+
+                <input
+                type="text"
+                name="nombre_cliente"
+                placeholder="Nombre completo"
+                required>
+
+            </div>
+
+            <!-- Correo -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                type="email"
+                name="email_cliente"
+                placeholder="Correo electrónico"
+                required>
+
+            </div>
+
+            <!-- Celular -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <input
+                type="text"
+                name="numero_cliente"
+                placeholder="Número de celular"
+                required>
+
+            </div>
+
+            <!-- Dirección -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <input
+                type="text"
+                name="direccion_cliente"
+                placeholder="Dirección"
+                required>
+
+            </div>
+
+            <!-- Fecha -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <input
+                type="date"
+                name="nacimiento_cliente"
+                required>
+
+            </div>
+
+            <!-- Contraseña -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required>
+
+                <i class="fa-solid fa-eye ojo"></i>
+
+            </div>
+
+            <!-- Confirmar -->
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                type="password"
+                name="confirmar"
+                placeholder="Confirmar contraseña"
+                required>
+
+                <i class="fa-solid fa-eye ojo"></i>
+
+            </div>
+
+            <!-- Checkbox -->
+
+            <div class="terminos">
+
+                <input
+                type="checkbox"
+                required>
+
+                <label>
+
+                    Acepto los
+                    <a href="#">términos y condiciones</a>
+
+                </label>
+
+            </div>
+
+            <!-- Botón -->
+
+            <button
+            class="btn-registro"
+            type="submit">
+
+                Registrarse
+
+            </button>
+
+        </form>
+
+        <!--===================
+                LOGIN
+        ====================-->
+
+        <div class="login">
+
+            <span>¿Ya tienes cuenta?</span>
+
+            <a href="login">
+                Inicia sesión
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

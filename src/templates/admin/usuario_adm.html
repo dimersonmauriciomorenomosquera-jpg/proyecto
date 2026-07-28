@@ -1,0 +1,998 @@
+{% extends "admin/layaout_adm.html" %}
+{% block contenido %}
+
+<head>
+
+
+    <title>Usuarios | Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario_adm.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+
+<!--============== CONTENIDO ==============-->
+
+<main class="contenido">
+
+<header>
+
+<div>
+
+<h1>Gestión de Usuarios</h1>
+
+<p>Administra los usuarios registrados en Serenity Mode.</p>
+
+</div>
+
+<button class="nuevo">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Nuevo usuario
+
+</button>
+
+</header>
+
+<!--============== ESTADÍSTICAS ==============-->
+
+<section class="estadisticas">
+
+<div class="card">
+
+<h3>Usuarios registrados</h3>
+
+<h2>356</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Usuarios activos</h3>
+
+<h2>320</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Administradores</h3>
+
+<h2>3</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Nuevos este mes</h3>
+
+<h2>18</h2>
+
+</div>
+
+</section>
+
+<!--============== FILTROS ==============-->
+
+<section class="barra">
+
+<input
+type="text"
+placeholder="Buscar usuario...">
+
+<select>
+
+<option>Todos los roles</option>
+
+<option>Administrador</option>
+
+<option>Cliente</option>
+
+</select>
+
+<select>
+
+<option>Todos los estados</option>
+
+<option>Activo</option>
+
+<option>Inactivo</option>
+
+<option>Bloqueado</option>
+
+</select>
+
+<button>
+
+Buscar
+
+</button>
+
+</section>
+
+<!--============== TABLA ==============-->
+
+<section class="tabla">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Foto</th>
+
+<th>Nombre</th>
+
+<th>Correo</th>
+
+<th>Teléfono</th>
+
+<th>Rol</th>
+
+<th>Estado</th>
+
+<th>Registro</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+<img src="img/user1.jpg" alt="Usuario">
+
+</td>
+
+<td>Mauricio Moreno</td>
+
+<td>mauricio@email.com</td>
+
+<td>3001234567</td>
+
+<td>
+
+<span class="admin">
+
+Administrador
+
+</span>
+
+</td>
+
+<td>
+
+<span class="activo">
+
+Activo
+
+</span>
+
+</td>
+
+<td>12/02/2026</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+<button class="editar">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button class="eliminar">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<img src="img/user2.jpg" alt="Usuario">
+
+</td>
+
+<td>Laura Gómez</td>
+
+<td>laura@email.com</td>
+
+<td>3109876543</td>
+
+<td>
+
+<span class="cliente">
+
+Cliente
+
+</span>
+
+</td>
+
+<td>
+
+<span class="activo">
+
+Activo
+
+</span>
+
+</td>
+
+<td>20/03/2026</td>
+
+<td>
+
+<button class="ver">
+<i class="fa-solid fa-eye"></i>
+</button>
+
+<button class="editar">
+<i class="fa-solid fa-pen"></i>
+</button>
+
+<button class="eliminar">
+<i class="fa-solid fa-trash"></i>
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+            <td>
+                <img src="img/user3.jpg" alt="Usuario">
+            </td>
+
+            <td>Andrés Ruiz</td>
+
+            <td>andres@email.com</td>
+
+            <td>3154567890</td>
+
+            <td>
+
+                <span class="cliente">
+
+                    Cliente
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="inactivo">
+
+                    Inactivo
+
+                </span>
+
+            </td>
+
+            <td>05/01/2026</td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+                <button class="editar">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button class="eliminar">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <img src="img/user4.jpg" alt="Usuario">
+            </td>
+
+            <td>Sofía Martínez</td>
+
+            <td>sofia@email.com</td>
+
+            <td>3206549871</td>
+
+            <td>
+
+                <span class="cliente">
+
+                    Cliente
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="bloqueado">
+
+                    Bloqueado
+
+                </span>
+
+            </td>
+
+            <td>18/04/2026</td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+                <button class="editar">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button class="eliminar">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <img src="img/user5.jpg" alt="Usuario">
+            </td>
+
+            <td>Daniel Torres</td>
+
+            <td>daniel@email.com</td>
+
+            <td>3018529637</td>
+
+            <td>
+
+                <span class="cliente">
+
+                    Cliente
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="activo">
+
+                    Activo
+
+                </span>
+
+            </td>
+
+            <td>30/05/2026</td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+                <button class="editar">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button class="eliminar">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</section>
+
+<!--============== PAGINACIÓN ==============-->
+
+<section class="paginacion">
+
+<button>
+
+<i class="fa-solid fa-angle-left"></i>
+
+</button>
+
+<button class="activo">
+
+1
+
+</button>
+
+<button>
+
+2
+
+</button>
+
+<button>
+
+3
+
+</button>
+
+<button>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</button>
+
+</section>
+
+<!--============== FOOTER ==============-->
+
+<footer>
+
+<p>
+
+© 2026 Serenity Mode | Gestión de Usuarios
+
+</p>
+
+</footer>
+</main>
+
+<!--==================================
+        MODAL NUEVO USUARIO
+===================================-->
+
+<div class="modal" id="modalAgregarUsuario">
+
+    <div class="modal-box modal-grande">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Nuevo Usuario
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="producto-modal">
+
+                <div class="producto-imagen">
+
+                    <img
+                    src="{{ url_for('static', filename='img/user_default.png') }}"
+                    id="previewUsuario">
+
+                    <label class="subir">
+
+                        <i class="fa-solid fa-camera"></i>
+
+                        Seleccionar foto
+
+                        <input
+                        type="file"
+                        hidden>
+
+                    </label>
+
+                </div>
+
+                <div class="producto-info">
+
+                    <div class="grupo">
+
+                        <label>Nombre completo</label>
+
+                        <input type="text">
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Correo electrónico</label>
+
+                        <input type="email">
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Teléfono</label>
+
+                            <input type="text">
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Rol</label>
+
+                            <select>
+
+                                <option>Administrador</option>
+
+                                <option>Cliente</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Estado</label>
+
+                            <select>
+
+                                <option>Activo</option>
+
+                                <option>Inactivo</option>
+
+                                <option>Bloqueado</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Contraseña</label>
+
+                            <input type="password">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+
+                Cancelar
+
+            </button>
+
+            <button
+class="btn-dorado"
+id="guardarUsuario">
+
+Guardar Usuario
+
+</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL EDITAR USUARIO
+===================================-->
+
+<div class="modal" id="modalEditarUsuario">
+
+    <div class="modal-box modal-grande">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-user-pen"></i>
+
+                Editar Usuario
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <form>
+
+            <div class="modal-body">
+
+                <div class="producto-modal">
+
+                    <!-- FOTO -->
+
+                    <div class="producto-imagen">
+
+                        <img
+                        src="{{ url_for('static', filename='img/user1.jpg') }}"
+                        id="previewEditarUsuario"
+                        alt="Usuario">
+
+                        <label class="subir">
+
+                            <i class="fa-solid fa-camera"></i>
+
+                            Cambiar foto
+
+                            <input
+                            type="file"
+                            id="imagenEditarUsuario"
+                            hidden>
+
+                        </label>
+
+                    </div>
+
+                    <!-- DATOS -->
+
+                    <div class="producto-info">
+
+                        <div class="grupo">
+
+                            <label>Nombre completo</label>
+
+                            <input
+                            type="text"
+                            value="Mauricio Moreno">
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Correo electrónico</label>
+
+                            <input
+                            type="email"
+                            value="mauricio@email.com">
+
+                        </div>
+
+                        <div class="fila">
+
+                            <div class="grupo">
+
+                                <label>Teléfono</label>
+
+                                <input
+                                type="text"
+                                value="3001234567">
+
+                            </div>
+
+                            <div class="grupo">
+
+                                <label>Rol</label>
+
+                                <select>
+
+                                    <option selected>Administrador</option>
+
+                                    <option>Cliente</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="fila">
+
+                            <div class="grupo">
+
+                                <label>Estado</label>
+
+                                <select>
+
+                                    <option selected>Activo</option>
+
+                                    <option>Inactivo</option>
+
+                                    <option>Bloqueado</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="grupo">
+
+                                <label>Nueva contraseña</label>
+
+                                <input
+                                type="password"
+                                placeholder="••••••••">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                type="button"
+                class="btn-outline cerrar">
+
+                    Cancelar
+
+                </button>
+
+                <button
+                type="submit"
+                class="btn-dorado"
+                id="guardarCambiosUsuario">
+
+                    Guardar Cambios
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal" id="modalEliminarUsuario">
+
+    <div class="modal-box modal-pequeno">
+
+        <div class="modal-header">
+
+            <h2>
+                <i class="fa-solid fa-user-xmark"></i>
+                Eliminar Usuario
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="confirmacion">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h2>¿Eliminar usuario?</h2>
+
+                <p>
+                    ¿Deseas eliminar a
+                    <strong>Mauricio Moreno</strong>?
+                </p>
+
+                <p>
+                    Esta acción no podrá deshacerse.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+                Cancelar
+            </button>
+
+            <button class="btn-danger" id="eliminarUsuario">
+                Eliminar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL VER USUARIO
+===================================-->
+
+<div class="modal" id="modalVerUsuario">
+
+    <div class="modal-box modal-grande">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-user"></i>
+
+                Información del Usuario
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="vista-producto">
+
+                <!-- FOTO -->
+
+                <div class="producto-imagen">
+
+                    <img
+                    src="{{ url_for('static', filename='img/user1.jpg') }}"
+                    alt="Usuario">
+
+                </div>
+
+                <!-- INFORMACIÓN -->
+
+                <div class="producto-info">
+
+                    <h2 style="color:#C7A85D; margin-bottom:20px;">
+
+                        Mauricio Moreno
+
+                    </h2>
+
+                    <div class="grupo">
+
+                        <label>Correo electrónico</label>
+
+                        <input
+                        type="text"
+                        value="mauricio@email.com"
+                        readonly>
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Teléfono</label>
+
+                            <input
+                            type="text"
+                            value="3001234567"
+                            readonly>
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Rol</label>
+
+                            <input
+                            type="text"
+                            value="Administrador"
+                            readonly>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Estado</label>
+
+                            <input
+                            type="text"
+                            value="Activo"
+                            readonly>
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Fecha de Registro</label>
+
+                            <input
+                            type="text"
+                            value="12/02/2026"
+                            readonly>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+            class="btn-dorado cerrar">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/usuario_adm.js') }}"></script>
+
+</body>
+
+{% endblock %}
+
+</html>

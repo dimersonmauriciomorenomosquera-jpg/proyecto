@@ -1,0 +1,192 @@
+{% extends "admin/layaout_adm.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ventas_adm.css') }}">
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Gestión de Ventas</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Ventas Hoy</h3>
+        <p>$2.350.000</p>
+    </div>
+
+    <div class="card">
+        <h3>Ventas del Mes</h3>
+        <p>$18.450.000</p>
+    </div>
+
+    <div class="card">
+        <h3>Pedidos</h3>
+        <p>128</p>
+    </div>
+
+    <div class="card">
+        <h3>Productos Vendidos</h3>
+        <p>347</p>
+    </div>
+
+</div>
+
+<div class="tabla">
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acción</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <td>001</td>
+                <td>Juan Pérez</td>
+                <td>09/07/2026</td>
+                <td>$320.000</td>
+                <td>Pagado</td>
+                <td>
+                    <button class="ver">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>002</td>
+                <td>Ana Gómez</td>
+                <td>09/07/2026</td>
+                <td>$180.000</td>
+                <td>Enviado</td>
+                <td>
+                    <button class="ver">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>003</td>
+                <td>Carlos Ruiz</td>
+                <td>08/07/2026</td>
+                <td>$520.000</td>
+                <td>Pendiente</td>
+                <td>
+                    <button class="ver">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<!--==========================
+        MODAL VER VENTA
+===========================-->
+
+<div class="modal" id="modalVerVenta">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                <i class="fa-solid fa-receipt"></i>
+                Detalle de la Venta
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="vista-producto">
+
+                <h2>Venta #001</h2>
+
+                <p><strong>Cliente:</strong> Juan Pérez</p>
+                <p><strong>Correo:</strong> juan@email.com</p>
+                <p><strong>Fecha:</strong> 09/07/2026</p>
+                <p><strong>Método de pago:</strong> Tarjeta Visa</p>
+                <p><strong>Estado:</strong> Pagado</p>
+                <p><strong>Dirección:</strong> Calle 25 #18-40, Bogotá</p>
+
+                <hr>
+
+                <h3>Productos</h3>
+
+                <table class="tabla-productos">
+
+                    <thead>
+
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Tenis Urban Black</td>
+                            <td>1</td>
+                            <td>$220.000</td>
+                            <td>$220.000</td>
+                        </tr>
+
+                        <tr>
+                            <td>Camiseta Oversize</td>
+                            <td>2</td>
+                            <td>$50.000</td>
+                            <td>$100.000</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <div class="total-venta">
+
+                    <h2>Total: $320.000</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+                Cerrar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/ventas_adm.js') }}"></script>
+
+{% endblock %}

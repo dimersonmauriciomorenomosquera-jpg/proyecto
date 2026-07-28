@@ -1,0 +1,219 @@
+{% extends "admin/layaout_adm.html" %}
+
+{% block contenido %}
+
+
+<head>  
+    <title>Admnistrador</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<header>
+
+    <div class="titulo">
+
+        <h1>Dashboard</h1>
+
+        <p>Bienvenido al panel administrativo de Serenity Mode</p>
+
+    </div>
+
+    <div class="admin">
+
+        <img src="{{ url_for('static', filename='img/admin.jpg') }}" alt="Administrador">
+
+        <div>
+
+            <h3>Mauricio Moreno</h3>
+
+            <span>Administrador</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+<section class="cards">
+
+    <div class="card">
+
+        <div class="icono">
+            <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+
+        <h3>Ventas del día</h3>
+
+        <h2>$2.540.000</h2>
+
+        <span>+18%</span>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icono">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <h3>Usuarios registrados</h3>
+
+        <h2>356</h2>
+
+        <span>+12 nuevos</span>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icono">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+
+        <h3>Pedidos pendientes</h3>
+
+        <h2>18</h2>
+
+        <span>Por despachar</span>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icono">
+            <i class="fa-solid fa-truck-fast"></i>
+        </div>
+
+        <h3>Envíos pendientes</h3>
+
+        <h2>9</h2>
+
+        <span>En preparación</span>
+
+    </div>
+
+    <div class="card">
+
+        <div class="icono">
+            <i class="fa-solid fa-shirt"></i>
+        </div>
+
+        <h3>Productos</h3>
+
+        <h2>245</h2>
+
+        <span>12 agotados</span>
+
+    </div>
+
+</section>
+
+<section class="graficas">
+
+    <div class="grafica grande">
+
+        <h2>Ventas últimos 7 días</h2>
+
+        <canvas id="ventasSemana"></canvas>
+
+    </div>
+
+    <div class="grafica">
+
+        <h2>Ventas por categoría</h2>
+
+        <canvas id="categorias"></canvas>
+
+    </div>
+
+</section>
+
+<section class="grafica">
+
+    <h2>Ventas por mes</h2>
+
+    <canvas id="ventasMes"></canvas>
+
+</section>
+
+<section class="productos">
+
+    <div class="encabezado">
+
+        <h2>Productos registrados</h2>
+
+        <button>Agregar producto</button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td><img src="{{ url_for('static', filename='img/nike.png') }}"></td>
+                <td>Nike Air Force</td>
+                <td>Zapatos</td>
+                <td>25</td>
+                <td>$420.000</td>
+                <td><span class="disponible">Disponible</span></td>
+
+                <td>
+
+                    <button class="editar">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+                    <button class="eliminar">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<section class="pedidos">
+
+    <div class="pedido-card">
+
+        <h2>Pedidos recientes</h2>
+
+        <ul>
+
+            <li>Pedido #1054 <span>En preparación</span></li>
+            <li>Pedido #1055 <span>Enviado</span></li>
+            <li>Pedido #1056 <span>Pendiente</span></li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,94 +1,401 @@
 {% extends "layout.html" %}
-    {%block contenido%}
-<head>
-    <title>Detalle Producto</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/descripcion.css') }}">
-</head>
-<body>
 
-    <button class="volver" onclick="window.history.back()">
-    ← Volver
-</button>
+{% block contenido %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/descripcion.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
 
-    <section class="producto-container">
+<section class="detalle-producto">
 
-        <div class="galeria">
+    <!-- ==========================
+            BREADCRUMB
+    =========================== -->
+
+    <div class="breadcrumb">
+
+        <a href="{{ url_for('inicio.index') }}">
+            Inicio
+        </a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <a href="{{ url_for('productos.index') }}">
+            Productos
+        </a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <span>{{ producto.nombre_producto }}</span>
+
+    </div>
+
+    <!-- ==========================
+        CONTENEDOR PRINCIPAL
+    =========================== -->
+
+    <div class="detalle-contenedor">
+
+        <!-- ==========================
+                GALERÍA
+        =========================== -->
+
+        <div class="galeria-producto">
+
+            <div class="miniaturas">
+
+                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+
+                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+
+                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+
+                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+
+            </div>
+
             <div class="imagen-principal">
 
-                <img src="{{ producto.imagen }}">
+                <img
+                    src="{{ url_for('static', filename='img/serenity.png') }}"
+                    alt="{{ producto.nombre_producto }}"
+                >
 
             </div>
 
         </div>
 
-        <!-- INFORMACION -->
+        <!-- ==========================
+            INFORMACIÓN
+        =========================== -->
 
         <div class="info-producto">
 
-            <span class="nuevo">NUEVO</span>
+            <span class="badge-producto">
 
-            <h1>{{ producto.nombre }}</h1>
+                Más vendido
 
-        <div class="estrellas">
+            </span>
 
-    <span class="estrella" data-valor="1">☆</span>
-    <span class="estrella" data-valor="2">☆</span>
-    <span class="estrella" data-valor="3">☆</span>
-    <span class="estrella" data-valor="4">☆</span>
-    <span class="estrella" data-valor="5">☆</span>
+            <h1>
 
-</div>
+                {{ producto.nombre_producto }}
 
-<button type="button" class="enviarOpinion" onclick="enviarOpinion('{{ producto.id }}')">
-    Enviar opinión
-</button>
+            </h1>
 
-            <h2>$ {{ "{:,.0f}".format(producto.precio).replace(",", ".") }}</h2>
+            <div class="meta-producto">
 
-            <p class="descripcion">
-                {{producto.descripcion}}
-            </p>
+                <span>Hombre</span>
 
+                <span>•</span>
 
-        <!-- TALLAS -->
-<div class="opciones">
+                <span>Casual</span>
 
-    <h3>Talla:</h3>
-    <div id="tallas-container" class="tallas"data-categoria="{{ producto.categoria | lower }}">
-</div>
+                <span>•</span>
 
-</div>
-
-
-
-            <!-- CANTIDAD -->
-
-            <div class="opciones">
-
-                <h3 class="cantidad2">Cantidad:</h3>
+                <span>Original</span>
 
             </div>
-                    <div class="producto">
-                    <button onclick="cambiarCantidad(this, -1)">-</button>
-                    <span class="cantidad">1</span>
-                    <button onclick="cambiarCantidad(this, 1)">+</button>
+
+            <div class="valoracion">
+
+                <div class="estrellas">
+
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+
                 </div>
 
+                <span>(126 reseñas)</span>
+
+            </div>
+
+            <div class="precios">
+
+                <h2>
+
+                    ${{ "{:,.0f}".format(producto.precio_producto).replace(",", ".") }}
+
+                </h2>
+
+                <div class="precio-anterior">
+
+                    <span>$420.000</span>
+
+                    <small>-17%</small>
+
+                </div>
+
+            </div>
+
+            <p class="descripcion-corta">
+
+                {{ producto.descripcion_producto }}
+
+            </p>
+
+                    <!-- ==========================
+                    COLORES
+            =========================== -->
+
+            <div class="opcion-producto">
+
+                <h3>Color</h3>
+
+                <div class="colores">
+
+                    <button class="color negro activo"></button>
+
+                    <button class="color blanco"></button>
+
+                    <button class="color gris"></button>
+
+                    <button class="color dorado"></button>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================
+                    TALLAS
+            =========================== -->
+
+            <div class="opcion-producto">
+
+                <div class="titulo-tallas">
+
+                    <h3>Talla</h3>
+
+                    <a href="#">Guía de tallas</a>
+
+                </div>
+
+                <div class="tallas">
+
+                    <button>38</button>
+
+                    <button>39</button>
+
+                    <button class="activo">40</button>
+
+                    <button>41</button>
+
+                    <button>42</button>
+
+                    <button>43</button>
+
+                    <button>44</button>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================
+                    CANTIDAD
+            =========================== -->
+
+            <div class="opcion-producto">
+
+                <h3>Cantidad</h3>
+
+                <div class="cantidad">
+
+                    <button>-</button>
+
+                    <input
+                        type="number"
+                        value="1"
+                        min="1"
+                    >
+
+                    <button>+</button>
+
+                </div>
+
+            </div>
+
+            <!-- ==========================
+                    BOTONES
+            =========================== -->
+
+            <div class="acciones-producto">
+
+                <button class="btn-carrito">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Agregar al carrito
+
+                </button>
+
+                <button class="btn-comprar">
+
+                    Comprar ahora
+
+                </button>
+
+            </div>
+
+            <!-- ==========================
+                    BENEFICIOS
+            =========================== -->
+
+            <div class="beneficios">
+
+                <div class="beneficio">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                    <div>
+
+                        <h4>Envío gratis</h4>
+
+                        <p>Compras superiores a $200.000</p>
+
+                    </div>
+
+                </div>
+
+                <div class="beneficio">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <div>
+
+                        <h4>Garantía</h4>
+
+                        <p>Producto 100% original</p>
+
+                    </div>
+
+                </div>
+
+                <div class="beneficio">
+
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+
+                    <div>
+
+                        <h4>Devoluciones</h4>
+
+                        <p>Hasta 30 días después de la compra</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!--====================================
+            DESCRIPCIÓN
+    =====================================-->
+
+    <section class="descripcion-producto">
+
+        <div class="titulo-seccion">
+
+            <h2>Descripción del producto</h2>
+
+            <p>
+                Descubre todos los detalles de este producto diseñado para brindar
+                comodidad, estilo y durabilidad.
+            </p>
+
+        </div>
+
+        <div class="descripcion-card">
+
+            <p>
+
+                {{ producto.descripcion_producto }}
+
+            </p>
+
+            <p>
+
+                Fabricado con materiales premium que ofrecen una excelente
+                resistencia al desgaste. Su diseño moderno combina perfectamente
+                con cualquier estilo urbano o casual, convirtiéndose en una opción
+                ideal para el día a día.
+
+            </p>
+
+        </div>
+
+    </section>
 
 
-            <!-- BOTONES -->
-<button class="carrito" onclick="agregarCarrito(
-    '{{ producto.nombre }}',
-    '{{ producto.precio }}',
-    '{{ producto.imagen }}',
-    '{{ producto.descripcion }}',
-    tallaSeleccionada
-)">
-    Agregar al carrito
-</button>
-</div>
+    <!--====================================
+            CARACTERÍSTICAS
+    =====================================-->
+
+    <section class="caracteristicas-producto">
+
+        <div class="titulo-seccion">
+
+            <h2>Características</h2>
+
+            <p>
+                Todo lo que hace especial este producto.
+            </p>
+
+        </div>
+
+        <div class="grid-caracteristicas">
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Materiales de alta calidad.</span>
+
+            </div>
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Diseño moderno y elegante.</span>
+
+            </div>
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Excelente comodidad para uso diario.</span>
+
+            </div>
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Suela resistente y antideslizante.</span>
+
+            </div>
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Acabados premium.</span>
+
+            </div>
+
+            <div class="caracteristica">
+
+                <i class="fa-solid fa-check"></i>
+
+                <span>Ideal para cualquier ocasión.</span>
 
             </div>
 
@@ -96,9 +403,245 @@
 
     </section>
 
-<script src="{{ url_for('static', filename='js/descripcion.js') }}"></script>
 
+    <!--====================================
+        ENVÍOS Y DEVOLUCIONES
+    =====================================-->
 
+    <section class="informacion-extra">
 
-{%endblock%}
+        <div class="info-card">
 
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <h3>Envíos rápidos</h3>
+
+            <p>
+
+                Realizamos envíos a todo el país con seguimiento en tiempo
+                real. Recibe tu pedido entre 2 y 5 días hábiles.
+
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+
+            <h3>Devoluciones fáciles</h3>
+
+            <p>
+
+                Si el producto no cumple tus expectativas podrás devolverlo
+                durante los primeros 30 días.
+
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>Compra segura</h3>
+
+            <p>
+
+                Todos nuestros productos cuentan con garantía y métodos
+                de pago completamente seguros.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!--====================================
+        PRODUCTOS RELACIONADOS
+    =====================================-->
+
+    <section class="productos-relacionados">
+
+        <div class="titulo-seccion">
+
+            <h2>También te puede interesar</h2>
+
+            <p>Descubre otros productos similares.</p>
+
+        </div>
+
+        <div class="grid-productos">
+
+            <!-- Producto 1 -->
+
+            <div class="card-producto">
+
+                <img src="{{ url_for('static', filename='img/productos/zapato2.png') }}" alt="Producto">
+
+                <div class="card-info">
+
+                    <span class="categoria">Hombre</span>
+
+                    <h3>Nike Air Max 90</h3>
+
+                    <p class="precio">$420.000</p>
+
+                    <a href="#" class="btn-ver">
+
+                        Ver producto
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Producto 2 -->
+
+            <div class="card-producto">
+
+                <img src="{{ url_for('static', filename='img/productos/zapato3.png') }}" alt="Producto">
+
+                <div class="card-info">
+
+                    <span class="categoria">Unisex</span>
+
+                    <h3>Converse Chuck 70</h3>
+
+                    <p class="precio">$280.000</p>
+
+                    <a href="#" class="btn-ver">
+
+                        Ver producto
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Producto 3 -->
+
+            <div class="card-producto">
+
+                <img src="{{ url_for('static', filename='img/productos/zapato4.png') }}" alt="Producto">
+
+                <div class="card-info">
+
+                    <span class="categoria">Hombre</span>
+
+                    <h3>Vans Old Skool</h3>
+
+                    <p class="precio">$250.000</p>
+
+                    <a href="#" class="btn-ver">
+
+                        Ver producto
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Producto 4 -->
+
+            <div class="card-producto">
+
+                <img src="{{ url_for('static', filename='img/productos/zapato5.png') }}" alt="Producto">
+
+                <div class="card-info">
+
+                    <span class="categoria">Mujer</span>
+
+                    <h3>Nike Dunk Low</h3>
+
+                    <p class="precio">$380.000</p>
+
+                    <a href="#" class="btn-ver">
+
+                        Ver producto
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+<script>
+
+const miniaturas = document.querySelectorAll(".miniaturas img");
+const imagenPrincipal = document.querySelector(".imagen-principal img");
+
+miniaturas.forEach(img => {
+
+    img.addEventListener("click", () => {
+
+        imagenPrincipal.src = img.src;
+
+        miniaturas.forEach(i => i.classList.remove("activa"));
+
+        img.classList.add("activa");
+
+    });
+
+});
+
+const tallas = document.querySelectorAll(".tallas button");
+
+tallas.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        tallas.forEach(t => t.classList.remove("activo"));
+
+        btn.classList.add("activo");
+
+    });
+
+});
+
+const colores = document.querySelectorAll(".color");
+
+colores.forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        colores.forEach(c => c.classList.remove("activo"));
+
+        btn.classList.add("activo");
+
+    });
+
+});
+
+const menos = document.querySelector(".cantidad button:first-child");
+const mas = document.querySelector(".cantidad button:last-child");
+const cantidad = document.querySelector(".cantidad input");
+
+menos.addEventListener("click", () => {
+
+    if (cantidad.value > 1) {
+
+        cantidad.value--;
+
+    }
+
+});
+
+mas.addEventListener("click", () => {
+
+    cantidad.value++;
+
+});
+
+</script>
+
+{% endblock %}

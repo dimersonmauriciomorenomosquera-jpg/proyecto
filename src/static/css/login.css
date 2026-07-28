@@ -1,140 +1,565 @@
-.menu{
-    padding: 60px ;
-    width: 30%;
-    background: #000;
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 
 }
+
 body{
-    padding: 0px;
-    margin: 0px;
-    background:#e0d7ca;
-}
-.frases{
-    color: white;
-    padding-top: 70px;
-    text-align: center;
-    font-size: 20px;
-}
-.serenity{
-    color: gold;
-    text-align: center;
-    font-size: 60px;
-    font-style: italic;
-    
-}
-.img{
-    height: 65%;
-    width: 95%;
-    margin-top: 80px;
-}
-h1{ 
-    
-    margin-left:0px;
-    position: absolute;
-    top: 50px;
-    left: 58%;
-    font-style: italic;
-    font-size: 90px;
-    color: #000;
-    
-    
-}
-.nombre{
-    position:absolute;
-    left: 55%;
-    top:240px;
-    width: 300px;
-    height: 50px;
-    
-    
-}
-.nombres{
-    position:absolute;
-    left: 55%;
-    top:200px;
-    
-    
-}
-.Contraseña{
-    position:absolute;
-    left: 55%;
-    top:300px;
-}
-.password{
-    position:absolute;
-    left: 55%;
-    top:350px;
-    width: 300px;
-    height: 50px;
-}
-.button  {
-    position:absolute;
-    left: 55%;
-    top:420px;
-    width: 307px;
-    height: 60px;
-    background: beige;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 18px;
+
+    background:#111;
+    height:100vh;
 
 }
-h3{
-    position: absolute;
-    left:50%;
-    top:500px;
+
+.contenedor{
+
+    display:flex;
+    width:100%;
+    height:100vh;
+
 }
-.buttonf{
+
+.izquierda{
+
+    width:40%;
+    overflow:hidden;
+
+}
+
+.izquierda img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+.derecha{
+
+    width:60%;
+
+    background:#0e0e0e;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+}
+
+h1{
+
+    color:#d4af37;
+
+    font-size:50px;
+
+    font-family:Georgia;
+
+}
+
+p{
+
+    color:#d8d8d8;
+
+    margin-top:10px;
+
+    margin-bottom:45px;
+
+}
+
+h2{
+
+    margin-bottom:35px;
+
+}
+
+form{
+
+    width:420px;
+
+}
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:22px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    padding:16px 45px;
+
+    background:#1d1d1d;
+
+    border:none;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.input-box input:focus{
+
+    outline:2px solid #d4af37;
+
+}
+
+.input-box i:first-child{
+
     position:absolute;
-    left: 65%;
-    top:550px;
-    width: 260px;
-    height: 45px;
-    background: beige;
-    text-align: center;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 25px;
+
+    left:18px;
+
+    top:18px;
+
+    color:#c6a85d;
 
 }
-.buttong{
+
+.fa-eye{
+
     position:absolute;
-    left: 45%;
-    top:550px;
-    width: 265px;
-    height: 50px;
-    background: beige;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 25px;
-    
+
+    right:18px;
+
+    top:18px;
+
+    color:#999;
+
+    cursor:pointer;
+
 }
-.buttono{
+
+.opciones{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+    font-size:14px;
+
+}
+
+.opciones a{
+
+    color:#d4af37;
+
+    text-decoration:none;
+
+}
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#d4af37;
+
+    color:black;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#c89b19;
+
+}
+
+.linea{
+
+    margin:35px 0 20px;
+
+    color:#aaa;
+
+}
+
+.redes{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.redes button{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:#1f1f1f;
+
+    color:white;
+
+    font-size:25px;
+
+}
+
+.registro{
+
+    margin-top:35px;
+
+    color:#aaa;
+
+}
+
+.registro a{
+
+    color:#d4af37;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+.admin-link{
+    margin-top: 25px;
+    display: inline-block;
+    color: #9e9e9e;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.admin-link:hover{
+    color: #d4af37;
+}
+/*==================================
+        MODAL RECUPERAR
+===================================*/
+
+.modal{
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:9999;
+
+}
+
+.modal.activo{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+/*==================================
+        CAJA MODAL
+===================================*/
+
+.modal-box{
+
+    position:relative;
+
+    width:520px;
+    max-width:90%;
+
+    background:#232323;
+
+    border:1px solid #C7A85D;
+    border-radius:22px;
+
+    padding:40px;
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+
+    animation:modal .35s ease;
+
+}
+
+@keyframes modal{
+
+    from{
+
+        transform:translateY(-20px) scale(.95);
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:translateY(0) scale(1);
+        opacity:1;
+
+    }
+
+}
+
+/*==================================
+        BOTON CERRAR
+===================================*/
+
+.cerrar-modal{
+
     position:absolute;
-    left:55%;
-    top:650px;
-    width: 265px;
-    height: 50px;
-    background: beige;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 18px;
-}
-.buttonf:hover , .buttong:hover , .button:hover , .buttono:hover{
-    background: blanchedalmond;
-}
 
+    top:18px;
+    right:18px;
 
+    width:46px;
+    height:46px;
 
-input::placeholder{
-    background: #fff;
-    font-size: 15px;
-}
-.frase{
-    background: none;
-    font-size: 0;
-    color: black;
-}
-.Serenity{
-    visibility: hidden;
+    border:none;
+    border-radius:50%;
+
+    background:#333;
+
+    color:#fff;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
 }
 
+.cerrar-modal:hover{
 
+    background:#C7A85D;
+    color:#111;
 
+}
+
+/*==================================
+            ICONO
+===================================*/
+
+.modal-icono{
+
+    width:95px;
+    height:95px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:#C7A85D;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.modal-icono i{
+
+    font-size:42px;
+    color:#fff;
+
+}
+
+/*==================================
+            TITULO
+===================================*/
+
+.modal-box h2{
+
+    color:#C7A85D;
+
+    font-size:28px;
+
+    margin-bottom:18px;
+
+}
+
+/*==================================
+            TEXTO
+===================================*/
+
+.modal-box p{
+
+    width:90%;
+
+    margin:0 auto 30px;
+
+    color:#d6d6d6;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+}
+
+/*==================================
+            INPUT
+===================================*/
+
+.input-modal{
+
+    position:relative;
+
+    width:100%;
+
+    margin-bottom:28px;
+
+}
+
+.input-modal i{
+
+    position:absolute;
+
+    left:20px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#C7A85D;
+
+    font-size:18px;
+
+}
+
+.input-modal input{
+
+    width:100% !important;
+
+    height:58px;
+
+    padding-left:55px;
+    padding-right:20px;
+
+    border:1px solid #555;
+
+    border-radius:15px;
+
+    background:#2d2d2d;
+
+    color:#fff;
+
+    font-size:16px;
+
+    outline:none;
+
+    box-sizing:border-box;
+
+}
+
+.input-modal input::placeholder{
+
+    color:#9d9d9d;
+
+}
+
+.input-modal input:focus{
+
+    border-color:#C7A85D;
+
+}
+
+/*==================================
+            BOTON
+===================================*/
+
+.btn-recuperar{
+
+    width:100% !important;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#C7A85D;
+
+    color:#111;
+
+    font-size:18px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.btn-recuperar:hover{
+
+    background:#d8c48d;
+
+}
+
+/*==================================
+        RESPONSIVE
+===================================*/
+
+@media(max-width:600px){
+
+    .modal-box{
+
+        width:95%;
+
+        padding:30px 25px;
+
+    }
+
+    .modal-box h2{
+
+        font-size:24px;
+
+    }
+
+    .modal-box p{
+
+        width:100%;
+        font-size:16px;
+
+    }
+
+}
+ 
 

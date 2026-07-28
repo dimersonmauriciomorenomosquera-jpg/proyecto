@@ -11,19 +11,19 @@
                     <div class="menu-dropdown" id="menu">
 
     {% if request.path != '/carrito' %}
-    <a href="{{ url_for('carrito') }}">Carrito</a>
+    <a href="{{ url_for('carrito.index') }}">Carrito</a>
     {% endif %}
 
     {% if request.path != '/productos' %}
-    <a href="{{ url_for('productos') }}">Productos</a>
+    <a href="{{ url_for('productos.index') }}">Productos</a>
     {% endif %}
 
     {% if request.path != '/pago' %}
-    <a href="{{ url_for('pago') }}">Metodo de Pago</a>
+    <a href="{{ url_for('novedades.index') }}">Novedades</a>
     {% endif %}
 
     {% if request.path != '/inicio' and request.path != '/' %}
-    <a href="{{ url_for('inicio') }}">Inicio</a>
+    <a href="{{ url_for('inicio.index') }}">Inicio</a>
     {% endif %}
 
 </div>
@@ -35,9 +35,9 @@
                 <div class="user-container">
                     <button class="user" onclick="toggleUser()">👤</button>
                     <div class="user-menu" id="ingreso">
-                    <a href="registro">Registrarse</a>
-                    <a href="login">Login</a>
-                    <a href="usuario">Informacion</a>
+                    <a href="auth/registro">Registrarse</a>
+                    <a href="auth/login">Login</a>
+                    <a href="auth/usuario">Informacion</a>
                     </div>
                 </div>
         <div class="search-box">
@@ -66,7 +66,7 @@
                     estilo que te representa,
                     serenidad que te define.
                     </p>
-                    <a href="{{ url_for('soporte') }}" class="soporte">
+                    <a  class="soporte">
                         CONTACTAR SOPORTE
                     </a>
                 

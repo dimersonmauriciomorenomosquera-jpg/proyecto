@@ -49,8 +49,8 @@ body{
 .user-menu{
     display:none;
     position:absolute;
-    top:40px;
-    margin-left: 1350px;
+    top:0px;
+    margin-left: 1320px;
     background:black;
     border:1px solid #c7a85d;
 }
@@ -116,7 +116,7 @@ body{
     width:15%;
     position: absolute;
     margin-left: 90%;
-    transform:translate(-50%, -150%);
+    transform:translate(-50%, -143%);
     margin-bottom: 8px;
     z-index: 10000;
 }

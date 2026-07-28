@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layaout_adm.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    {% block css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="{{ url_for('static', filename='img/serenity.png') }}" alt="Serenity Mode">
+
+            <h2>Serenity Mode</h2>
+
+            <p>Administrador</p>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li class="{% if request.endpoint == 'admnistrador' %}active{% endif %}">
+                    <a href="{{ url_for('admin.dashboard') }}">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'productos_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.productos_adm') }}">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Productos</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'usuario_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.usuario_adm') }}">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'envios_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.envios_adm') }}">
+                        <i class="fa-solid fa-truck"></i>
+                        <span>Envíos</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'ventas_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.ventas_adm') }}">
+                        <i class="fa-solid fa-money-bill-trend-up"></i>
+                        <span>Ventas</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'reportes_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.reportes_adm') }}">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Reportes</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.endpoint == 'configuracion_adm' %}active{% endif %}">
+                    <a href="{{ url_for('admin.configuracion_adm') }}">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Configuración</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('inicio.index') }}">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        {% block contenido %}
+        {% endblock %}
+
+    </main>
+
+</body>
+
+</html>

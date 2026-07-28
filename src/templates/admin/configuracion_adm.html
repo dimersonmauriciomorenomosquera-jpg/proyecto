@@ -1,0 +1,189 @@
+{% extends "admin/layaout_adm.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/configuracion_adm.css') }}">
+{% endblock %}
+
+{% block contenido %}
+
+<div class="configuracion">
+
+    <div class="titulo">
+
+        <h1>Configuración</h1>
+
+        <p>
+            Administra la información general y las preferencias de Serenity Mode.
+        </p>
+
+    </div>
+
+    <div class="config-grid">
+
+        <!-- PERFIL -->
+
+        <div class="config-card">
+
+            <h2>
+                <i class="fa-solid fa-user"></i>
+                Perfil del administrador
+            </h2>
+
+            <div class="perfil">
+
+                <img src="{{ url_for('static', filename='img/admin.jpg') }}" alt="Administrador">
+
+                <div class="datos">
+
+                    <label>Nombre</label>
+                    <input type="text" value="Mauricio Moreno">
+
+                    <label>Correo electrónico</label>
+                    <input type="email" value="admin@serenitymode.com">
+
+                    <label>Teléfono</label>
+                    <input type="text" value="+57 300 123 4567">
+
+                    <button>
+                        Guardar cambios
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SEGURIDAD -->
+
+        <div class="config-card">
+
+            <h2>
+                <i class="fa-solid fa-lock"></i>
+                Seguridad
+            </h2>
+
+            <label>Contraseña actual</label>
+            <input type="password">
+
+            <label>Nueva contraseña</label>
+            <input type="password">
+
+            <label>Confirmar contraseña</label>
+            <input type="password">
+
+            <button>
+                Actualizar contraseña
+            </button>
+
+        </div>
+
+        <!-- TIENDA -->
+
+        <div class="config-card">
+
+            <h2>
+                <i class="fa-solid fa-store"></i>
+                Información de la tienda
+            </h2>
+
+            <label>Nombre de la tienda</label>
+            <input type="text" value="Serenity Mode">
+
+            <label>Correo de soporte</label>
+            <input type="email" value="soporte@serenitymode.com">
+
+            <label>Teléfono</label>
+            <input type="text" value="+57 300 123 4567">
+
+            <label>Dirección</label>
+            <input type="text" value="Bogotá, Colombia">
+
+            <button>
+                Guardar información
+            </button>
+
+        </div>
+
+        <!-- NOTIFICACIONES -->
+
+        <div class="config-card">
+
+            <h2>
+                <i class="fa-solid fa-bell"></i>
+                Notificaciones
+            </h2>
+
+            <div class="switch">
+                <span>Nuevos pedidos</span>
+                <input type="checkbox" checked>
+            </div>
+
+            <div class="switch">
+                <span>Nuevos clientes</span>
+                <input type="checkbox" checked>
+            </div>
+
+            <div class="switch">
+                <span>Stock bajo</span>
+                <input type="checkbox" checked>
+            </div>
+
+            <div class="switch">
+                <span>Promociones</span>
+                <input type="checkbox">
+            </div>
+
+            <div class="switch">
+                <span>Ventas realizadas</span>
+                <input type="checkbox" checked>
+            </div>
+
+            <button>
+                Guardar preferencias
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ZONA DE SEGURIDAD -->
+
+    <section class="danger-zone">
+
+        <h2>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            Zona de seguridad
+        </h2>
+
+        <p>
+
+            Las siguientes acciones son importantes y pueden afectar el funcionamiento de la tienda.
+
+        </p>
+
+        <div class="acciones">
+
+            <button class="cerrar">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                Cerrar sesión
+
+            </button>
+
+            <button class="eliminar">
+
+                <i class="fa-solid fa-power-off"></i>
+
+                Desactivar tienda
+
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

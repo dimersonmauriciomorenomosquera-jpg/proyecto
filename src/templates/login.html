@@ -1,29 +1,170 @@
-{% extends "layout.html" %}
-    {%block contenido%}
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Serenity Mode</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-    </div>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-    <aside class="menu">
-        <div class="serenity">Serenity Mode</div>
-        <img src="{{ url_for('static', filename='img/serenity.png') }}" class="img"> 
-        <div class="frases">Crea tu estilo, Vive Serenity Mode</div>
-    </aside>    
-            <form>
-                <h1>login</h1>
-                <h2 class="nombres">Nombre de Usuario</h2>
-                <input type="text" placeholder="Juan Perez" class="nombre">
-                <h2 class="Contraseña">Contraseña</h2>
-                <input type="password" placeholder="M45418872" class="password">
-                <input type="button"  value="Ingresar" class="button">
-                <h3>Iniciar sección con:   </h3>
-                <input type="button " value="Facebook 📘" class="buttonf">
-                <input type="button" value="Google 🔎" class="buttong" >
-                <input type="button" value="¿ Olvidaste tu contraseña?" class="buttono">
-            </form>
 
-    </main>
-    
-{%endblock%}
+<div class="contenedor">
+
+    <div class="izquierda">
+
+        <img src="{{ url_for('static', filename='img/serenity.png') }}" alt="Logo">
+
+    </div>
+
+    <div class="derecha">
+
+        <h1>Serenity Mode</h1>
+
+        <p>Crea tu estilo, vive Serenity Mode</p>
+
+        <h2>Iniciar Sesión</h2>
+
+        <form>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-user"></i>
+
+                <input
+                type="text"
+                placeholder="Nombre de Usuario">
+
+            </div>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                type="password"
+                placeholder="Contraseña">
+
+                <i class="fa-solid fa-eye"></i>
+
+            </div>
+
+            <div class="opciones">
+
+                <label>
+
+                    <input type="checkbox">
+
+                    Recordarme
+
+                </label>
+
+                <a href="#" id="abrirRecuperar">¿Olvidaste tu contraseña?</a>
+
+            </div>
+
+            <button>
+
+                Ingresar
+
+            </button>
+
+        </form>
+
+        <div class="linea">
+
+            <span>o inicia sesión con</span>
+
+        </div>
+
+        <div class="redes">
+
+            <button>
+
+                <i class="fa-brands fa-google"></i>
+
+            </button>
+
+            <button>
+
+                <i class="fa-brands fa-facebook-f"></i>
+
+            </button>
+
+        </div>
+
+        <div class="registro">
+
+            ¿No tienes cuenta?
+
+            <a href="">Regístrate</a>
+
+        </div>
+
+    <!--==================================
+        MODAL RECUPERAR CONTRASEÑA
+===================================-->
+
+<div class="modal" id="modalRecuperar">
+
+    <div class="modal-box">
+
+        <button class="cerrar-modal">&times;</button>
+
+        <div class="modal-icono">
+
+            <i class="fa-solid fa-key"></i>
+
+        </div>
+
+        <h2>Recuperar contraseña</h2>
+
+        <p>
+            Ingresa el correo electrónico asociado a tu cuenta.
+            Te enviaremos un enlace para restablecer tu contraseña.
+        </p>
+
+        <form>
+
+            <div class="input-modal">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <input
+                    type="email"
+                    placeholder="Correo electrónico"
+                    required>
+
+            </div>
+
+            <button type="submit" class="btn-recuperar">
+
+                Enviar enlace
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+        {% if request.path != '/admnistrador' %}
+        <a href="{{ url_for('admin.dashboard') }}"><i class="fa-solid fa-lock"></i>
+            Acceso de administrador
+        </a>
+        {% endif %}
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

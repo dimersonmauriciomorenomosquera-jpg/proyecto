@@ -154,13 +154,15 @@
                             <p>Paga fácilmente con Google Pay</p>
                         </div>
                     </div>
-
                 </div>
-
-                <button class="pay-btn">
-                    <i class="fa-solid fa-lock"></i>
-                    PAGAR AHORA
-                </button>
+                    {% if request.path != '/admnistrador' %}
+                    <button class="pay-btn">                       
+                            <a href="{{ url_for('factura.index') }}">
+                                <i class="fa-solid fa-lock"></i>
+                                Pagar
+                            </a>
+                    </button>
+                    {% endif %}
 
                 <p class="terms">
                     Al continuar, aceptas nuestros Términos y Condiciones y Política de Privacidad.

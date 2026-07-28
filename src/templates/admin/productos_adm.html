@@ -1,0 +1,810 @@
+{% extends "admin/layaout_adm.html" %}
+{% block contenido %}
+<head>
+    <title>Productos | Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/productos_adm.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+
+
+<!--================ CONTENIDO ================-->
+
+<main class="contenido">
+
+<header>
+
+<div>
+
+<h1>Gestión de Productos</h1>
+
+<p>Administra todos los productos de Serenity Mode.</p>
+
+</div>
+
+<button class="nuevo">
+
+<i class="fa-solid fa-plus"></i>
+
+Agregar producto
+
+</button>
+
+</header>
+
+<!--================ ESTADISTICAS ================-->
+
+<section class="estadisticas">
+
+<div class="card">
+
+<h3>Total productos</h3>
+
+<h2>245</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Agotados</h3>
+
+<h2>12</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Categorías</h3>
+
+<h2>5</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Inventario</h3>
+
+<h2>$35.200.000</h2>
+
+</div>
+
+</section>
+
+<!--================ FILTROS ================-->
+
+<section class="barra">
+
+<input
+type="text"
+placeholder="Buscar producto...">
+
+<select>
+
+<option>Todas las categorías</option>
+
+<option>Zapatos</option>
+
+<option>Ropa</option>
+
+<option>Accesorios</option>
+
+</select>
+
+<button>
+
+Buscar
+
+</button>
+
+</section>
+
+<!--================ TABLA ================-->
+
+<section class="tabla">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Imagen</th>
+
+<th>Nombre</th>
+
+<th>Categoría</th>
+
+<th>Precio</th>
+
+<th>Stock</th>
+
+<th>Estado</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+<img src="img/airforce.jpg">
+
+</td>
+
+<td>Nike Air Force One</td>
+
+<td>Zapatos</td>
+
+<td>$420.000</td>
+
+<td>28</td>
+
+<td>
+
+<span class="disponible">
+
+Disponible
+
+</span>
+
+</td>
+
+<td>
+
+<button class="editar">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button class="eliminar">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<img src="img/cadena.jpg">
+
+</td>
+
+<td>Cadena Cubana</td>
+
+<td>Accesorios</td>
+
+<td>$95.000</td>
+
+<td>15</td>
+
+<td>
+
+<span class="disponible">
+
+Disponible
+
+</span>
+
+</td>
+
+<td>
+
+<button class="editar">
+
+<i class="fa-solid fa-pen"></i>
+
+</button>
+
+<button class="eliminar">
+
+<i class="fa-solid fa-trash"></i>
+
+</button>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+            <td>
+                <img src="img/pantalon.jpg" alt="Pantalón Cargo">
+            </td>
+
+            <td>Pantalón Cargo Serenity</td>
+
+            <td>Ropa</td>
+
+            <td>$180.000</td>
+
+            <td>12</td>
+
+            <td>
+                <span class="disponible">Disponible</span>
+            </td>
+
+            <td>
+
+                <button class="editar">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <button class="eliminar">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <button class="ver">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <img src="img/buso.jpg" alt="Buso">
+            </td>
+
+            <td>Buso Oversize</td>
+
+            <td>Ropa</td>
+
+            <td>$210.000</td>
+
+            <td>0</td>
+
+            <td>
+                <span class="agotado">Agotado</span>
+            </td>
+
+            <td>
+
+                <button class="editar">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <button class="eliminar">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <button class="ver">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                <img src="img/reloj.jpg" alt="Reloj">
+            </td>
+
+            <td>Reloj Luxury Blue</td>
+
+            <td>Accesorios</td>
+
+            <td>$350.000</td>
+
+            <td>8</td>
+
+            <td>
+                <span class="disponible">Disponible</span>
+            </td>
+
+            <td>
+
+                <button class="editar">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <button class="eliminar">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <button class="ver">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</section>
+
+<!--================ PAGINACIÓN ================-->
+
+<section class="paginacion">
+
+<button>
+    <i class="fa-solid fa-angle-left"></i>
+</button>
+
+<button class="activo">1</button>
+
+<button>2</button>
+
+<button>3</button>
+
+<button>
+    <i class="fa-solid fa-angle-right"></i>
+</button>
+
+</section>
+
+<!--================ FOOTER ================-->
+
+<footer>
+
+<p>
+
+© 2026 Serenity Mode | Gestión de Productos
+
+</p>
+
+<!--==================================
+        MODAL AGREGAR PRODUCTO
+===================================-->
+
+<div class="modal" id="modalAgregar">
+
+    <div class="modal-box modal-grande">
+
+        <div class="modal-header">
+
+            <h2>
+                <i class="fa-solid fa-plus"></i>
+                Agregar Producto
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="producto-modal">
+
+                <div class="producto-imagen">
+
+                    <img
+                    src="{{ url_for('static', filename='img/sin_imagen.png') }}"
+                    id="previewAgregar">
+
+                    <label class="subir">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                        Seleccionar imagen
+
+                        <input
+                        type="file"
+                        hidden>
+
+                    </label>
+
+                </div>
+
+                <div class="producto-info">
+
+                    <div class="grupo">
+
+                        <label>Nombre</label>
+
+                        <input
+                        type="text">
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Categoría</label>
+
+                            <select>
+
+                                <option>Zapatos</option>
+                                <option>Ropa</option>
+                                <option>Accesorios</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Estado</label>
+
+                            <select>
+
+                                <option>Disponible</option>
+                                <option>Agotado</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Precio</label>
+
+                            <input type="number">
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Stock</label>
+
+                            <input type="number">
+
+                        </div>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Descripción</label>
+
+                        <textarea rows="5"></textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+
+                Cancelar
+
+            </button>
+
+            <button class="btn-dorado" id="guardarProducto">
+                Guardar Producto
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL EDITAR PRODUCTO
+===================================-->
+
+<div class="modal" id="modalEditar">
+
+    <div class="modal-box modal-grande">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-pen"></i>
+
+                Editar Producto
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="producto-modal">
+
+                <div class="producto-imagen">
+
+                    <img
+                    src="{{ url_for('static', filename='img/producto1.jpg') }}"
+                    id="previewEditar">
+
+                    <label class="subir">
+
+                        Cambiar imagen
+
+                        <input
+                        type="file"
+                        hidden>
+
+                    </label>
+
+                </div>
+
+                <div class="producto-info">
+
+                    <div class="grupo">
+
+                        <label>Nombre</label>
+
+                        <input
+                        type="text"
+                        value="Nike Air Force One">
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Categoría</label>
+
+                            <select>
+
+                                <option selected>Zapatos</option>
+                                <option>Ropa</option>
+                                <option>Accesorios</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Estado</label>
+
+                            <select>
+
+                                <option selected>Disponible</option>
+                                <option>Agotado</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="fila">
+
+                        <div class="grupo">
+
+                            <label>Precio</label>
+
+                            <input
+                            type="number"
+                            value="420000">
+
+                        </div>
+
+                        <div class="grupo">
+
+                            <label>Stock</label>
+
+                            <input
+                            type="number"
+                            value="28">
+
+                        </div>
+
+                    </div>
+
+                    <div class="grupo">
+
+                        <label>Descripción</label>
+
+                        <textarea rows="5">Tenis Nike Air Force elaborados en cuero premium.</textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+
+                Cancelar
+
+            </button>
+
+            <button class="btn-dorado" id="guardarCambios">
+                Guardar Cambios
+            </button>
+       
+        </div>
+
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL VER PRODUCTO
+===================================-->
+
+<div class="modal" id="modalVer">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Detalles del Producto
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="vista-producto">
+
+                <img
+                src="{{ url_for('static', filename='img/producto1.jpg') }}">
+
+                <div>
+
+                    <h2>Nike Air Force One</h2>
+
+                    <p><strong>Categoría:</strong> Zapatos</p>
+
+                    <p><strong>Precio:</strong> $420.000</p>
+
+                    <p><strong>Stock:</strong> 28 unidades</p>
+
+                    <p>
+
+                        <strong>Estado:</strong>
+
+                        <span class="disponible">
+
+                            Disponible
+
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Descripción:</strong>
+
+                    </p>
+
+                    <p>
+
+                        Tenis deportivos elaborados en cuero premium para uso casual.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-dorado cerrar">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL ELIMINAR PRODUCTO
+===================================-->
+
+<div class="modal" id="modalEliminar">
+
+    <div class="modal-box modal-pequeño">
+
+        <div class="modal-body confirmar">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <button class="btn-eliminar" id="eliminarProducto">
+                Eliminar
+            </button>
+
+            <p>
+
+                ¿Deseas eliminar el producto
+
+                <strong>
+
+                    Nike Air Force One
+
+                </strong>?
+
+            </p>
+
+            <span>
+
+                Esta acción no se puede deshacer.
+
+            </span>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-outline cerrar">
+
+                Cancelar
+
+            </button>
+
+            <button class="btn-eliminar">
+
+                Eliminar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</footer>
+
+</main>
+
+</body>
+
+<script src="{{ url_for('static', filename='js/productos_adm.js') }}"></script>
+{% endblock %}
+
+
+</html>

@@ -1,0 +1,415 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+
+<head>
+    <title>Envíos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/envio.css') }}">
+</head>
+
+<div class="contenedor-envios">
+
+    <!--======================
+        PANEL IZQUIERDO
+    =======================-->
+
+    <section class="panel-envio">
+
+        <!-- Título -->
+
+        <div class="titulo-envio">
+
+            <div class="icono-envio">
+                <i class="fa-solid fa-truck"></i>
+            </div>
+
+            <div>
+
+                <h2>Envíos</h2>
+
+                <p>Selecciona el método de envío que prefieras.</p>
+
+            </div>
+
+        </div>
+
+        <!-- Dirección -->
+
+        <div class="card-envio">
+
+            <h3>
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Dirección de envío
+
+            </h3>
+
+            <div class="direccion">
+
+                <div>
+
+                    <strong>Calle 123 #45-67</strong>
+
+                    <p>Maria Martinez</p>
+
+                    <p>314236844</p>
+
+                    <p>Medellín - Antioquia</p>
+
+                    <p>Colombia</p>
+
+                </div>
+
+                <button>
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Cambiar
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Opciones -->
+
+        <div class="card-envio">
+
+            <h3>
+
+                <i class="fa-solid fa-box"></i>
+
+                Opciones de envío
+
+            </h3>
+
+            <!-- Estándar -->
+
+            <label class="opcion-envio activa">
+
+                <input
+                    type="radio"
+                    name="envio"
+                    checked
+                    onchange="abrirModal('Nacional','Servientrega','$9.900')">
+
+                <div>
+
+                    <h4>Envío Estándar</h4>
+
+                    <p>Entrega de 3 a 5 días hábiles.</p>
+
+                </div>
+
+                <span>$9.900</span>
+
+            </label>
+
+            <!-- Express -->
+
+            <label class="opcion-envio">
+
+                <input
+                    type="radio"
+                    name="envio"
+                    onchange="abrirModal('Nacional','Coordinadora','$16.900')">
+
+                <div>
+
+                    <h4>Envío Express</h4>
+
+                    <p>Entrega de 1 a 2 días hábiles.</p>
+
+                </div>
+
+                <span>$16.900</span>
+
+            </label>
+
+            <!-- Gratis -->
+
+            <label class="opcion-envio">
+
+                <input
+                    type="radio"
+                    name="envio"
+                    onchange="abrirModal('Nacional','Inter Rapidísimo','Gratis')">
+
+                <div>
+
+                    <h4>Envío Gratis</h4>
+
+                    <p>Entrega de 5 a 7 días hábiles.</p>
+
+                </div>
+
+                <span class="gratis">GRATIS</span>
+
+            </label>
+
+        </div>
+
+        <!-- Botón -->
+
+       
+
+        <button class="btn-continuar">                     
+            <a href="{{ url_for('pago.index') }}">
+            <i class="fa-solid fa-arrow-right"></i>
+                CONTINUAR AL PAGO
+            </a>
+        </button>
+
+        
+
+    </section>
+
+    <!--======================
+        PANEL DERECHO
+    =======================-->
+
+    <aside class="resumen">
+
+        <h3>
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            Resumen del pedido
+
+        </h3>
+
+        <div class="producto-resumen">
+
+            <img src="{{ url_for('static', filename='img/productos/chaqueta.jpg') }}">
+
+            <div>
+
+                <h4>Chaqueta Premium</h4>
+
+                <p>Talla L</p>
+
+                <strong>$130.000</strong>
+
+            </div>
+
+        </div>
+
+        <div class="producto-resumen">
+
+            <img src="{{ url_for('static', filename='img/productos/reloj.jpg') }}">
+
+            <div>
+
+                <h4>Reloj Hombre</h4>
+
+                <p>Plateado</p>
+
+                <strong>$120.000</strong>
+
+            </div>
+
+        </div>
+
+        <div class="producto-resumen">
+
+            <img src="{{ url_for('static', filename='img/productos/tenis.jpg') }}">
+
+            <div>
+
+                <h4>Nike Force</h4>
+
+                <p>Talla 42</p>
+
+                <strong>$100.000</strong>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="totales">
+
+            <p>Subtotal <span>$350.000</span></p>
+
+            <p>Envío <span>$9.900</span></p>
+
+            <h2>Total <span>$359.900</span></h2>
+
+        </div>
+
+        <div class="seguro">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <div>
+
+                <h4>Compra segura</h4>
+
+                <p>Tus datos están protegidos.</p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>
+
+<!--======================
+        MODAL
+=======================-->
+
+<div class="modal-envio" id="modalEnvio">
+
+    <div class="contenido-modal">
+
+        <div class="titulo-modal">
+
+            <h2>
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+                Confirmar envío
+
+            </h2>
+
+            <button class="cerrar" onclick="cerrarModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="datos-envio">
+
+            <div class="dato">
+
+                <i class="fa-solid fa-user"></i>
+
+                <div>
+
+                    <small>Cliente</small>
+
+                    <strong id="clienteNombre">María Martínez</strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div>
+
+                    <small>Dirección</small>
+
+                    <strong id="clienteDireccion">
+
+                        Calle 123 #45-67
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <div>
+
+                    <small>Teléfono</small>
+
+                    <strong>314236844</strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-city"></i>
+
+                <div>
+
+                    <small>Ciudad</small>
+
+                    <strong>Medellín</strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-earth-americas"></i>
+
+                <div>
+
+                    <small>Tipo de envío</small>
+
+                    <strong id="tipoEnvio"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-truck"></i>
+
+                <div>
+
+                    <small>Transportadora</small>
+
+                    <strong id="empresaEnvio"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="dato">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <div>
+
+                    <small>Costo</small>
+
+                    <strong id="precioEnvio"></strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="acciones-modal">
+
+            <button class="cancelar" onclick="cerrarModal()">
+
+                Cancelar
+
+            </button>
+
+            <button class="confirmar">
+
+                Confirmar envío
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/envio.js') }}"></script>
+
+{% endblock %}

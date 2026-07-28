@@ -1,0 +1,143 @@
+{% extends "admin/layaout_adm.html" %}
+
+{% block titulo %}
+Reportes
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reportes_adm.css') }}">
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Reportes</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <i class="fa-solid fa-money-bill-trend-up"></i>
+        <h3>Ventas Totales</h3>
+        <p>$28.450.000</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <h3>Pedidos</h3>
+        <p>215</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-users"></i>
+        <h3>Clientes</h3>
+        <p>98</p>
+    </div>
+
+    <div class="card">
+        <i class="fa-solid fa-box"></i>
+        <h3>Productos</h3>
+        <p>76</p>
+    </div>
+
+</div>
+
+<div class="tabla">
+
+    <div class="encabezado">
+
+        <h2>Generar Reportes</h2>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Reporte</th>
+                <th>Descripción</th>
+                <th>Acción</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>Ventas</td>
+                <td>Reporte completo de ventas realizadas.</td>
+                <td>
+                    <button>Generar</button>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Clientes</td>
+                <td>Listado de clientes registrados.</td>
+                <td>
+                    <button>Generar</button>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Productos</td>
+                <td>Inventario actual de productos.</td>
+                <td>
+                    <button>Generar</button>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Facturas</td>
+                <td>Facturas emitidas por fecha.</td>
+                <td>
+                    <button>Generar</button>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Envíos</td>
+                <td>Estado de todos los envíos.</td>
+                <td>
+                    <button>Generar</button>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="graficas">
+
+    <div class="grafica">
+
+        <h2>Ventas por Mes</h2>
+
+        <canvas id="ventasMes"></canvas>
+
+    </div>
+
+    <div class="grafica">
+
+        <h2>Productos más vendidos</h2>
+
+        <canvas id="productosVendidos"></canvas>
+
+    </div>
+
+</div>
+
+{% endblock %}

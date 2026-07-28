@@ -1,0 +1,711 @@
+{% extends "admin/layaout_adm.html" %}
+{% block contenido %}
+
+<head>
+
+    <title>Envíos | Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/envios_adm.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+
+
+<!--================ CONTENIDO ================-->
+
+<main class="contenido">
+
+<header>
+
+<div>
+
+<h1>Gestión de Envíos</h1>
+
+<p>Administra todos los envíos realizados.</p>
+
+</div>
+
+
+
+</header>
+
+<!--================ TARJETAS ================-->
+
+<section class="estadisticas">
+
+<div class="card">
+
+<h3>Envíos Totales</h3>
+
+<h2>985</h2>
+
+</div>
+
+<div class="card">
+
+<h3>En Camino</h3>
+
+<h2>132</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Entregados</h3>
+
+<h2>835</h2>
+
+</div>
+
+<div class="card">
+
+<h3>Retrasados</h3>
+
+<h2>18</h2>
+
+</div>
+
+</section>
+
+<!--================ BUSCADOR ================-->
+
+<section class="barra">
+
+<input
+type="text"
+placeholder="Buscar envío...">
+
+<select>
+
+<option>Estado</option>
+
+<option>Preparando</option>
+
+<option>En camino</option>
+
+<option>Entregado</option>
+
+<option>Retrasado</option>
+
+</select>
+
+<select>
+
+<option>Transportadora</option>
+
+<option>Servientrega</option>
+
+<option>Interrapidísimo</option>
+
+<option>Coordinadora</option>
+
+</select>
+
+<button>
+
+Buscar
+
+</button>
+
+</section>
+
+<!--================ TABLA ================-->
+
+<section class="tabla">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Guía</th>
+
+<th>Cliente</th>
+
+<th>Transportadora</th>
+
+<th>Destino</th>
+
+<th>Fecha</th>
+
+<th>Estado</th>
+
+<th>Acciones</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>ENV-00125</td>
+
+<td>Mauricio Moreno</td>
+
+<td>Servientrega</td>
+
+<td>Bogotá</td>
+
+<td>12/06/2026</td>
+
+<td>
+
+<span class="camino">
+
+En camino
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+<button class="ruta">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>ENV-00126</td>
+
+<td>Laura Gómez</td>
+
+<td>Interrapidísimo</td>
+
+<td>Medellín</td>
+
+<td>12/06/2026</td>
+
+<td>
+
+<span class="entregado">
+
+Entregado
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+
+
+<button class="ruta">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>ENV-00127</td>
+
+<td>Andrés Ruiz</td>
+
+<td>Coordinadora</td>
+
+<td>Cali</td>
+
+<td>13/06/2026</td>
+
+<td>
+
+<span class="retrasado">
+
+Retrasado
+
+</span>
+
+</td>
+
+<td>
+
+<button class="ver">
+
+<i class="fa-solid fa-eye"></i>
+
+</button>
+
+
+<button class="ruta">
+
+<i class="fa-solid fa-location-dot"></i>
+
+</button>
+
+</td>
+
+</tr>
+
+        <tr>
+
+            <td>ENV-00128</td>
+
+            <td>Sofía Martínez</td>
+
+            <td>Servientrega</td>
+
+            <td>Barranquilla</td>
+
+            <td>13/06/2026</td>
+
+            <td>
+
+                <span class="preparando">
+
+                    Preparando
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+            
+
+                <button class="ruta">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>ENV-00129</td>
+
+            <td>Daniel Torres</td>
+
+            <td>Coordinadora</td>
+
+            <td>Bucaramanga</td>
+
+            <td>14/06/2026</td>
+
+            <td>
+
+                <span class="entregado">
+
+                    Entregado
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+
+                <button class="ruta">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>ENV-00130</td>
+
+            <td>Camila Rodríguez</td>
+
+            <td>Interrapidísimo</td>
+
+            <td>Pereira</td>
+
+            <td>15/06/2026</td>
+
+            <td>
+
+                <span class="camino">
+
+                    En camino
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button class="ver">
+
+                    <i class="fa-solid fa-eye"></i>
+
+                </button>
+
+
+                <button class="ruta">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</section>
+
+<!--================ PAGINACIÓN ================-->
+
+<section class="paginacion">
+
+<button>
+
+<i class="fa-solid fa-angle-left"></i>
+
+</button>
+
+<button class="activo">
+
+1
+
+</button>
+
+<button>
+
+2
+
+</button>
+
+<button>
+
+3
+
+</button>
+
+<button>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</button>
+
+</section>
+
+<!--================ RESUMEN ================-->
+
+<section class="resumen">
+
+<div class="resumen-card">
+
+<h2>
+
+<i class="fa-solid fa-truck-fast"></i>
+
+Resumen de Envíos
+
+</h2>
+
+<div class="estadistica">
+
+<p>Servientrega</p>
+
+<span>430 envíos</span>
+
+</div>
+
+<div class="estadistica">
+
+<p>Interrapidísimo</p>
+
+<span>295 envíos</span>
+
+</div>
+
+<div class="estadistica">
+
+<p>Coordinadora</p>
+
+<span>260 envíos</span>
+
+</div>
+
+<div class="estadistica">
+
+<p>Tiempo promedio</p>
+
+<span>2.4 días</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!--================ FOOTER ================-->
+
+<footer>
+
+<p>
+
+© 2026 Serenity Mode | Gestión de Envíos
+
+</p>
+
+</footer>
+
+</main>
+
+<!--==================================
+        MODAL VER ENVÍO
+===================================-->
+
+<div class="modal" id="modalVerEnvio">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-eye"></i>
+
+                Información del Envío
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="vista-producto">
+
+                <h2>ENV-00125</h2>
+
+                <p><strong>Cliente:</strong> Mauricio Moreno</p>
+
+                <p><strong>Pedido:</strong> PED-00125</p>
+
+                <p><strong>Factura:</strong> FAC-00125</p>
+
+                <p><strong>Transportadora:</strong> Servientrega</p>
+
+                <p><strong>Destino:</strong> Bogotá D.C.</p>
+
+                <p><strong>Dirección:</strong> Cra 45 #12-30</p>
+
+                <p><strong>Fecha de envío:</strong> 12/06/2026</p>
+
+                <p><strong>Fecha estimada:</strong> 14/06/2026</p>
+
+                <p><strong>Estado:</strong> En camino</p>
+
+                <p><strong>Observaciones:</strong> El paquete salió del centro logístico y se encuentra en tránsito.</p>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-dorado cerrar">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--==================================
+        MODAL SEGUIMIENTO
+===================================-->
+
+<div class="modal" id="modalRuta">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Seguimiento del Envío
+
+            </h2>
+
+            <button class="cerrar-modal">&times;</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="ruta-envio">
+
+                <!-- Línea de tiempo -->
+
+                <div class="timeline">
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>Pedido confirmado</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>Pago aprobado</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>Factura generada</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>Preparando envío</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>Despachado</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso activo">
+
+                        <i class="fa-solid fa-truck"></i>
+
+                        <span>En camino</span>
+
+                    </div>
+
+                    <div class="linea"></div>
+
+                    <div class="paso">
+
+                        <i class="fa-regular fa-circle"></i>
+
+                        <span>Entregado</span>
+
+                    </div>
+
+                </div>
+
+                <!-- Información -->
+
+                <div class="detalle-ruta">
+
+                    <h3>Información del envío</h3>
+
+                    <hr>
+
+                    <p><strong>Guía:</strong> ENV-00125</p>
+
+                    <p><strong>Transportadora:</strong> Servientrega</p>
+
+                    <p><strong>Cliente:</strong> Mauricio Moreno</p>
+
+                    <p><strong>Ubicación actual:</strong> Centro Logístico Bogotá</p>
+
+                    <p><strong>Última actualización:</strong> Hoy 2:30 PM</p>
+
+                    <p><strong>Tiempo estimado:</strong> 1 día</p>
+
+                    <p><strong>Estado:</strong> En camino</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="btn-dorado cerrar">
+
+                Cerrar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/envio_adm.js') }}"></script>
+</body>
+{% endblock %}
+
+
+</html>

@@ -1,0 +1,259 @@
+/*=============================
+        CONFIGURACIÓN
+=============================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+.configuracion{
+    width:100%;
+}
+
+.titulo{
+    margin-bottom:35px;
+}
+
+.titulo h1{
+    font-size:34px;
+    color:#111;
+    margin-bottom:8px;
+}
+
+.titulo p{
+    color:#666;
+    font-size:16px;
+}
+
+/*=============================
+        GRID
+=============================*/
+
+.config-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+    margin-bottom:35px;
+}
+
+/*=============================
+        TARJETAS
+=============================*/
+
+.config-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.config-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,.12);
+}
+
+.config-card h2{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#111;
+    margin-bottom:25px;
+    font-size:22px;
+}
+
+.config-card h2 i{
+    color:#d4af37;
+}
+
+/*=============================
+            PERFIL
+=============================*/
+
+.perfil{
+    display:flex;
+    gap:30px;
+    align-items:flex-start;
+}
+
+.perfil img{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #d4af37;
+}
+
+.datos{
+    flex:1;
+}
+
+/*=============================
+        FORMULARIOS
+=============================*/
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    color:#555;
+    font-weight:600;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d9d9d9;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+input:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 8px rgba(212,175,55,.25);
+}
+
+/*=============================
+        BOTONES
+=============================*/
+
+button{
+    margin-top:25px;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#d4af37;
+    color:#111;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+}
+
+button:hover{
+    background:#111;
+    color:white;
+}
+
+/*=============================
+        SWITCH
+=============================*/
+
+.switch{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.switch:last-child{
+    border:none;
+}
+
+.switch span{
+    font-size:15px;
+    color:#444;
+}
+
+.switch input{
+    width:20px;
+    height:20px;
+    accent-color:#d4af37;
+}
+
+/*=============================
+        ZONA PELIGRO
+=============================*/
+
+.danger-zone{
+    background:white;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border-left:6px solid #d32f2f;
+}
+
+.danger-zone h2{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#d32f2f;
+    margin-bottom:15px;
+}
+
+.danger-zone p{
+    color:#666;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.acciones{
+    display:flex;
+    gap:20px;
+}
+
+.cerrar{
+    background:#555;
+    color:white;
+}
+
+.cerrar:hover{
+    background:#333;
+}
+
+.eliminar{
+    background:#d32f2f;
+    color:white;
+}
+
+.eliminar:hover{
+    background:#b71c1c;
+}
+
+/*=============================
+        RESPONSIVE
+=============================*/
+
+@media(max-width:1200px){
+
+    .config-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .perfil{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .datos{
+        width:100%;
+    }
+
+    .acciones{
+        flex-direction:column;
+    }
+
+}
+/*=============================
+        MAIN
+=============================*/
+
+.main{
+    margin-left:280px;
+    width:calc(100% - 280px);
+    min-height:100vh;
+    padding:40px;
+    background:#f5f5f5;
+}

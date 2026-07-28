@@ -1,0 +1,718 @@
+{% extends "layout.html" %}
+    {%block contenido%}
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novedades | Serenity Mode</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/novedades.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    
+
+
+    <!--==================================
+                HERO
+    ===================================-->
+
+    <section class="hero">
+
+        <div class="hero-overlay"></div>
+
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1800"
+            alt="Hero">
+
+        <div class="hero-content">
+
+            <span class="tag">
+                NUEVA COLECCIÓN
+            </span>
+
+            <h1>
+
+                Descubre lo último
+                en Serenity Mode
+
+            </h1>
+
+            <p>
+
+                Moda premium inspirada en las tendencias
+                internacionales. Diseños exclusivos para quienes
+                buscan vestir diferente.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="btn-gold">
+
+                    Comprar ahora
+
+                </button>
+
+                <button class="btn-outline">
+
+                    Ver colección
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!--==================================
+        BANNER PROMOCIONAL
+    ===================================-->
+
+    <section class="promo">
+
+        <div>
+
+            <i class="fa-solid fa-fire"></i>
+
+            Lanzamiento 2026
+
+        </div>
+
+        <div>
+
+            Envío Gratis en compras superiores a $250.000
+
+        </div>
+
+        <div>
+
+            <i class="fa-solid fa-star"></i>
+
+            Edición limitada
+
+        </div>
+
+    </section>
+
+
+    <!--==================================
+        PRODUCTOS DESTACADOS
+    ===================================-->
+
+    <section class="destacados">
+
+        <div class="titulo">
+
+            <span>NOVEDADES</span>
+
+            <h2>Productos Destacados</h2>
+
+            <p>
+
+                Las prendas que están marcando tendencia esta temporada.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid-destacados">
+
+
+            <!-- CARD 1 -->
+
+            <article class="card-producto">
+
+                <div class="badge">
+
+                    NEW
+
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700">
+
+                <div class="card-info">
+
+                    <h3>Chaqueta Urban Black</h3>
+
+                    <span>$189.900</span>
+
+                    <button>
+
+                        Ver Producto
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="card-producto">
+
+                <div class="badge">
+
+                    TREND
+
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700">
+
+                <div class="card-info">
+
+                    <h3>Nike Air Force</h3>
+
+                    <span>$499.900</span>
+
+                    <button>
+
+                        Ver Producto
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="card-producto">
+
+                <div class="badge">
+
+                    NEW
+
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700">
+
+                <div class="card-info">
+
+                    <h3>Vestido Elegance</h3>
+
+                    <span>$159.900</span>
+
+                    <button>
+
+                        Ver Producto
+
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+
+            <article class="card-producto">
+
+                <div class="badge">
+
+                    HOT
+
+                </div>
+
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700">
+
+                <div class="card-info">
+
+                    <h3>Camiseta Premium</h3>
+
+                    <span>$89.900</span>
+
+                    <button>
+
+                        Ver Producto
+
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+        <!--==================================
+            LOOKBOOK
+    ===================================-->
+
+    <section class="lookbook">
+
+        <div class="titulo">
+
+            <span>LOOKBOOK</span>
+
+            <h2>Inspírate con nuevos estilos</h2>
+
+            <p>
+                Descubre combinaciones pensadas para cada ocasión.
+            </p>
+
+        </div>
+
+        <div class="lookbook-grid">
+
+            <div class="look-card grande">
+
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200">
+
+                <div class="look-info">
+
+                    <span>CASUAL PREMIUM</span>
+
+                    <h3>Elegancia para todos los días</h3>
+
+                    <button>Descubrir</button>
+
+                </div>
+
+            </div>
+
+            <div class="look-card">
+
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900">
+
+                <div class="look-info">
+
+                    <span>MUJER</span>
+
+                    <h3>Minimal Collection</h3>
+
+                </div>
+
+            </div>
+
+            <div class="look-card">
+
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900">
+
+                <div class="look-info">
+
+                    <span>HOMBRE</span>
+
+                    <h3>Urban Collection</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!--==================================
+            CATEGORÍAS
+    ===================================-->
+
+    <section class="categorias">
+
+        <div class="titulo">
+
+            <span>EXPLORAR</span>
+
+            <h2>Novedades por categoría</h2>
+
+        </div>
+
+        <div class="categoria-grid">
+
+            <div class="categoria">
+
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700">
+
+                <div>
+
+                    <h3>Mujer</h3>
+
+                    <p>Ver colección</p>
+
+                </div>
+
+            </div>
+
+            <div class="categoria">
+
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=700">
+
+                <div>
+
+                    <h3>Hombre</h3>
+
+                    <p>Ver colección</p>
+
+                </div>
+
+            </div>
+
+            <div class="categoria">
+
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700">
+
+                <div>
+
+                    <h3>Calzado</h3>
+
+                    <p>Ver colección</p>
+
+                </div>
+
+            </div>
+
+            <div class="categoria">
+
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700">
+
+                <div>
+
+                    <h3>Accesorios</h3>
+
+                    <p>Ver colección</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!--==================================
+            BANNER
+    ===================================-->
+
+    <section class="banner">
+
+        <div class="banner-contenido">
+
+            <span>LIMITED EDITION</span>
+
+            <h2>
+
+                Nueva colección otoño · invierno
+
+            </h2>
+
+            <p>
+
+                Diseños exclusivos creados para quienes
+                buscan un estilo único.
+
+            </p>
+
+            <button>
+
+                Comprar Ahora
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!--==================================
+        RECIÉN LLEGADOS
+    ===================================-->
+
+    <section class="recientes">
+
+        <div class="titulo">
+
+            <span>RECIÉN LLEGADOS</span>
+
+            <h2>Últimos productos agregados</h2>
+
+        </div>
+
+        <div class="productos-grid">
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700">
+
+                <h4>Camiseta Essential</h4>
+
+                <span>$79.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700">
+
+                <h4>Nike Air Force</h4>
+
+                <span>$499.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700">
+
+                <h4>Vestido Premium</h4>
+
+                <span>$169.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700">
+
+                <h4>Chaqueta Serenity</h4>
+
+                <span>$189.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700">
+
+                <h4>Bolso Urban</h4>
+
+                <span>$119.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=700">
+
+                <h4>Hoodie Black</h4>
+
+                <span>$149.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=700">
+
+                <h4>Pantalón Cargo</h4>
+
+                <span>$139.900</span>
+
+            </article>
+
+            <article class="producto">
+
+                <img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=700">
+
+                <h4>Tenis Lifestyle</h4>
+
+                <span>$259.900</span>
+
+            </article>
+
+        </div>
+
+    </section>
+
+        <!--==================================
+            EDITORIAL
+    ==================================-->
+
+    <section class="editorial">
+
+        <div class="titulo">
+
+            <span>EDITORIAL</span>
+
+            <h2>Inspiración para tu próximo outfit</h2>
+
+            <p>
+
+                Descubre cómo combinar nuestras últimas prendas
+                con un estilo moderno y elegante.
+
+            </p>
+
+        </div>
+
+        <div class="editorial-grid">
+
+            <div class="editorial-card grande">
+
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200">
+
+                <div class="overlay">
+
+                    <span>STYLE GUIDE</span>
+
+                    <h3>Elegancia sin esfuerzo</h3>
+
+                    <button>Leer más</button>
+
+                </div>
+
+            </div>
+
+            <div class="editorial-card">
+
+                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=900">
+
+                <div class="overlay">
+
+                    <h3>Moda Urbana</h3>
+
+                </div>
+
+            </div>
+
+            <div class="editorial-card">
+
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900">
+
+                <div class="overlay">
+
+                    <h3>Nueva Temporada</h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!--==================================
+        MÁS VENDIDOS
+    ==================================-->
+
+    <section class="best-seller">
+
+        <div class="titulo">
+
+            <span>TOP VENTAS</span>
+
+            <h2>Lo más vendido esta semana</h2>
+
+        </div>
+
+        <div class="best-grid">
+
+            <div class="best-card">
+
+                <span>#1</span>
+
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600">
+
+                <h3>Nike Air Force</h3>
+
+            </div>
+
+            <div class="best-card">
+
+                <span>#2</span>
+
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600">
+
+                <h3>Chaqueta Serenity</h3>
+
+            </div>
+
+            <div class="best-card">
+
+                <span>#3</span>
+
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600">
+
+                <h3>Vestido Premium</h3>
+
+            </div>
+
+            <div class="best-card">
+
+                <span>#4</span>
+
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600">
+
+                <h3>Hoodie Black</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!--==================================
+            NEWSLETTER
+    ==================================-->
+
+    <section class="newsletter">
+
+        <div class="newsletter-content">
+
+            <span>ÚNETE A SERENITY MODE</span>
+
+            <h2>
+
+                Recibe antes que nadie
+                nuestras novedades.
+
+            </h2>
+
+            <p>
+
+                Promociones exclusivas, nuevos lanzamientos
+                y descuentos especiales.
+
+            </p>
+
+            <div class="newsletter-form">
+
+                <input
+                    type="email"
+                    placeholder="Correo electrónico">
+
+                <button>
+
+                    Suscribirme
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+</body>
+
+ <script src="{{ url_for('static', filename='js/novedades.js') }}"></script>
+{%endblock%}

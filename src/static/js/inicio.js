@@ -1,4 +1,3 @@
-
 function irCatalogo(categoria){
-    window.location.href = "/productos/" + categoria;
+    window.location.href = "/productos/categoria/" + categoria;
 }

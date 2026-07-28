@@ -1,125 +1,90 @@
+/*==================================
+        FAVORITOS
+==================================*/
 
+document.querySelectorAll(".favorito").forEach(boton=>{
 
-function cargarOpiniones(producto){
+    boton.addEventListener("click",()=>{
 
-    let opiniones = JSON.parse(localStorage.getItem("opiniones")) || {};
+        boton.classList.toggle("activo");
 
-    let lista = opiniones[producto] || [];
+        const icono=boton.querySelector("i");
 
-    let total = 0;
+        if(boton.classList.contains("activo")){
 
-    lista.forEach(opinion => {
-        total += opinion.estrellas;
-    });
+            icono.classList.remove("fa-regular");
+            icono.classList.add("fa-solid");
 
-    let promedio = 0;
+        }else{
 
-    if(lista.length > 0){
-        promedio = Math.round(total / lista.length);
-    }
+            icono.classList.remove("fa-solid");
+            icono.classList.add("fa-regular");
 
-    let estrellas = "";
-
-    for(let i = 1; i <= 5; i++){
-
-        if(i <= promedio){
-            estrellas += "★";
-        } else {
-            estrellas += "☆";
-        }
-
-    }
-
-    let estrellasElemento = document.getElementById("estrellas-" + producto);
-    let cantidadElemento = document.getElementById("cantidad-" + producto);
-
-    if(estrellasElemento && cantidadElemento){
-
-        estrellasElemento.innerText = estrellas;
-
-        cantidadElemento.innerText =
-            "(" + lista.length + " opiniones)";
-    }
-}
-
-
-
-
-
-                function toggleUser(){
-                const menu = document.getElementById("usuario");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-                function togglehome(){
-                const menu = document.getElementById("home");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-
-        
-    
-
-
-
-function filtrarProductos(categoria){
-
-    let productos = document.querySelectorAll(".card");
-
-    productos.forEach(producto => {
-
-        let categorias = producto.dataset.categoria.split(" ");
-
-        if(categoria === "todos"){
-
-            producto.style.display = "block";
-
-        } else if(categorias.includes(categoria)){
-
-            producto.style.display = "block";
-
-        } else {
-
-            producto.style.display = "none";
         }
 
     });
 
-}
+});
 
 
+/*==================================
+        TALLAS
+==================================*/
 
-window.onload = function(){
+document.querySelectorAll(".tallas button").forEach(boton=>{
 
-    cargarOpiniones("saco-dama");
-    cargarOpiniones("reloj-hombre");
-    cargarOpiniones("cadena-cubana");
-    cargarOpiniones("force-one");
-    cargarOpiniones("new-balance");
-    cargarOpiniones("north-face");
-    cargarOpiniones("vestido-corto");
-    cargarOpiniones("levis-basica");
-    cargarOpiniones("manga-larga");
-    cargarOpiniones("manga-corta");
-    cargarOpiniones("zapatillas");
-    cargarOpiniones("zapatillas-plataforma");
-    cargarOpiniones("arretes-esmeralda");
-    cargarOpiniones("arretes-dorados");
-    cargarOpiniones("arretes-hombre");
-    cargarOpiniones("anillos");
-    cargarOpiniones("blusa-escotada");
-    cargarOpiniones("baggy-hombre");
-    cargarOpiniones("cargo-negro");
-    cargarOpiniones("cargo-gris");
-    cargarOpiniones("polo-negra");
-    cargarOpiniones("pantalon-clasico");
-    cargarOpiniones("zamba");
-    cargarOpiniones("botas");
+    boton.addEventListener("click",()=>{
 
-}
+        document.querySelectorAll(".tallas button").forEach(btn=>{
+
+            btn.classList.remove("seleccionado");
+
+        });
+
+        boton.classList.add("seleccionado");
+
+    });
+
+});
 
 
+/*==================================
+        COLORES
+==================================*/
+
+document.querySelectorAll(".colores span").forEach(color=>{
+
+    color.addEventListener("click",()=>{
+
+        document.querySelectorAll(".colores span").forEach(c=>{
+
+            c.classList.remove("activo");
+
+        });
+
+        color.classList.add("activo");
+
+    });
+
+});
 
 
-function verDescripcion(producto){
-    window.location.href = "/descripcion/" + producto;
-}
+/*==================================
+        BOTÓN PRODUCTO
+==================================*/
 
+document.querySelectorAll(".btn-comprar").forEach(boton=>{
+
+    boton.addEventListener("mouseenter",()=>{
+
+        boton.innerHTML='<i class="fa-solid fa-bag-shopping"></i> Ver producto';
+
+    });
+
+    boton.addEventListener("mouseleave",()=>{
+
+        boton.innerHTML="Ver producto";
+
+    });
+
+});
