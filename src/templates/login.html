@@ -8,17 +8,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
 
 <div class="contenedor">
 
+    <!--==================================
+                LOGO
+    ===================================-->
+
     <div class="izquierda">
 
-        <img src="{{ url_for('static', filename='img/serenity.png') }}" alt="Logo">
+        <img
+            src="{{ url_for('static', filename='img/serenity.png') }}"
+            alt="Logo Serenity Mode">
 
     </div>
+
+    <!--==================================
+                LOGIN
+    ===================================-->
 
     <div class="derecha">
 
@@ -28,27 +38,43 @@
 
         <h2>Iniciar Sesión</h2>
 
-        <form>
+        <form id="formLogin">
+
+            <!-- Correo -->
 
             <div class="input-box">
 
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-envelope"></i>
 
                 <input
-                type="text"
-                placeholder="Nombre de Usuario">
+                    type="email"
+                    id="email_cliente"
+                    name="email_cliente"
+                    placeholder="Correo electrónico"
+                    autocomplete="email"
+                    required>
 
             </div>
+
+            <!-- Contraseña -->
 
             <div class="input-box">
 
                 <i class="fa-solid fa-lock"></i>
 
                 <input
-                type="password"
-                placeholder="Contraseña">
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    autocomplete="current-password"
+                    required>
 
-                <i class="fa-solid fa-eye"></i>
+                <i
+                    class="fa-solid fa-eye"
+                    id="mostrarPassword"
+                    style="cursor:pointer;">
+                </i>
 
             </div>
 
@@ -56,17 +82,21 @@
 
                 <label>
 
-                    <input type="checkbox">
+                    <input type="checkbox" id="recordarme">
 
                     Recordarme
 
                 </label>
 
-                <a href="#" id="abrirRecuperar">¿Olvidaste tu contraseña?</a>
+                <a href="#" id="abrirRecuperar">
+
+                    ¿Olvidaste tu contraseña?
+
+                </a>
 
             </div>
 
-            <button>
+            <button type="submit">
 
                 Ingresar
 
@@ -82,13 +112,13 @@
 
         <div class="redes">
 
-            <button>
+            <button type="button">
 
                 <i class="fa-brands fa-google"></i>
 
             </button>
 
-            <button>
+            <button type="button">
 
                 <i class="fa-brands fa-facebook-f"></i>
 
@@ -100,11 +130,35 @@
 
             ¿No tienes cuenta?
 
-            <a href="">Regístrate</a>
+            <a href="{{ url_for('auth.registro') }}">
+
+                Regístrate
+
+            </a>
 
         </div>
 
-    <!--==================================
+        {% if request.path != '/administrador' %}
+
+        <div class="admin">
+
+            <a href="{{ url_for('admin.dashboard') }}">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Acceso de administrador
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<!--==================================
         MODAL RECUPERAR CONTRASEÑA
 ===================================-->
 
@@ -112,7 +166,13 @@
 
     <div class="modal-box">
 
-        <button class="cerrar-modal">&times;</button>
+        <button
+            type="button"
+            class="cerrar-modal">
+
+            &times;
+
+        </button>
 
         <div class="modal-icono">
 
@@ -123,11 +183,13 @@
         <h2>Recuperar contraseña</h2>
 
         <p>
-            Ingresa el correo electrónico asociado a tu cuenta.
+
+            Ingresa el correo asociado a tu cuenta.
             Te enviaremos un enlace para restablecer tu contraseña.
+
         </p>
 
-        <form>
+        <form id="formRecuperar">
 
             <div class="input-modal">
 
@@ -135,12 +197,16 @@
 
                 <input
                     type="email"
+                    id="correoRecuperar"
+                    name="correoRecuperar"
                     placeholder="Correo electrónico"
                     required>
 
             </div>
 
-            <button type="submit" class="btn-recuperar">
+            <button
+                type="submit"
+                class="btn-recuperar">
 
                 Enviar enlace
 
@@ -153,18 +219,6 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/login.js') }}"></script>
-
-        {% if request.path != '/admnistrador' %}
-        <a href="{{ url_for('admin.dashboard') }}"><i class="fa-solid fa-lock"></i>
-            Acceso de administrador
-        </a>
-        {% endif %}
-
-
-
-    </div>
-
-</div>
 
 </body>
 </html>

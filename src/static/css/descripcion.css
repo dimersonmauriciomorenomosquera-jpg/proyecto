@@ -37,11 +37,13 @@ button{
 
 .detalle-producto{
 
-    max-width:1450px;
+    width:95%;
 
-    margin:50px auto 80px;
+    max-width:1800px;
 
-    padding:0 40px;
+    margin:60px auto 100px;
+
+    padding:0 30px;
 
 }
 
@@ -101,9 +103,9 @@ button{
 
     display:grid;
 
-    grid-template-columns:minmax(500px,620px) 1fr;
+    grid-template-columns:760px 1fr;
 
-    gap:60px;
+    gap:70px;
 
     align-items:start;
 
@@ -116,9 +118,10 @@ button{
 
     display:grid;
 
-    grid-template-columns:90px 1fr;
+    grid-template-columns:120px 1fr;
 
-    gap:25px;
+    gap:35px;
+
 
     align-items:start;
 
@@ -140,9 +143,9 @@ button{
 
 .miniaturas img{
 
-    width:90px;
-
-    height:90px;
+    width:120px;
+    height:120px;
+    border-radius:20px;
 
     object-fit:cover;
 
@@ -184,7 +187,10 @@ button{
 
     border-radius:28px;
 
-    padding:20px;
+    padding-left:15px;
+    padding-right: 15px;
+
+    height:760px;
 
     display:flex;
 
@@ -200,13 +206,10 @@ button{
 
     display:block;
 
-    width:auto;
+    width:100%;
 
-    max-width:100%;
 
-    max-height:520px;
-
-    height:auto;
+    height:100%;
 
     object-fit:contain;
 
@@ -1354,9 +1357,12 @@ button{
 *{
 
     transition:background .3s,
-               color .3s,
-               border .3s,
-               box-shadow .3s,
-               transform .3s;
+            color .3s,
+            border .3s,
+            box-shadow .3s,
+            transform .3s;
 
+}
+.frase,.search-box{
+    visibility: hidden;
 }

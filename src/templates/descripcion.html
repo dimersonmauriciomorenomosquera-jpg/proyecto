@@ -7,7 +7,11 @@
 
 
 
-<section class="detalle-producto">
+<section
+    class="detalle-producto"
+    data-id="{{ producto.id_producto }}"
+    data-precio="{{ producto.precio_producto }}"
+    data-categoria="{{ producto.categoria }}">
 
     <!-- ==========================
             BREADCRUMB
@@ -57,10 +61,7 @@
 
             <div class="imagen-principal">
 
-                <img
-                    src="{{ url_for('static', filename='img/serenity.png') }}"
-                    alt="{{ producto.nombre_producto }}"
-                >
+                <img src="{{ producto.imagen }}" alt="{{ producto.nombre_producto }}">
 
             </div>
 
@@ -118,7 +119,7 @@
 
                 <h2>
 
-                    ${{ "{:,.0f}".format(producto.precio_producto).replace(",", ".") }}
+                    ${{ "{:,.0f}".format(producto.precio_producto|float).replace(",", ".") }}
 
                 </h2>
 
@@ -166,34 +167,22 @@
 
             <div class="opcion-producto">
 
-                <div class="titulo-tallas">
+    <div class="titulo-tallas">
 
-                    <h3>Talla</h3>
+        <h3>Talla</h3>
 
-                    <a href="#">Guía de tallas</a>
+        <a href="#">Guía de tallas</a>
 
-                </div>
+    </div>
 
-                <div class="tallas">
+    <div
+        class="tallas"
+        id="tallas-container"
+        data-categoria="{{ producto.categoria }}">
+    </div>
 
-                    <button>38</button>
-
-                    <button>39</button>
-
-                    <button class="activo">40</button>
-
-                    <button>41</button>
-
-                    <button>42</button>
-
-                    <button>43</button>
-
-                    <button>44</button>
-
-                </div>
-
-            </div>
-
+</div>
+            
             <!-- ==========================
                     CANTIDAD
             =========================== -->
@@ -207,10 +196,11 @@
                     <button>-</button>
 
                     <input
-                        type="number"
-                        value="1"
-                        min="1"
-                    >
+    id="cantidad"
+    type="number"
+    value="1"
+    min="1">
+                    
 
                     <button>+</button>
 
@@ -224,7 +214,9 @@
 
             <div class="acciones-producto">
 
-                <button class="btn-carrito">
+                <button
+    class="btn-carrito"
+    id="btn-agregar-carrito">
 
                     <i class="fa-solid fa-cart-shopping"></i>
 
@@ -575,73 +567,6 @@
 
 </section>
 
-<script>
-
-const miniaturas = document.querySelectorAll(".miniaturas img");
-const imagenPrincipal = document.querySelector(".imagen-principal img");
-
-miniaturas.forEach(img => {
-
-    img.addEventListener("click", () => {
-
-        imagenPrincipal.src = img.src;
-
-        miniaturas.forEach(i => i.classList.remove("activa"));
-
-        img.classList.add("activa");
-
-    });
-
-});
-
-const tallas = document.querySelectorAll(".tallas button");
-
-tallas.forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        tallas.forEach(t => t.classList.remove("activo"));
-
-        btn.classList.add("activo");
-
-    });
-
-});
-
-const colores = document.querySelectorAll(".color");
-
-colores.forEach(btn => {
-
-    btn.addEventListener("click", () => {
-
-        colores.forEach(c => c.classList.remove("activo"));
-
-        btn.classList.add("activo");
-
-    });
-
-});
-
-const menos = document.querySelector(".cantidad button:first-child");
-const mas = document.querySelector(".cantidad button:last-child");
-const cantidad = document.querySelector(".cantidad input");
-
-menos.addEventListener("click", () => {
-
-    if (cantidad.value > 1) {
-
-        cantidad.value--;
-
-    }
-
-});
-
-mas.addEventListener("click", () => {
-
-    cantidad.value++;
-
-});
-
-</script>
+<script src="{{ url_for('static', filename='js/descripcion.js') }}"></script>
 
 {% endblock %}

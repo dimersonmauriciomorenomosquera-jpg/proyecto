@@ -1,35 +1,37 @@
-//funcion agregar al carrito//
+// ==========================
+// AGREGAR AL CARRITO
+// ==========================
 
-function agregarCarrito(nombre, precio, imagen, descripcion, talla){
+let tallaSeleccionada = null;
+
+function agregarCarrito(nombre, precio, imagen, descripcion) {
 
     let carrito = JSON.parse(localStorage.getItem("carrito"));
 
-    if(!Array.isArray(carrito)){
+    if (!Array.isArray(carrito)) {
         carrito = [];
     }
 
-    let cantidad = parseInt(
-        document.querySelector(".cantidad").innerText
-    );
+    let cantidad = parseInt(document.querySelector(".cantidad input").value);
 
-    let productoExistente = carrito.find(producto => 
+    let productoExistente = carrito.find(producto =>
         producto.nombre === nombre &&
-        producto.talla === talla
+        producto.talla === tallaSeleccionada
     );
 
-    if(productoExistente){
+    if (productoExistente) {
 
         productoExistente.cantidad += cantidad;
 
     } else {
 
         carrito.push({
-            nombre: nombre,
-            precio: precio,
-            imagen: imagen,
-            descripcion: descripcion,
-            talla: talla,
-            cantidad: cantidad
+            nombre,
+            precio,
+            imagen,
+            descripcion,
+            talla: tallaSeleccionada,
+            cantidad
         });
 
     }
@@ -41,151 +43,258 @@ function agregarCarrito(nombre, precio, imagen, descripcion, talla){
 }
 
 
-//funcion de cantidad//
+// ==========================
+// CARGAR TALLAS
+// ==========================
 
-function cambiarCantidad(boton, valor){
-
-    let producto = boton.parentElement;
-
-    let cantidadElemento = producto.querySelector(".cantidad");
-
-    let cantidad = parseInt(cantidadElemento.innerText);
-
-    cantidad += valor;
-
-    if(cantidad < 1){
-        cantidad = 1;
-    }
-
-    cantidadElemento.innerText = cantidad;
-
-}
-
-
-
-
-
-let tallaSeleccionada = null;
-
-
-
-function cargarTallas(){
+function cargarTallas() {
 
     const contenedor = document.getElementById("tallas-container");
 
-    let categoria = contenedor.dataset.categoria.trim();
+    if (!contenedor) return;
+
+    let categoria = contenedor.dataset.categoria.toLowerCase().trim();
 
     let tallas = [];
 
-    // 👟 ZAPATOS
-if(categoria.includes("zapatos")){
-    tallas = [33, 34, 35, 36, 37, 38, 39, 40, 41, 42];
-}
+    if (categoria === "ropa") {
 
-// 👕 ROPA
-else if(categoria.includes("ropa")){
-    tallas = ["S", "M", "L", "XL"];
-}
+        tallas = ["S", "M", "L", "XL"];
 
-// 💍 ACCESORIOS
-else if(categoria.includes("accesorios")){
-    contenedor.innerHTML = "";
-    tallaSeleccionada = "sin talla";
-    return;
-}
-    // 🧨 SI NO HAY CATEGORÍA
-    if(tallas.length === 0){
-        tallas = ["S", "M", "L","XL"];
+    } else if (categoria === "zapatos") {
+
+        tallas = [35, 36, 37, 38, 39, 40, 41, 42, 43];
+
+    } else if (categoria === "accesorios") {
+
+        contenedor.parentElement.style.display = "none";
+        return;
+
     }
 
     contenedor.innerHTML = "";
 
     tallas.forEach((talla, index) => {
 
-        let btn = document.createElement("button");
-        btn.innerText = talla;
+        const boton = document.createElement("button");
 
-        if(index === 0){
-            btn.classList.add("active");
+        boton.textContent = talla;
+
+        if (index === 0) {
+
+            boton.classList.add("activo");
             tallaSeleccionada = talla;
+
         }
 
-        btn.onclick = function(){
+        boton.addEventListener("click", () => {
 
-            document.querySelectorAll(".tallas button").forEach(b => {
-                b.classList.remove("active");
+            document.querySelectorAll("#tallas-container button").forEach(btn => {
+                btn.classList.remove("activo");
             });
 
-            btn.classList.add("active");
+            boton.classList.add("activo");
+
             tallaSeleccionada = talla;
-        };
-
-        contenedor.appendChild(btn);
-    });
-}
-
-
-let estrellasSeleccionadas = 0;
-
-const estrellas = document.querySelectorAll(".estrella");
-
-estrellas.forEach(estrella => {
-
-    estrella.addEventListener("click", () => {
-
-        estrellasSeleccionadas = estrella.dataset.valor;
-
-        estrellas.forEach(e => {
-
-            if(e.dataset.valor <= estrellasSeleccionadas){
-                e.innerText = "★";
-            } else {
-                e.innerText = "☆";
-            }
 
         });
 
+        contenedor.appendChild(boton);
+
     });
 
-});
-
-
-function enviarOpinion(producto){
-
-    if(estrellasSeleccionadas == 0){
-        alert("Selecciona estrellas");
-        return;
-    }
-
-    let opiniones = JSON.parse(localStorage.getItem("opiniones"));
-
-    if(typeof opiniones !== "object" || opiniones === null){
-        opiniones = {};
-    }
-
-    if(!Array.isArray(opiniones[producto])){
-        opiniones[producto] = [];
-    }
-
-    let yaOpino = opiniones[producto].find(
-        opinion => opinion.usuario === "usuario1"
-    );
-
-    if(yaOpino){
-        alert("Ya enviaste una opinión para este producto");
-        return;
-    }
-
-    opiniones[producto].push({
-        usuario: "usuario1",
-        estrellas: Number(estrellasSeleccionadas)
-    });
-
-    localStorage.setItem("opiniones", JSON.stringify(opiniones));
-
-    alert("Opinión guardada");
 }
-window.addEventListener("load", function(){
-    cargarTallas();
-    cargarOpiniones()
+
+
+// ==========================
+// GALERÍA
+// ==========================
+
+const miniaturas = document.querySelectorAll(".miniaturas img");
+const imagenPrincipal = document.querySelector(".imagen-principal img");
+
+miniaturas.forEach(img => {
+
+    img.addEventListener("click", () => {
+
+        imagenPrincipal.src = img.src;
+
+        miniaturas.forEach(i => i.classList.remove("activa"));
+
+        img.classList.add("activa");
+
+    });
+
 });
+
+
+// ==========================
+// COLORES
+// ==========================
+
+const colores = document.querySelectorAll(".color");
+
+colores.forEach(color => {
+
+    color.addEventListener("click", () => {
+
+        colores.forEach(c => c.classList.remove("activo"));
+
+        color.classList.add("activo");
+
+    });
+
+});
+
+
+// ==========================
+// CANTIDAD
+// ==========================
+
+const menos = document.querySelector(".cantidad button:first-child");
+const mas = document.querySelector(".cantidad button:last-child");
+const cantidad = document.querySelector(".cantidad input");
+
+menos.addEventListener("click", () => {
+
+    if (cantidad.value > 1) {
+
+        cantidad.value--;
+
+    }
+
+});
+
+mas.addEventListener("click", () => {
+
+    cantidad.value++;
+
+});
+
+
+// ==========================
+// INICIO
+// ==========================
+
+window.addEventListener("load", () => {
+
+    cargarTallas();
+
+});
+
+/*==================================
+    AGREGAR AL CARRITO
+==================================*/
+/*==================================
+    AGREGAR AL CARRITO
+==================================*/
+
+const btnAgregarCarrito = document.getElementById("btn-agregar-carrito");
+
+btnAgregarCarrito.addEventListener("click", agregarAlCarrito);
+
+async function agregarAlCarrito() {
+
+    // Verificar si el usuario inició sesión
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+
+        alert("Debes iniciar sesión para agregar productos al carrito.");
+
+        window.location.href = "/login";
+
+        return;
+
+    }
+
+    // Obtener datos del producto
+    const detalle = document.querySelector(".detalle-producto");
+
+    const idProducto = Number(detalle.dataset.id);
+
+    const cantidad = Number(document.getElementById("cantidad").value);
+
+    const categoria = detalle.dataset.categoria.toLowerCase().trim();
+
+    let talla = null;
+
+    // Solo ropa y zapatos necesitan talla
+    if (categoria === "ropa" || categoria === "zapatos") {
+
+        const tallaSeleccionada = document.querySelector(".tallas button.activo");
+
+        if (!tallaSeleccionada) {
+
+            alert("Selecciona una talla.");
+
+            return;
+
+        }
+
+        talla = tallaSeleccionada.textContent.trim();
+
+    }
+
+    // Validar cantidad
+    if (cantidad <= 0) {
+
+        alert("La cantidad debe ser mayor que cero.");
+
+        return;
+
+    }
+
+    // Datos que espera el backend
+    const datos = {
+
+        id_producto: idProducto,
+
+        cantidad: cantidad,
+
+        talla: talla
+
+    };
+
+    try {
+
+        const respuesta = await fetch(
+            "http://127.0.0.1:5000/detalle_carrito/",
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type": "application/json",
+
+                    "Authorization": `Bearer ${token}`
+
+                },
+
+                body: JSON.stringify(datos)
+
+            }
+        );
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok) {
+
+            alert("Producto agregado al carrito correctamente.");
+
+        } else {
+
+            alert(resultado.message);
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Error al conectar con el servidor.");
+
+    }
+
+}

@@ -35,8 +35,9 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
 
                     <input
-                        type="text"
-                        placeholder="Buscar producto...">
+    type="text"
+    id="buscar"
+    placeholder="Buscar producto...">
 
                 </div>
 
@@ -48,84 +49,31 @@
 
             <div class="filtro">
 
-                <h3>Categorías</h3>
+    <h3>Categorías</h3>
 
-                <label>
-                    <input type="radio" name="categoria" checked>
-                    Todos
-                </label>
+    <label>
+        <input type="radio" name="categoria" value="Todos" checked>
+        Todos
+    </label>
 
-                <label>
-                    <input type="radio" name="categoria">
-                    Hombre
-                </label>
+    <label>
+        <input type="radio" name="categoria" value="Ropa">
+        Ropa
+    </label>
 
-                <label>
-                    <input type="radio" name="categoria">
-                    Mujer
-                </label>
+    <label>
+        <input type="radio" name="categoria" value="Zapatos">
+        Zapatos
+    </label>
 
-                <label>
-                    <input type="radio" name="categoria">
-                    Unisex
-                </label>
+    <label>
+        <input type="radio" name="categoria" value="Accesorios">
+        Accesorios
+    </label>
 
-                <label>
-                    <input type="radio" name="categoria">
-                    Accesorios
-                </label>
+</div>
 
-            </div>
-
-            <!--=========================
-                    TALLAS
-            =========================-->
-
-            <div class="filtro">
-
-                <h3>Tallas</h3>
-
-                <div class="tallas">
-
-                    <div class="grupo-tallas">
-
-                        <h4>Ropa</h4>
-
-                        <div class="opciones-tallas">
-
-                            <button>S</button>
-                            <button>M</button>
-                            <button>L</button>
-                            <button>XL</button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="grupo-tallas">
-
-                        <h4>Zapatos</h4>
-
-                        <div class="opciones-tallas">
-
-                            <button>35</button>
-                            <button>36</button>
-                            <button>37</button>
-                            <button>38</button>
-                            <button>39</button>
-                            <button>40</button>
-                            <button>41</button>
-                            <button>42</button>
-                            <button>43</button>
-                            <button>44</button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
+            
 
             <!--=========================
                     ORDENAR
@@ -135,33 +83,16 @@
 
                 <h3>Ordenar</h3>
 
-                <select>
+                <select id="ordenar">
 
-                    <option>
-                        Relevancia
-                    </option>
+    <option value="">Relevancia</option>
+    <option value="recientes">Más recientes</option>
+    <option value="vendidos">Más vendidos</option>
+    <option value="precio_asc">Precio menor</option>
+    <option value="precio_desc">Precio mayor</option>
+    <option value="nombre">Nombre A-Z</option>
 
-                    <option>
-                        Más recientes
-                    </option>
-
-                    <option>
-                        Más vendidos
-                    </option>
-
-                    <option>
-                        Precio menor
-                    </option>
-
-                    <option>
-                        Precio mayor
-                    </option>
-
-                    <option>
-                        Nombre A-Z
-                    </option>
-
-                </select>
+</select>
 
             </div>
 
@@ -169,703 +100,29 @@
                 LIMPIAR
             =========================-->
 
-            <button class="btn-limpiar">
+            <button class="btn-limpiar" id="limpiar">
 
-                <i class="fa-solid fa-filter-circle-xmark"></i>
+    <i class="fa-solid fa-filter-circle-xmark"></i>
 
-                Limpiar filtros
+    Limpiar filtros
 
-            </button>
+</button>
 
         </section>
 
         <!--=================================
                 GRID PRODUCTOS
         ==================================-->
-
-        <section class="productos-grid">
-
-            <!--=========================
-                    PRODUCTO 1
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato1.png') }}" alt="Nike Air Force">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Hombre
-                    </span>
-
-                    <h3>
-                        Nike Air Force 1 '07
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-
-                        <span>(126)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $350.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-                        <!--=========================
-                    PRODUCTO 2
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato2.png') }}" alt="Adidas Campus">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Hombre
-                    </span>
-
-                    <h3>
-                        Adidas Campus 00s
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(82)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $420.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 3
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato3.png') }}" alt="Converse Chuck 70">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Unisex
-                    </span>
-
-                    <h3>
-                        Converse Chuck 70
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
-                        <span>(214)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $280.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 4
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato4.png') }}" alt="Vans Old Skool">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Hombre
-                    </span>
-
-                    <h3>
-                        Vans Old Skool
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(97)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $250.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 5
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato5.png') }}" alt="Nike Dunk Low">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Mujer
-                    </span>
-
-                    <h3>
-                        Nike Dunk Low
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
-                        <span>(183)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $380.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 6
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/zapato6.png') }}" alt="New Balance 530">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Running
-                    </span>
-
-                    <h3>
-                        New Balance 530
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(65)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $450.000
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-                    <!--=========================
-                    PRODUCTO 7
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto7.jpg') }}" alt="Chaqueta Bomber">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Chaquetas
-                    </span>
-
-                    <h3>
-                        Chaqueta Bomber
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-
-                        <span>(78)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $259.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 8
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto8.jpg') }}" alt="Jogger Cargo">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Pantalones
-                    </span>
-
-                    <h3>
-                        Jogger Cargo
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(52)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $149.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 9
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto9.jpg') }}" alt="Sudadera Oversize">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Buzos
-                    </span>
-
-                    <h3>
-                        Sudadera Oversize
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
-                        <span>(114)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $179.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 10
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto10.jpg') }}" alt="Gorra Classic">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Accesorios
-                    </span>
-
-                    <h3>
-                        Gorra Classic
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(39)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $69.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 11
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto11.jpg') }}" alt="Tenis White Street">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Hombre
-                    </span>
-
-                    <h3>
-                        Tenis White Street
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-
-                        <span>(167)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $329.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-            <!--=========================
-                    PRODUCTO 12
-            =========================-->
-
-            <article class="producto">
-
-                <button class="favorito">
-
-                    <i class="fa-regular fa-heart"></i>
-
-                </button>
-
-                <a href="#">
-
-                    <img src="{{ url_for('static', filename='img/productos/producto12.jpg') }}" alt="Tenis Retro Black">
-
-                </a>
-
-                <div class="info">
-
-                    <span class="categoria">
-                        Hombre
-                    </span>
-
-                    <h3>
-                        Tenis Retro Black
-                    </h3>
-
-                    <div class="estrellas">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-
-                        <span>(91)</span>
-
-                    </div>
-
-                    <p class="precio">
-                        $299.900
-                    </p>
-
-                    <button class="btn-comprar">
-
-                        Ver producto
-
-                    </button>
-
-                </div>
-
-            </article>
-
-                </section>
-
-    </div>
-
-    <!--==============================
-            PAGINACIÓN
-    ==============================-->
-
-    <div class="paginacion">
-
-        <button class="activo">
-            1
-        </button>
-
-        <button>
-            2
-        </button>
-
-        <button>
-            3
-        </button>
-
-        <button>
-            4
-        </button>
-
-        <button>
-
-            <i class="fa-solid fa-angle-right"></i>
-
-        </button>
-
-    </div>
+        <section class="productos-grid" id="productos-grid">
 
 </section>
+        
+
+    </div>
+
+    <div id="paginacion" class="paginacion"></div>
+
+</section>
+<script src="{{ url_for('static', filename='js/productos.js') }}"></script>
 
 {% endblock %}

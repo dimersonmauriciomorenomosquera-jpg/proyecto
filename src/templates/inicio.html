@@ -105,7 +105,8 @@
         PRODUCTOS DESTACADOS
 =====================================-->
 
-<section class="productos">
+
+    <section class="productos">
 
     <div class="titulo-seccion">
 
@@ -119,197 +120,13 @@
 
     </div>
 
-    <div class="contenedor-productos">
-
-        <!-- Producto 1 -->
-
-        <div class="card-producto">
-
-            <span class="etiqueta">Nuevo</span>
-
-            <button class="favorito">
-                <i class="fa-regular fa-heart"></i>
-            </button>
-
-            <img src="{{ url_for('static', filename='img/producto1.jpg') }}" alt="Sudadera">
-
-            <div class="info-producto">
-
-                <span class="categoria-producto">
-                    Ropa
-                </span>
-
-                <h3>Sudadera Premium</h3>
-
-                <div class="estrellas">
-
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-
-                </div>
-
-                <div class="precio">
-
-                    <span class="nuevo">$48</span>
-
-                    <span class="anterior">$60</span>
-
-                </div>
-
-                <button class="btn-carrito">
-
-                    <i class="fa-solid fa-cart-shopping"></i>
-
-                    Agregar al carrito
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- Producto 2 -->
-
-        <div class="card-producto">
-
-            <span class="etiqueta oferta">Oferta</span>
-
-            <button class="favorito">
-                <i class="fa-regular fa-heart"></i>
-            </button>
-
-            <img src="{{ url_for('static', filename='img/producto2.jpg') }}" alt="Zapatos">
-
-            <div class="info-producto">
-
-                <span class="categoria-producto">
-
-                    Zapatos
-
-                </span>
-
-                <h3>Tenis Urban</h3>
-
-                <div class="estrellas">
-
-                    ★★★★★
-
-                </div>
-
-                <div class="precio">
-
-                    <span class="nuevo">$75</span>
-
-                    <span class="anterior">$90</span>
-
-                </div>
-
-                <button class="btn-carrito">
-
-                    <i class="fa-solid fa-cart-shopping"></i>
-
-                    Agregar al carrito
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- Producto 3 -->
-
-        <div class="card-producto">
-
-            <button class="favorito">
-                <i class="fa-regular fa-heart"></i>
-            </button>
-
-            <img src="{{ url_for('static', filename='img/producto3.jpg') }}" alt="Reloj">
-
-            <div class="info-producto">
-
-                <span class="categoria-producto">
-
-                    Accesorios
-
-                </span>
-
-                <h3>Reloj Luxury</h3>
-
-                <div class="estrellas">
-
-                    ★★★★★
-
-                </div>
-
-                <div class="precio">
-
-                    <span class="nuevo">$120</span>
-
-                </div>
-
-                <button class="btn-carrito">
-
-                    <i class="fa-solid fa-cart-shopping"></i>
-
-                    Agregar al carrito
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- Producto 4 -->
-
-        <div class="card-producto">
-
-            <button class="favorito">
-                <i class="fa-regular fa-heart"></i>
-            </button>
-
-            <img src="{{ url_for('static', filename='img/producto4.jpg') }}" alt="Bolso">
-
-            <div class="info-producto">
-
-                <span class="categoria-producto">
-
-                    Bolsos
-
-                </span>
-
-                <h3>Bolso Elegance</h3>
-
-                <div class="estrellas">
-
-                    ★★★★★
-
-                </div>
-
-                <div class="precio">
-
-                    <span class="nuevo">$82</span>
-
-                </div>
-
-                <button class="btn-carrito">
-
-                    <i class="fa-solid fa-cart-shopping"></i>
-
-                    Agregar al carrito
-
-                </button>
-
-            </div>
-
-        </div>
+    <div class="contenedor-productos" id="productos-destacados">
 
     </div>
 
 </section>
+
+
 
 <!--====================================
         EXPERIENCIA SERENITY

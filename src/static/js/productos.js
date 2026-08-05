@@ -2,89 +2,270 @@
         FAVORITOS
 ==================================*/
 
-document.querySelectorAll(".favorito").forEach(boton=>{
+let paginaActual = 1;
 
-    boton.addEventListener("click",()=>{
+const contenedor = document.getElementById("productos-grid");
 
-        boton.classList.toggle("activo");
+function activarFavoritos() {
 
-        const icono=boton.querySelector("i");
+    document.querySelectorAll(".favorito").forEach(boton => {
 
-        if(boton.classList.contains("activo")){
+        boton.addEventListener("click", () => {
 
-            icono.classList.remove("fa-regular");
-            icono.classList.add("fa-solid");
+            boton.classList.toggle("activo");
 
-        }else{
+            const icono = boton.querySelector("i");
 
-            icono.classList.remove("fa-solid");
-            icono.classList.add("fa-regular");
+            if (boton.classList.contains("activo")) {
+
+                icono.classList.remove("fa-regular");
+                icono.classList.add("fa-solid");
+
+            } else {
+
+                icono.classList.remove("fa-solid");
+                icono.classList.add("fa-regular");
+
+            }
+
+        });
+
+    });
+
+}
+
+/*==================================
+        CARGAR PRODUCTOS
+==================================*/
+
+async function cargarProductos() {
+
+    const buscar = document.getElementById("buscar").value;
+
+    const categoria = document.querySelector(
+        "input[name='categoria']:checked"
+    ).value;
+
+    const ordenar = document.getElementById("ordenar").value;
+
+    let url = `http://127.0.0.1:5000/productos/buscar?pagina=${paginaActual}`;
+
+    const parametros = [];
+
+    if (buscar !== "") {
+
+        parametros.push(`buscar=${encodeURIComponent(buscar)}`);
+
+    }
+
+    if (categoria !== "Todos") {
+
+        parametros.push(`categoria=${encodeURIComponent(categoria)}`);
+
+    }
+
+    if (ordenar !== "") {
+
+        parametros.push(`ordenar=${encodeURIComponent(ordenar)}`);
+
+    }
+
+    if (parametros.length > 0) {
+
+        url += "&" + parametros.join("&");
+
+    }
+
+    try {
+
+        const respuesta = await fetch(url);
+
+        if (!respuesta.ok) {
+
+            throw new Error("No fue posible cargar los productos");
 
         }
 
-    });
+        const datos = await respuesta.json();
 
-});
+        mostrarProductos(datos.productos);
 
+        crearPaginacion(datos.total_paginas);
 
-/*==================================
-        TALLAS
-==================================*/
+    } catch (error) {
 
-document.querySelectorAll(".tallas button").forEach(boton=>{
+        console.error(error);
 
-    boton.addEventListener("click",()=>{
+    }
 
-        document.querySelectorAll(".tallas button").forEach(btn=>{
-
-            btn.classList.remove("seleccionado");
-
-        });
-
-        boton.classList.add("seleccionado");
-
-    });
-
-});
-
+}
 
 /*==================================
-        COLORES
+        MOSTRAR PRODUCTOS
 ==================================*/
 
-document.querySelectorAll(".colores span").forEach(color=>{
+function mostrarProductos(productos) {
 
-    color.addEventListener("click",()=>{
+    contenedor.innerHTML = "";
 
-        document.querySelectorAll(".colores span").forEach(c=>{
+    productos.forEach(producto => {
 
-            c.classList.remove("activo");
+        contenedor.innerHTML += `
 
-        });
+        <article class="producto">
 
-        color.classList.add("activo");
+            <button class="favorito">
+                <i class="fa-regular fa-heart"></i>
+            </button>
+
+            <a href="/productos/${producto.id_producto}">
+
+                <img src="${producto.imagen}" alt="${producto.nombre_producto}">
+
+            </a>
+
+            <div class="info">
+
+                <span class="categoria">
+                    ${producto.categoria}
+                </span>
+
+                <h3>
+                    ${producto.nombre_producto}
+                </h3>
+
+                <div class="estrellas">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+
+                </div>
+
+                <p class="precio">
+
+                    $${Number(producto.precio_producto).toLocaleString("es-CO")}
+
+                </p>
+
+                <button
+                    class="btn-comprar"
+                    onclick="verProducto(${producto.id_producto})">
+
+                    Ver producto
+
+                </button>
+
+            </div>
+
+        </article>
+
+        `;
 
     });
 
-});
+    activarFavoritos();
 
+}
 
 /*==================================
-        BOTÓN PRODUCTO
+        PAGINACIÓN
 ==================================*/
 
-document.querySelectorAll(".btn-comprar").forEach(boton=>{
+function crearPaginacion(totalPaginas) {
 
-    boton.addEventListener("mouseenter",()=>{
+    const paginacion = document.getElementById("paginacion");
 
-        boton.innerHTML='<i class="fa-solid fa-bag-shopping"></i> Ver producto';
+    paginacion.innerHTML = "";
 
-    });
+    for (let i = 1; i <= totalPaginas; i++) {
 
-    boton.addEventListener("mouseleave",()=>{
+        paginacion.innerHTML += `
 
-        boton.innerHTML="Ver producto";
+            <button
+                class="${i === paginaActual ? "activo" : ""}"
+                onclick="cambiarPagina(${i})">
+
+                ${i}
+
+            </button>
+
+        `;
+
+    }
+
+}
+
+function cambiarPagina(pagina) {
+
+    paginaActual = pagina;
+
+    cargarProductos();
+
+}
+
+/*==================================
+        VER PRODUCTO
+==================================*/
+
+function verProducto(id) {
+
+    window.location.href = `/productos/${id}`;
+
+}
+
+/*==================================
+        EVENTOS FILTROS
+==================================*/
+
+document.getElementById("buscar").addEventListener("input", () => {
+
+    paginaActual = 1;
+
+    cargarProductos();
+
+});
+
+document.querySelectorAll("input[name='categoria']").forEach(radio => {
+
+    radio.addEventListener("change", () => {
+
+        paginaActual = 1;
+
+        cargarProductos();
 
     });
 
 });
+
+document.getElementById("ordenar").addEventListener("change", () => {
+
+    paginaActual = 1;
+
+    cargarProductos();
+
+});
+
+document.getElementById("limpiar").addEventListener("click", () => {
+
+    document.getElementById("buscar").value = "";
+
+    document.querySelector(
+        "input[name='categoria'][value='Todos']"
+    ).checked = true;
+
+    document.getElementById("ordenar").value = "";
+
+    paginaActual = 1;
+
+    cargarProductos();
+
+});
+
+/*==================================
+        INICIO
+==================================*/
+
+cargarProductos();

@@ -42,7 +42,7 @@ def detalle(id_producto):
         producto = None
 
     return render_template(
-        "detalle_producto.html",
+        "descripcion.html",
         producto=producto
     )
 
@@ -62,3 +62,14 @@ def categoria(categoria):
         productos=productos,
         q=categoria
     )
+
+@productos_bp.route('/buscar', methods=['GET'])
+def buscar_productos():
+
+    nombre = request.args.get("nombre")
+    categoria = request.args.get("categoria")
+    ordenar = request.args.get("ordenar")
+
+    productos = Productos.buscar(nombre, categoria, ordenar)
+
+    return jsonify([p.to_dict() for p in productos]), 200
