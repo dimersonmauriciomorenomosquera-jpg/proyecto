@@ -12,6 +12,19 @@ def _client():
 @inicio_bp.route("/")
 def index():
 
+    print("========================================")
+    print("SESSION EN INICIO:")
+    print(session)
+    print("API TOKEN EN INICIO:")
+    print(session.get("api_token"))
+    print("ID CLIENTE EN INICIO:")
+    print(session.get("id_cliente"))
+    print("USUARIO EN INICIO:")
+    print(session.get("usuario"))
+    print("========================================")
+
+    
+
     try:
         productos = APIClient.as_list(
             _client().get("/productos/")

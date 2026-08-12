@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | Serenity Mode</title>
 
-    <link rel="stylesheet" href="../static/css/registro.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -22,8 +22,8 @@
 
     <div class="lado-izquierdo">
 
-        <img src="../static/img/registro1.jpeg"
-        alt="Serenity Mode">
+        <img src="{{ url_for('static', filename='img/registro1.jpeg') }}"
+             alt="Serenity Mode">
 
     </div>
 
@@ -41,7 +41,7 @@
 
         <h2>Crear Cuenta</h2>
 
-        <form action="" method="POST">
+        <form id="formRegistro">
 
             <!-- Nombre -->
 
@@ -50,10 +50,10 @@
                 <i class="fa-solid fa-user"></i>
 
                 <input
-                type="text"
-                name="nombre_cliente"
-                placeholder="Nombre completo"
-                required>
+                    type="text"
+                    name="nombre_cliente"
+                    placeholder="Nombre completo"
+                    required>
 
             </div>
 
@@ -64,10 +64,10 @@
                 <i class="fa-solid fa-envelope"></i>
 
                 <input
-                type="email"
-                name="email_cliente"
-                placeholder="Correo electrónico"
-                required>
+                    type="email"
+                    name="email_cliente"
+                    placeholder="Correo electrónico"
+                    required>
 
             </div>
 
@@ -78,10 +78,10 @@
                 <i class="fa-solid fa-phone"></i>
 
                 <input
-                type="text"
-                name="numero_cliente"
-                placeholder="Número de celular"
-                required>
+                    type="text"
+                    name="numero_cliente"
+                    placeholder="Número de celular"
+                    required>
 
             </div>
 
@@ -92,10 +92,10 @@
                 <i class="fa-solid fa-location-dot"></i>
 
                 <input
-                type="text"
-                name="direccion_cliente"
-                placeholder="Dirección"
-                required>
+                    type="text"
+                    name="direccion_cliente"
+                    placeholder="Dirección"
+                    required>
 
             </div>
 
@@ -106,9 +106,9 @@
                 <i class="fa-solid fa-calendar-days"></i>
 
                 <input
-                type="date"
-                name="nacimiento_cliente"
-                required>
+                    type="date"
+                    name="nacimiento_cliente"
+                    required>
 
             </div>
 
@@ -119,10 +119,10 @@
                 <i class="fa-solid fa-lock"></i>
 
                 <input
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                required>
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    required>
 
                 <i class="fa-solid fa-eye ojo"></i>
 
@@ -135,10 +135,10 @@
                 <i class="fa-solid fa-lock"></i>
 
                 <input
-                type="password"
-                name="confirmar"
-                placeholder="Confirmar contraseña"
-                required>
+                    type="password"
+                    name="confirmar"
+                    placeholder="Confirmar contraseña"
+                    required>
 
                 <i class="fa-solid fa-eye ojo"></i>
 
@@ -149,8 +149,8 @@
             <div class="terminos">
 
                 <input
-                type="checkbox"
-                required>
+                    type="checkbox"
+                    required>
 
                 <label>
 
@@ -164,8 +164,8 @@
             <!-- Botón -->
 
             <button
-            class="btn-registro"
-            type="submit">
+                class="btn-registro"
+                type="submit">
 
                 Registrarse
 
@@ -181,16 +181,17 @@
 
             <span>¿Ya tienes cuenta?</span>
 
-            <a href="login">
+            <a href="{{ url_for('auth.login') }}">
                 Inicia sesión
             </a>
 
         </div>
 
-
     </div>
 
 </div>
+
+<script src="{{ url_for('static', filename='js/registro.js') }}"></script>
 
 </body>
 </html>

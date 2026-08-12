@@ -1,31 +1,55 @@
+// ======================================
+// MENÚ PRINCIPAL
+// ======================================
 
-                function toggleMenu(){
-                const menu = document.getElementById("menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
-        
-                function toggleUser(){
-                const menu = document.getElementById("ingreso");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-                }
+function toggleMenu() {
+    const menu = document.getElementById("menu");
 
-        
+    if (!menu) return;
+
+    menu.style.display =
+        menu.style.display === "block"
+            ? "none"
+            : "block";
+}
+
+
+// ======================================
+// MENÚ DE USUARIO
+// ======================================
+
+function toggleUser() {
+    const menu = document.getElementById("ingreso");
+
+    if (!menu) return;
+
+    menu.style.display =
+        menu.style.display === "block"
+            ? "none"
+            : "block";
+}
+
+
+// ======================================
+// BUSCADOR DE PRODUCTOS
+// ======================================
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const buscador = document.getElementById("buscador");
     const productos = document.querySelectorAll(".card");
 
-    if(buscador){
+    if (buscador) {
 
         buscador.addEventListener("keyup", () => {
 
-            let texto = buscador.value.toLowerCase();
+            const texto = buscador.value.toLowerCase();
 
             productos.forEach(producto => {
 
-                let contenido = producto.innerText.toLowerCase();
+                const contenido = producto.innerText.toLowerCase();
 
-                if(contenido.includes(texto)) {
+                if (contenido.includes(texto)) {
                     producto.style.display = "block";
                 } else {
                     producto.style.display = "none";
@@ -39,68 +63,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-const btnCerrarSesion = document.getElementById("btnCerrarSesion");
-
-if (btnCerrarSesion) {
-
-    btnCerrarSesion.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("usuario");
-
-        alert("Sesión cerrada correctamente.");
-
-        window.location.href = "/";
-
-    });
-
-}
 
 // ======================================
-// MOSTRAR U OCULTAR OPCIONES DEL MENÚ
+// MOSTRAR / OCULTAR OPCIONES DEL MENÚ
 // ======================================
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    const token = localStorage.getItem("token");
 
     const menuLogin = document.getElementById("menuLogin");
     const menuRegistro = document.getElementById("menuRegistro");
     const menuInformacion = document.getElementById("menuInformacion");
     const btnCerrarSesion = document.getElementById("btnCerrarSesion");
 
-    if (token) {
+    /*
+     * IMPORTANTE:
+     *
+     * La autenticación real está en Flask:
+     *
+     * session["api_token"]
+     *
+     * Por eso NO usamos:
+     *
+     * localStorage.getItem("token")
+     *
+     * para decidir si el usuario está autenticado.
+     */
 
-        // Usuario autenticado
-        menuLogin.style.display = "none";
-        menuRegistro.style.display = "none";
+    // --------------------------------------
+    // CERRAR SESIÓN
+    // --------------------------------------
 
-        menuInformacion.style.display = "block";
-        btnCerrarSesion.style.display = "block";
+    if (btnCerrarSesion) {
 
-    } else {
+        btnCerrarSesion.addEventListener("click", function (e) {
 
-        // Usuario no autenticado
-        menuLogin.style.display = "block";
-        menuRegistro.style.display = "block";
+            e.preventDefault();
 
-        menuInformacion.style.display = "none";
-        btnCerrarSesion.style.display = "none";
+            // Flask se encarga de eliminar:
+            // session["api_token"]
+            // session["id_cliente"]
+            // session["usuario"]
+
+            window.location.href = "/logout";
+
+        });
 
     }
-
-    // Cerrar sesión
-    btnCerrarSesion.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("usuario");
-
-        window.location.href = "/";
-
-    });
 
 });

@@ -1,572 +1,753 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-
-<link rel="stylesheet" href="{{ url_for('static', filename='css/descripcion.css') }}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/descripcion.css') }}">
 
 
+<!-- ======================================================
+     BREADCRUMB
+======================================================= -->
 
-<section
-    class="detalle-producto"
+<div class="breadcrumb">
+
+    <a href="{{ url_for('inicio.index') }}">
+        Inicio
+    </a>
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+    <a href="{{ url_for('productos.index') }}">
+        Productos
+    </a>
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+    <span>
+        {{ producto.nombre_producto }}
+    </span>
+
+</div>
+
+
+<!-- ======================================================
+     CONTENEDOR PRODUCTO
+======================================================= -->
+
+<div
+    class="detalle-contenedor"
     data-id="{{ producto.id_producto }}"
-    data-precio="{{ producto.precio_producto }}"
-    data-categoria="{{ producto.categoria }}">
+>
 
-    <!-- ==========================
-            BREADCRUMB
-    =========================== -->
 
-    <div class="breadcrumb">
+    <!-- ==================================================
+         GALERÍA
+    =================================================== -->
 
-        <a href="{{ url_for('inicio.index') }}">
-            Inicio
-        </a>
+    <div class="galeria-producto">
 
-        <i class="fa-solid fa-chevron-right"></i>
+        <!-- MINIATURAS -->
 
-        <a href="{{ url_for('productos.index') }}">
-            Productos
-        </a>
+        <div class="miniaturas">
 
-        <i class="fa-solid fa-chevron-right"></i>
+            <img
+                src="{{ producto.imagen }}"
+                alt="{{ producto.nombre_producto }}"
+                class="activa"
+            >
 
-        <span>{{ producto.nombre_producto }}</span>
+            <img
+                src="{{ producto.imagen }}"
+                alt="{{ producto.nombre_producto }}"
+            >
+
+            <img
+                src="{{ producto.imagen }}"
+                alt="{{ producto.nombre_producto }}"
+            >
+
+            <img
+                src="{{ producto.imagen }}"
+                alt="{{ producto.nombre_producto }}"
+            >
+
+        </div>
+
+
+        <!-- IMAGEN PRINCIPAL -->
+
+        <div class="imagen-principal">
+
+            <img
+                src="{{ producto.imagen }}"
+                alt="{{ producto.nombre_producto }}"
+            >
+
+        </div>
 
     </div>
 
-    <!-- ==========================
-        CONTENEDOR PRINCIPAL
-    =========================== -->
 
-    <div class="detalle-contenedor">
+    <!-- ==================================================
+         INFORMACIÓN DEL PRODUCTO
+    =================================================== -->
 
-        <!-- ==========================
-                GALERÍA
-        =========================== -->
+    <div class="info-producto">
 
-        <div class="galeria-producto">
 
-            <div class="miniaturas">
+        <span class="badge-producto">
+            Más vendido
+        </span>
 
-                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
 
-                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+        <h1>
+            {{ producto.nombre_producto }}
+        </h1>
 
-                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
 
-                <img src="{{ url_for('static', filename='img/' ~ producto.imagen_producto) }}" alt="Miniatura">
+        <!-- META -->
+
+        <div class="meta-producto">
+
+            <span>
+                {{ producto.categoria }}
+            </span>
+
+            <span>•</span>
+
+            <span>
+                {{ producto.marca_producto }}
+            </span>
+
+            <span>•</span>
+
+            <span>
+                Original
+            </span>
+
+        </div>
+
+
+        <!-- VALORACIÓN -->
+
+        <div class="valoracion">
+
+            <div class="estrellas">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
 
             </div>
 
-            <div class="imagen-principal">
+            <span>
+                (126 reseñas)
+            </span>
 
-                <img src="{{ producto.imagen }}" alt="{{ producto.nombre_producto }}">
+        </div>
+
+
+        <!-- ==================================================
+             PRECIO
+        =================================================== -->
+
+        <div class="precios">
+
+            <h2>
+                ${{ "{:,.0f}".format(
+                    producto.precio_producto|float
+                ).replace(",", ".") }}
+            </h2>
+
+            <div class="precio-anterior">
+
+                <span>
+                    $420.000
+                </span>
+
+                <small>
+                    -17%
+                </small>
 
             </div>
 
         </div>
 
-        <!-- ==========================
-            INFORMACIÓN
-        =========================== -->
 
-        <div class="info-producto">
+        <!-- ==================================================
+             DESCRIPCIÓN CORTA
+        =================================================== -->
 
-            <span class="badge-producto">
+        <p class="descripcion-corta">
 
-                Más vendido
+            {{ producto.descripcion_producto }}
 
-            </span>
+        </p>
 
-            <h1>
 
-                {{ producto.nombre_producto }}
+        <!-- ==================================================
+             COLORES
+        =================================================== -->
 
-            </h1>
+        <div class="opcion-producto">
 
-            <div class="meta-producto">
+            <h3>
+                Color
+            </h3>
 
-                <span>Hombre</span>
+            <div class="colores">
 
-                <span>•</span>
+                <button
+                    type="button"
+                    class="color negro activo"
+                    aria-label="Color negro"
+                ></button>
 
-                <span>Casual</span>
+                <button
+                    type="button"
+                    class="color blanco"
+                    aria-label="Color blanco"
+                ></button>
 
-                <span>•</span>
+                <button
+                    type="button"
+                    class="color gris"
+                    aria-label="Color gris"
+                ></button>
 
-                <span>Original</span>
+                <button
+                    type="button"
+                    class="color dorado"
+                    aria-label="Color dorado"
+                ></button>
 
             </div>
 
-            <div class="valoracion">
+        </div>
 
-                <div class="estrellas">
 
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
+        <!-- ==================================================
+             TALLAS
+        =================================================== -->
+
+        <div
+            class="opcion-producto opcion-tallas"
+            id="opcion-tallas"
+        >
+
+            <div class="titulo-tallas">
+
+                <h3>
+                    Talla
+                </h3>
+
+                <a href="#">
+                    Guía de tallas
+                </a>
+
+            </div>
+
+
+            <div
+                class="tallas"
+                id="tallas-container"
+                data-categoria="{{ producto.categoria }}"
+            ></div>
+
+        </div>
+
+
+        <!-- ==================================================
+             CANTIDAD
+        =================================================== -->
+
+        <div class="opcion-producto">
+
+            <h3>
+                Cantidad
+            </h3>
+
+            <div class="cantidad">
+
+                <button
+                    type="button"
+                    id="btn-menos"
+                    aria-label="Disminuir cantidad"
+                >
+                    -
+                </button>
+
+                <input
+                    id="cantidad"
+                    type="number"
+                    value="1"
+                    min="1"
+                    step="1"
+                >
+
+                <button
+                    type="button"
+                    id="btn-mas"
+                    aria-label="Aumentar cantidad"
+                >
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             BOTONES
+        =================================================== -->
+
+        <div class="acciones-producto">
+
+            <button
+                type="button"
+                class="btn-carrito"
+                id="btn-agregar-carrito"
+            >
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Agregar al carrito
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn-comprar"
+            >
+
+                Comprar ahora
+
+            </button>
+
+        </div>
+
+
+        <!-- ==================================================
+             BENEFICIOS
+        =================================================== -->
+
+        <div class="beneficios">
+
+
+            <div class="beneficio">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+                <div>
+
+                    <h4>
+                        Envío gratis
+                    </h4>
+
+                    <p>
+                        Compras superiores a $200.000
+                    </p>
 
                 </div>
 
-                <span>(126 reseñas)</span>
-
             </div>
 
-            <div class="precios">
 
-                <h2>
+            <div class="beneficio">
 
-                    ${{ "{:,.0f}".format(producto.precio_producto|float).replace(",", ".") }}
+                <i class="fa-solid fa-shield-halved"></i>
 
-                </h2>
+                <div>
 
-                <div class="precio-anterior">
+                    <h4>
+                        Garantía
+                    </h4>
 
-                    <span>$420.000</span>
-
-                    <small>-17%</small>
+                    <p>
+                        Producto 100% original
+                    </p>
 
                 </div>
 
             </div>
 
-            <p class="descripcion-corta">
 
-                {{ producto.descripcion_producto }}
+            <div class="beneficio">
 
-            </p>
+                <i class="fa-solid fa-arrow-rotate-left"></i>
 
-                    <!-- ==========================
-                    COLORES
-            =========================== -->
+                <div>
 
-            <div class="opcion-producto">
+                    <h4>
+                        Devoluciones
+                    </h4>
 
-                <h3>Color</h3>
-
-                <div class="colores">
-
-                    <button class="color negro activo"></button>
-
-                    <button class="color blanco"></button>
-
-                    <button class="color gris"></button>
-
-                    <button class="color dorado"></button>
+                    <p>
+                        Hasta 30 días después de la compra
+                    </p>
 
                 </div>
 
             </div>
 
-            <!-- ==========================
-                    TALLAS
-            =========================== -->
+        </div>
 
-            <div class="opcion-producto">
-
-    <div class="titulo-tallas">
-
-        <h3>Talla</h3>
-
-        <a href="#">Guía de tallas</a>
-
-    </div>
-
-    <div
-        class="tallas"
-        id="tallas-container"
-        data-categoria="{{ producto.categoria }}">
     </div>
 
 </div>
-            
-            <!-- ==========================
-                    CANTIDAD
-            =========================== -->
 
-            <div class="opcion-producto">
 
-                <h3>Cantidad</h3>
+<!-- ======================================================
+     DESCRIPCIÓN
+======================================================= -->
 
-                <div class="cantidad">
+<section class="descripcion-producto">
 
-                    <button>-</button>
+    <div class="titulo-seccion">
 
-                    <input
-    id="cantidad"
-    type="number"
-    value="1"
-    min="1">
-                    
+        <h2>
+            Descripción del producto
+        </h2>
 
-                    <button>+</button>
+        <p>
+            Descubre todos los detalles de este producto.
+        </p>
 
-                </div>
+    </div>
+
+    <div class="descripcion-card">
+
+        <p>
+            {{ producto.descripcion_producto }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     CARACTERÍSTICAS
+======================================================= -->
+
+<section class="caracteristicas-producto">
+
+    <div class="titulo-seccion">
+
+        <h2>
+            Características
+        </h2>
+
+        <p>
+            Todo lo que hace especial este producto.
+        </p>
+
+    </div>
+
+
+    <div class="grid-caracteristicas">
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Materiales de alta calidad.
+            </span>
+
+        </div>
+
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Diseño moderno y elegante.
+            </span>
+
+        </div>
+
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Excelente comodidad para uso diario.
+            </span>
+
+        </div>
+
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Acabados premium.
+            </span>
+
+        </div>
+
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Excelente durabilidad.
+            </span>
+
+        </div>
+
+
+        <div class="caracteristica">
+
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+                Ideal para uso diario.
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     INFORMACIÓN EXTRA
+======================================================= -->
+
+<section class="informacion-extra">
+
+
+    <div class="info-card">
+
+        <i class="fa-solid fa-truck-fast"></i>
+
+        <h3>
+            Envíos rápidos
+        </h3>
+
+        <p>
+            Realizamos envíos a todo el país con seguimiento
+            en tiempo real.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <i class="fa-solid fa-arrow-rotate-left"></i>
+
+        <h3>
+            Devoluciones fáciles
+        </h3>
+
+        <p>
+            Si el producto no cumple tus expectativas podrás
+            devolverlo.
+        </p>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <h3>
+            Compra segura
+        </h3>
+
+        <p>
+            Todos nuestros productos cuentan con garantía.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     PRODUCTOS RELACIONADOS
+======================================================= -->
+
+<section class="productos-relacionados">
+
+    <div class="titulo-seccion">
+
+        <h2>
+            También te puede interesar
+        </h2>
+
+        <p>
+            Descubre otros productos similares.
+        </p>
+
+    </div>
+
+
+    <div class="grid-productos">
+
+
+        <!-- ==================================================
+             PRODUCTO 1
+        =================================================== -->
+
+        <div class="card-producto">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/productos/zapato2.png'
+                ) }}"
+                alt="Nike Air Max 90"
+            >
+
+            <div class="card-info">
+
+                <span class="categoria">
+                    Hombre
+                </span>
+
+                <h3>
+                    Nike Air Max 90
+                </h3>
+
+                <p class="precio">
+                    $420.000
+                </p>
+
+                <a href="#" class="btn-ver">
+                    Ver producto
+                </a>
 
             </div>
 
-            <!-- ==========================
-                    BOTONES
-            =========================== -->
+        </div>
 
-            <div class="acciones-producto">
 
-                <button
-    class="btn-carrito"
-    id="btn-agregar-carrito">
+        <!-- ==================================================
+             PRODUCTO 2
+        =================================================== -->
 
-                    <i class="fa-solid fa-cart-shopping"></i>
+        <div class="card-producto">
 
-                    Agregar al carrito
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/productos/zapato3.png'
+                ) }}"
+                alt="Converse Chuck 70"
+            >
 
-                </button>
+            <div class="card-info">
 
-                <button class="btn-comprar">
+                <span class="categoria">
+                    Unisex
+                </span>
 
-                    Comprar ahora
+                <h3>
+                    Converse Chuck 70
+                </h3>
 
-                </button>
+                <p class="precio">
+                    $280.000
+                </p>
+
+                <a href="#" class="btn-ver">
+                    Ver producto
+                </a>
 
             </div>
 
-            <!-- ==========================
-                    BENEFICIOS
-            =========================== -->
+        </div>
 
-            <div class="beneficios">
 
-                <div class="beneficio">
+        <!-- ==================================================
+             PRODUCTO 3
+        =================================================== -->
 
-                    <i class="fa-solid fa-truck-fast"></i>
+        <div class="card-producto">
 
-                    <div>
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/productos/zapato4.png'
+                ) }}"
+                alt="Vans Old Skool"
+            >
 
-                        <h4>Envío gratis</h4>
+            <div class="card-info">
 
-                        <p>Compras superiores a $200.000</p>
+                <span class="categoria">
+                    Hombre
+                </span>
 
-                    </div>
+                <h3>
+                    Vans Old Skool
+                </h3>
 
-                </div>
+                <p class="precio">
+                    $250.000
+                </p>
 
-                <div class="beneficio">
+                <a href="#" class="btn-ver">
+                    Ver producto
+                </a>
 
-                    <i class="fa-solid fa-shield-halved"></i>
+            </div>
 
-                    <div>
+        </div>
 
-                        <h4>Garantía</h4>
 
-                        <p>Producto 100% original</p>
+        <!-- ==================================================
+             PRODUCTO 4
+        =================================================== -->
 
-                    </div>
+        <div class="card-producto">
 
-                </div>
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/productos/zapato5.png'
+                ) }}"
+                alt="Nike Dunk Low"
+            >
 
-                <div class="beneficio">
+            <div class="card-info">
 
-                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                <span class="categoria">
+                    Mujer
+                </span>
 
-                    <div>
+                <h3>
+                    Nike Dunk Low
+                </h3>
 
-                        <h4>Devoluciones</h4>
+                <p class="precio">
+                    $380.000
+                </p>
 
-                        <p>Hasta 30 días después de la compra</p>
-
-                    </div>
-
-                </div>
+                <a href="#" class="btn-ver">
+                    Ver producto
+                </a>
 
             </div>
 
         </div>
 
     </div>
-
-        <!--====================================
-            DESCRIPCIÓN
-    =====================================-->
-
-    <section class="descripcion-producto">
-
-        <div class="titulo-seccion">
-
-            <h2>Descripción del producto</h2>
-
-            <p>
-                Descubre todos los detalles de este producto diseñado para brindar
-                comodidad, estilo y durabilidad.
-            </p>
-
-        </div>
-
-        <div class="descripcion-card">
-
-            <p>
-
-                {{ producto.descripcion_producto }}
-
-            </p>
-
-            <p>
-
-                Fabricado con materiales premium que ofrecen una excelente
-                resistencia al desgaste. Su diseño moderno combina perfectamente
-                con cualquier estilo urbano o casual, convirtiéndose en una opción
-                ideal para el día a día.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!--====================================
-            CARACTERÍSTICAS
-    =====================================-->
-
-    <section class="caracteristicas-producto">
-
-        <div class="titulo-seccion">
-
-            <h2>Características</h2>
-
-            <p>
-                Todo lo que hace especial este producto.
-            </p>
-
-        </div>
-
-        <div class="grid-caracteristicas">
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Materiales de alta calidad.</span>
-
-            </div>
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Diseño moderno y elegante.</span>
-
-            </div>
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Excelente comodidad para uso diario.</span>
-
-            </div>
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Suela resistente y antideslizante.</span>
-
-            </div>
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Acabados premium.</span>
-
-            </div>
-
-            <div class="caracteristica">
-
-                <i class="fa-solid fa-check"></i>
-
-                <span>Ideal para cualquier ocasión.</span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!--====================================
-        ENVÍOS Y DEVOLUCIONES
-    =====================================-->
-
-    <section class="informacion-extra">
-
-        <div class="info-card">
-
-            <i class="fa-solid fa-truck-fast"></i>
-
-            <h3>Envíos rápidos</h3>
-
-            <p>
-
-                Realizamos envíos a todo el país con seguimiento en tiempo
-                real. Recibe tu pedido entre 2 y 5 días hábiles.
-
-            </p>
-
-        </div>
-
-        <div class="info-card">
-
-            <i class="fa-solid fa-arrow-rotate-left"></i>
-
-            <h3>Devoluciones fáciles</h3>
-
-            <p>
-
-                Si el producto no cumple tus expectativas podrás devolverlo
-                durante los primeros 30 días.
-
-            </p>
-
-        </div>
-
-        <div class="info-card">
-
-            <i class="fa-solid fa-shield-halved"></i>
-
-            <h3>Compra segura</h3>
-
-            <p>
-
-                Todos nuestros productos cuentan con garantía y métodos
-                de pago completamente seguros.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!--====================================
-        PRODUCTOS RELACIONADOS
-    =====================================-->
-
-    <section class="productos-relacionados">
-
-        <div class="titulo-seccion">
-
-            <h2>También te puede interesar</h2>
-
-            <p>Descubre otros productos similares.</p>
-
-        </div>
-
-        <div class="grid-productos">
-
-            <!-- Producto 1 -->
-
-            <div class="card-producto">
-
-                <img src="{{ url_for('static', filename='img/productos/zapato2.png') }}" alt="Producto">
-
-                <div class="card-info">
-
-                    <span class="categoria">Hombre</span>
-
-                    <h3>Nike Air Max 90</h3>
-
-                    <p class="precio">$420.000</p>
-
-                    <a href="#" class="btn-ver">
-
-                        Ver producto
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- Producto 2 -->
-
-            <div class="card-producto">
-
-                <img src="{{ url_for('static', filename='img/productos/zapato3.png') }}" alt="Producto">
-
-                <div class="card-info">
-
-                    <span class="categoria">Unisex</span>
-
-                    <h3>Converse Chuck 70</h3>
-
-                    <p class="precio">$280.000</p>
-
-                    <a href="#" class="btn-ver">
-
-                        Ver producto
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- Producto 3 -->
-
-            <div class="card-producto">
-
-                <img src="{{ url_for('static', filename='img/productos/zapato4.png') }}" alt="Producto">
-
-                <div class="card-info">
-
-                    <span class="categoria">Hombre</span>
-
-                    <h3>Vans Old Skool</h3>
-
-                    <p class="precio">$250.000</p>
-
-                    <a href="#" class="btn-ver">
-
-                        Ver producto
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- Producto 4 -->
-
-            <div class="card-producto">
-
-                <img src="{{ url_for('static', filename='img/productos/zapato5.png') }}" alt="Producto">
-
-                <div class="card-info">
-
-                    <span class="categoria">Mujer</span>
-
-                    <h3>Nike Dunk Low</h3>
-
-                    <p class="precio">$380.000</p>
-
-                    <a href="#" class="btn-ver">
-
-                        Ver producto
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
 
 </section>
 
 <script src="{{ url_for('static', filename='js/descripcion.js') }}"></script>
-
 {% endblock %}

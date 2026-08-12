@@ -1,338 +1,725 @@
+// ==========================================================
+// CARRITO
+// ==========================================================
+
 let carrito = [];
 
-const URL_API = "http://127.0.0.1:5000/detalle_carrito/";
 
-
-// ==================================
-// CARGAR CARRITO DESDE BACKEND
-// ==================================
+// ==========================================================
+// CARGAR CARRITO
+// ==========================================================
 
 async function cargarCarrito() {
 
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-
-        alert("Debe iniciar sesión.");
-
-        window.location.href = "/login";
-
-        return;
-
-    }
+    console.log("======================================");
+    console.log("CARGANDO CARRITO");
+    console.log("======================================");
 
     try {
 
-        const respuesta = await fetch(URL_API, {
+        /*
+         * NO llamamos directamente a:
+         *
+         * /detalle_carrito/
+         *
+         * porque esa ruta pertenece al backend.
+         *
+         * El frontend utiliza una ruta propia:
+         *
+         * /carrito/detalles
+         *
+         * Flask recibe la petición y consulta
+         * la API con el JWT guardado en session.
+         */
 
-            headers: {
+        const respuesta = await fetch(
+            "/carrito/detalles"
+        );
 
-                Authorization: `Bearer ${token}`
 
-            }
-
-        });
+        // ==================================================
+        // VERIFICAR RESPUESTA
+        // ==================================================
 
         if (!respuesta.ok) {
 
-            throw new Error("Error al obtener el carrito");
+            const texto = await respuesta.text();
+
+            console.error(
+                "RESPUESTA DEL SERVIDOR:",
+                texto
+            );
+
+            throw new Error(
+                `Error HTTP: ${respuesta.status}`
+            );
+        }
+
+
+        // ==================================================
+        // CONVERTIR JSON
+        // ==================================================
+
+        const datos = await respuesta.json();
+
+
+        console.log(
+            "DETALLES RECIBIDOS:",
+            datos
+        );
+
+
+        // ==================================================
+        // VALIDAR ARRAY
+        // ==================================================
+
+        if (!Array.isArray(datos)) {
+
+            console.error(
+                "La respuesta no es un array:",
+                datos
+            );
+
+            carrito = [];
+
+        } else {
+
+            carrito = datos;
 
         }
 
-        carrito = await respuesta.json();
+
+        // ==================================================
+        // MOSTRAR
+        // ==================================================
 
         mostrarCarrito();
 
+
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR CARGANDO CARRITO:",
+            error
+        );
 
-        alert("No se pudo cargar el carrito");
+
+        carrito = [];
+
+
+        const contenedor =
+            document.getElementById("carrito");
+
+
+        if (contenedor) {
+
+            contenedor.innerHTML = `
+                <h2>
+                    No se pudo cargar el carrito.
+                </h2>
+            `;
+
+        }
+
+
+        const totalElemento =
+            document.getElementById("total");
+
+
+        if (totalElemento) {
+
+            totalElemento.innerText =
+                "$ 0";
+
+        }
 
     }
 
 }
 
 
-// ==================================
+// ==========================================================
 // MOSTRAR CARRITO
-// ==================================
+// ==========================================================
 
 function mostrarCarrito() {
 
-    const contenedor = document.getElementById("carrito");
+    const contenedor =
+        document.getElementById("carrito");
 
-    contenedor.innerHTML = "";
 
-    let total = 0;
+    if (!contenedor) {
 
-    if (carrito.length === 0) {
-
-        contenedor.innerHTML = `
-
-            <h2>Tu carrito está vacío</h2>
-
-        `;
-
-        document.getElementById("total").innerText = "$0";
+        console.warn(
+            "No existe el elemento #carrito"
+        );
 
         return;
 
     }
 
+
+    contenedor.innerHTML = "";
+
+
+    let total = 0;
+
+
+    // ======================================================
+    // CARRITO VACÍO
+    // ======================================================
+
+    if (carrito.length === 0) {
+
+        contenedor.innerHTML = `
+            <h2>
+                Tu carrito está vacío
+            </h2>
+        `;
+
+
+        actualizarTotal(0);
+
+        return;
+
+    }
+
+
+    // ======================================================
+    // MOSTRAR PRODUCTOS
+    // ======================================================
+
     carrito.forEach((item) => {
 
-        let subtotal = item.precio_unitario * item.cantidad;
+        const cantidad =
+            Number(item.cantidad) || 1;
+
+
+        const precio =
+            Number(item.precio_unitario) || 0;
+
+
+        const subtotal =
+            Number(item.subtotal) ||
+            precio * cantidad;
+
 
         total += subtotal;
 
+
+        const idDetalle =
+            Number(item.id_detalle_carrito);
+
+
+        // ==================================================
+        // IMAGEN
+        // ==================================================
+
+        const imagen =
+            limpiarImagen(item.imagen);
+
+
+        // ==================================================
+        // NOMBRE
+        // ==================================================
+
+        const nombre =
+            item.nombre ||
+            "Producto sin nombre";
+
+
+        // ==================================================
+        // DESCRIPCIÓN
+        // ==================================================
+
+        const descripcion =
+            item.descripcion ||
+            "";
+
+
+        // ==================================================
+        // TALLA
+        // ==================================================
+
+        const tallaHTML =
+            item.talla
+                ? `
+                    <p class="talla">
+                        <strong>Talla:</strong>
+                        ${item.talla}
+                    </p>
+                  `
+                : "";
+
+
+        // ==================================================
+        // PRODUCTO
+        // ==================================================
+
         contenedor.innerHTML += `
 
-        <div class="producto">
+            <div class="producto">
 
-            <div class="imagen">
+                <!-- ======================================
+                     IMAGEN
+                ======================================= -->
 
-                <img
-                    src="${item.imagen || ''}"
-                    alt="${item.nombre || ''}">
+                <div class="imagen">
 
-            </div>
-
-            <div class="info">
-
-                <div class="info-top">
-
-                    <div>
-
-                        <h3 class="nombre">
-
-                            ${item.nombre || "Sin nombre"}
-
-                        </h3>
-
-                        <p class="descripcion">
-
-                            ${item.descripcion || ""}
-
-                        </p>
-
-                        ${item.talla ? `
-
-                        <p class="talla">
-
-                            <strong>Talla:</strong>
-
-                            ${item.talla}
-
-                        </p>
-
-                        ` : ""}
-
-                    </div>
-
-                    <button
-                        class="eliminar"
-                        onclick="eliminarProducto(${item.id_detalle_carrito})">
-
-                        <i class="fa-solid fa-trash"></i>
-
-                    </button>
+                    <img
+                        src="${imagen}"
+                        alt="${nombre}"
+                    >
 
                 </div>
 
-                <div class="info-bottom">
 
-                    <div class="precios">
+                <!-- ======================================
+                     INFORMACIÓN
+                ======================================= -->
 
-                        <p class="precio">
+                <div class="info">
 
-                            Precio:
-                            ${formatear(item.precio_unitario)}
 
-                        </p>
+                    <!-- ==================================
+                         PARTE SUPERIOR
+                    =================================== -->
 
-                        <p class="sub">
+                    <div class="info-top">
 
-                            Subtotal:
-                            ${formatear(subtotal)}
+                        <div>
 
-                        </p>
+                            <h3 class="nombre">
+                                ${nombre}
+                            </h3>
 
-                    </div>
 
-                    <div class="cantidad">
+                            <p class="descripcion">
+                                ${descripcion}
+                            </p>
 
-                        <button onclick="actualizarCantidad(${item.id_detalle_carrito}, ${item.cantidad - 1})">
 
-                            -
+                            ${tallaHTML}
 
-                        </button>
+                        </div>
 
-                        <span>
 
-                            ${item.cantidad}
+                        <!-- ==============================
+                             ELIMINAR
+                        =============================== -->
 
-                        </span>
+                        <button
+                            type="button"
+                            class="eliminar"
+                            onclick="eliminarProducto(${idDetalle})"
+                        >
 
-                        <button onclick="actualizarCantidad(${item.id_detalle_carrito}, ${item.cantidad + 1})">
-
-                            +
+                            <i
+                                class="fa-solid fa-trash"
+                            ></i>
 
                         </button>
 
                     </div>
 
+
+                    <!-- ==================================
+                         PARTE INFERIOR
+                    =================================== -->
+
+                    <div class="info-bottom">
+
+
+                        <!-- ==============================
+                             PRECIOS
+                        =============================== -->
+
+                        <div class="precios">
+
+                            <p class="precio">
+
+                                Precio:
+
+                                ${formatear(precio)}
+
+                            </p>
+
+
+                            <p class="sub">
+
+                                Subtotal:
+
+                                ${formatear(subtotal)}
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- ==============================
+                             CANTIDAD
+                        =============================== -->
+
+                        <div class="cantidad">
+
+
+                            <button
+                                type="button"
+                                onclick="actualizarCantidad(
+                                    ${idDetalle},
+                                    ${cantidad - 1}
+                                )"
+                            >
+                                -
+                            </button>
+
+
+                            <span>
+                                ${cantidad}
+                            </span>
+
+
+                            <button
+                                type="button"
+                                onclick="actualizarCantidad(
+                                    ${idDetalle},
+                                    ${cantidad + 1}
+                                )"
+                            >
+                                +
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
             </div>
-
-        </div>
 
         `;
 
     });
 
-    document.getElementById("total").innerText = formatear(total);
+
+    // ======================================================
+    // TOTAL
+    // ======================================================
+
+    actualizarTotal(total);
 
 }
 
 
-// ==================================
-// ACTUALIZAR CANTIDAD
-// ==================================
+// ==========================================================
+// ACTUALIZAR TOTAL
+// ==========================================================
 
-async function actualizarCantidad(id, cantidad) {
+function actualizarTotal(total) {
+
+    const totalElemento =
+        document.getElementById("total");
+
+
+    if (!totalElemento) {
+        return;
+    }
+
+
+    totalElemento.innerText =
+        formatear(total);
+
+}
+
+
+// ==========================================================
+// ACTUALIZAR CANTIDAD
+// ==========================================================
+
+async function actualizarCantidad(
+    idDetalle,
+    cantidad
+) {
+
+    console.log(
+        "======================================"
+    );
+
+    console.log(
+        "ACTUALIZANDO DETALLE"
+    );
+
+    console.log(
+        "ID DETALLE:",
+        idDetalle
+    );
+
+    console.log(
+        "NUEVA CANTIDAD:",
+        cantidad
+    );
+
+
+    // ==================================================
+    // SI LLEGA A CERO
+    // ==================================================
 
     if (cantidad < 1) {
 
-        eliminarProducto(id);
+        await eliminarProducto(
+            idDetalle
+        );
 
         return;
 
     }
 
-    const token = localStorage.getItem("token");
 
     try {
 
-        const respuesta = await fetch(`${URL_API}${id}`, {
+        /*
+         * Esta ruta pertenece al FRONTEND.
+         *
+         * Flask recibe la petición y después
+         * llama al backend:
+         *
+         * PUT /detalle_carrito/<id>
+         */
 
-            method: "PUT",
+        const respuesta =
+            await fetch(
+                `/carrito/actualizar/${idDetalle}`,
+                {
 
-            headers: {
+                    method: "POST",
 
-                "Content-Type": "application/json",
+                    headers: {
 
-                Authorization: `Bearer ${token}`
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
 
-            },
+                    },
 
-            body: JSON.stringify({
+                    body:
+                        `cantidad=${encodeURIComponent(cantidad)}`
 
-                cantidad: cantidad
+                }
+            );
 
-            })
-
-        });
 
         if (!respuesta.ok) {
 
-            const error = await respuesta.json();
-
-            alert(error.message);
-
-            return;
+            throw new Error(
+                "No se pudo actualizar la cantidad."
+            );
 
         }
 
-        cargarCarrito();
+
+        /*
+         * Como Flask devuelve nuevamente
+         * la página del carrito, simplemente
+         * volvemos a pedir los detalles.
+         */
+
+        await cargarCarrito();
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR ACTUALIZANDO CANTIDAD:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "No se pudo actualizar la cantidad."
+        );
 
     }
 
 }
 
 
-// ==================================
+// ==========================================================
 // ELIMINAR PRODUCTO
-// ==================================
+// ==========================================================
 
-async function eliminarProducto(id) {
+async function eliminarProducto(
+    idDetalle
+) {
 
-    const token = localStorage.getItem("token");
+    console.log(
+        "======================================"
+    );
 
-    console.log("TOKEN:", token);
+    console.log(
+        "ELIMINANDO DETALLE:",
+        idDetalle
+    );
+
 
     try {
 
-        const respuesta = await fetch(`${URL_API}${id}`, {
+        /*
+         * Esta ruta pertenece al FRONTEND.
+         */
 
-            method: "DELETE",
+        const respuesta =
+            await fetch(
+                `/carrito/eliminar/${idDetalle}`,
+                {
 
-            headers: {
+                    method: "POST"
 
-                Authorization: `Bearer ${token}`
+                }
+            );
 
-            }
-
-        });
 
         if (!respuesta.ok) {
 
-            throw new Error("No se pudo eliminar");
+            throw new Error(
+                "No se pudo eliminar el producto."
+            );
 
         }
 
-        cargarCarrito();
+
+        /*
+         * Volvemos a consultar
+         * los productos reales.
+         */
+
+        await cargarCarrito();
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR ELIMINANDO PRODUCTO:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "No se pudo eliminar el producto."
+        );
 
     }
 
 }
 
 
-// ==================================
-// FORMATO MONEDA
-// ==================================
+// ==========================================================
+// LIMPIAR IMAGEN
+// ==========================================================
+
+function limpiarImagen(imagen) {
+
+    if (!imagen) {
+
+        return "";
+
+    }
+
+
+    /*
+     * Tu API está devolviendo algo como:
+     *
+     * [https://ejemplo.com/imagen.jpg](https://ejemplo.com/imagen.jpg)
+     *
+     * Eso NO sirve directamente para <img src="">.
+     *
+     * Extraemos la URL real.
+     */
+
+    const match =
+        imagen.match(
+            /^\[.*?\]\((.*?)\)$/
+        );
+
+
+    if (match) {
+
+        return match[1];
+
+    }
+
+
+    return imagen;
+
+}
+
+
+// ==========================================================
+// FORMATEAR MONEDA
+// ==========================================================
 
 function formatear(valor) {
 
-    return "$ " + Number(valor).toLocaleString("es-CO");
+    const numero =
+        Number(valor) || 0;
+
+
+    return "$ " +
+        numero.toLocaleString(
+            "es-CO"
+        );
 
 }
 
 
-// ==================================
+// ==========================================================
 // IR A PAGO
-// ==================================
+// ==========================================================
 
 function irAPago() {
 
     if (carrito.length === 0) {
 
-        alert("Tu carrito está vacío");
+        alert(
+            "Tu carrito está vacío."
+        );
 
         return;
 
     }
 
-    window.location.href = "/pago";
+
+    window.location.href =
+        "/pago";
 
 }
 
 
-// ==================================
+// ==========================================================
 // INICIO
-// ==================================
+// ==========================================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    cargarCarrito();
+        console.log(
+            "======================================"
+        );
 
-});
+        console.log(
+            "CARRITO.JS CARGADO"
+        );
+
+        console.log(
+            "======================================"
+        );
+
+
+        cargarCarrito();
+
+    }
+);

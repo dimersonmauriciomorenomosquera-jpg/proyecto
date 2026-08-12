@@ -46,33 +46,66 @@
 
     <div class="left-top">
 
-        <div class="user-container">
+    <div class="user-container">
 
-            <button class="user" onclick="toggleUser()">👤</button>
+        <button class="user" onclick="toggleUser()">👤</button>
 
-            <div class="user-menu" id="ingreso">
+        <div class="user-menu" id="ingreso">
 
-                <a href="/auth/registro" id="menuRegistro">
-                    Registrarse
-                </a>
+            {% if session.get("api_token") %}
 
-                <a href="/auth/login" id="menuLogin">
-                    Login
-                </a>
+                <!-- =====================================
+                     USUARIO AUTENTICADO
+                ====================================== -->
 
-                <a href="/auth/usuario" id="menuInformacion">
+                <a
+                    href="{{ url_for('usuario.perfil') }}"
+                    id="menuInformacion">
+
                     Información
+
                 </a>
 
-                <a href="#" id="btnCerrarSesion">
+
+                <a
+                    href="{{ url_for('auth.logout') }}"
+                    id="btnCerrarSesion">
+
                     Cerrar Sesión
+
                 </a>
 
-            </div>
+
+            {% else %}
+
+                <!-- =====================================
+                     USUARIO NO AUTENTICADO
+                ====================================== -->
+
+                <a
+                    href="{{ url_for('auth.registro') }}"
+                    id="menuRegistro">
+
+                    Registrarse
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('auth.index') }}"
+                    id="menuLogin">
+
+                    Login
+
+                </a>
+
+            {% endif %}
 
         </div>
 
     </div>
+
+</div>
 
 </header>
     

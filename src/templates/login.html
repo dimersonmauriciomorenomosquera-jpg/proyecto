@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>Login | Serenity Mode</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 
-    <link rel="stylesheet"
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/login.css') }}">
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
 </head>
+
+
 <body>
+
 
 <div class="contenedor">
 
-    <!--==================================
-                LOGO
-    ===================================-->
+
+    <!-- ==================================================
+         IZQUIERDA
+    =================================================== -->
 
     <div class="izquierda">
 
@@ -26,21 +46,32 @@
 
     </div>
 
-    <!--==================================
-                LOGIN
-    ===================================-->
+
+    <!-- ==================================================
+         LOGIN
+    =================================================== -->
 
     <div class="derecha">
 
-        <h1>Serenity Mode</h1>
+        <h1>
+            Serenity Mode
+        </h1>
 
-        <p>Crea tu estilo, vive Serenity Mode</p>
 
-        <h2>Iniciar Sesión</h2>
+        <p>
+            Crea tu estilo, vive Serenity Mode
+        </p>
+
+
+        <h2>
+            Iniciar Sesión
+        </h2>
+
 
         <form id="formLogin">
 
-            <!-- Correo -->
+
+            <!-- CORREO -->
 
             <div class="input-box">
 
@@ -56,7 +87,8 @@
 
             </div>
 
-            <!-- Contraseña -->
+
+            <!-- CONTRASEÑA -->
 
             <div class="input-box">
 
@@ -72,29 +104,39 @@
 
                 <i
                     class="fa-solid fa-eye"
-                    id="mostrarPassword"
-                    style="cursor:pointer;">
+                    id="mostrarPassword">
                 </i>
 
             </div>
+
+
+            <!-- OPCIONES -->
 
             <div class="opciones">
 
                 <label>
 
-                    <input type="checkbox" id="recordarme">
+                    <input
+                        type="checkbox"
+                        id="recordarme">
 
                     Recordarme
 
                 </label>
 
-                <a href="#" id="abrirRecuperar">
+
+                <a
+                    href="#"
+                    id="abrirRecuperar">
 
                     ¿Olvidaste tu contraseña?
 
                 </a>
 
             </div>
+
+
+            <!-- INGRESAR -->
 
             <button type="submit">
 
@@ -104,11 +146,19 @@
 
         </form>
 
+
+        <!-- ==================================================
+             LOGIN SOCIAL
+        =================================================== -->
+
         <div class="linea">
 
-            <span>o inicia sesión con</span>
+            <span>
+                o inicia sesión con
+            </span>
 
         </div>
+
 
         <div class="redes">
 
@@ -118,6 +168,7 @@
 
             </button>
 
+
             <button type="button">
 
                 <i class="fa-brands fa-facebook-f"></i>
@@ -126,11 +177,17 @@
 
         </div>
 
+
+        <!-- ==================================================
+             REGISTRO
+        =================================================== -->
+
         <div class="registro">
 
             ¿No tienes cuenta?
 
-            <a href="{{ url_for('auth.registro') }}">
+            <a
+                href="{{ url_for('auth.registro') }}">
 
                 Regístrate
 
@@ -138,11 +195,17 @@
 
         </div>
 
+
+        <!-- ==================================================
+             ADMIN
+        =================================================== -->
+
         {% if request.path != '/administrador' %}
 
         <div class="admin">
 
-            <a href="{{ url_for('admin.dashboard') }}">
+            <a
+                href="{{ url_for('admin.dashboard') }}">
 
                 <i class="fa-solid fa-lock"></i>
 
@@ -154,25 +217,39 @@
 
         {% endif %}
 
+
     </div>
 
 </div>
 
-<!--==================================
-        MODAL RECUPERAR CONTRASEÑA
-===================================-->
 
-<div class="modal" id="modalRecuperar">
+<!-- ======================================================
+     MODAL RECUPERAR CONTRASEÑA
+======================================================= -->
+
+<div
+    class="modal"
+    id="modalRecuperar">
+
+
+    <!-- CAJA -->
 
     <div class="modal-box">
 
+
+        <!-- CERRAR -->
+
         <button
             type="button"
-            class="cerrar-modal">
+            class="cerrar-modal"
+            id="cerrarRecuperar">
 
             &times;
 
         </button>
+
+
+        <!-- ICONO -->
 
         <div class="modal-icono">
 
@@ -180,45 +257,218 @@
 
         </div>
 
-        <h2>Recuperar contraseña</h2>
 
-        <p>
+        <!-- TITULO -->
 
-            Ingresa el correo asociado a tu cuenta.
-            Te enviaremos un enlace para restablecer tu contraseña.
+        <h2>
+            Recuperar contraseña
+        </h2>
 
-        </p>
 
-        <form id="formRecuperar">
+        <!-- ==================================================
+             PASO 1
+        =================================================== -->
 
-            <div class="input-modal">
+        <div
+            id="pasoCorreo"
+            class="paso-recuperacion">
 
-                <i class="fa-solid fa-envelope"></i>
 
-                <input
-                    type="email"
-                    id="correoRecuperar"
-                    name="correoRecuperar"
-                    placeholder="Correo electrónico"
-                    required>
+            <p>
+
+                Ingresa el correo asociado a tu cuenta
+                para verificar que esté registrado.
+
+            </p>
+
+
+            <!-- INDICADOR -->
+
+            <div class="indicador-pasos">
+
+                <span class="paso activo">
+                    1
+                </span>
+
+                <span class="linea-paso"></span>
+
+                <span class="paso">
+                    2
+                </span>
 
             </div>
 
-            <button
-                type="submit"
-                class="btn-recuperar">
 
-                Enviar enlace
+            <!-- FORMULARIO -->
+
+            <form id="formRecuperar">
+
+                <div class="input-modal">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="correoRecuperar"
+                        name="correoRecuperar"
+                        placeholder="Correo electrónico"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-recuperar">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    Verificar correo
+
+                </button>
+
+            </form>
+
+
+        </div>
+
+
+        <!-- ==================================================
+             PASO 2
+        =================================================== -->
+
+        <div
+            id="pasoPassword"
+            class="paso-recuperacion"
+            style="display: none;">
+
+
+            <p>
+
+                Hemos encontrado tu cuenta.
+                Ingresa tu nueva contraseña.
+
+            </p>
+
+
+            <!-- INDICADOR -->
+
+            <div class="indicador-pasos">
+
+                <span class="paso completado">
+
+                    <i class="fa-solid fa-check"></i>
+
+                </span>
+
+
+                <span class="linea-paso activa"></span>
+
+
+                <span class="paso activo">
+
+                    2
+
+                </span>
+
+            </div>
+
+
+            <!-- CORREO -->
+
+            <div class="correo-verificado">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <span id="correoVerificado"></span>
+
+            </div>
+
+
+            <!-- NUEVA CONTRASEÑA -->
+
+            <div class="input-modal">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="nuevaPassword"
+                    placeholder="Nueva contraseña"
+                    autocomplete="new-password"
+                    required>
+
+                <i
+                    class="fa-solid fa-eye"
+                    id="mostrarNuevaPassword">
+                </i>
+
+            </div>
+
+
+            <!-- CONFIRMAR -->
+
+            <div class="input-modal">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="confirmarPassword"
+                    placeholder="Confirmar contraseña"
+                    autocomplete="new-password"
+                    required>
+
+                <i
+                    class="fa-solid fa-eye"
+                    id="mostrarConfirmarPassword">
+                </i>
+
+            </div>
+
+
+            <!-- RESTABLECER -->
+
+            <button
+                type="button"
+                class="btn-recuperar"
+                id="btnRestablecer">
+
+                <i class="fa-solid fa-key"></i>
+
+                Restablecer contraseña
 
             </button>
 
-        </form>
+
+        </div>
+
+
+        <!-- ==================================================
+             MENSAJE
+        =================================================== -->
+
+        <div
+            id="mensajeRecuperacion"
+            class="mensaje-recuperacion">
+        </div>
+
 
     </div>
 
 </div>
 
-<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script
+    src="{{ url_for('static', filename='js/login.js') }}">
+</script>
+
 
 </body>
+
 </html>

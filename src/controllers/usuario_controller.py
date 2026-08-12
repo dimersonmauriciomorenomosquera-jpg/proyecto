@@ -1,6 +1,14 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, session
+from flask import (
+    Blueprint,
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    request,
+    session
+)
+
 from clients.api_client import APIClient, APIError
-from flask import Blueprint
 
 
 usuario_bp = Blueprint("usuario", __name__)
@@ -13,6 +21,11 @@ def _client():
 @usuario_bp.route("/")
 def perfil():
 
+    if "api_token" not in session:
+
+        flash("Debes iniciar sesión.", "warning")
+        return redirect(url_for("auth.login"))
+
     try:
 
         usuario = _client().get("/clientes/perfil")
@@ -20,7 +33,6 @@ def perfil():
     except APIError as e:
 
         flash(str(e), "danger")
-
         return redirect(url_for("inicio.index"))
 
     return render_template(
@@ -29,40 +41,35 @@ def perfil():
     )
 
 
-@usuario_bp.route("/editar", methods=["GET", "POST"])
+@usuario_bp.route("/editar", methods=["POST"])
 def editar_perfil():
 
-    if request.method == "POST":
+    if "api_token" not in session:
 
-        datos = {
-            "nombre": request.form["nombre"],
-            "apellido": request.form["apellido"],
-            "email": request.form["email"],
-            "telefono": request.form["telefono"],
-            "direccion": request.form["direccion"]
-        }
+        flash("Debes iniciar sesión.", "warning")
+        return redirect(url_for("auth.login"))
 
-        try:
+    datos = {
 
-            _client().put("/clientes/perfil", datos)
+        "nombre": request.form.get("nombre"),
+        "apellido": request.form.get("apellido"),
+        "email": request.form.get("email"),
+        "telefono": request.form.get("telefono"),
+        "direccion": request.form.get("direccion")
 
-            flash("Perfil actualizado correctamente.", "success")
-
-            return redirect(url_for("usuario.perfil"))
-
-        except APIError as e:
-
-            flash(str(e), "danger")
+    }
 
     try:
 
-        usuario = _client().get("/clientes/perfil")
+        _client().put("/clientes/perfil", datos)
 
-    except APIError:
+        flash(
+            "Perfil actualizado correctamente.",
+            "success"
+        )
 
-        usuario = None
+    except APIError as e:
 
-    return render_template(
-        "editar_usuario.html",
-        usuario=usuario
-    )
+        flash(str(e), "danger")
+
+    return redirect(url_for("usuario.perfil"))

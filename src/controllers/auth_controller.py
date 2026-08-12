@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, jsonify
+
 from clients.api_client import APIClient, APIError
+
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -8,51 +11,140 @@ def _client():
     return APIClient(session.get("api_token"))
 
 
-# ==========================
-# LOGIN
-# ==========================
+# ==========================================================
+# LOGIN - MOSTRAR FORMULARIO
+# ==========================================================
 
-@auth_bp.route("/login")
+@auth_bp.route("/login", methods=["GET"])
 def index():
+
     return render_template("login.html")
 
+
+# ==========================================================
+# LOGIN - PROCESAR
+# ==========================================================
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
 
     datos = {
-        "email": request.form["email"],
+        "email_cliente": request.form["email"],
         "password": request.form["password"]
     }
 
     try:
 
-        respuesta = _client().post("/auth/login", datos)
+        respuesta = _client().post(
+            "/auth/login",
+            datos
+        )
 
-        session["api_token"] = respuesta["token"]
+        print("========================================")
+        print("RESPUESTA LOGIN:")
+        print(respuesta)
+        print("========================================")
 
-        flash("Bienvenido.", "success")
+        # ==================================================
+        # OBTENER TOKEN
+        # ==================================================
 
-        return redirect(url_for("inicio.index"))
+        token = respuesta.get("token")
+
+        print("TOKEN RECIBIDO:", token)
+
+        if not token:
+
+            flash(
+                "El servidor no devolvió el token.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("auth.index")
+            )
+
+        # ==================================================
+        # OBTENER INFORMACIÓN DEL USUARIO
+        # ==================================================
+
+        usuario = respuesta.get("usuario")
+
+        if not usuario:
+
+            flash(
+                "El servidor no devolvió los datos del usuario.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("auth.index")
+            )
+
+        id_cliente = usuario.get("id_cliente")
+
+        if not id_cliente:
+
+            flash(
+                "El servidor no devolvió el ID del cliente.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("auth.index")
+            )
+
+        # ==================================================
+        # GUARDAR INFORMACIÓN EN SESSION
+        # ==================================================
+
+        session["api_token"] = token
+
+        session["id_cliente"] = id_cliente
+
+        session["usuario"] = usuario
+
+        print("========================================")
+        print("TOKEN GUARDADO:", session.get("api_token"))
+        print("ID CLIENTE GUARDADO:", session.get("id_cliente"))
+        print("USUARIO GUARDADO:", session.get("usuario"))
+        print("========================================")
+
+        flash(
+            "Bienvenido.",
+            "success"
+        )
+
+        return redirect(
+            url_for("inicio.index")
+        )
 
     except APIError as e:
 
-        flash(str(e), "danger")
+        print("ERROR LOGIN:", e)
 
-        return redirect(url_for("auth.index"))
+        flash(
+            str(e),
+            "danger"
+        )
+
+        return redirect(
+            url_for("auth.index")
+        )
 
 
-# ==========================
+# ==========================================================
 # REGISTRO
-# ==========================
-
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+# ==========================================================
 
 @auth_bp.route("/registro", methods=["GET", "POST"])
 def registro():
 
     if request.method == "GET":
-        return render_template("Registro.html")
+
+        return render_template(
+            "Registro.html"
+        )
 
     datos = {
         "nombre": request.form["nombre"],
@@ -64,41 +156,123 @@ def registro():
     }
 
     try:
-        _client().post("/clientes/", datos)
 
-        flash("Usuario registrado correctamente.", "success")
+        _client().post(
+            "/clientes/",
+            datos
+        )
 
-        return redirect(url_for("auth.login"))
+        flash(
+            "Usuario registrado correctamente.",
+            "success"
+        )
+
+        return redirect(
+            url_for("auth.index")
+        )
 
     except APIError as e:
 
-        flash(str(e), "danger")
+        print("ERROR REGISTRO:", e)
 
-        return redirect(url_for("auth.registro"))
-# ==========================
+        flash(
+            str(e),
+            "danger"
+        )
+
+        return redirect(
+            url_for("auth.registro")
+        )
+
+
+# ==========================================================
 # LOGOUT
-# ==========================
+# ==========================================================
 
 @auth_bp.route("/logout")
 def logout():
 
     session.pop("api_token", None)
+    session.pop("id_cliente", None)
+    session.pop("usuario", None)
 
-    flash("Sesión cerrada.", "success")
+    flash(
+        "Sesión cerrada.",
+        "success"
+    )
 
-    return redirect(url_for("inicio.index"))
+    return redirect(
+        url_for("inicio.index")
+    )
 
-from flask import render_template, request, redirect, url_for, flash
+# ==========================================================
+# VERIFICAR CORREO PARA RECUPERAR CONTRASEÑA
+# ==========================================================
 
-# ==========================
-# INFORMACIÓN DEL USUARIO
-# ==========================
+@auth_bp.route("/recuperar/verificar", methods=["POST"])
+def verificar_correo():
 
-@auth_bp.route("/usuario", methods=["GET"])
-def usuario():
-    return render_template("usuario.html")
+    datos = request.get_json()
 
+    if not datos:
 
-@auth_bp.route("/usuario", methods=["POST"])
-def actualizar_usuario():
-    pass
+        return jsonify({
+            "error": "Debe enviar información."
+        }), 400
+
+    email = datos.get("email_cliente")
+
+    if not email:
+
+        return jsonify({
+            "error": "El correo es obligatorio."
+        }), 400
+
+    try:
+
+        respuesta = _client().post(
+            "/auth/recuperar/verificar",
+            datos
+        )
+
+        return jsonify(respuesta), 200
+
+    except APIError as e:
+
+        print("ERROR VERIFICAR CORREO:", e)
+
+        return jsonify({
+            "error": str(e)
+        }), 404
+
+# ==========================================================
+# RESTABLECER CONTRASEÑA
+# ==========================================================
+
+@auth_bp.route("/recuperar/restablecer", methods=["PUT"])
+def restablecer_password():
+
+    datos = request.get_json()
+
+    if not datos:
+
+        return jsonify({
+            "error": "Debe enviar información."
+        }), 400
+
+    try:
+
+        respuesta = _client().put(
+            "/auth/recuperar/restablecer",
+            datos
+        )
+
+        return jsonify(respuesta), 200
+
+    except APIError as e:
+
+        print("ERROR RESTABLECER PASSWORD:", e)
+
+        return jsonify({
+            "error": str(e)
+        }), 400

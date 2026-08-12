@@ -259,307 +259,392 @@ button:hover{
 .admin-link:hover{
     color: #d4af37;
 }
-/*==================================
-        MODAL RECUPERAR
-===================================*/
+/* ==========================================
+   MODAL RECUPERAR CONTRASEÑA
+========================================== */
 
-.modal{
+.modal {
+    position: fixed;
+    inset: 0;
 
-    position:fixed;
-    top:0;
-    left:0;
+    display: none;
 
-    width:100%;
-    height:100%;
+    align-items: center;
+    justify-content: center;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background: rgba(0, 0, 0, 0.75);
 
-    background:rgba(0,0,0,.75);
+    backdrop-filter: blur(5px);
 
-    opacity:0;
-    visibility:hidden;
-
-    transition:.3s;
-
-    z-index:9999;
-
+    z-index: 9999;
 }
 
-.modal.activo{
-
-    opacity:1;
-    visibility:visible;
-
+.modal.activo {
+    display: flex;
 }
 
-/*==================================
-        CAJA MODAL
-===================================*/
 
-.modal-box{
+/* ==========================================
+   CAJA DEL MODAL
+========================================== */
 
-    position:relative;
+.modal-box {
+    position: relative;
 
-    width:520px;
-    max-width:90%;
+    width: 90%;
+    max-width: 500px;
 
-    background:#232323;
+    padding: 40px;
 
-    border:1px solid #C7A85D;
-    border-radius:22px;
+    background: #151515;
 
-    padding:40px;
+    border: 1px solid rgba(212, 175, 55, 0.35);
 
-    text-align:center;
+    border-radius: 18px;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.45);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.6);
 
-    animation:modal .35s ease;
+    color: white;
 
+    animation: aparecerModal 0.25s ease;
 }
 
-@keyframes modal{
 
-    from{
+@keyframes aparecerModal {
 
-        transform:translateY(-20px) scale(.95);
-        opacity:0;
-
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.97);
     }
 
-    to{
-
-        transform:translateY(0) scale(1);
-        opacity:1;
-
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 
 }
 
-/*==================================
-        BOTON CERRAR
-===================================*/
 
-.cerrar-modal{
+/* ==========================================
+   BOTÓN CERRAR
+========================================== */
 
-    position:absolute;
+.cerrar-modal {
 
-    top:18px;
-    right:18px;
+    position: absolute;
 
-    width:46px;
-    height:46px;
+    top: 15px;
+    right: 18px;
 
-    border:none;
-    border-radius:50%;
+    background: transparent;
 
-    background:#333;
+    border: none;
 
-    color:#fff;
+    color: #ffffff;
 
-    font-size:24px;
+    font-size: 30px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.3s;
+    transition: 0.2s;
+}
+
+
+.cerrar-modal:hover {
+
+    color: #d4af37;
+
+    transform: scale(1.1);
 
 }
 
-.cerrar-modal:hover{
 
-    background:#C7A85D;
-    color:#111;
+/* ==========================================
+   ICONO
+========================================== */
+
+.modal-icono {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #d4af37;
+
+    border-radius: 50%;
+
+    color: #d4af37;
+
+    font-size: 28px;
+}
+
+
+/* ==========================================
+   TITULO
+========================================== */
+
+.modal-box h2 {
+
+    text-align: center;
+
+    margin-bottom: 15px;
+
+    color: #ffffff;
+
+    font-size: 28px;
+}
+
+
+.modal-box p {
+
+    text-align: center;
+
+    color: #bdbdbd;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================
+   PASOS
+========================================== */
+
+.indicador-pasos {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 25px 0;
+}
+
+
+.paso {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 1px solid #555;
+
+    color: #888;
+
+    font-weight: bold;
+}
+
+
+.paso.activo,
+.paso.completado {
+
+    background: #d4af37;
+
+    border-color: #d4af37;
+
+    color: #111;
+}
+
+
+.linea-paso {
+
+    width: 80px;
+
+    height: 2px;
+
+    background: #444;
+}
+
+
+.linea-paso.activa {
+
+    background: #d4af37;
+}
+
+
+/* ==========================================
+   INPUTS DEL MODAL
+========================================== */
+
+.input-modal {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+    padding: 0 15px;
+
+    height: 52px;
+
+    border: 1px solid #444;
+
+    border-radius: 8px;
+
+    background: #1b1b1b;
+
+    transition: 0.2s;
+}
+
+
+.input-modal:focus-within {
+
+    border-color: #d4af37;
+
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+}
+
+
+.input-modal > i:first-child {
+
+    color: #d4af37;
 
 }
 
-/*==================================
-            ICONO
-===================================*/
 
-.modal-icono{
+.input-modal input {
 
-    width:95px;
-    height:95px;
+    flex: 1;
 
-    margin:0 auto 25px;
+    width: 100%;
 
-    border-radius:50%;
+    border: none;
 
-    background:#C7A85D;
+    outline: none;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background: transparent;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+
+.input-modal input::placeholder {
+
+    color: #777;
 
 }
 
-.modal-icono i{
 
-    font-size:42px;
-    color:#fff;
+/* ==========================================
+   BOTÓN RECUPERAR
+========================================== */
+
+.btn-recuperar {
+
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #d4af37;
+
+    color: #111;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.btn-recuperar:hover {
+
+    background: #e4c45a;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   CORREO VERIFICADO
+========================================== */
+
+.correo-verificado {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 15px;
+
+    margin-bottom: 18px;
+
+    border-radius: 8px;
+
+    background: rgba(212, 175, 55, 0.08);
+
+    border: 1px solid rgba(212, 175, 55, 0.25);
+
+    color: #d4af37;
 
 }
 
-/*==================================
-            TITULO
-===================================*/
 
-.modal-box h2{
+.correo-verificado span {
 
-    color:#C7A85D;
+    color: #ddd;
 
-    font-size:28px;
+    font-size: 14px;
 
-    margin-bottom:18px;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ==========================================
+   MENSAJES
+========================================== */
+
+.mensaje-recuperacion {
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 14px;
 
 }
 
-/*==================================
-            TEXTO
-===================================*/
 
-.modal-box p{
+.mensaje-recuperacion.error {
 
-    width:90%;
-
-    margin:0 auto 30px;
-
-    color:#d6d6d6;
-
-    font-size:18px;
-
-    line-height:1.7;
-
+    color: #ff6b6b;
 }
 
-/*==================================
-            INPUT
-===================================*/
 
-.input-modal{
+.mensaje-recuperacion.exito {
 
-    position:relative;
-
-    width:100%;
-
-    margin-bottom:28px;
-
+    color: #5edb78;
 }
-
-.input-modal i{
-
-    position:absolute;
-
-    left:20px;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    color:#C7A85D;
-
-    font-size:18px;
-
-}
-
-.input-modal input{
-
-    width:100% !important;
-
-    height:58px;
-
-    padding-left:55px;
-    padding-right:20px;
-
-    border:1px solid #555;
-
-    border-radius:15px;
-
-    background:#2d2d2d;
-
-    color:#fff;
-
-    font-size:16px;
-
-    outline:none;
-
-    box-sizing:border-box;
-
-}
-
-.input-modal input::placeholder{
-
-    color:#9d9d9d;
-
-}
-
-.input-modal input:focus{
-
-    border-color:#C7A85D;
-
-}
-
-/*==================================
-            BOTON
-===================================*/
-
-.btn-recuperar{
-
-    width:100% !important;
-
-    height:58px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:#C7A85D;
-
-    color:#111;
-
-    font-size:18px;
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.btn-recuperar:hover{
-
-    background:#d8c48d;
-
-}
-
-/*==================================
-        RESPONSIVE
-===================================*/
-
-@media(max-width:600px){
-
-    .modal-box{
-
-        width:95%;
-
-        padding:30px 25px;
-
-    }
-
-    .modal-box h2{
-
-        font-size:24px;
-
-    }
-
-    .modal-box p{
-
-        width:100%;
-        font-size:16px;
-
-    }
-
-}
- 
 

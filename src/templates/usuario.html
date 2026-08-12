@@ -1,608 +1,856 @@
-{% extends "layout.html" %}
-    {%block contenido%}
+<!DOCTYPE html>
+<html lang="es">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<title>MI Cuenta</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Mi Cuenta | Serenity Mode</title>
 
-<div class="usuario-container">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
 
-    <!--=========================
-            PERFIL
-    ==========================-->
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
 
-    <section class="perfil">
+<body>
 
-        <div class="perfil-info">
+    <main class="contenedor-usuario">
 
-            <div class="foto">
-                <img src="{{ url_for('static', filename='img/user.jpg') }}" alt="">
+        <!-- =========================
+             BIENVENIDA
+        ========================== -->
+
+        <section class="bienvenida">
+
+            <div class="avatar">
+
+                <i class="fa-solid fa-user"></i>
+
             </div>
 
-            <div class="datos">
+            <h1>
 
-                <h1>{{ usuario.nombre_cliente }}</h1>
+                ¡Bienvenido,
+                <span>{{ usuario.nombre_cliente }}</span>!
+
+            </h1>
 
             <p>
-                <i class="fa-regular fa-envelope"></i>
-                {{ usuario.email_cliente }}
+
+                Administra tu información, consulta tus pedidos
+                y mantén segura tu cuenta.
+
             </p>
-            </div>
 
-        </div>
-
-        <div class="perfil-botones">
-
-            <button class="btn-dorado" id="abrirPerfil">
-                <i class="fa-regular fa-user"></i>
-                Editar Perfil
-            </button>
-
-            <button class="btn-outline"  id="abrirPassword">
-                <i class="fa-solid fa-lock"></i>
-                Cambiar contraseña
-            </button>
-
-        </div>
-
-    </section>
+        </section>
 
 
-    <!--=========================
-          ESTADÍSTICAS
-    ==========================-->
+        <!-- =========================
+              INFORMACIÓN
+        ========================== -->
 
-    <section class="estadisticas">
+        <section class="card informacion">
 
-        <div class="card-stat">
+            <div class="titulo-card">
 
-            <div class="icono">
-                <i class="fa-solid fa-bag-shopping"></i>
-            </div>
+                <h2>
 
-            <div>
+                    <i class="fa-solid fa-address-card"></i>
 
-                <span>Total pedidos</span>
+                    Datos personales
 
-                <h2>18</h2>
+                </h2>
+
+                <button id="btnEditarInfo" class="btn-dorado">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Editar información
+
+                </button>
 
             </div>
 
-        </div>
 
-        <div class="card-stat">
+            <div class="datos-grid">
 
-            <div class="icono">
-                <i class="fa-solid fa-wallet"></i>
-            </div>
+                <div class="dato">
 
-            <div>
+                    <i class="fa-solid fa-user"></i>
 
-                <span>Total gastado</span>
+                    <div>
 
-                <h2>$2.480.000</h2>
+                        <span>Nombre completo</span>
 
-            </div>
+                        <h4>{{ usuario.nombre_cliente }}</h4>
 
-        </div>
+                    </div>
 
-        <div class="card-stat">
-
-            <div class="icono">
-                <i class="fa-solid fa-truck"></i>
-            </div>
-
-            <div>
-
-                <span>Último pedido</span>
-
-                <h2>#SM-2058</h2>
-
-            </div>
-
-        </div>
-
-        <div class="card-stat">
-
-            <div class="icono">
-                <i class="fa-solid fa-star"></i>
-            </div>
-
-            <div>
-
-                <span>Puntos Serenity</span>
-
-                <h2>1260</h2>
-
-            </div>
-
-        </div>
-
-    </section>
+                </div>
 
 
-    <!--=========================
-     INFORMACIÓN + DIRECCIONES
-    ==========================-->
+                <div class="dato">
 
-    <section class="info-grid">
+                    <i class="fa-solid fa-envelope"></i>
 
-        <div class="card">
+                    <div>
 
-            <h2>Información Personal</h2>
+                        <span>Correo electrónico</span>
 
-            <div class="info-item">
+                        <h4>{{ usuario.email_cliente }}</h4>
 
-                <span>Nombre</span>
+                    </div>
 
-                <p>Mauricio Moreno</p>
+                </div>
 
-            </div>
 
-            <div class="info-item">
+                <div class="dato">
 
-                <span>Email</span>
+                    <i class="fa-solid fa-phone"></i>
 
-                <p>mauricio@email.com</p>
+                    <div>
 
-            </div>
+                        <span>Teléfono</span>
 
-            <div class="info-item">
+                        <h4>{{ usuario.numero_cliente }}</h4>
 
-                <span>Teléfono</span>
+                    </div>
 
-                <p>3102456789</p>
+                </div>
+
+
+                <div class="dato">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <div>
+
+                        <span>Dirección</span>
+
+                        <h4>{{ usuario.direccion_cliente }}</h4>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <div>
+
+                        <span>Fecha de nacimiento</span>
+
+                        <h4>{{ usuario.nacimiento_cliente }}</h4>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <div class="info-item">
-
-                <span>Fecha nacimiento</span>
-
-                <p>05/09/2007</p>
-
-            </div>
-
-            <div class="info-item">
-
-                <span>Dirección</span>
-
-                <p>Bogotá, Colombia</p>
-
-            </div>
-
-        </div>
+        </section>
 
 
-        <div class="card">
 
-            <h2>Direcciones Guardadas</h2>
+        <!-- =========================
+            ACCIONES
+        ========================== -->
 
-            <div class="direccion">
+        <section class="acciones">
 
-                <i class="fa-solid fa-house"></i>
 
-                <div>
 
-                    <h4>Dirección principal</h4>
+            <article class="accion">
+
+                <div class="icono">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                </div>
+
+                <div class="texto">
+
+                    <h3>
+
+                        Cambiar contraseña
+
+                    </h3>
 
                     <p>
 
-                        Carrera 11 #93A-45
-
-                        <br>
-
-                        Bogotá, Colombia
+                        Actualiza tu contraseña para proteger
+                        tu cuenta.
 
                     </p>
 
                 </div>
 
-            </div>
-
-            <button class="btn-outline">
-
-                Administrar
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!--=========================
-        ÚLTIMOS PEDIDOS
-    ==========================-->
-
-    <section class="card pedidos">
-
-        <h2>Últimos pedidos</h2>
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Pedido</th>
-
-                    <th>Fecha</th>
-
-                    <th>Estado</th>
-
-                    <th>Total</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <tr>
-
-                    <td>#SM-2058</td>
-
-                    <td>20 Mayo 2026</td>
-
-                    <td>
-
-                        <span class="estado entregado">
-
-                            Entregado
-
-                        </span>
-
-                    </td>
-
-                    <td>$680.000</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>#SM-2057</td>
-
-                    <td>15 Mayo 2026</td>
-
-                    <td>
-
-                        <span class="estado camino">
-
-                            En camino
-
-                        </span>
-
-                    </td>
-
-                    <td>$1.250.000</td>
-
-                </tr>
-
-                <tr>
-
-                    <td>#SM-2056</td>
-
-                    <td>8 Mayo 2026</td>
-
-                    <td>
-
-                        <span class="estado preparando">
-
-                            Preparando
-
-                        </span>
-
-                    </td>
-
-                    <td>$550.000</td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </section>
-
-
-    <!--=========================
-      MÉTODOS DE PAGO
-    ==========================-->
-
-    <section class="card">
-
-        <h2>Métodos de Pago</h2>
-
-        <div class="tarjetas">
-
-            <div class="tarjeta visa">
-
-                <h3>VISA</h3>
-
-                <span>**** **** **** 4242</span>
-
-                <p>Vence 08/26</p>
-
-            </div>
-
-            <div class="tarjeta master">
-
-                <h3>Mastercard</h3>
-
-                <span>**** **** **** 8888</span>
-
-                <p>Vence 11/27</p>
-
-            </div>
-
-            <button class="agregar"  id="abrirPago">
-
-                <i class="fa-solid fa-plus"></i>
-
-                Agregar método
-
-            </button>
-
-        </div>
-
-    </section>
-
-</div>
-
-<!--==================================
-        MODAL EDITAR PERFIL
-===================================-->
-
-<div class="modal" id="modalPerfil">
-
-    <div class="modal-contenido">
-
-        <div class="modal-header">
-
-            <h2>Editar Perfil</h2>
-
-            <button class="cerrar-modal">&times;</button>
-
-        </div>
-
-        <form action="#" method="POST">
-
-            <div class="grupo-input">
-
-                <label>Nombre</label>
-
-                <input
-                    type="text"
-                    name="nombre"
-                    value="Mauricio Moreno">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Correo</label>
-
-                <input
-                    type="email"
-                    name="correo"
-                    value="mauricio@email.com">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Teléfono</label>
-
-                <input
-                    type="text"
-                    name="telefono"
-                    value="3102456789">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Dirección</label>
-
-                <input
-                    type="text"
-                    name="direccion"
-                    value="Bogotá, Colombia">
-
-            </div>
-
-            <div class="acciones-modal">
-
                 <button
-                    type="button"
-                    class="btn-outline cerrar">
-
-                    Cancelar
-
-                </button>
-
-                <button
-                    type="submit"
+                    id="btnPassword"
                     class="btn-dorado">
 
-                    Guardar Cambios
+                    Cambiar
 
                 </button>
 
-            </div>
+            </article>
 
-        </form>
 
-    </div>
 
-</div>
 
-<!--==================================
-    MODAL CAMBIAR CONTRASEÑA
-===================================-->
 
-<div class="modal" id="modalPassword">
+            <article class="accion">
 
-    <div class="modal-contenido">
+                <div class="icono">
 
-        <div class="modal-header">
-
-            <h2>Cambiar Contraseña</h2>
-
-            <button class="cerrar-modal">&times;</button>
-
-        </div>
-
-        <form action="#" method="POST">
-
-            <div class="grupo-input">
-
-                <label>Contraseña actual</label>
-
-                <input
-                    type="password"
-                    name="actual">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Nueva contraseña</label>
-
-                <input
-                    type="password"
-                    name="nueva">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Confirmar contraseña</label>
-
-                <input
-                    type="password"
-                    name="confirmar">
-
-            </div>
-
-            <div class="acciones-modal">
-
-                <button
-                    type="button"
-                    class="btn-outline cerrar">
-
-                    Cancelar
-
-                </button>
-
-                <button
-                    type="submit"
-                    class="btn-dorado">
-
-                    Actualizar
-
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<!--==================================
-    MODAL MÉTODO DE PAGO
-===================================-->
-
-<div class="modal" id="modalPago">
-
-    <div class="modal-contenido">
-
-        <div class="modal-header">
-
-            <h2>Agregar Método de Pago</h2>
-
-            <button class="cerrar-modal">&times;</button>
-
-        </div>
-
-        <form action="#" method="POST">
-
-            <div class="grupo-input">
-
-                <label>Número de tarjeta</label>
-
-                <input
-                    type="text"
-                    placeholder="0000 0000 0000 0000">
-
-            </div>
-
-            <div class="grupo-input">
-
-                <label>Nombre del titular</label>
-
-                <input
-                    type="text"
-                    placeholder="Mauricio Moreno">
-
-            </div>
-
-            <div class="fila">
-
-                <div class="grupo-input">
-
-                    <label>Fecha</label>
-
-                    <input
-                        type="text"
-                        placeholder="08/28">
+                    <i class="fa-solid fa-box"></i>
 
                 </div>
 
-                <div class="grupo-input">
+                <div class="texto">
 
-                    <label>CVV</label>
+                    <h3>
 
-                    <input
-                        type="password"
-                        placeholder="123">
+                        Mis pedidos
+
+                    </h3>
+
+                    <p>
+
+                        Consulta el historial
+                        de todas tus compras.
+
+                    </p>
+
+                </div>
+
+                <button
+                    id="btnPedidos"
+                    class="btn-dorado">
+
+                    Ver pedidos
+
+                </button>
+
+            </article>
+
+        </section>
+
+
+
+
+        <!-- =========================
+            RESUMEN
+        ========================== -->
+
+        <section class="card">
+
+            <h2>
+
+                Resumen de actividad
+
+            </h2>
+
+
+            <div class="resumen">
+
+
+
+                <div class="resumen-card">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <h3>
+
+                        {{ total_pedidos }}
+
+                    </h3>
+
+                    <span>
+
+                        Pedidos realizados
+
+                    </span>
+
+                </div>
+
+
+
+
+                <div class="resumen-card">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <h3>
+
+                        {{ pedidos_en_camino }}
+
+                    </h3>
+
+                    <span>
+
+                        Envíos en camino
+
+                    </span>
+
+                </div>
+
+
+
+
+                <div class="resumen-card">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    <h3>
+
+                        {{ favoritos }}
+
+                    </h3>
+
+                    <span>
+
+                        Productos favoritos
+
+                    </span>
 
                 </div>
 
             </div>
 
-            <div class="acciones-modal">
+        </section>
+
+            <!--=========================================
+                ÚLTIMOS PEDIDOS
+        ==========================================-->
+
+        <section class="card pedidos-recientes">
+
+            <div class="titulo-card">
+
+                <h2>
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    Últimos pedidos
+
+                </h2>
 
                 <button
-                    type="button"
-                    class="btn-outline cerrar">
-
-                    Cancelar
-
-                </button>
-
-                <button
-                    type="submit"
+                    id="btnVerTodosPedidos"
                     class="btn-dorado">
 
-                    Agregar
+                    Ver todos
 
                 </button>
 
             </div>
 
-        </form>
 
+            <div class="tabla-responsive">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th># Pedido</th>
+
+                            <th>Fecha</th>
+
+                            <th>Total</th>
+
+                            <th>Estado</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% if pedidos %}
+
+                            {% for pedido in pedidos %}
+
+                            <tr>
+
+                                <td>
+
+                                    #{{ pedido.id_factura }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ pedido.fecha_factura }}
+
+                                </td>
+
+                                <td>
+
+                                    ${{ "{:,.0f}".format(pedido.total_factura|float) }}
+
+                                </td>
+
+                                <td>
+
+                                    {% if pedido.estado == "Entregado" %}
+
+                                        <span class="estado entregado">
+
+                                            {{ pedido.estado }}
+
+                                        </span>
+
+                                    {% elif pedido.estado == "En camino" %}
+
+                                        <span class="estado camino">
+
+                                            {{ pedido.estado }}
+
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="estado pendiente">
+
+                                            {{ pedido.estado }}
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="4">
+
+                                    Aún no tienes pedidos registrados.
+
+                                </td>
+
+                            </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!--=========================================
+                MODAL EDITAR INFORMACIÓN
+        ==========================================-->
+
+        <div
+            class="modal"
+            id="modalEditar">
+
+            <div class="modal-contenido">
+
+                <button
+                    class="cerrar-modal"
+                    data-close>
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+                <h2>
+
+                    Editar información
+
+                </h2>
+
+                <form
+                    id="formEditarUsuario">
+
+                    <div class="grupo-input">
+
+                        <label>
+
+                            Nombre completo
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            value="{{ usuario.nombre_cliente }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="grupo-input">
+
+                        <label>
+
+                            Correo electrónico
+
+                        </label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            value="{{ usuario.email_cliente }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="grupo-input">
+
+                        <label>
+
+                            Número telefónico
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="telefono"
+                            name="telefono"
+                            value="{{ usuario.numero_cliente }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="grupo-input">
+
+                        <label>
+
+                            Dirección
+
+                        </label>
+
+                        <input
+                            type="text"
+                            id="direccion"
+                            name="direccion"
+                            value="{{ usuario.direccion_cliente }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="grupo-input">
+
+                        <label>
+
+                            Fecha de nacimiento
+
+                        </label>
+
+                        <input
+                            type="date"
+                            id="fecha"
+                            name="fecha"
+                            value="{{ usuario.nacimiento_cliente }}">
+
+                    </div>
+
+
+                    <div class="botones-modal">
+
+                        <button
+                            type="button"
+                            class="btn-secundario"
+                            data-close>
+
+                            Cancelar
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn-dorado">
+
+                            Guardar cambios
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+            <!--=========================================
+                MODAL CAMBIAR CONTRASEÑA
+        ==========================================-->
+
+        <div class="modal" id="modalPassword">
+
+            <div class="modal-contenido">
+
+                <button class="cerrar-modal" data-close>
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+                <h2>
+
+                    Cambiar contraseña
+
+                </h2>
+
+                <form id="formPassword">
+
+                    <div class="grupo-input">
+
+                        <label for="passwordActual">
+
+                            Contraseña actual
+
+                        </label>
+
+                        <input
+                            type="password"
+                            id="passwordActual"
+                            name="passwordActual"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="grupo-input">
+
+                        <label for="passwordNueva">
+
+                            Nueva contraseña
+
+                        </label>
+
+                        <input
+                            type="password"
+                            id="passwordNueva"
+                            name="passwordNueva"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="grupo-input">
+
+                        <label for="confirmarPassword">
+
+                            Confirmar contraseña
+
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmarPassword"
+                            name="confirmarPassword"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="botones-modal">
+
+                        <button
+                            type="button"
+                            class="btn-secundario"
+                            data-close>
+
+                            Cancelar
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn-dorado">
+
+                            Actualizar contraseña
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!--=========================================
+                MODAL HISTORIAL DE PEDIDOS
+        ==========================================-->
+
+        <div class="modal" id="modalPedidos">
+
+            <div class="modal-contenido modal-grande">
+
+                <button class="cerrar-modal" data-close>
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+                <h2>
+
+                    Historial de pedidos
+
+                </h2>
+
+                <div class="tabla-responsive">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Pedido</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% if pedidos %}
+
+                                {% for pedido in pedidos %}
+
+                                <tr>
+
+                                    <td>
+
+                                        #{{ pedido.id_factura }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ pedido.fecha_factura }}
+
+                                    </td>
+
+                                    <td>
+
+                                        ${{ "{:,.0f}".format(pedido.total_factura|float) }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {% if pedido.estado == "Entregado" %}
+
+                                            <span class="estado entregado">
+
+                                                {{ pedido.estado }}
+
+                                            </span>
+
+                                        {% elif pedido.estado == "En camino" %}
+
+                                            <span class="estado camino">
+
+                                                {{ pedido.estado }}
+
+                                            </span>
+
+                                        {% else %}
+
+                                            <span class="estado pendiente">
+
+                                                {{ pedido.estado }}
+
+                                            </span>
+
+                                        {% endif %}
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td colspan="4">
+
+                                        No existen pedidos registrados.
+
+                                    </td>
+
+                                </tr>
+
+                            {% endif %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </main>
+
+
+
+    <!--=========================================
+            OVERLAY
+    ==========================================-->
+
+    <div
+        class="overlay"
+        id="overlay">
     </div>
 
-</div>
-
-<script src="{{ url_for('static', filename='js/usuario.js') }}"></script>
 
 
-{%endblock%}
+    <!--=========================================
+            JAVASCRIPT
+    ==========================================-->
+
+    <script src="{{ url_for('static', filename='js/usuario.js') }}"></script>
+
+</body>
+
+</html>
