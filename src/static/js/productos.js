@@ -33,42 +33,92 @@ function activarFavoritos() {
     });
 
 }
-
 /*==================================
         CARGAR PRODUCTOS
 ==================================*/
 
 async function cargarProductos() {
 
-    const buscar = document.getElementById("buscar").value;
+    const inputBuscar =
+        document.getElementById("buscar");
 
-    const categoria = document.querySelector(
-        "input[name='categoria']:checked"
-    ).value;
+    const inputCategoria =
+        document.querySelector(
+            "input[name='categoria']:checked"
+        );
 
-    const ordenar = document.getElementById("ordenar").value;
+    const inputOrdenar =
+        document.getElementById("ordenar");
 
-    let url = `http://127.0.0.1:5000/productos/buscar?pagina=${paginaActual}`;
+
+    const buscar = inputBuscar
+        ? inputBuscar.value.trim()
+        : "";
+
+
+    const categoria = inputCategoria
+        ? inputCategoria.value
+        : "Todos";
+
+
+    const ordenar = inputOrdenar
+        ? inputOrdenar.value
+        : "";
+
+
+    // ==========================================
+    // URL DEL FRONTEND
+    // ==========================================
+
+    let url =
+        `/productos/buscar?pagina=${paginaActual}&por_pagina=12`;
+
 
     const parametros = [];
 
+
+    // ==========================================
+    // BUSCAR
+    // ==========================================
+
     if (buscar !== "") {
 
-        parametros.push(`buscar=${encodeURIComponent(buscar)}`);
+        parametros.push(
+            `buscar=${encodeURIComponent(buscar)}`
+        );
 
     }
+
+
+    // ==========================================
+    // CATEGORÍA
+    // ==========================================
 
     if (categoria !== "Todos") {
 
-        parametros.push(`categoria=${encodeURIComponent(categoria)}`);
+        parametros.push(
+            `categoria=${encodeURIComponent(categoria)}`
+        );
 
     }
+
+
+    // ==========================================
+    // ORDENAR
+    // ==========================================
 
     if (ordenar !== "") {
 
-        parametros.push(`ordenar=${encodeURIComponent(ordenar)}`);
+        parametros.push(
+            `ordenar=${encodeURIComponent(ordenar)}`
+        );
 
     }
+
+
+    // ==========================================
+    // AGREGAR PARÁMETROS
+    // ==========================================
 
     if (parametros.length > 0) {
 
@@ -76,30 +126,58 @@ async function cargarProductos() {
 
     }
 
+
+    console.log(
+        "URL PRODUCTOS:",
+        url
+    );
+
+
     try {
 
-        const respuesta = await fetch(url);
+        const respuesta =
+            await fetch(url);
+
 
         if (!respuesta.ok) {
 
-            throw new Error("No fue posible cargar los productos");
+            throw new Error(
+                `Error HTTP: ${respuesta.status}`
+            );
 
         }
 
-        const datos = await respuesta.json();
 
-        mostrarProductos(datos.productos);
+        const datos =
+            await respuesta.json();
 
-        crearPaginacion(datos.total_paginas);
+
+        console.log(
+            "RESPUESTA PRODUCTOS:",
+            datos
+        );
+
+
+        mostrarProductos(
+            datos.productos
+        );
+
+
+        crearPaginacion(
+            datos.total_paginas
+        );
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR CARGANDO PRODUCTOS:",
+            error
+        );
 
     }
 
 }
-
 /*==================================
         MOSTRAR PRODUCTOS
 ==================================*/

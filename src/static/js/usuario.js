@@ -1,95 +1,182 @@
-/*==================================================
-                REFERENCIAS
-==================================================*/
+/* =========================================================
+   USUARIO.JS - SERENITY MODE
+   ========================================================= */
+
+
+/* =========================================================
+   REFERENCIAS
+   ========================================================= */
 
 const overlay = document.getElementById("overlay");
 
-const botonesModal = document.querySelectorAll("[data-modal]");
+const modalEditar = document.getElementById("modalEditar");
+const modalPassword = document.getElementById("modalPassword");
+const modalPedidos = document.getElementById("modalPedidos");
 
-const botonesCerrar = document.querySelectorAll("[data-close]");
+const btnEditarInfo = document.getElementById("btnEditarInfo");
+const btnPassword = document.getElementById("btnPassword");
+const btnPedidos = document.getElementById("btnPedidos");
+const btnVerTodosPedidos = document.getElementById("btnVerTodosPedidos");
 
 const modales = document.querySelectorAll(".modal");
 
+const botonesCerrar = document.querySelectorAll("[data-close]");
 
-/*==================================================
-                ABRIR MODAL
-==================================================*/
 
-function abrirModal(idModal){
+/* =========================================================
+   ABRIR MODAL
+   ========================================================= */
 
-    const modal = document.getElementById(idModal);
+function abrirModal(modal) {
 
-    if(!modal) return;
+    if (!modal) {
+        console.error("No se encontró el modal.");
+        return;
+    }
 
-    overlay.classList.add("active");
+    if (!overlay) {
+        console.error("No se encontró el overlay.");
+        return;
+    }
 
+    // Primero cerramos cualquier modal abierto
+    modales.forEach(function (m) {
+        m.classList.remove("active");
+    });
+
+    // Abrimos el modal seleccionado
     modal.classList.add("active");
 
-    document.body.style.overflow = "hidden";
+    // Mostramos el fondo oscuro
+    overlay.classList.add("active");
 
+    // Evitamos hacer scroll en la página
+    document.body.style.overflow = "hidden";
 }
 
 
-/*==================================================
-                CERRAR MODAL
-==================================================*/
+/* =========================================================
+   CERRAR MODAL
+   ========================================================= */
 
-function cerrarModal(modal){
+function cerrarModal(modal) {
+
+    if (!modal) {
+        return;
+    }
 
     modal.classList.remove("active");
 
-    if(document.querySelectorAll(".modal.active").length === 0){
+    // Si ya no queda ningún modal abierto
+    const algunModalAbierto =
+        document.querySelector(".modal.active");
+
+    if (!algunModalAbierto) {
 
         overlay.classList.remove("active");
 
         document.body.style.overflow = "auto";
-
     }
-
 }
 
 
-/*==================================================
-            CERRAR TODOS
-==================================================*/
+/* =========================================================
+   CERRAR TODOS LOS MODALES
+   ========================================================= */
 
-function cerrarTodos(){
+function cerrarTodosLosModales() {
 
-    modales.forEach(modal=>{
+    modales.forEach(function (modal) {
 
         modal.classList.remove("active");
 
     });
 
-    overlay.classList.remove("active");
+    if (overlay) {
+        overlay.classList.remove("active");
+    }
 
-    document.body.style.overflow="auto";
+    document.body.style.overflow = "auto";
+}
+
+
+/* =========================================================
+   MODAL EDITAR INFORMACIÓN
+   ========================================================= */
+
+if (btnEditarInfo) {
+
+    btnEditarInfo.addEventListener("click", function () {
+
+        console.log("Abriendo modal de editar información");
+
+        abrirModal(modalEditar);
+
+    });
 
 }
 
 
-/*==================================================
-            ABRIR MODALES
-==================================================*/
+/* =========================================================
+   MODAL CAMBIAR CONTRASEÑA
+   ========================================================= */
 
-botonesModal.forEach(boton=>{
+if (btnPassword) {
 
-    boton.addEventListener("click",()=>{
+    btnPassword.addEventListener("click", function () {
 
-        abrirModal(boton.dataset.modal);
+        console.log("Abriendo modal de contraseña");
+
+        abrirModal(modalPassword);
 
     });
 
-});
+}
 
 
-/*==================================================
-            CERRAR MODALES
-==================================================*/
+/* =========================================================
+   MODAL PEDIDOS
+   ========================================================= */
 
-botonesCerrar.forEach(boton=>{
+if (btnPedidos) {
 
-    boton.addEventListener("click",()=>{
+    btnPedidos.addEventListener("click", function () {
+
+        console.log("Abriendo historial de pedidos");
+
+        abrirModal(modalPedidos);
+
+    });
+
+}
+
+
+/* =========================================================
+   BOTÓN "VER TODOS"
+   ========================================================= */
+
+if (btnVerTodosPedidos) {
+
+    btnVerTodosPedidos.addEventListener("click", function () {
+
+        console.log("Abriendo todos los pedidos");
+
+        abrirModal(modalPedidos);
+
+    });
+
+}
+
+
+/* =========================================================
+   BOTONES X Y CANCELAR
+   ========================================================= */
+
+botonesCerrar.forEach(function (boton) {
+
+    boton.addEventListener("click", function (evento) {
+
+        evento.preventDefault();
 
         const modal = boton.closest(".modal");
 
@@ -100,271 +187,478 @@ botonesCerrar.forEach(boton=>{
 });
 
 
-/*==================================================
-            CLICK EN OVERLAY
-==================================================*/
+/* =========================================================
+   CLICK EN OVERLAY
+   ========================================================= */
 
-overlay.addEventListener("click",()=>{
+if (overlay) {
 
-    cerrarTodos();
+    overlay.addEventListener("click", function () {
 
-});
+        cerrarTodosLosModales();
+
+    });
+
+}
 
 
-/*==================================================
-            TECLA ESC
-==================================================*/
+/* =========================================================
+   TECLA ESC
+   ========================================================= */
 
-document.addEventListener("keydown",(e)=>{
+document.addEventListener("keydown", function (evento) {
 
-    if(e.key==="Escape"){
+    if (evento.key === "Escape") {
 
-        cerrarTodos();
+        cerrarTodosLosModales();
 
     }
 
 });
 
 
-/*==================================================
-        EVITAR PROPAGACIÓN
-==================================================*/
+/* =========================================================
+   EVITAR QUE EL CLICK DENTRO DEL MODAL LO CIERRE
+   ========================================================= */
 
-modales.forEach(modal=>{
+modales.forEach(function (modal) {
 
-    modal.querySelector(".modal-contenido")
-    .addEventListener("click",(e)=>{
+    const contenido = modal.querySelector(".modal-contenido");
 
-        e.stopPropagation();
+    if (contenido) {
 
-    });
+        contenido.addEventListener("click", function (evento) {
+
+            evento.stopPropagation();
+
+        });
+
+    }
 
 });
+/* =========================================================
+FORMULARIO EDITAR INFORMACIÓN
+========================================================= */
+
+const formEditarUsuario =
+    document.getElementById("formEditarUsuario");
+
+if (formEditarUsuario) {
+
+    formEditarUsuario.addEventListener(
+        "submit",
+        async function (evento) {
+
+            evento.preventDefault();
+
+            const nombre =
+                document.getElementById("nombre").value.trim();
+
+            const correo =
+                document.getElementById("correo").value.trim();
+
+            const telefono =
+                document.getElementById("telefono").value.trim();
+
+            const direccion =
+                document.getElementById("direccion").value.trim();
+
+            const fecha =
+                document.getElementById("fecha").value;
 
 
-/*==================================================
-            ANIMACIÓN TARJETAS
-==================================================*/
+            /* =========================================
+               VALIDACIONES
+            ========================================= */
 
-const cards = document.querySelectorAll(".card");
+            if (nombre === "") {
 
-cards.forEach((card,index)=>{
+                alert("El nombre es obligatorio.");
+                return;
+
+            }
+
+            if (correo === "") {
+
+                alert("El correo electrónico es obligatorio.");
+                return;
+
+            }
+
+            if (telefono === "") {
+
+                alert("El número telefónico es obligatorio.");
+                return;
+
+            }
+
+            if (direccion === "") {
+
+                alert("La dirección es obligatoria.");
+                return;
+
+            }
+
+
+            /* =========================================
+               DATOS
+            ========================================= */
+
+            const datos = {
+
+                nombre: nombre,
+
+                email: correo,
+
+                telefono: telefono,
+
+                direccion: direccion,
+
+                fecha: fecha
+
+            };
+
+
+            console.log("DATOS ENVIADOS:");
+
+            console.log(datos);
+
+
+            try {
+
+                /* =========================================
+                   ENVIAR AL FLASK FRONTEND
+                ========================================= */
+
+                const respuesta = await fetch(
+                    "/usuario/editar",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+
+                        },
+
+                        body: new URLSearchParams({
+
+                            nombre: nombre,
+
+                            correo: correo,
+
+                            telefono: telefono,
+
+                            direccion: direccion,
+
+                            fecha: fecha
+
+                        })
+
+                    }
+                );
+
+
+                /* =========================================
+                   FLASK REDIRIGE AL PERFIL
+                ========================================= */
+
+                if (!respuesta.ok) {
+
+                    console.error(
+                        "Error HTTP:",
+                        respuesta.status
+                    );
+
+                    alert(
+                        "No se pudo actualizar la información."
+                    );
+
+                    return;
+
+                }
+
+
+                /* =========================================
+                   RECARGAR PERFIL
+                ========================================= */
+
+                cerrarTodosLosModales();
+
+                window.location.href =
+                    "/usuario/";
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "ERROR ACTUALIZANDO PERFIL:",
+                    error
+                );
+
+                alert(
+                    "No fue posible conectar con el servidor."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FORMULARIO CAMBIAR CONTRASEÑA
+========================================================= */
+
+const formPassword =
+    document.getElementById("formPassword");
+
+if (formPassword) {
+
+    formPassword.addEventListener(
+        "submit",
+        async function (evento) {
+
+            evento.preventDefault();
+
+            /* =========================================
+               OBTENER CAMPOS
+            ========================================= */
+
+            const passwordActual =
+                document
+                    .getElementById("passwordActual")
+                    .value;
+
+            const passwordNueva =
+                document
+                    .getElementById("passwordNueva")
+                    .value;
+
+            const confirmarPassword =
+                document
+                    .getElementById("confirmarPassword")
+                    .value;
+
+
+            /* =========================================
+               VALIDACIONES
+            ========================================= */
+
+            if (passwordActual === "") {
+
+                alert(
+                    "Debes ingresar tu contraseña actual."
+                );
+
+                return;
+            }
+
+
+            if (passwordNueva === "") {
+
+                alert(
+                    "Debes ingresar la nueva contraseña."
+                );
+
+                return;
+            }
+
+
+            if (confirmarPassword === "") {
+
+                alert(
+                    "Debes confirmar la nueva contraseña."
+                );
+
+                return;
+            }
+
+
+            if (passwordNueva.length < 8) {
+
+                alert(
+                    "La nueva contraseña debe tener mínimo 8 caracteres."
+                );
+
+                return;
+            }
+
+
+            if (passwordNueva !== confirmarPassword) {
+
+                alert(
+                    "Las contraseñas nuevas no coinciden."
+                );
+
+                return;
+            }
+
+
+            /* =========================================
+               DATOS
+            ========================================= */
+
+            const datos = {
+
+                password_actual:
+                    passwordActual,
+
+                password_nueva:
+                    passwordNueva
+
+            };
+
+
+            console.log(
+                "DATOS CAMBIO CONTRASEÑA:"
+            );
+
+            console.log({
+                password_actual: "***",
+                password_nueva: "***"
+            });
+
+
+            /* =========================================
+               ENVIAR AL FLASK FRONTEND
+            ========================================= */
+
+            try {
+
+                const respuesta = await fetch(
+                    "/usuario/cambiar-password",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+
+                        },
+
+                        body: new URLSearchParams({
+
+                            password_actual:
+                                passwordActual,
+
+                            password_nueva:
+                                passwordNueva
+
+                        })
+
+                    }
+                );
+
+
+                /* =========================================
+                   RESPUESTA DEL FRONTEND
+                ========================================= */
+
+                if (!respuesta.ok) {
+
+                    console.error(
+                        "Error HTTP:",
+                        respuesta.status
+                    );
+
+                    alert(
+                        "No se pudo cambiar la contraseña."
+                    );
+
+                    return;
+                }
+
+
+                /* =========================================
+                   ÉXITO
+                ========================================= */
+
+                alert(
+                    "Contraseña actualizada correctamente."
+                );
+
+                formPassword.reset();
+
+                cerrarTodosLosModales();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "ERROR CAMBIANDO CONTRASEÑA:",
+                    error
+                );
+
+                alert(
+                    "No fue posible conectar con el servidor."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ANIMACIÓN DE TARJETAS
+   ========================================================= */
+
+const cards =
+    document.querySelectorAll(".card, .accion");
+
+cards.forEach(function (card, index) {
 
     card.animate(
 
         [
-
             {
-
-                opacity:0,
-
-                transform:"translateY(25px)"
-
+                opacity: 0,
+                transform: "translateY(20px)"
             },
 
             {
-
-                opacity:1,
-
-                transform:"translateY(0px)"
-
+                opacity: 1,
+                transform: "translateY(0)"
             }
-
         ],
 
         {
-
-            duration:500,
-
-            delay:index*120,
-
-            fill:"forwards"
-
+            duration: 500,
+            delay: index * 100,
+            fill: "forwards"
         }
 
     );
 
 });
 
-/*==================================================
-        FORMULARIO EDITAR INFORMACIÓN
-==================================================*/
 
-const formEditar = document.getElementById("formEditarUsuario");
-
-if(formEditar){
-
-    formEditar.addEventListener("submit",(e)=>{
-
-        e.preventDefault();
-
-        const nombre = document.getElementById("nombre").value.trim();
-
-        const correo = document.getElementById("correo").value.trim();
-
-        const telefono = document.getElementById("telefono").value.trim();
-
-        const direccion = document.getElementById("direccion").value.trim();
-
-        const fecha = document.getElementById("fecha").value;
-
-        if(
-            nombre === "" ||
-            correo === "" ||
-            telefono === "" ||
-            direccion === ""
-        ){
-
-            alert("Todos los campos son obligatorios.");
-
-            return;
-
-        }
-
-        console.log({
-
-            nombre,
-            correo,
-            telefono,
-            direccion,
-            fecha
-
-        });
-
-        alert("Información validada correctamente.");
-
-        cerrarTodos();
-
-    });
-
-}
-
-
-/*==================================================
-        FORMULARIO CAMBIAR CONTRASEÑA
-==================================================*/
-
-const formPassword = document.getElementById("formPassword");
-
-if(formPassword){
-
-    formPassword.addEventListener("submit",(e)=>{
-
-        e.preventDefault();
-
-        const actual = document
-        .getElementById("passwordActual")
-        .value;
-
-        const nueva = document
-        .getElementById("passwordNueva")
-        .value;
-
-        const confirmar = document
-        .getElementById("confirmarPassword")
-        .value;
-
-
-        if(
-
-            actual === "" ||
-
-            nueva === "" ||
-
-            confirmar === ""
-
-        ){
-
-            alert("Debes completar todos los campos.");
-
-            return;
-
-        }
-
-
-        if(nueva.length < 8){
-
-            alert("La contraseña debe tener mínimo 8 caracteres.");
-
-            return;
-
-        }
-
-
-        if(nueva !== confirmar){
-
-            alert("Las contraseñas no coinciden.");
-
-            return;
-
-        }
-
-
-        console.log({
-
-            actual,
-
-            nueva
-
-        });
-
-
-        alert("Contraseña validada correctamente.");
-
-        formPassword.reset();
-
-        cerrarTodos();
-
-    });
-
-}
-
-
-/*==================================================
-            TABLA PEDIDOS
-==================================================*/
-
-const tablaPedidos = document.querySelector("table");
-
-if(tablaPedidos){
-
-    const filas = tablaPedidos.querySelectorAll("tbody tr");
-
-    filas.forEach((fila)=>{
-
-        fila.addEventListener("mouseenter",()=>{
-
-            fila.style.cursor="pointer";
-
-        });
-
-    });
-
-}
-
-
-/*==================================================
-        LIMPIAR FORMULARIOS
-==================================================*/
-
-function limpiarFormularios(){
-
-    if(formPassword){
-
-        formPassword.reset();
-
-    }
-
-}
-
-overlay.addEventListener("click",limpiarFormularios);
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        limpiarFormularios();
-
-    }
-
-});
+/* =========================================================
+   DEBUG
+   ========================================================= */
+
+console.log("====================================");
+console.log("usuario.js cargado correctamente");
+console.log("====================================");
+
+console.log("btnEditarInfo:", btnEditarInfo);
+console.log("btnPassword:", btnPassword);
+console.log("btnPedidos:", btnPedidos);
+console.log("btnVerTodosPedidos:", btnVerTodosPedidos);
+
+console.log("modalEditar:", modalEditar);
+console.log("modalPassword:", modalPassword);
+console.log("modalPedidos:", modalPedidos);
+console.log("overlay:", overlay);

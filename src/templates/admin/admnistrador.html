@@ -1,35 +1,74 @@
 {% extends "admin/layaout_adm.html" %}
 
+
+{% block css %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/adm.css') }}"
+>
+
+{% endblock %}
+
+
+
 {% block contenido %}
 
 
-<head>  
-    <title>Admnistrador</title>
+<!-- =====================================================
+     HEADER DEL DASHBOARD
+====================================================== -->
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/adm.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-</head>
-
-<header>
+<header class="dashboard-header">
 
     <div class="titulo">
 
-        <h1>Dashboard</h1>
+        <h1>
+            Dashboard
+        </h1>
 
-        <p>Bienvenido al panel administrativo de Serenity Mode</p>
+        <p>
+            Bienvenido al panel administrativo de Serenity Mode
+        </p>
 
     </div>
 
+
+    <!-- ================================================
+         INFORMACIÓN DEL ADMINISTRADOR
+    ================================================= -->
+
     <div class="admin">
 
-        <img src="{{ url_for('static', filename='img/admin.jpg') }}" alt="Administrador">
+        <img
+            src="{{ url_for('static', filename='img/admin.jpg') }}"
+            alt="Administrador"
+        >
+
 
         <div>
 
-            <h3>Mauricio Moreno</h3>
+            {% if session.get("administrador") %}
 
-            <span>Administrador</span>
+                <h3>
+                    {{ session["administrador"]["nombre"] }}
+                </h3>
+
+                <span>
+                    {{ session["administrador"]["rol"] }}
+                </span>
+
+            {% else %}
+
+                <h3>
+                    Administrador
+                </h3>
+
+                <span>
+                    Administrador
+                </span>
+
+            {% endif %}
 
         </div>
 
@@ -37,183 +76,460 @@
 
 </header>
 
+
+
+<!-- =====================================================
+     TARJETAS DEL DASHBOARD
+====================================================== -->
+
 <section class="cards">
 
+
+    <!-- =================================================
+         VENTAS DEL DÍA
+    ================================================== -->
+
     <div class="card">
 
         <div class="icono">
+
             <i class="fa-solid fa-sack-dollar"></i>
+
         </div>
 
-        <h3>Ventas del día</h3>
+        <h3>
+            Ventas del día
+        </h3>
 
-        <h2>$2.540.000</h2>
+        <h2>
+            $0
+        </h2>
 
-        <span>+18%</span>
+        <span>
+            Sin datos
+        </span>
 
     </div>
+
+
+
+    <!-- =================================================
+     USUARIOS
+================================================== -->
+
+<div class="card">
+
+    <div class="icono">
+
+        <i class="fa-solid fa-users"></i>
+
+    </div>
+
+    <h3>
+        Usuarios registrados
+    </h3>
+
+    <h2>
+        {{ total_usuarios }}
+    </h2>
+
+    <span>
+        Usuarios registrados
+    </span>
+
+</div>
+
+
+    <!-- =================================================
+         PEDIDOS PENDIENTES
+    ================================================== -->
 
     <div class="card">
 
         <div class="icono">
-            <i class="fa-solid fa-users"></i>
-        </div>
 
-        <h3>Usuarios registrados</h3>
-
-        <h2>356</h2>
-
-        <span>+12 nuevos</span>
-
-    </div>
-
-    <div class="card">
-
-        <div class="icono">
             <i class="fa-solid fa-cart-shopping"></i>
+
         </div>
 
-        <h3>Pedidos pendientes</h3>
+        <h3>
+            Pedidos pendientes
+        </h3>
 
-        <h2>18</h2>
+        <h2>
+            0
+        </h2>
 
-        <span>Por despachar</span>
+        <span>
+            Sin datos
+        </span>
 
     </div>
+
+
+
+    <!-- =================================================
+         ENVÍOS PENDIENTES
+    ================================================== -->
 
     <div class="card">
 
         <div class="icono">
+
             <i class="fa-solid fa-truck-fast"></i>
+
         </div>
 
-        <h3>Envíos pendientes</h3>
+        <h3>
+            Envíos pendientes
+        </h3>
 
-        <h2>9</h2>
+        <h2>
+            0
+        </h2>
 
-        <span>En preparación</span>
+        <span>
+            Sin datos
+        </span>
 
     </div>
+
+
+
+    <!-- =================================================
+         TOTAL PRODUCTOS
+    ================================================== -->
 
     <div class="card">
 
         <div class="icono">
+
             <i class="fa-solid fa-shirt"></i>
+
         </div>
 
-        <h3>Productos</h3>
+        <h3>
+            Productos
+        </h3>
 
-        <h2>245</h2>
+        <h2>
+            {{ total_productos }}
+        </h2>
 
-        <span>12 agotados</span>
+        <span>
+            {{ productos_agotados }} agotados
+        </span>
 
     </div>
+
 
 </section>
+
+
+
+<!-- =====================================================
+     GRÁFICAS
+====================================================== -->
 
 <section class="graficas">
 
+
+    <!-- =================================================
+         VENTAS ÚLTIMOS 7 DÍAS
+    ================================================== -->
+
     <div class="grafica grande">
 
-        <h2>Ventas últimos 7 días</h2>
+        <h2>
+            Ventas últimos 7 días
+        </h2>
 
-        <canvas id="ventasSemana"></canvas>
+        <canvas
+            id="ventasSemana"
+        ></canvas>
 
     </div>
+
+
+
+    <!-- =================================================
+         VENTAS POR CATEGORÍA
+    ================================================== -->
 
     <div class="grafica">
 
-        <h2>Ventas por categoría</h2>
+        <h2>
+            Ventas por categoría
+        </h2>
 
-        <canvas id="categorias"></canvas>
+        <canvas
+            id="categorias"
+        ></canvas>
 
     </div>
 
+
 </section>
+
+
+
+<!-- =====================================================
+     VENTAS POR MES
+====================================================== -->
 
 <section class="grafica">
 
-    <h2>Ventas por mes</h2>
+    <h2>
+        Ventas por mes
+    </h2>
 
-    <canvas id="ventasMes"></canvas>
+    <canvas
+        id="ventasMes"
+    ></canvas>
 
 </section>
 
+
+
+<!-- =====================================================
+     ÚLTIMOS 5 PRODUCTOS
+====================================================== -->
+
 <section class="productos">
+
+
+    <!-- =================================================
+         ENCABEZADO
+    ================================================== -->
 
     <div class="encabezado">
 
-        <h2>Productos registrados</h2>
+        <h2>
+            Últimos productos registrados
+        </h2>
 
-        <button>Agregar producto</button>
+
+        <a
+            href="{{ url_for('admin.productos_adm') }}"
+            class="btn-productos"
+        >
+            Ver todos
+        </a>
 
     </div>
 
+
+
+    <!-- =================================================
+         TABLA
+    ================================================== -->
+
     <table>
+
 
         <thead>
 
             <tr>
 
-                <th>Imagen</th>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Stock</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th>
+                    Imagen
+                </th>
+
+                <th>
+                    Producto
+                </th>
+
+                <th>
+                    Categoría
+                </th>
+
+                <th>
+                    Stock
+                </th>
+
+                <th>
+                    Precio
+                </th>
+
+                <th>
+                    Estado
+                </th>
 
             </tr>
 
         </thead>
 
+
+
         <tbody>
+
+
+            <!-- =========================================
+                 RECORRER LOS ÚLTIMOS 5
+            ========================================== -->
+
+            {% for producto in ultimos_productos %}
+
 
             <tr>
 
-                <td><img src="{{ url_for('static', filename='img/nike.png') }}"></td>
-                <td>Nike Air Force</td>
-                <td>Zapatos</td>
-                <td>25</td>
-                <td>$420.000</td>
-                <td><span class="disponible">Disponible</span></td>
+
+                <!-- =====================================
+                     IMAGEN
+                ====================================== -->
 
                 <td>
 
-                    <button class="editar">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
+                    <img
+                        src="{{ producto.imagen }}"
+                        alt="{{ producto.nombre_producto }}"
+                    >
 
-                    <button class="eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                </td>
+
+
+
+                <!-- =====================================
+                     NOMBRE
+                ====================================== -->
+
+                <td>
+
+                    {{ producto.nombre_producto }}
+
+                </td>
+
+
+
+                <!-- =====================================
+                     CATEGORÍA
+                ====================================== -->
+
+                <td>
+
+                    {{ producto.categoria }}
+
+                </td>
+
+
+
+                <!-- =====================================
+                     STOCK
+                ====================================== -->
+
+                <td>
+
+                    {{ producto.stock_producto }}
+
+                </td>
+
+
+
+                <!-- =====================================
+                     PRECIO
+                ====================================== -->
+
+                <td>
+
+                    ${{ "{:,.0f}".format(
+                        producto.precio_producto|float
+                    ) }}
+
+                </td>
+
+
+
+                <!-- =====================================
+                     ESTADO
+                ====================================== -->
+
+                <td>
+
+
+                    {% if producto.stock_producto|int > 0 %}
+
+                        <span class="disponible">
+                            Disponible
+                        </span>
+
+                    {% else %}
+
+                        <span class="agotado">
+                            Agotado
+                        </span>
+
+                    {% endif %}
+
+
+                </td>
+
+
+            </tr>
+
+
+            {% else %}
+
+
+            <!-- =========================================
+                 SIN PRODUCTOS
+            ========================================== -->
+
+            <tr>
+
+                <td colspan="6">
+
+                    No hay productos registrados.
 
                 </td>
 
             </tr>
 
+
+            {% endfor %}
+
+
         </tbody>
+
 
     </table>
 
+
 </section>
+
+
+
+<!-- =====================================================
+     PEDIDOS RECIENTES
+====================================================== -->
 
 <section class="pedidos">
 
+
     <div class="pedido-card">
 
-        <h2>Pedidos recientes</h2>
+
+        <h2>
+            Pedidos recientes
+        </h2>
+
 
         <ul>
 
-            <li>Pedido #1054 <span>En preparación</span></li>
-            <li>Pedido #1055 <span>Enviado</span></li>
-            <li>Pedido #1056 <span>Pendiente</span></li>
+
+            <li>
+
+                No hay pedidos recientes.
+
+            </li>
+
 
         </ul>
 
+
     </div>
 
+
 </section>
+
 
 {% endblock %}

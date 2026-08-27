@@ -1,33 +1,76 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/layout.css') }}"
+    >
+
 </head>
-<body >
-    <header class="topbar">
+
+
+<body>
+
+<header class="topbar">
+
+
+    <!-- ======================================================
+         MENÚ IZQUIERDO
+    ======================================================= -->
 
     <div class="left-top">
 
         <div class="menu-container">
 
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <button
+                class="menu-btn"
+                onclick="toggleMenu()"
+            >
+                ☰
+            </button>
 
-            <div class="menu-dropdown" id="menu">
+
+            <div
+                class="menu-dropdown"
+                id="menu"
+            >
 
                 {% if request.path != '/carrito' %}
-                <a href="{{ url_for('carrito.index') }}">Carrito</a>
+
+                    <a href="{{ url_for('carrito.index') }}">
+                        Carrito
+                    </a>
+
                 {% endif %}
+
 
                 {% if request.path != '/productos' %}
-                <a href="{{ url_for('productos.index') }}">Productos</a>
+
+                    <a href="{{ url_for('productos.index') }}">
+                        Productos
+                    </a>
+
                 {% endif %}
 
-                {% if request.path != '/pago' %}
-                <a href="{{ url_for('novedades.index') }}">Novedades</a>
+
+                {% if request.path != '/novedades' %}
+
+                    <a href="{{ url_for('novedades.index') }}">
+                        Novedades
+                    </a>
+
                 {% endif %}
 
-                {% if request.path != '/inicio' and request.path != '/' %}
-                <a href="{{ url_for('inicio.index') }}">Inicio</a>
+
+                {% if request.path != '/inicio'
+                      and request.path != '/' %}
+
+                    <a href="{{ url_for('inicio.index') }}">
+                        Inicio
+                    </a>
+
                 {% endif %}
 
             </div>
@@ -36,145 +79,273 @@
 
     </div>
 
+
+    <!-- ======================================================
+         FRASE
+    ======================================================= -->
+
     <div class="frase">
+
         "Crea tu Estilo, Vive Serenity Mode"
+
     </div>
 
+
+    <!-- ======================================================
+         NOMBRE
+    ======================================================= -->
+
     <div class="Serenity">
+
         Serenity Mode
+
     </div>
+
+
+    <!-- ======================================================
+         MENÚ USUARIO
+    ======================================================= -->
 
     <div class="left-top">
 
-    <div class="user-container">
+        <div class="user-container">
 
-        <button class="user" onclick="toggleUser()">👤</button>
-
-        <div class="user-menu" id="ingreso">
-
-            {% if session.get("api_token") %}
-
-                <!-- =====================================
-                     USUARIO AUTENTICADO
-                ====================================== -->
-
-                <a
-                    href="{{ url_for('usuario.perfil') }}"
-                    id="menuInformacion">
-
-                    Información
-
-                </a>
+            <button
+                class="user"
+                onclick="toggleUser()"
+            >
+                👤
+            </button>
 
 
-                <a
-                    href="{{ url_for('auth.logout') }}"
-                    id="btnCerrarSesion">
-
-                    Cerrar Sesión
-
-                </a>
+            <div
+                class="user-menu"
+                id="ingreso"
+            >
 
 
-            {% else %}
+                {% if session.get("api_token") %}
 
-                <!-- =====================================
-                     USUARIO NO AUTENTICADO
-                ====================================== -->
+                    <!-- ======================================
+                         USUARIO AUTENTICADO
+                    ======================================= -->
 
-                <a
-                    href="{{ url_for('auth.registro') }}"
-                    id="menuRegistro">
+                    <a
+                        href="{{ url_for('usuario.perfil') }}"
+                        id="menuInformacion"
+                    >
+                        Información
+                    </a>
 
-                    Registrarse
 
-                </a>
+                    <a
+                        href="{{ url_for('auth.logout') }}"
+                        id="btnCerrarSesion"
+                    >
+                        Cerrar Sesión
+                    </a>
 
 
-                <a
-                    href="{{ url_for('auth.index') }}"
-                    id="menuLogin">
+                {% else %}
 
-                    Login
+                    <!-- ======================================
+                         USUARIO NO AUTENTICADO
+                    ======================================= -->
 
-                </a>
+                    <a
+                        href="{{ url_for('auth.registro') }}"
+                        id="menuRegistro"
+                    >
+                        Registrarse
+                    </a>
 
-            {% endif %}
+
+                    <a
+                        href="{{ url_for('auth.index') }}"
+                        id="menuLogin"
+                    >
+                        Login
+                    </a>
+
+                {% endif %}
+
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
 </header>
-    
-        <div class="search-box">
-    <input type="text" id="buscador" placeholder="Buscar productos...">
-    
+
+
+<!-- ==========================================================
+     BUSCADOR
+=========================================================== -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="buscador"
+        placeholder="Buscar productos..."
+    >
+
     <i class="fa-solid fa-magnifying-glass"></i>
+
 </div>
 
-        </header>
+
+<!-- ==========================================================
+     CONTENIDO
+=========================================================== -->
+
+<main class="contenido">
+
+    {% block contenido %}
+
+    {% endblock %}
+
+</main>
+
+
+<!-- ==========================================================
+     FOOTER
+=========================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <!-- ==================================================
+             INFORMACIÓN
+        =================================================== -->
+
+        <div class="footer-box">
+
+            <h2>
+                SERENITY
+                <span>MODE</span>
+            </h2>
+
+
+            <p>
+                Moda que te acompaña,
+                estilo que te representa,
+                serenidad que te define.
+            </p>
+
+
+            <a class="soporte">
+                CONTACTAR SOPORTE
+            </a>
+
+
+            <div class="socials">
+
+                <i class="fa-brands fa-instagram"></i>
+
+                <i class="fa-brands fa-facebook"></i>
+
+                <i class="fa-brands fa-tiktok"></i>
+
+                <i class="fa-brands fa-pinterest"></i>
+
+            </div>
 
         </div>
 
-    <main class="contenido">
-    {%block contenido%}
-    {%endblock%}
-    </main>
 
-    <footer class="footer">
+        <!-- ==================================================
+             AYUDA
+        =================================================== -->
 
-        <div class="footer-container">
+        <div class="footer-box">
 
-            <div class="footer-box">
-                <h2>SERENITY <span>MODE</span></h2>
-                <p>
-                    Moda que te acompaña,
-                    estilo que te representa,
-                    serenidad que te define.
-                    </p>
-                    <a  class="soporte">
-                        CONTACTAR SOPORTE
-                    </a>
-                
-                <div class="socials">
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-tiktok"></i>
-                    <i class="fa-brands fa-pinterest"></i>
-                </div>
-            </div>
+            <h3>
+                AYUDA
+            </h3>
 
 
-            <div class="footer-box">
-                <h3>AYUDA</h3>
+            <a href="#">
+                Preguntas frecuentes
+            </a>
 
-                <a href="#">Preguntas frecuentes</a>
-                <a href="#">Envíos y entregas</a>
-                <a href="#">Cambios y devoluciones</a>
-                <a href="#">Términos y condiciones</a>
-            </div>
 
-            <div class="footer-box">
-                <h3>CONTÁCTANOS</h3>
+            <a href="#">
+                Envíos y entregas
+            </a>
 
-                <p>hola@serenitymode.com</p>
-                <p>+57 300 123 4567</p>
-                <p>Carrera 15 # 88 - 21</p>
-                <p>Bogotá, Colombia</p>
-            </div>
+
+            <a href="#">
+                Cambios y devoluciones
+            </a>
+
+
+            <a href="#">
+                Términos y condiciones
+            </a>
 
         </div>
 
-        <div class="footer-bottom">
-            © 2026 Serenity Mode. Todos los derechos reservados.
+
+        <!-- ==================================================
+             CONTACTO
+        =================================================== -->
+
+        <div class="footer-box">
+
+            <h3>
+                CONTÁCTANOS
+            </h3>
+
+
+            <p>
+                hola@serenitymode.com
+            </p>
+
+
+            <p>
+                +57 300 123 4567
+            </p>
+
+
+            <p>
+                Carrera 15 # 88 - 21
+            </p>
+
+
+            <p>
+                Bogotá, Colombia
+            </p>
+
         </div>
 
-    </footer>
 
-    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Serenity Mode.
+        Todos los derechos reservados.
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================================
+     JAVASCRIPT
+=========================================================== -->
+
+<script
+    src="{{ url_for('static', filename='js/layout.js') }}"
+></script>
+
 
 </body>
+
 </html>

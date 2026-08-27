@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // session["id_cliente"]
             // session["usuario"]
 
-            window.location.href = "/logout";
+            window.location.href = "auth/logout";
 
         });
 

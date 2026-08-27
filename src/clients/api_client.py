@@ -37,13 +37,21 @@ class APIClient:
 
     def _handle(self, response: httpx.Response):
 
+        # ======================================================
+        # RESPUESTA VACÍA
+        # ======================================================
+
         if not response.content:
 
             raise APIError(
-                "El servidor retornó una respuesta vacía",
+                "El servidor retornó una respuesta vacía.",
                 response.status_code
             )
 
+
+        # ======================================================
+        # CONVERTIR RESPUESTA A JSON
+        # ======================================================
 
         try:
 
@@ -59,13 +67,39 @@ class APIClient:
             )
 
 
-        # Backend retorna una lista directamente
+        # ======================================================
+        # TOKEN EXPIRADO / NO AUTORIZADO
+        # ======================================================
+
+        if response.status_code == 401:
+
+            mensaje = (
+                body.get("msg")
+                or body.get("message")
+                or body.get("error")
+                or "Sesión expirada."
+            ) if isinstance(body, dict) else "Sesión expirada."
+
+
+            raise APIError(
+                mensaje,
+                401
+            )
+
+
+        # ======================================================
+        # RESPUESTA EN FORMA DE LISTA
+        # ======================================================
+
         if isinstance(body, list):
 
             return body
 
 
-        # La respuesta debe ser un diccionario
+        # ======================================================
+        # LA RESPUESTA DEBE SER UN DICCIONARIO
+        # ======================================================
+
         if not isinstance(body, dict):
 
             raise APIError(
@@ -75,8 +109,9 @@ class APIClient:
             )
 
 
-        # Backend con wrapper:
-        # { "success": true, "data": ... }
+        # ======================================================
+        # BACKEND CON WRAPPER
+        # ======================================================
 
         if "success" in body:
 
@@ -85,7 +120,7 @@ class APIClient:
                 raise APIError(
                     body.get(
                         "message",
-                        "Error desconocido"
+                        "Error desconocido."
                     ),
                     response.status_code,
                     body.get("errors")
@@ -94,18 +129,24 @@ class APIClient:
             return body.get("data")
 
 
-        # Backend devuelve dict directamente
+        # ======================================================
+        # RESPUESTA EXITOSA DIRECTA
+        # ======================================================
+
         if response.status_code < 400:
 
             return body
 
 
-        # Error del backend
+        # ======================================================
+        # ERROR DEL BACKEND
+        # ======================================================
 
         raise APIError(
             body.get("message")
             or body.get("error")
-            or "Error del servidor",
+            or body.get("msg")
+            or "Error del servidor.",
             response.status_code
         )
 
@@ -200,6 +241,7 @@ class APIClient:
 
             return data
 
+
         if isinstance(data, dict):
 
             return (
@@ -208,5 +250,6 @@ class APIClient:
                 or data.get("results")
                 or []
             )
+
 
         return []
