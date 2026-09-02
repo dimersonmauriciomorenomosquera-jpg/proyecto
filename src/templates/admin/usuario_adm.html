@@ -1,502 +1,552 @@
 {% extends "admin/layaout_adm.html" %}
+
 {% block contenido %}
 
 <head>
 
-
     <title>Usuarios | Serenity Mode</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario_adm.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/usuario_adm.css') }}"
+    >
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <!-- ======================================================
+         CORRECCIÓN DE APERTURA DE MODALES
+    ======================================================= -->
+
+    <style>
+
+        /*
+         * El JavaScript utiliza:
+         *
+         * modal.classList.add("mostrar")
+         *
+         * Por eso esta clase debe hacer visible el modal.
+         */
+
+        .modal.mostrar {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+    </style>
 
 </head>
 
-<body>
-
-
-
-<!--============== CONTENIDO ==============-->
 
 <main class="contenido">
 
-<header>
+    <!-- ======================================================
+         ENCABEZADO
+    ======================================================= -->
 
-<div>
+    <header>
 
-<h1>Gestión de Usuarios</h1>
+        <div>
 
-<p>Administra los usuarios registrados en Serenity Mode.</p>
+            <h1>Gestión de Usuarios</h1>
 
-</div>
+            <p>
+                Administra los clientes registrados en Serenity Mode.
+            </p>
 
-<button class="nuevo">
+        </div>
 
-<i class="fa-solid fa-user-plus"></i>
 
-Nuevo usuario
+        <button
+            type="button"
+            class="nuevo"
+            id="btnNuevoUsuario"
+        >
 
-</button>
+            <i class="fa-solid fa-user-plus"></i>
 
-</header>
+            Nuevo cliente
 
-<!--============== ESTADÍSTICAS ==============-->
+        </button>
 
-<section class="estadisticas">
+    </header>
 
-<div class="card">
 
-<h3>Usuarios registrados</h3>
+    <!-- ======================================================
+         ESTADÍSTICAS
+    ======================================================= -->
 
-<h2>356</h2>
+    <section class="estadisticas">
 
-</div>
+        <div class="card">
 
-<div class="card">
+            <h3>Usuarios registrados</h3>
 
-<h3>Usuarios activos</h3>
+            <h2 id="totalUsuarios">
+                {{ total_usuarios or 0 }}
+            </h2>
 
-<h2>320</h2>
+        </div>
 
-</div>
 
-<div class="card">
+        <div class="card">
 
-<h3>Administradores</h3>
+            <h3>Usuarios activos</h3>
 
-<h2>3</h2>
+            <h2 id="usuariosActivos">
 
-</div>
+                {{
+                    clientes
+                    | selectattr("estado_cliente", "equalto", "Activo")
+                    | list
+                    | length
+                }}
 
-<div class="card">
+            </h2>
 
-<h3>Nuevos este mes</h3>
+        </div>
 
-<h2>18</h2>
 
-</div>
+        <div class="card">
 
-</section>
+            <h3>Administradores</h3>
 
-<!--============== FILTROS ==============-->
+            <h2 id="totalAdministradores">
+                0
+            </h2>
 
-<section class="barra">
+        </div>
 
-<input
-type="text"
-placeholder="Buscar usuario...">
 
-<select>
+        <div class="card">
 
-<option>Todos los roles</option>
+            <h3>Nuevos este mes</h3>
 
-<option>Administrador</option>
+            <h2 id="usuariosMes">
+                0
+            </h2>
 
-<option>Cliente</option>
+        </div>
 
-</select>
+    </section>
 
-<select>
 
-<option>Todos los estados</option>
+    <!-- ======================================================
+         FILTROS
+    ======================================================= -->
 
-<option>Activo</option>
+    <section class="barra">
 
-<option>Inactivo</option>
+        <input
+            type="text"
+            id="buscadorUsuario"
+            placeholder="Buscar usuario..."
+            autocomplete="off"
+        >
 
-<option>Bloqueado</option>
 
-</select>
+        <select id="filtroRol">
 
-<button>
+            <option value="">
+                Todos los roles
+            </option>
 
-Buscar
+            <option value="cliente">
+                Cliente
+            </option>
 
-</button>
+        </select>
 
-</section>
 
-<!--============== TABLA ==============-->
+        <select id="filtroEstado">
 
-<section class="tabla">
+            <option value="">
+                Todos los estados
+            </option>
 
-<table>
+            <option value="activo">
+                Activo
+            </option>
 
-<thead>
+            <option value="inactivo">
+                Inactivo
+            </option>
 
-<tr>
+        </select>
 
-<th>Foto</th>
 
-<th>Nombre</th>
+        <button
+            type="button"
+            id="btnBuscarUsuario"
+        >
 
-<th>Correo</th>
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-<th>Teléfono</th>
+            Buscar
 
-<th>Rol</th>
+        </button>
 
-<th>Estado</th>
+    </section>
 
-<th>Registro</th>
 
-<th>Acciones</th>
+    <!-- ======================================================
+         TABLA
+    ======================================================= -->
 
-</tr>
+    <section class="tabla">
 
-</thead>
+        <table>
 
-<tbody>
+            <thead>
 
-<tr>
+                <tr>
+
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Fecha nacimiento</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tablaUsuarios">
+
+                {% if clientes %}
+
+                    {% for cliente in clientes %}
+
+                        {% set estado = cliente.estado_cliente or 'Activo' %}
+
+                        <tr
+
+                            data-id="{{ cliente.id_cliente }}"
+
+                            data-nombre="{{ cliente.nombre_cliente or '' }}"
+
+                            data-email="{{ cliente.email_cliente or '' }}"
+
+                            data-telefono="{{ cliente.numero_cliente or '' }}"
+
+                            data-direccion="{{ cliente.direccion_cliente or '' }}"
+
+                            data-nacimiento="{{ cliente.nacimiento_cliente or '' }}"
+
+                            data-estado="{{ estado }}"
+
+                            data-rol="Cliente"
+
+                        >
+
+                            <!-- FOTO -->
+
+                            {% set imagen_default = url_for('static', filename='img/user_default.png') %}
 
 <td>
-
-<img src="img/user1.jpg" alt="Usuario">
-
+    <img
+        class="foto-usuario"
+        src="{{ imagen_default }}"
+        alt="Foto de {{ cliente.nombre_cliente or 'usuario' }}"
+        loading="lazy"
+        onerror="this.onerror=null; this.src='{{ imagen_default }}';"
+    >
 </td>
 
-<td>Mauricio Moreno</td>
 
-<td>mauricio@email.com</td>
+                            <!-- NOMBRE -->
 
-<td>3001234567</td>
+                            <td>
 
-<td>
+                                {{ cliente.nombre_cliente or "-" }}
 
-<span class="admin">
+                            </td>
 
-Administrador
 
-</span>
+                            <!-- CORREO -->
 
-</td>
+                            <td>
 
-<td>
+                                {{ cliente.email_cliente or "-" }}
 
-<span class="activo">
+                            </td>
 
-Activo
 
-</span>
+                            <!-- TELÉFONO -->
 
-</td>
+                            <td>
 
-<td>12/02/2026</td>
+                                {{ cliente.numero_cliente or "-" }}
 
-<td>
+                            </td>
 
-<button class="ver">
 
-<i class="fa-solid fa-eye"></i>
+                            <!-- ROL -->
 
-</button>
+                            <td>
 
-<button class="editar">
+                                <span class="cliente">
 
-<i class="fa-solid fa-pen"></i>
+                                    Cliente
 
-</button>
+                                </span>
 
-<button class="eliminar">
+                            </td>
 
-<i class="fa-solid fa-trash"></i>
 
-</button>
+                            <!-- ESTADO -->
 
-</td>
+                            <td>
 
-</tr>
+                                {% if estado|lower == 'activo' %}
 
-<tr>
+                                    <span class="activo">
 
-<td>
+                                        Activo
 
-<img src="img/user2.jpg" alt="Usuario">
+                                    </span>
 
-</td>
+                                {% else %}
 
-<td>Laura Gómez</td>
+                                    <span class="inactivo">
 
-<td>laura@email.com</td>
+                                        {{ estado }}
 
-<td>3109876543</td>
+                                    </span>
 
-<td>
+                                {% endif %}
 
-<span class="cliente">
+                            </td>
 
-Cliente
 
-</span>
+                            <!-- FECHA NACIMIENTO -->
 
-</td>
+                            <td>
 
-<td>
+                                {{ cliente.nacimiento_cliente or "-" }}
 
-<span class="activo">
+                            </td>
 
-Activo
 
-</span>
+                            <!-- ACCIONES -->
 
-</td>
+                            <td class="acciones">
 
-<td>20/03/2026</td>
+                                <!-- VER -->
 
-<td>
+                                <button
 
-<button class="ver">
-<i class="fa-solid fa-eye"></i>
-</button>
+                                    type="button"
 
-<button class="editar">
-<i class="fa-solid fa-pen"></i>
-</button>
+                                    class="ver"
 
-<button class="eliminar">
-<i class="fa-solid fa-trash"></i>
-</button>
+                                    data-id="{{ cliente.id_cliente }}"
 
-</td>
+                                    title="Ver usuario"
 
-</tr>
+                                >
 
-<tr>
+                                    <i class="fa-solid fa-eye"></i>
 
-            <td>
-                <img src="img/user3.jpg" alt="Usuario">
-            </td>
+                                </button>
 
-            <td>Andrés Ruiz</td>
 
-            <td>andres@email.com</td>
+                                <!-- EDITAR -->
 
-            <td>3154567890</td>
+                                <button
 
-            <td>
+                                    type="button"
 
-                <span class="cliente">
+                                    class="editar"
 
-                    Cliente
+                                    data-id="{{ cliente.id_cliente }}"
 
-                </span>
+                                    title="Editar usuario"
 
-            </td>
+                                >
 
-            <td>
+                                    <i class="fa-solid fa-pen"></i>
 
-                <span class="inactivo">
+                                </button>
 
-                    Inactivo
 
-                </span>
+                                <!-- ACTIVAR / DESACTIVAR -->
 
-            </td>
+                                {% if estado|lower == 'activo' %}
 
-            <td>05/01/2026</td>
+                                    <button
 
-            <td>
+                                        type="button"
 
-                <button class="ver">
+                                        class="eliminar"
 
-                    <i class="fa-solid fa-eye"></i>
+                                        data-id="{{ cliente.id_cliente }}"
 
-                </button>
+                                        data-nombre="{{ cliente.nombre_cliente or '' }}"
 
-                <button class="editar">
+                                        data-estado="Activo"
 
-                    <i class="fa-solid fa-pen"></i>
+                                        title="Desactivar usuario"
 
-                </button>
+                                    >
 
-                <button class="eliminar">
+                                        <i class="fa-solid fa-user-slash"></i>
 
-                    <i class="fa-solid fa-trash"></i>
+                                    </button>
 
-                </button>
+                                {% else %}
 
-            </td>
+                                    <button
 
-        </tr>
+                                        type="button"
 
-        <tr>
+                                        class="eliminar"
 
-            <td>
-                <img src="img/user4.jpg" alt="Usuario">
-            </td>
+                                        data-id="{{ cliente.id_cliente }}"
 
-            <td>Sofía Martínez</td>
+                                        data-nombre="{{ cliente.nombre_cliente or '' }}"
 
-            <td>sofia@email.com</td>
+                                        data-estado="Inactivo"
 
-            <td>3206549871</td>
+                                        title="Activar usuario"
 
-            <td>
+                                    >
 
-                <span class="cliente">
+                                        <i class="fa-solid fa-user-check"></i>
 
-                    Cliente
+                                    </button>
 
-                </span>
+                                {% endif %}
 
-            </td>
+                            </td>
 
-            <td>
+                        </tr>
 
-                <span class="bloqueado">
+                    {% endfor %}
 
-                    Bloqueado
+                {% else %}
 
-                </span>
+                    <tr>
 
-            </td>
+                        <td colspan="8">
 
-            <td>18/04/2026</td>
+                            No hay usuarios registrados.
 
-            <td>
+                        </td>
 
-                <button class="ver">
+                    </tr>
 
-                    <i class="fa-solid fa-eye"></i>
+                {% endif %}
 
-                </button>
+            </tbody>
 
-                <button class="editar">
+        </table>
 
-                    <i class="fa-solid fa-pen"></i>
+    </section>
 
-                </button>
 
-                <button class="eliminar">
+    <!-- ======================================================
+         PAGINACIÓN
+    ======================================================= -->
 
-                    <i class="fa-solid fa-trash"></i>
+    <section
 
-                </button>
+        class="paginacion"
 
-            </td>
+        id="paginacionUsuarios"
 
-        </tr>
+    >
 
-        <tr>
+        <button
 
-            <td>
-                <img src="img/user5.jpg" alt="Usuario">
-            </td>
+            type="button"
 
-            <td>Daniel Torres</td>
+            id="paginaAnteriorUsuario"
 
-            <td>daniel@email.com</td>
+            disabled
 
-            <td>3018529637</td>
+            title="Página anterior"
 
-            <td>
+        >
 
-                <span class="cliente">
+            <i class="fa-solid fa-angle-left"></i>
 
-                    Cliente
+        </button>
 
-                </span>
 
-            </td>
+        <div id="numerosPaginasUsuarios">
 
-            <td>
+            <button
 
-                <span class="activo">
+                type="button"
 
-                    Activo
+                class="activo"
 
-                </span>
+                data-pagina="1"
 
-            </td>
+            >
 
-            <td>30/05/2026</td>
+                1
 
-            <td>
+            </button>
 
-                <button class="ver">
+        </div>
 
-                    <i class="fa-solid fa-eye"></i>
 
-                </button>
+        <button
 
-                <button class="editar">
+            type="button"
 
-                    <i class="fa-solid fa-pen"></i>
+            id="paginaSiguienteUsuario"
 
-                </button>
+            disabled
 
-                <button class="eliminar">
+            title="Página siguiente"
 
-                    <i class="fa-solid fa-trash"></i>
+        >
 
-                </button>
+            <i class="fa-solid fa-angle-right"></i>
 
-            </td>
+        </button>
 
-        </tr>
+    </section>
 
-    </tbody>
 
-</table>
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
 
-</section>
+    <footer>
 
-<!--============== PAGINACIÓN ==============-->
+        <p>
 
-<section class="paginacion">
+            © 2026 Serenity Mode | Gestión de Usuarios
 
-<button>
+        </p>
 
-<i class="fa-solid fa-angle-left"></i>
+    </footer>
 
-</button>
-
-<button class="activo">
-
-1
-
-</button>
-
-<button>
-
-2
-
-</button>
-
-<button>
-
-3
-
-</button>
-
-<button>
-
-<i class="fa-solid fa-angle-right"></i>
-
-</button>
-
-</section>
-
-<!--============== FOOTER ==============-->
-
-<footer>
-
-<p>
-
-© 2026 Serenity Mode | Gestión de Usuarios
-
-</p>
-
-</footer>
 </main>
 
-<!--==================================
-        MODAL NUEVO USUARIO
-===================================-->
 
-<div class="modal" id="modalAgregarUsuario">
+<!-- ==========================================================
+     MODAL AGREGAR CLIENTE
+=========================================================== -->
+
+<div
+
+    class="modal"
+
+    id="modalAgregarUsuario"
+
+>
 
     <div class="modal-box modal-grande">
 
@@ -506,105 +556,288 @@ Activo
 
                 <i class="fa-solid fa-user-plus"></i>
 
-                Nuevo Usuario
+                Nuevo Cliente
 
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+
+                type="button"
+
+                class="cerrar-modal"
+
+                aria-label="Cerrar"
+
+            >
+
+                &times;
+
+            </button>
 
         </div>
 
-        <div class="modal-body">
 
-            <div class="producto-modal">
+        <form id="formAgregarUsuario">
 
-                <div class="producto-imagen">
+            <div class="modal-body">
 
-                    <img
-                    src="{{ url_for('static', filename='img/user_default.png') }}"
-                    id="previewUsuario">
+                <div class="producto-modal">
 
-                    <label class="subir">
 
-                        <i class="fa-solid fa-camera"></i>
+                    <!-- FOTO -->
 
-                        Seleccionar foto
+                    <div class="producto-imagen">
 
-                        <input
-                        type="file"
-                        hidden>
+                        <img
 
-                    </label>
+                            src="{{ url_for(
+                                'static',
+                                filename='img/user_default.png'
+                            ) }}"
 
-                </div>
+                            id="previewUsuario"
 
-                <div class="producto-info">
+                            alt="Vista previa del usuario"
 
-                    <div class="grupo">
+                        >
 
-                        <label>Nombre completo</label>
 
-                        <input type="text">
+                        <label class="subir">
 
-                    </div>
+                            <i class="fa-solid fa-camera"></i>
 
-                    <div class="grupo">
+                            Seleccionar foto
 
-                        <label>Correo electrónico</label>
 
-                        <input type="email">
+                            <input
 
-                    </div>
+                                type="file"
 
-                    <div class="fila">
+                                id="imagenAgregarUsuario"
 
-                        <div class="grupo">
+                                name="imagen"
 
-                            <label>Teléfono</label>
+                                accept="image/png,image/jpeg,image/webp"
 
-                            <input type="text">
+                                hidden
 
-                        </div>
+                            >
 
-                        <div class="grupo">
-
-                            <label>Rol</label>
-
-                            <select>
-
-                                <option>Administrador</option>
-
-                                <option>Cliente</option>
-
-                            </select>
-
-                        </div>
+                        </label>
 
                     </div>
 
-                    <div class="fila">
+
+                    <!-- INFORMACIÓN -->
+
+                    <div class="producto-info">
+
+
+                        <!-- NOMBRE -->
 
                         <div class="grupo">
 
-                            <label>Estado</label>
+                            <label for="nombreAgregarUsuario">
 
-                            <select>
+                                Nombre completo
 
-                                <option>Activo</option>
+                            </label>
 
-                                <option>Inactivo</option>
 
-                                <option>Bloqueado</option>
+                            <input
 
-                            </select>
+                                type="text"
+
+                                id="nombreAgregarUsuario"
+
+                                name="nombre_cliente"
+
+                                required
+
+                                autocomplete="name"
+
+                            >
 
                         </div>
 
+
+                        <!-- CORREO -->
+
                         <div class="grupo">
 
-                            <label>Contraseña</label>
+                            <label for="emailAgregarUsuario">
 
-                            <input type="password">
+                                Correo electrónico
+
+                            </label>
+
+
+                            <input
+
+                                type="email"
+
+                                id="emailAgregarUsuario"
+
+                                name="email_cliente"
+
+                                required
+
+                                autocomplete="email"
+
+                            >
+
+                        </div>
+
+
+                        <!-- TELÉFONO + NACIMIENTO -->
+
+                        <div class="fila">
+
+
+                            <div class="grupo">
+
+                                <label for="telefonoAgregarUsuario">
+
+                                    Teléfono
+
+                                </label>
+
+
+                                <input
+
+                                    type="text"
+
+                                    id="telefonoAgregarUsuario"
+
+                                    name="numero_cliente"
+
+                                    required
+
+                                    inputmode="numeric"
+
+                                    autocomplete="tel"
+
+                                >
+
+                            </div>
+
+
+                            <div class="grupo">
+
+                                <label for="nacimientoAgregarUsuario">
+
+                                    Fecha de nacimiento
+
+                                </label>
+
+
+                                <input
+
+                                    type="date"
+
+                                    id="nacimientoAgregarUsuario"
+
+                                    name="nacimiento_cliente"
+
+                                    required
+
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DIRECCIÓN -->
+
+                        <div class="grupo">
+
+                            <label for="direccionAgregarUsuario">
+
+                                Dirección
+
+                            </label>
+
+
+                            <input
+
+                                type="text"
+
+                                id="direccionAgregarUsuario"
+
+                                name="direccion_cliente"
+
+                                placeholder="Ingrese la dirección"
+
+                                required
+
+                                autocomplete="street-address"
+
+                            >
+
+                        </div>
+
+
+                        <!-- CONTRASEÑA -->
+
+                        <div class="grupo">
+
+                            <label for="passwordAgregarUsuario">
+
+                                Contraseña
+
+                            </label>
+
+
+                            <input
+
+                                type="password"
+
+                                id="passwordAgregarUsuario"
+
+                                name="password"
+
+                                required
+
+                                minlength="6"
+
+                                autocomplete="new-password"
+
+                            >
+
+                        </div>
+
+
+                        <!-- ESTADO -->
+
+                        <div class="grupo">
+
+                            <label for="estadoNuevoUsuario">
+
+                                Estado
+
+                            </label>
+
+
+                            <input
+
+                                type="text"
+
+                                id="estadoNuevoUsuario"
+
+                                value="Activo"
+
+                                readonly
+
+                            >
+
+
+                            <small>
+
+                                Los clientes nuevos se registran automáticamente como activos.
+
+                            </small>
 
                         </div>
 
@@ -614,35 +847,56 @@ Activo
 
             </div>
 
-        </div>
 
-        <div class="modal-footer">
+            <div class="modal-footer">
 
-            <button class="btn-outline cerrar">
+                <button
 
-                Cancelar
+                    type="button"
 
-            </button>
+                    class="btn-outline cerrar"
 
-            <button
-class="btn-dorado"
-id="guardarUsuario">
+                >
 
-Guardar Usuario
+                    Cancelar
 
-</button>
+                </button>
 
-        </div>
+
+                <button
+
+                    type="submit"
+
+                    class="btn-dorado"
+
+                    id="guardarUsuario"
+
+                >
+
+                    Guardar Cliente
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
-<!--==================================
-        MODAL EDITAR USUARIO
-===================================-->
 
-<div class="modal" id="modalEditarUsuario">
+<!-- ==========================================================
+     MODAL EDITAR CLIENTE
+=========================================================== -->
+
+<div
+
+    class="modal"
+
+    id="modalEditarUsuario"
+
+>
 
     <div class="modal-box modal-grande">
 
@@ -652,28 +906,52 @@ Guardar Usuario
 
                 <i class="fa-solid fa-user-pen"></i>
 
-                Editar Usuario
+                Editar Cliente
 
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+
+                type="button"
+
+                class="cerrar-modal"
+
+                aria-label="Cerrar"
+
+            >
+
+                &times;
+
+            </button>
 
         </div>
 
-        <form>
+
+        <form id="formEditarUsuario">
 
             <div class="modal-body">
 
                 <div class="producto-modal">
+
 
                     <!-- FOTO -->
 
                     <div class="producto-imagen">
 
                         <img
-                        src="{{ url_for('static', filename='img/user1.jpg') }}"
-                        id="previewEditarUsuario"
-                        alt="Usuario">
+
+                            src="{{ url_for(
+                                'static',
+                                filename='img/user_default.png'
+                            ) }}"
+
+                            id="previewEditarUsuario"
+
+                            alt="Vista previa del usuario"
+
+                        >
+
 
                         <label class="subir">
 
@@ -681,94 +959,237 @@ Guardar Usuario
 
                             Cambiar foto
 
+
                             <input
-                            type="file"
-                            id="imagenEditarUsuario"
-                            hidden>
+
+                                type="file"
+
+                                id="imagenEditarUsuario"
+
+                                name="imagen"
+
+                                accept="image/png,image/jpeg,image/webp"
+
+                                hidden
+
+                            >
 
                         </label>
 
                     </div>
 
+
                     <!-- DATOS -->
 
                     <div class="producto-info">
 
+
+                        <input
+
+                            type="hidden"
+
+                            id="idEditarUsuario"
+
+                        >
+
+
+                        <!-- NOMBRE -->
+
                         <div class="grupo">
 
-                            <label>Nombre completo</label>
+                            <label for="nombreEditarUsuario">
+
+                                Nombre completo
+
+                            </label>
+
 
                             <input
-                            type="text"
-                            value="Mauricio Moreno">
 
-                        </div>
-
-                        <div class="grupo">
-
-                            <label>Correo electrónico</label>
-
-                            <input
-                            type="email"
-                            value="mauricio@email.com">
-
-                        </div>
-
-                        <div class="fila">
-
-                            <div class="grupo">
-
-                                <label>Teléfono</label>
-
-                                <input
                                 type="text"
-                                value="3001234567">
 
-                            </div>
+                                id="nombreEditarUsuario"
+
+                                required
+
+                                autocomplete="name"
+
+                            >
+
+                        </div>
+
+
+                        <!-- CORREO -->
+
+                        <div class="grupo">
+
+                            <label for="emailEditarUsuario">
+
+                                Correo electrónico
+
+                            </label>
+
+
+                            <input
+
+                                type="email"
+
+                                id="emailEditarUsuario"
+
+                                required
+
+                                autocomplete="email"
+
+                            >
+
+                        </div>
+
+
+                        <!-- TELÉFONO + NACIMIENTO -->
+
+                        <div class="fila">
+
 
                             <div class="grupo">
 
-                                <label>Rol</label>
+                                <label for="telefonoEditarUsuario">
 
-                                <select>
+                                    Teléfono
 
-                                    <option selected>Administrador</option>
+                                </label>
 
-                                    <option>Cliente</option>
 
-                                </select>
+                                <input
+
+                                    type="text"
+
+                                    id="telefonoEditarUsuario"
+
+                                    required
+
+                                    inputmode="numeric"
+
+                                    autocomplete="tel"
+
+                                >
+
+                            </div>
+
+
+                            <div class="grupo">
+
+                                <label for="nacimientoEditarUsuario">
+
+                                    Fecha de nacimiento
+
+                                </label>
+
+
+                                <input
+
+                                    type="date"
+
+                                    id="nacimientoEditarUsuario"
+
+                                    required
+
+                                >
 
                             </div>
 
                         </div>
 
-                        <div class="fila">
 
-                            <div class="grupo">
+                        <!-- DIRECCIÓN -->
 
-                                <label>Estado</label>
+                        <div class="grupo">
 
-                                <select>
+                            <label for="direccionEditarUsuario">
 
-                                    <option selected>Activo</option>
+                                Dirección
 
-                                    <option>Inactivo</option>
+                            </label>
 
-                                    <option>Bloqueado</option>
 
-                                </select>
+                            <input
 
-                            </div>
+                                type="text"
 
-                            <div class="grupo">
+                                id="direccionEditarUsuario"
 
-                                <label>Nueva contraseña</label>
+                                placeholder="Ingrese la dirección"
 
-                                <input
+                                required
+
+                                autocomplete="street-address"
+
+                            >
+
+                        </div>
+
+
+                        <!-- ESTADO -->
+
+                        <div class="grupo">
+
+                            <label for="estadoEditarUsuario">
+
+                                Estado
+
+                            </label>
+
+
+                            <select id="estadoEditarUsuario">
+
+                                <option value="Activo">
+
+                                    Activo
+
+                                </option>
+
+
+                                <option value="Inactivo">
+
+                                    Inactivo
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CONTRASEÑA -->
+
+                        <div class="grupo">
+
+                            <label for="passwordEditarUsuario">
+
+                                Nueva contraseña
+
+                            </label>
+
+
+                            <input
+
                                 type="password"
-                                placeholder="••••••••">
 
-                            </div>
+                                id="passwordEditarUsuario"
+
+                                placeholder="Dejar vacío para conservar"
+
+                                minlength="6"
+
+                                autocomplete="new-password"
+
+                            >
+
+
+                            <small>
+
+                                Si no deseas cambiar la contraseña, deja este campo vacío.
+
+                            </small>
 
                         </div>
 
@@ -778,20 +1199,31 @@ Guardar Usuario
 
             </div>
 
+
             <div class="modal-footer">
 
                 <button
-                type="button"
-                class="btn-outline cerrar">
+
+                    type="button"
+
+                    class="btn-outline cerrar"
+
+                >
 
                     Cancelar
 
                 </button>
 
+
                 <button
-                type="submit"
-                class="btn-dorado"
-                id="guardarCambiosUsuario">
+
+                    type="submit"
+
+                    class="btn-dorado"
+
+                    id="guardarCambiosUsuario"
+
+                >
 
                     Guardar Cambios
 
@@ -805,50 +1237,132 @@ Guardar Usuario
 
 </div>
 
-<div class="modal" id="modalEliminarUsuario">
+
+<!-- ==========================================================
+     MODAL CAMBIAR ESTADO
+=========================================================== -->
+
+<div
+
+    class="modal"
+
+    id="modalEliminarUsuario"
+
+>
 
     <div class="modal-box modal-pequeno">
 
+
         <div class="modal-header">
 
-            <h2>
-                <i class="fa-solid fa-user-xmark"></i>
-                Eliminar Usuario
+            <h2 id="tituloEstadoUsuario">
+
+                <i
+
+                    class="fa-solid fa-user-slash"
+
+                    id="iconoTituloEstadoUsuario"
+
+                ></i>
+
+                Desactivar Usuario
+
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+
+                type="button"
+
+                class="cerrar-modal"
+
+                aria-label="Cerrar"
+
+            >
+
+                &times;
+
+            </button>
 
         </div>
+
 
         <div class="modal-body">
 
             <div class="confirmacion">
 
-                <i class="fa-solid fa-triangle-exclamation"></i>
 
-                <h2>¿Eliminar usuario?</h2>
+                <i
+
+                    class="fa-solid fa-triangle-exclamation"
+
+                    id="iconoEstadoUsuario"
+
+                ></i>
+
+
+                <h2 id="preguntaEstadoUsuario">
+
+                    ¿Desactivar usuario?
+
+                </h2>
+
 
                 <p>
-                    ¿Deseas eliminar a
-                    <strong>Mauricio Moreno</strong>?
+
+                    ¿Deseas cambiar el estado de
+
+                    <strong id="nombreEliminarUsuario">
+
+                        -
+
+                    </strong>?
+
                 </p>
 
-                <p>
-                    Esta acción no podrá deshacerse.
+
+                <p id="mensajeEstadoUsuario">
+
+                    El usuario no será eliminado.
+
+                    Su estado pasará a
+                    <strong>Inactivo</strong>
+                    y conservará todos sus datos.
+
                 </p>
 
             </div>
 
         </div>
 
+
         <div class="modal-footer">
 
-            <button class="btn-outline cerrar">
+            <button
+
+                type="button"
+
+                class="btn-outline cerrar"
+
+            >
+
                 Cancelar
+
             </button>
 
-            <button class="btn-danger" id="eliminarUsuario">
-                Eliminar
+
+            <button
+
+                type="button"
+
+                class="btn-danger"
+
+                id="cambiarEstadoUsuario"
+
+            >
+
+                Desactivar
+
             </button>
 
         </div>
@@ -857,13 +1371,21 @@ Guardar Usuario
 
 </div>
 
-<!--==================================
-        MODAL VER USUARIO
-===================================-->
 
-<div class="modal" id="modalVerUsuario">
+<!-- ==========================================================
+     MODAL VER CLIENTE
+=========================================================== -->
+
+<div
+
+    class="modal"
+
+    id="modalVerUsuario"
+
+>
 
     <div class="modal-box modal-grande">
+
 
         <div class="modal-header">
 
@@ -871,98 +1393,222 @@ Guardar Usuario
 
                 <i class="fa-solid fa-user"></i>
 
-                Información del Usuario
+                Información del Cliente
 
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+
+                type="button"
+
+                class="cerrar-modal"
+
+                aria-label="Cerrar"
+
+            >
+
+                &times;
+
+            </button>
 
         </div>
+
 
         <div class="modal-body">
 
             <div class="vista-producto">
+
 
                 <!-- FOTO -->
 
                 <div class="producto-imagen">
 
                     <img
-                    src="{{ url_for('static', filename='img/user1.jpg') }}"
-                    alt="Usuario">
+
+                        src="{{ url_for(
+                            'static',
+                            filename='img/user_default.png'
+                        ) }}"
+
+                        id="verImagenUsuario"
+
+                        alt="Foto del cliente"
+
+                    >
 
                 </div>
+
 
                 <!-- INFORMACIÓN -->
 
                 <div class="producto-info">
 
-                    <h2 style="color:#C7A85D; margin-bottom:20px;">
 
-                        Mauricio Moreno
+                    <h2
+
+                        id="verNombreUsuario"
+
+                        style="
+                            color:#C7A85D;
+                            margin-bottom:20px;
+                        "
+
+                    >
+
+                        -
 
                     </h2>
 
+
+                    <!-- CORREO -->
+
                     <div class="grupo">
 
-                        <label>Correo electrónico</label>
+                        <label for="verEmailUsuario">
+
+                            Correo electrónico
+
+                        </label>
+
 
                         <input
-                        type="text"
-                        value="mauricio@email.com"
-                        readonly>
+
+                            type="text"
+
+                            id="verEmailUsuario"
+
+                            readonly
+
+                        >
 
                     </div>
 
+
+                    <!-- TELÉFONO + ESTADO -->
+
                     <div class="fila">
+
 
                         <div class="grupo">
 
-                            <label>Teléfono</label>
+                            <label for="verTelefonoUsuario">
+
+                                Teléfono
+
+                            </label>
+
 
                             <input
-                            type="text"
-                            value="3001234567"
-                            readonly>
+
+                                type="text"
+
+                                id="verTelefonoUsuario"
+
+                                readonly
+
+                            >
 
                         </div>
 
+
                         <div class="grupo">
 
-                            <label>Rol</label>
+                            <label for="verEstadoUsuario">
+
+                                Estado
+
+                            </label>
+
 
                             <input
-                            type="text"
-                            value="Administrador"
-                            readonly>
+
+                                type="text"
+
+                                id="verEstadoUsuario"
+
+                                readonly
+
+                            >
 
                         </div>
 
                     </div>
 
+
+                    <!-- NACIMIENTO + ROL -->
+
                     <div class="fila">
 
-                        <div class="grupo">
-
-                            <label>Estado</label>
-
-                            <input
-                            type="text"
-                            value="Activo"
-                            readonly>
-
-                        </div>
 
                         <div class="grupo">
 
-                            <label>Fecha de Registro</label>
+                            <label for="verNacimientoUsuario">
+
+                                Fecha de nacimiento
+
+                            </label>
+
 
                             <input
-                            type="text"
-                            value="12/02/2026"
-                            readonly>
+
+                                type="text"
+
+                                id="verNacimientoUsuario"
+
+                                readonly
+
+                            >
 
                         </div>
+
+
+                        <div class="grupo">
+
+                            <label for="verRolUsuario">
+
+                                Rol
+
+                            </label>
+
+
+                            <input
+
+                                type="text"
+
+                                id="verRolUsuario"
+
+                                value="Cliente"
+
+                                readonly
+
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DIRECCIÓN -->
+
+                    <div class="grupo">
+
+                        <label for="verDireccionUsuario">
+
+                            Dirección
+
+                        </label>
+
+
+                        <input
+
+                            type="text"
+
+                            id="verDireccionUsuario"
+
+                            readonly
+
+                        >
 
                     </div>
 
@@ -972,10 +1618,16 @@ Guardar Usuario
 
         </div>
 
+
         <div class="modal-footer">
 
             <button
-            class="btn-dorado cerrar">
+
+                type="button"
+
+                class="btn-dorado cerrar"
+
+            >
 
                 Cerrar
 
@@ -988,11 +1640,18 @@ Guardar Usuario
 </div>
 
 
+<!-- ==========================================================
+     JAVASCRIPT
+=========================================================== -->
 
-<script src="{{ url_for('static', filename='js/usuario_adm.js') }}"></script>
+<script
 
-</body>
+    src="{{ url_for(
+        'static',
+        filename='js/usuario_adm.js'
+    ) }}"
+
+></script>
+
 
 {% endblock %}
-
-</html>

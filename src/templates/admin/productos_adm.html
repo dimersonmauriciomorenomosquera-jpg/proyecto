@@ -1,110 +1,147 @@
+
 {% extends "admin/layaout_adm.html" %}
+
 {% block contenido %}
+
 <head>
+
     <title>Productos | Serenity Mode</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/productos_adm.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/productos_adm.css') }}">
 
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
-<body>
-
-
-
-<!--================ CONTENIDO ================-->
 
 <main class="contenido">
 
+<!-- =====================================================
+                        ENCABEZADO
+===================================================== -->
+
 <header>
 
-<div>
+    <div>
 
-<h1>Gestión de Productos</h1>
+        <h1>Gestión de Productos</h1>
 
-<p>Administra todos los productos de Serenity Mode.</p>
+        <p>
+            Administra todos los productos de Serenity Mode.
+        </p>
 
-</div>
+    </div>
 
-<button class="nuevo">
 
-<i class="fa-solid fa-plus"></i>
+    <button
+        type="button"
+        class="nuevo"
+        id="btnNuevoProducto">
 
-Agregar producto
+        <i class="fa-solid fa-plus"></i>
 
-</button>
+        Agregar producto
+
+    </button>
 
 </header>
 
-<!--================ ESTADISTICAS ================-->
+
+<!-- =====================================================
+                    ESTADÍSTICAS
+===================================================== -->
 
 <section class="estadisticas">
 
-<div class="card">
+    <div class="card">
 
-<h3>Total productos</h3>
+        <h3>Total productos</h3>
 
-<h2>245</h2>
+        <h2 id="totalProductos">0</h2>
 
-</div>
+    </div>
 
-<div class="card">
 
-<h3>Agotados</h3>
+    <div class="card">
 
-<h2>12</h2>
+        <h3>Agotados</h3>
 
-</div>
+        <h2 id="totalAgotados">0</h2>
 
-<div class="card">
+    </div>
 
-<h3>Categorías</h3>
 
-<h2>5</h2>
+    <div class="card">
 
-</div>
+        <h3>Categorías</h3>
 
-<div class="card">
+        <h2 id="totalCategorias">0</h2>
 
-<h3>Inventario</h3>
+    </div>
 
-<h2>$35.200.000</h2>
 
-</div>
+    <div class="card">
+
+        <h3>Inventario</h3>
+
+        <h2 id="totalInventario">$0</h2>
+
+    </div>
 
 </section>
 
-<!--================ FILTROS ================-->
+
+<!-- =====================================================
+                        FILTROS
+===================================================== -->
 
 <section class="barra">
 
-<input
-type="text"
-placeholder="Buscar producto...">
+    <input
+        type="text"
+        id="buscadorProducto"
+        placeholder="Buscar producto...">
 
-<select>
 
-<option>Todas las categorías</option>
+    <select id="filtroCategoria">
 
-<option>Zapatos</option>
+        <option value="">
+            Todas las categorías
+        </option>
 
-<option>Ropa</option>
+        <option value="Zapatos">
+            Zapatos
+        </option>
 
-<option>Accesorios</option>
+        <option value="Ropa">
+            Ropa
+        </option>
 
-</select>
+        <option value="Accesorios">
+            Accesorios
+        </option>
 
-<button>
+    </select>
 
-Buscar
 
-</button>
+    <button
+        type="button"
+        id="btnBuscar">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        Buscar
+
+    </button>
 
 </section>
 
-<!--================ TABLA ================-->
+
+<!-- =====================================================
+                         TABLA
+===================================================== -->
 
 <section class="tabla">
 
@@ -114,380 +151,463 @@ Buscar
 
 <tr>
 
-<th>Imagen</th>
-
-<th>Nombre</th>
-
-<th>Categoría</th>
-
-<th>Precio</th>
-
-<th>Stock</th>
-
-<th>Estado</th>
-
-<th>Acciones</th>
+    <th>Imagen</th>
+    <th>Nombre</th>
+    <th>Marca</th>
+    <th>Categoría</th>
+    <th>Precio</th>
+    <th>Stock</th>
+    <th>Estado</th>
+    <th>Acciones</th>
 
 </tr>
 
 </thead>
 
-<tbody>
 
-<tr>
+<tbody id="tablaProductos">
 
-<td>
+{% for producto in productos %}
 
-<img src="img/airforce.jpg">
+<tr
+    data-id="{{ producto.id_producto }}"
+    data-nombre="{{ producto.nombre_producto }}"
+    data-categoria="{{ producto.categoria }}"
+    data-marca="{{ producto.marca_producto }}"
+    data-precio="{{ producto.precio_producto }}"
+    data-stock="{{ producto.stock_producto }}"
+    data-descripcion="{{ producto.descripcion_producto }}"
+    data-talla="{{ producto.talla }}"
+    data-sku="{{ producto.sku }}"
+    data-codigo-barras="{{ producto.codigo_barras }}"
+    data-imagen="{{ producto.imagen }}"
+>
 
-</td>
 
-<td>Nike Air Force One</td>
+    <!-- IMAGEN -->
 
-<td>Zapatos</td>
+    <td>
 
-<td>$420.000</td>
+        <img
+            src="{{ producto.imagen or url_for('static', filename='img/sin_imagen.png') }}"
+            alt="{{ producto.nombre_producto }}"
+            class="imagen-producto">
 
-<td>28</td>
+    </td>
 
-<td>
 
-<span class="disponible">
+    <!-- NOMBRE -->
 
-Disponible
+    <td>
 
-</span>
+        {{ producto.nombre_producto }}
 
-</td>
+    </td>
 
-<td>
 
-<button class="editar">
+    <!-- MARCA -->
 
-<i class="fa-solid fa-pen"></i>
+    <td>
 
-</button>
+        {{ producto.marca_producto or "-" }}
 
-<button class="eliminar">
+    </td>
 
-<i class="fa-solid fa-trash"></i>
 
-</button>
+    <!-- CATEGORÍA -->
 
-<button class="ver">
+    <td>
 
-<i class="fa-solid fa-eye"></i>
+        {{ producto.categoria or "-" }}
 
-</button>
+    </td>
 
-</td>
+
+    <!-- PRECIO -->
+
+    <td>
+
+        ${{ "{:,.0f}".format(
+            producto.precio_producto|float
+        ).replace(",", ".") }}
+
+    </td>
+
+
+    <!-- STOCK -->
+
+    <td>
+
+        {{ producto.stock_producto }}
+
+    </td>
+
+
+    <!-- ESTADO -->
+
+    <td>
+
+        {% if producto.stock_producto|int > 0 %}
+
+            <span class="disponible">
+                Disponible
+            </span>
+
+        {% else %}
+
+            <span class="agotado">
+                Agotado
+            </span>
+
+        {% endif %}
+
+    </td>
+
+
+    <!-- ACCIONES -->
+
+    <td class="acciones">
+
+        <button
+            type="button"
+            class="editar"
+            data-id="{{ producto.id_producto }}"
+            title="Editar producto">
+
+            <i class="fa-solid fa-pen"></i>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="eliminar"
+            data-id="{{ producto.id_producto }}"
+            title="Eliminar producto">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </button>
+
+
+        <button
+            type="button"
+            class="ver"
+            data-id="{{ producto.id_producto }}"
+            title="Ver producto">
+
+            <i class="fa-solid fa-eye"></i>
+
+        </button>
+
+    </td>
 
 </tr>
 
+
+{% else %}
+
 <tr>
 
-<td>
+    <td colspan="8">
 
-<img src="img/cadena.jpg">
+        No hay productos registrados.
 
-</td>
-
-<td>Cadena Cubana</td>
-
-<td>Accesorios</td>
-
-<td>$95.000</td>
-
-<td>15</td>
-
-<td>
-
-<span class="disponible">
-
-Disponible
-
-</span>
-
-</td>
-
-<td>
-
-<button class="editar">
-
-<i class="fa-solid fa-pen"></i>
-
-</button>
-
-<button class="eliminar">
-
-<i class="fa-solid fa-trash"></i>
-
-</button>
-
-<button class="ver">
-
-<i class="fa-solid fa-eye"></i>
-
-</button>
-
-</td>
+    </td>
 
 </tr>
 
-<tr>
+{% endfor %}
 
-            <td>
-                <img src="img/pantalon.jpg" alt="Pantalón Cargo">
-            </td>
-
-            <td>Pantalón Cargo Serenity</td>
-
-            <td>Ropa</td>
-
-            <td>$180.000</td>
-
-            <td>12</td>
-
-            <td>
-                <span class="disponible">Disponible</span>
-            </td>
-
-            <td>
-
-                <button class="editar">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-
-                <button class="eliminar">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-
-                <button class="ver">
-                    <i class="fa-solid fa-eye"></i>
-                </button>
-
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>
-                <img src="img/buso.jpg" alt="Buso">
-            </td>
-
-            <td>Buso Oversize</td>
-
-            <td>Ropa</td>
-
-            <td>$210.000</td>
-
-            <td>0</td>
-
-            <td>
-                <span class="agotado">Agotado</span>
-            </td>
-
-            <td>
-
-                <button class="editar">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-
-                <button class="eliminar">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-
-                <button class="ver">
-                    <i class="fa-solid fa-eye"></i>
-                </button>
-
-            </td>
-
-        </tr>
-
-        <tr>
-
-            <td>
-                <img src="img/reloj.jpg" alt="Reloj">
-            </td>
-
-            <td>Reloj Luxury Blue</td>
-
-            <td>Accesorios</td>
-
-            <td>$350.000</td>
-
-            <td>8</td>
-
-            <td>
-                <span class="disponible">Disponible</span>
-            </td>
-
-            <td>
-
-                <button class="editar">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-
-                <button class="eliminar">
-                    <i class="fa-solid fa-trash"></i>
-                </button>
-
-                <button class="ver">
-                    <i class="fa-solid fa-eye"></i>
-                </button>
-
-            </td>
-
-        </tr>
-
-    </tbody>
+</tbody>
 
 </table>
 
 </section>
 
-<!--================ PAGINACIÓN ================-->
 
-<section class="paginacion">
+<!-- =====================================================
+                      PAGINACIÓN
+===================================================== -->
 
-<button>
-    <i class="fa-solid fa-angle-left"></i>
-</button>
+<section
+    class="paginacion"
+    id="paginacion">
 
-<button class="activo">1</button>
+    <button
+        type="button"
+        id="paginaAnterior">
 
-<button>2</button>
+        <i class="fa-solid fa-angle-left"></i>
 
-<button>3</button>
+    </button>
 
-<button>
-    <i class="fa-solid fa-angle-right"></i>
-</button>
+
+    <div id="numerosPaginas"></div>
+
+
+    <button
+        type="button"
+        id="paginaSiguiente">
+
+        <i class="fa-solid fa-angle-right"></i>
+
+    </button>
 
 </section>
 
-<!--================ FOOTER ================-->
+
+<!-- =====================================================
+                         FOOTER
+===================================================== -->
 
 <footer>
 
-<p>
+    <p>
+        © 2026 Serenity Mode | Gestión de Productos
+    </p>
 
-© 2026 Serenity Mode | Gestión de Productos
+</footer>
 
-</p>
 
-<!--==================================
-        MODAL AGREGAR PRODUCTO
-===================================-->
+<!-- =====================================================
+                  MODAL AGREGAR PRODUCTO
+===================================================== -->
 
-<div class="modal" id="modalAgregar">
+<div
+    class="modal"
+    id="modalAgregar">
 
     <div class="modal-box modal-grande">
 
         <div class="modal-header">
 
             <h2>
+
                 <i class="fa-solid fa-plus"></i>
+
                 Agregar Producto
+
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+                type="button"
+                class="cerrar-modal">
+
+                &times;
+
+            </button>
 
         </div>
 
-        <div class="modal-body">
 
-            <div class="producto-modal">
+        <form id="formAgregarProducto">
 
-                <div class="producto-imagen">
+            <div class="modal-body">
 
-                    <img
-                    src="{{ url_for('static', filename='img/sin_imagen.png') }}"
-                    id="previewAgregar">
+                <div class="producto-modal">
 
-                    <label class="subir">
 
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <!-- IMAGEN -->
 
-                        Seleccionar imagen
+                    <div class="producto-imagen">
 
-                        <input
-                        type="file"
-                        hidden>
+                        <img
+                            src="{{ url_for(
+                                'static',
+                                filename='img/sin_imagen.png'
+                            ) }}"
+                            id="previewAgregar"
+                            alt="Vista previa">
 
-                    </label>
-
-                </div>
-
-                <div class="producto-info">
-
-                    <div class="grupo">
-
-                        <label>Nombre</label>
-
-                        <input
-                        type="text">
-
-                    </div>
-
-                    <div class="fila">
 
                         <div class="grupo">
 
-                            <label>Categoría</label>
+                            <label for="imagenAgregar">
+                                URL de la imagen
+                            </label>
 
-                            <select>
+                            <input
+                                type="url"
+                                id="imagenAgregar"
+                                placeholder="https://ejemplo.com/imagen.jpg"
+                                required>
 
-                                <option>Zapatos</option>
-                                <option>Ropa</option>
-                                <option>Accesorios</option>
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMACIÓN -->
+
+                    <div class="producto-info">
+
+
+                        <!-- NOMBRE -->
+
+                        <div class="grupo">
+
+                            <label for="nombreAgregar">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombreAgregar"
+                                required>
+
+                        </div>
+
+
+                        <!-- MARCA -->
+
+                        <div class="grupo">
+
+                            <label for="marcaAgregar">
+                                Marca
+                            </label>
+
+                            <input
+                                type="text"
+                                id="marcaAgregar"
+                                required>
+
+                        </div>
+
+
+                        <!-- CATEGORÍA -->
+
+                        <div class="grupo">
+
+                            <label for="categoriaAgregar">
+                                Categoría
+                            </label>
+
+                            <select
+                                id="categoriaAgregar"
+                                required>
+
+                                <option value="">
+                                    Seleccionar categoría
+                                </option>
+
+                                <option value="Ropa">
+                                    Ropa
+                                </option>
+
+                                <option value="Zapatos">
+                                    Zapatos
+                                </option>
+
+                                <option value="Accesorios">
+                                    Accesorios
+                                </option>
 
                             </select>
 
                         </div>
 
-                        <div class="grupo">
 
-                            <label>Estado</label>
+                        <!-- PRECIO + STOCK -->
 
-                            <select>
+                        <div class="fila">
 
-                                <option>Disponible</option>
-                                <option>Agotado</option>
+                            <div class="grupo">
 
-                            </select>
+                                <label for="precioAgregar">
+                                    Precio
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="precioAgregar"
+                                    min="0"
+                                    step="0.01"
+                                    required>
+
+                            </div>
+
+
+                            <div class="grupo">
+
+                                <label for="stockAgregar">
+                                    Stock
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="stockAgregar"
+                                    min="0"
+                                    required>
+
+                            </div>
 
                         </div>
 
-                    </div>
 
-                    <div class="fila">
-
-                        <div class="grupo">
-
-                            <label>Precio</label>
-
-                            <input type="number">
-
-                        </div>
+                        <!-- SKU -->
 
                         <div class="grupo">
 
-                            <label>Stock</label>
+                            <label for="skuAgregar">
+                                SKU
+                            </label>
 
-                            <input type="number">
+                            <input
+                                type="text"
+                                id="skuAgregar"
+                                required>
 
                         </div>
 
-                    </div>
 
-                    <div class="grupo">
+                        <!-- CÓDIGO DE BARRAS -->
 
-                        <label>Descripción</label>
+                        <div class="grupo">
 
-                        <textarea rows="5"></textarea>
+                            <label for="codigoAgregar">
+                                Código de barras
+                            </label>
+
+                            <input
+                                type="text"
+                                id="codigoAgregar"
+                                required>
+
+                        </div>
+
+
+                        <!-- TALLA -->
+
+                        <div class="grupo">
+
+                            <label for="tallaAgregar">
+                                Talla
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tallaAgregar"
+                                placeholder="Ej: S,M,L,XL">
+
+                        </div>
+
+
+                        <!-- DESCRIPCIÓN -->
+
+                        <div class="grupo">
+
+                            <label for="descripcionAgregar">
+                                Descripción
+                            </label>
+
+                            <textarea
+                                id="descripcionAgregar"
+                                rows="5"
+                                required></textarea>
+
+                        </div>
 
                     </div>
 
@@ -495,31 +615,43 @@ Disponible
 
             </div>
 
-        </div>
 
-        <div class="modal-footer">
+            <div class="modal-footer">
 
-            <button class="btn-outline cerrar">
+                <button
+                    type="button"
+                    class="btn-outline cerrar">
 
-                Cancelar
+                    Cancelar
 
-            </button>
+                </button>
 
-            <button class="btn-dorado" id="guardarProducto">
-                Guardar Producto
-            </button>
 
-        </div>
+                <button
+                    type="submit"
+                    class="btn-dorado"
+                    id="guardarProducto">
+
+                    Guardar Producto
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
-<!--==================================
-        MODAL EDITAR PRODUCTO
-===================================-->
 
-<div class="modal" id="modalEditar">
+<!-- =====================================================
+                  MODAL EDITAR PRODUCTO
+===================================================== -->
+
+<div
+    class="modal"
+    id="modalEditar">
 
     <div class="modal-box modal-grande">
 
@@ -533,104 +665,226 @@ Disponible
 
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+                type="button"
+                class="cerrar-modal">
+
+                &times;
+
+            </button>
 
         </div>
 
-        <div class="modal-body">
 
-            <div class="producto-modal">
+        <form id="formEditarProducto">
 
-                <div class="producto-imagen">
+            <div class="modal-body">
 
-                    <img
-                    src="{{ url_for('static', filename='img/producto1.jpg') }}"
-                    id="previewEditar">
+                <div class="producto-modal">
 
-                    <label class="subir">
 
-                        Cambiar imagen
+                    <!-- IMAGEN -->
 
-                        <input
-                        type="file"
-                        hidden>
+                    <div class="producto-imagen">
 
-                    </label>
+                        <img
+                            id="previewEditar"
+                            src="{{ url_for(
+                                'static',
+                                filename='img/sin_imagen.png'
+                            ) }}"
+                            alt="Vista previa">
 
-                </div>
-
-                <div class="producto-info">
-
-                    <div class="grupo">
-
-                        <label>Nombre</label>
-
-                        <input
-                        type="text"
-                        value="Nike Air Force One">
-
-                    </div>
-
-                    <div class="fila">
 
                         <div class="grupo">
 
-                            <label>Categoría</label>
+                            <label for="imagenEditar">
+                                URL de la imagen
+                            </label>
 
-                            <select>
+                            <input
+                                type="url"
+                                id="imagenEditar"
+                                placeholder="https://ejemplo.com/imagen.jpg"
+                                required>
 
-                                <option selected>Zapatos</option>
-                                <option>Ropa</option>
-                                <option>Accesorios</option>
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMACIÓN -->
+
+                    <div class="producto-info">
+
+
+                        <!-- ID OCULTO -->
+
+                        <input
+                            type="hidden"
+                            id="idEditar">
+
+
+                        <!-- NOMBRE -->
+
+                        <div class="grupo">
+
+                            <label for="nombreEditar">
+                                Nombre
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombreEditar"
+                                required>
+
+                        </div>
+
+
+                        <!-- MARCA -->
+
+                        <div class="grupo">
+
+                            <label for="marcaEditar">
+                                Marca
+                            </label>
+
+                            <input
+                                type="text"
+                                id="marcaEditar"
+                                required>
+
+                        </div>
+
+
+                        <!-- CATEGORÍA -->
+
+                        <div class="grupo">
+
+                            <label for="categoriaEditar">
+                                Categoría
+                            </label>
+
+                            <select
+                                id="categoriaEditar"
+                                required>
+
+                                <option value="Ropa">
+                                    Ropa
+                                </option>
+
+                                <option value="Zapatos">
+                                    Zapatos
+                                </option>
+
+                                <option value="Accesorios">
+                                    Accesorios
+                                </option>
 
                             </select>
 
                         </div>
 
-                        <div class="grupo">
 
-                            <label>Estado</label>
+                        <!-- PRECIO + STOCK -->
 
-                            <select>
+                        <div class="fila">
 
-                                <option selected>Disponible</option>
-                                <option>Agotado</option>
+                            <div class="grupo">
 
-                            </select>
+                                <label for="precioEditar">
+                                    Precio
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="precioEditar"
+                                    min="0"
+                                    step="0.01"
+                                    required>
+
+                            </div>
+
+
+                            <div class="grupo">
+
+                                <label for="stockEditar">
+                                    Stock
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="stockEditar"
+                                    min="0"
+                                    required>
+
+                            </div>
 
                         </div>
 
-                    </div>
 
-                    <div class="fila">
+                        <!-- SKU -->
 
                         <div class="grupo">
 
-                            <label>Precio</label>
+                            <label for="skuEditar">
+                                SKU
+                            </label>
 
                             <input
-                            type="number"
-                            value="420000">
+                                type="text"
+                                id="skuEditar"
+                                required>
 
                         </div>
+
+
+                        <!-- CÓDIGO DE BARRAS -->
 
                         <div class="grupo">
 
-                            <label>Stock</label>
+                            <label for="codigoEditar">
+                                Código de barras
+                            </label>
 
                             <input
-                            type="number"
-                            value="28">
+                                type="text"
+                                id="codigoEditar"
+                                required>
 
                         </div>
 
-                    </div>
 
-                    <div class="grupo">
+                        <!-- TALLA -->
 
-                        <label>Descripción</label>
+                        <div class="grupo">
 
-                        <textarea rows="5">Tenis Nike Air Force elaborados en cuero premium.</textarea>
+                            <label for="tallaEditar">
+                                Talla
+                            </label>
+
+                            <input
+                                type="text"
+                                id="tallaEditar">
+
+                        </div>
+
+
+                        <!-- DESCRIPCIÓN -->
+
+                        <div class="grupo">
+
+                            <label for="descripcionEditar">
+                                Descripción
+                            </label>
+
+                            <textarea
+                                id="descripcionEditar"
+                                rows="5"
+                                required></textarea>
+
+                        </div>
 
                     </div>
 
@@ -638,32 +892,43 @@ Disponible
 
             </div>
 
-        </div>
 
-        <div class="modal-footer">
+            <div class="modal-footer">
 
-            <button class="btn-outline cerrar">
+                <button
+                    type="button"
+                    class="btn-outline cerrar">
 
-                Cancelar
+                    Cancelar
 
-            </button>
+                </button>
 
-            <button class="btn-dorado" id="guardarCambios">
-                Guardar Cambios
-            </button>
-       
-        </div>
 
+                <button
+                    type="submit"
+                    class="btn-dorado"
+                    id="guardarCambios">
+
+                    Guardar Cambios
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
-<!--==================================
-        MODAL VER PRODUCTO
-===================================-->
 
-<div class="modal" id="modalVer">
+<!-- =====================================================
+                    MODAL VER PRODUCTO
+===================================================== -->
+
+<div
+    class="modal"
+    id="modalVer">
 
     <div class="modal-box">
 
@@ -671,42 +936,106 @@ Disponible
 
             <h2>
 
+                <i class="fa-solid fa-eye"></i>
+
                 Detalles del Producto
 
             </h2>
 
-            <button class="cerrar-modal">&times;</button>
+
+            <button
+                type="button"
+                class="cerrar-modal">
+
+                &times;
+
+            </button>
 
         </div>
+
 
         <div class="modal-body">
 
             <div class="vista-producto">
 
                 <img
-                src="{{ url_for('static', filename='img/producto1.jpg') }}">
+                    id="verImagen"
+                    src="{{ url_for(
+                        'static',
+                        filename='img/sin_imagen.png'
+                    ) }}"
+                    alt="Producto">
+
 
                 <div>
 
-                    <h2>Nike Air Force One</h2>
+                    <h2 id="verNombre">
+                        —
+                    </h2>
 
-                    <p><strong>Categoría:</strong> Zapatos</p>
 
-                    <p><strong>Precio:</strong> $420.000</p>
+                    <p>
 
-                    <p><strong>Stock:</strong> 28 unidades</p>
+                        <strong>Marca:</strong>
+
+                        <span id="verMarca">—</span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Categoría:</strong>
+
+                        <span id="verCategoria">—</span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Precio:</strong>
+
+                        <span id="verPrecio">—</span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Stock:</strong>
+
+                        <span id="verStock">—</span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Talla:</strong>
+
+                        <span id="verTalla">—</span>
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>SKU:</strong>
+
+                        <span id="verSku">—</span>
+
+                    </p>
+
 
                     <p>
 
                         <strong>Estado:</strong>
 
-                        <span class="disponible">
-
-                            Disponible
-
-                        </span>
+                        <span id="verEstado">—</span>
 
                     </p>
+
 
                     <p>
 
@@ -714,10 +1043,9 @@ Disponible
 
                     </p>
 
-                    <p>
 
-                        Tenis deportivos elaborados en cuero premium para uso casual.
-
+                    <p id="verDescripcion">
+                        —
                     </p>
 
                 </div>
@@ -726,9 +1054,12 @@ Disponible
 
         </div>
 
+
         <div class="modal-footer">
 
-            <button class="btn-dorado cerrar">
+            <button
+                type="button"
+                class="btn-dorado cerrar">
 
                 Cerrar
 
@@ -740,51 +1071,83 @@ Disponible
 
 </div>
 
-<!--==================================
-        MODAL ELIMINAR PRODUCTO
-===================================-->
 
-<div class="modal" id="modalEliminar">
+<!-- =====================================================
+                  MODAL ELIMINAR PRODUCTO
+===================================================== -->
 
-    <div class="modal-box modal-pequeño">
+<div
+    class="modal"
+    id="modalEliminar">
 
-        <div class="modal-body confirmar">
+    <div class="modal-box modal-pequeno">
 
-            <i class="fa-solid fa-triangle-exclamation"></i>
+        <div class="modal-header">
 
-            <button class="btn-eliminar" id="eliminarProducto">
-                Eliminar
+            <h2>
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                Eliminar producto
+
+            </h2>
+
+
+            <button
+                type="button"
+                class="cerrar-modal">
+
+                &times;
+
             </button>
-
-            <p>
-
-                ¿Deseas eliminar el producto
-
-                <strong>
-
-                    Nike Air Force One
-
-                </strong>?
-
-            </p>
-
-            <span>
-
-                Esta acción no se puede deshacer.
-
-            </span>
 
         </div>
 
+
+        <div class="modal-body confirmar">
+
+            <i class="fa-solid fa-trash"></i>
+
+
+            <p>
+                ¿Deseas eliminar el producto?
+            </p>
+
+
+            <strong id="nombreEliminar">
+                —
+            </strong>
+
+
+            <span>
+                Esta acción no se puede deshacer.
+            </span>
+
+
+            <input
+                type="hidden"
+                id="idEliminar">
+
+        </div>
+
+
         <div class="modal-footer">
 
-            <button class="btn-outline cerrar">
+            <button
+                type="button"
+                class="btn-outline cerrar">
 
                 Cancelar
 
             </button>
 
-            <button class="btn-eliminar">
+
+            <button
+                type="button"
+                class="btn-eliminar"
+                id="confirmarEliminar">
+
+                <i class="fa-solid fa-trash"></i>
 
                 Eliminar
 
@@ -797,14 +1160,20 @@ Disponible
 </div>
 
 
-</footer>
-
 </main>
 
-</body>
 
-<script src="{{ url_for('static', filename='js/productos_adm.js') }}"></script>
+<!-- =====================================================
+                    JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{{ url_for(
+        'static',
+        filename='js/productos_adm.js'
+    ) }}">
+</script>
+
+
 {% endblock %}
 
-
-</html>

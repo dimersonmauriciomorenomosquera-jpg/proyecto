@@ -1,5 +1,3 @@
-
-
 /*=========================
         CONTENIDO
 =========================*/
@@ -43,6 +41,7 @@ header p{
     color:white;
 }
 
+
 /*=========================
       ESTADÍSTICAS
 =========================*/
@@ -76,6 +75,7 @@ header p{
     color:#111;
     font-size:32px;
 }
+
 
 /*=========================
       BÚSQUEDA
@@ -117,6 +117,7 @@ header p{
     background:#d4af37;
     color:#111;
 }
+
 
 /*=========================
         TABLA
@@ -168,6 +169,7 @@ tbody img{
     border-radius:12px;
 }
 
+
 /*=========================
         ESTADOS
 =========================*/
@@ -189,6 +191,7 @@ tbody img{
     font-size:13px;
     font-weight:600;
 }
+
 
 /*=========================
         BOTONES
@@ -249,6 +252,7 @@ tbody img{
 
 }
 
+
 /*=========================
       PAGINACIÓN
 =========================*/
@@ -289,6 +293,7 @@ tbody img{
 
 }
 
+
 /*=========================
         FOOTER
 =========================*/
@@ -310,6 +315,7 @@ footer p{
     letter-spacing:1px;
 
 }
+
 
 /*=========================
       ANIMACIONES
@@ -341,6 +347,7 @@ footer p{
 
 }
 
+
 /*=========================
         SCROLL
 =========================*/
@@ -363,6 +370,7 @@ footer p{
     background:#efefef;
 
 }
+
 
 /*=========================
       RESPONSIVE
@@ -450,6 +458,7 @@ table{
 
 }
 
+
 /*==================================
             MODALES
 ==================================*/
@@ -457,10 +466,13 @@ table{
 .modal{
 
     position:fixed;
+
     inset:0;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     background:rgba(0,0,0,.75);
@@ -468,20 +480,30 @@ table{
     backdrop-filter:blur(8px);
 
     opacity:0;
+
     visibility:hidden;
 
     transition:.35s ease;
 
     z-index:9999;
 
+    overflow-y:auto;
+
+    padding:30px 15px;
+
+    box-sizing:border-box;
+
 }
+
 
 .modal.activo{
 
     opacity:1;
+
     visibility:visible;
 
 }
+
 
 /*==================================
         CAJA MODAL
@@ -490,7 +512,10 @@ table{
 .modal-box{
 
     width:900px;
+
     max-width:95%;
+
+    max-height:calc(100vh - 60px);
 
     background:#1a1a1a;
 
@@ -499,6 +524,10 @@ table{
     border-radius:20px;
 
     overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
 
     transform:translateY(30px) scale(.95);
 
@@ -509,23 +538,29 @@ table{
 
 }
 
+
 .modal.activo .modal-box{
 
     transform:translateY(0) scale(1);
 
 }
 
+
 .modal-grande{
 
     width:980px;
 
+    max-width:95vw;
+
 }
+
 
 .modal-pequeño{
 
     width:450px;
 
 }
+
 
 /*==================================
             HEADER
@@ -543,7 +578,10 @@ table{
 
     border-bottom:1px solid rgba(255,255,255,.08);
 
+    flex-shrink:0;
+
 }
+
 
 .modal-header h2{
 
@@ -559,9 +597,11 @@ table{
 
 }
 
+
 .cerrar-modal{
 
     width:42px;
+
     height:42px;
 
     border:none;
@@ -580,6 +620,7 @@ table{
 
 }
 
+
 .cerrar-modal:hover{
 
     background:#C7A85D;
@@ -587,6 +628,24 @@ table{
     color:#111;
 
 }
+
+
+/*==================================
+        FORMULARIO DEL MODAL
+==================================*/
+
+.modal-box form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    min-height:0;
+
+}
+
 
 /*==================================
             BODY
@@ -596,7 +655,48 @@ table{
 
     padding:30px;
 
+    overflow-y:auto;
+
+    flex:1;
+
+    min-height:0;
+
 }
+
+
+/*==================================
+        SCROLL DEL MODAL
+==================================*/
+
+.modal-body::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+.modal-body::-webkit-scrollbar-thumb{
+
+    background:#555;
+
+    border-radius:20px;
+
+}
+
+
+.modal-body::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+
+.modal-body::-webkit-scrollbar-thumb:hover{
+
+    background:#C7A85D;
+
+}
+
 
 /*==================================
         GRID PRODUCTO
@@ -612,6 +712,7 @@ table{
 
 }
 
+
 /*==================================
             IMAGEN
 ==================================*/
@@ -626,6 +727,7 @@ table{
 
 }
 
+
 .producto-imagen img{
 
     width:100%;
@@ -639,6 +741,7 @@ table{
     border:2px solid #2e2e2e;
 
 }
+
 
 .subir{
 
@@ -664,6 +767,7 @@ table{
 
 }
 
+
 .subir:hover{
 
     background:#C7A85D;
@@ -671,6 +775,7 @@ table{
     color:#111;
 
 }
+
 
 /*==================================
         INFORMACIÓN
@@ -686,6 +791,7 @@ table{
 
 }
 
+
 .grupo{
 
     display:flex;
@@ -696,6 +802,7 @@ table{
 
 }
 
+
 .grupo label{
 
     color:#bdbdbd;
@@ -703,6 +810,7 @@ table{
     font-size:15px;
 
 }
+
 
 .grupo input,
 .grupo select,
@@ -726,11 +834,13 @@ table{
 
 }
 
+
 .grupo textarea{
 
     resize:none;
 
 }
+
 
 .grupo input:focus,
 .grupo select:focus,
@@ -743,6 +853,7 @@ table{
     box-shadow:0 0 10px rgba(199,168,93,.25);
 
 }
+
 
 /*==================================
             FILA
@@ -758,8 +869,9 @@ table{
 
 }
 
+
 /*==================================
-        FOOTER
+        FOOTER DEL MODAL
 ==================================*/
 
 .modal-footer{
@@ -774,7 +886,10 @@ table{
 
     border-top:1px solid rgba(255,255,255,.08);
 
+    flex-shrink:0;
+
 }
+
 
 /*==================================
         BOTONES
@@ -800,11 +915,13 @@ table{
 
 }
 
+
 .btn-dorado:hover{
 
     transform:translateY(-2px);
 
 }
+
 
 .btn-outline{
 
@@ -822,11 +939,13 @@ table{
 
 }
 
+
 .btn-outline:hover{
 
     border-color:#C7A85D;
 
 }
+
 
 .btn-eliminar{
 
@@ -844,11 +963,13 @@ table{
 
 }
 
+
 .btn-eliminar:hover{
 
     background:#b92929;
 
 }
+
 
 /*==================================
         VISTA PRODUCTO
@@ -866,6 +987,7 @@ table{
 
 }
 
+
 .vista-producto img{
 
     width:100%;
@@ -874,6 +996,7 @@ table{
 
 }
 
+
 .vista-producto h2{
 
     color:#C7A85D;
@@ -881,6 +1004,7 @@ table{
     margin-bottom:18px;
 
 }
+
 
 .vista-producto p{
 
@@ -892,6 +1016,7 @@ table{
 
 }
 
+
 /*==================================
         ELIMINAR
 ==================================*/
@@ -901,6 +1026,7 @@ table{
     text-align:center;
 
 }
+
 
 .confirmar i{
 
@@ -912,6 +1038,7 @@ table{
 
 }
 
+
 .confirmar h2{
 
     color:white;
@@ -920,6 +1047,7 @@ table{
 
 }
 
+
 .confirmar p{
 
     color:#d2d2d2;
@@ -927,6 +1055,7 @@ table{
     font-size:16px;
 
 }
+
 
 .confirmar span{
 
@@ -938,8 +1067,9 @@ table{
 
 }
 
+
 /*==================================
-        RESPONSIVE
+        RESPONSIVE MODALES
 ==================================*/
 
 @media(max-width:900px){
@@ -947,41 +1077,81 @@ table{
 .producto-modal,
 .vista-producto{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
 
 .producto-imagen{
 
-align-items:center;
+    align-items:center;
 
 }
 
 .producto-imagen img{
 
-max-width:320px;
+    max-width:320px;
 
 }
 
 }
+
 
 @media(max-width:600px){
 
 .fila{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
 }
 
 .modal-footer{
 
-flex-direction:column;
+    flex-direction:column;
 
 }
 
 .modal-footer button{
 
-width:100%;
+    width:100%;
+
+}
+
+
+/* Ajuste adicional para pantallas pequeñas */
+
+.modal{
+
+    padding:15px 10px;
+
+}
+
+
+.modal-box{
+
+    max-height:calc(100vh - 30px);
+
+    max-width:100%;
+
+}
+
+
+.modal-header{
+
+    padding:20px;
+
+}
+
+
+.modal-body{
+
+    padding:20px;
+
+}
+
+
+.modal-footer{
+
+    padding:20px;
 
 }
 

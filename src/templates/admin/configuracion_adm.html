@@ -1,189 +1,443 @@
 {% extends "admin/layaout_adm.html" %}
 
 {% block css %}
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/configuracion_adm.css') }}">
+
 {% endblock %}
 
 {% block contenido %}
 
 <div class="configuracion">
 
-    <div class="titulo">
+<!-- =====================================================
+                     TÍTULO
+====================================================== -->
 
-        <h1>Configuración</h1>
+<div class="titulo">
 
-        <p>
-            Administra la información general y las preferencias de Serenity Mode.
-        </p>
+    <h1>Configuración</h1>
 
-    </div>
-
-    <div class="config-grid">
-
-        <!-- PERFIL -->
-
-        <div class="config-card">
-
-            <h2>
-                <i class="fa-solid fa-user"></i>
-                Perfil del administrador
-            </h2>
-
-            <div class="perfil">
-
-                <img src="{{ url_for('static', filename='img/admin.jpg') }}" alt="Administrador">
-
-                <div class="datos">
-
-                    <label>Nombre</label>
-                    <input type="text" value="Mauricio Moreno">
-
-                    <label>Correo electrónico</label>
-                    <input type="email" value="admin@serenitymode.com">
-
-                    <label>Teléfono</label>
-                    <input type="text" value="+57 300 123 4567">
-
-                    <button>
-                        Guardar cambios
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- SEGURIDAD -->
-
-        <div class="config-card">
-
-            <h2>
-                <i class="fa-solid fa-lock"></i>
-                Seguridad
-            </h2>
-
-            <label>Contraseña actual</label>
-            <input type="password">
-
-            <label>Nueva contraseña</label>
-            <input type="password">
-
-            <label>Confirmar contraseña</label>
-            <input type="password">
-
-            <button>
-                Actualizar contraseña
-            </button>
-
-        </div>
-
-        <!-- TIENDA -->
-
-        <div class="config-card">
-
-            <h2>
-                <i class="fa-solid fa-store"></i>
-                Información de la tienda
-            </h2>
-
-            <label>Nombre de la tienda</label>
-            <input type="text" value="Serenity Mode">
-
-            <label>Correo de soporte</label>
-            <input type="email" value="soporte@serenitymode.com">
-
-            <label>Teléfono</label>
-            <input type="text" value="+57 300 123 4567">
-
-            <label>Dirección</label>
-            <input type="text" value="Bogotá, Colombia">
-
-            <button>
-                Guardar información
-            </button>
-
-        </div>
-
-        <!-- NOTIFICACIONES -->
-
-        <div class="config-card">
-
-            <h2>
-                <i class="fa-solid fa-bell"></i>
-                Notificaciones
-            </h2>
-
-            <div class="switch">
-                <span>Nuevos pedidos</span>
-                <input type="checkbox" checked>
-            </div>
-
-            <div class="switch">
-                <span>Nuevos clientes</span>
-                <input type="checkbox" checked>
-            </div>
-
-            <div class="switch">
-                <span>Stock bajo</span>
-                <input type="checkbox" checked>
-            </div>
-
-            <div class="switch">
-                <span>Promociones</span>
-                <input type="checkbox">
-            </div>
-
-            <div class="switch">
-                <span>Ventas realizadas</span>
-                <input type="checkbox" checked>
-            </div>
-
-            <button>
-                Guardar preferencias
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- ZONA DE SEGURIDAD -->
-
-    <section class="danger-zone">
-
-        <h2>
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            Zona de seguridad
-        </h2>
-
-        <p>
-
-            Las siguientes acciones son importantes y pueden afectar el funcionamiento de la tienda.
-
-        </p>
-
-        <div class="acciones">
-
-            <button class="cerrar">
-
-                <i class="fa-solid fa-right-from-bracket"></i>
-
-                Cerrar sesión
-
-            </button>
-
-            <button class="eliminar">
-
-                <i class="fa-solid fa-power-off"></i>
-
-                Desactivar tienda
-
-            </button>
-
-        </div>
-
-    </section>
+    <p>
+        Administra la información general y las preferencias de Serenity Mode.
+    </p>
 
 </div>
 
+
+<!-- =====================================================
+                   GRID CONFIGURACIÓN
+====================================================== -->
+
+<div class="config-grid">
+
+
+    <!-- =================================================
+                     PERFIL ADMINISTRADOR
+    ================================================== -->
+
+    <div class="config-card">
+
+        <h2>
+            <i class="fa-solid fa-user"></i>
+            Perfil del administrador
+        </h2>
+
+
+        <div class="perfil">
+
+            <img
+                src="{{ url_for('static', filename='img/admin.jpg') }}"
+                alt="Administrador"
+            >
+
+
+            <div class="datos">
+
+
+                <!-- ID ADMINISTRADOR -->
+
+                <input
+                    type="hidden"
+                    id="idAdministrador"
+                    value="{{ administrador.id_administrador or '' }}"
+                >
+
+
+                <!-- NOMBRE -->
+
+                <label for="nombreAdministrador">
+                    Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="nombreAdministrador"
+                    value="{{ administrador.nombre_administrador or '' }}"
+                    placeholder="Ingrese su nombre"
+                >
+
+
+                <!-- CORREO -->
+
+                <label for="emailAdministrador">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="emailAdministrador"
+                    value="{{ administrador.email_administrador or '' }}"
+                    placeholder="Ingrese su correo electrónico"
+                >
+
+
+                <!-- TELÉFONO -->
+
+                <label for="telefonoAdministrador">
+                    Teléfono
+                </label>
+
+                <input
+                    type="text"
+                    id="telefonoAdministrador"
+                    value="{{ administrador.telefono_administrador or '' }}"
+                    placeholder="Ingrese su teléfono"
+                >
+
+
+                <!-- ROL -->
+
+                <label for="rolAdministrador">
+                    Rol
+                </label>
+
+                <input
+                    type="text"
+                    id="rolAdministrador"
+                    value="{{ administrador.rol_administrador or '' }}"
+                    readonly
+                >
+
+
+                <!-- ESTADO -->
+
+                <label for="estadoAdministrador">
+                    Estado
+                </label>
+
+                <input
+                    type="text"
+                    id="estadoAdministrador"
+                    value="{{ administrador.estado_administrador or '' }}"
+                    readonly
+                >
+
+
+                <!-- BOTÓN GUARDAR -->
+
+                <button
+                    type="button"
+                    id="btnGuardarPerfil"
+                >
+                    Guardar cambios
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+                        SEGURIDAD
+    ================================================== -->
+
+    <div class="config-card">
+
+        <h2>
+            <i class="fa-solid fa-lock"></i>
+            Seguridad
+        </h2>
+
+
+        <label for="passwordActual">
+            Contraseña actual
+        </label>
+
+        <input
+            type="password"
+            id="passwordActual"
+            placeholder="Ingrese su contraseña actual"
+        >
+
+
+        <label for="passwordNueva">
+            Nueva contraseña
+        </label>
+
+        <input
+            type="password"
+            id="passwordNueva"
+            placeholder="Ingrese la nueva contraseña"
+        >
+
+
+        <label for="passwordConfirmar">
+            Confirmar contraseña
+        </label>
+
+        <input
+            type="password"
+            id="passwordConfirmar"
+            placeholder="Confirme la nueva contraseña"
+        >
+
+
+        <button
+            type="button"
+            id="btnActualizarPassword"
+        >
+            Actualizar contraseña
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+                  INFORMACIÓN DE LA TIENDA
+    ================================================== -->
+
+    <div class="config-card">
+
+        <h2>
+            <i class="fa-solid fa-store"></i>
+            Información de la tienda
+        </h2>
+
+
+        <label for="nombreTienda">
+            Nombre de la tienda
+        </label>
+
+        <input
+            type="text"
+            id="nombreTienda"
+            value="Serenity Mode"
+        >
+
+
+        <label for="correoSoporte">
+            Correo de soporte
+        </label>
+
+        <input
+            type="email"
+            id="correoSoporte"
+            value="soporte@serenitymode.com"
+        >
+
+
+        <label for="telefonoTienda">
+            Teléfono
+        </label>
+
+        <input
+            type="text"
+            id="telefonoTienda"
+            value="+57 300 123 4567"
+        >
+
+
+        <label for="direccionTienda">
+            Dirección
+        </label>
+
+        <input
+            type="text"
+            id="direccionTienda"
+            value="Bogotá, Colombia"
+        >
+
+
+        <button
+            type="button"
+            id="btnGuardarTienda"
+        >
+            Guardar información
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+                     NOTIFICACIONES
+    ================================================== -->
+
+    <div class="config-card">
+
+        <h2>
+            <i class="fa-solid fa-bell"></i>
+            Notificaciones
+        </h2>
+
+
+        <div class="switch">
+
+            <span>
+                Nuevos pedidos
+            </span>
+
+            <input
+                type="checkbox"
+                id="notificacionPedidos"
+                checked
+            >
+
+        </div>
+
+
+        <div class="switch">
+
+            <span>
+                Nuevos clientes
+            </span>
+
+            <input
+                type="checkbox"
+                id="notificacionClientes"
+                checked
+            >
+
+        </div>
+
+
+        <div class="switch">
+
+            <span>
+                Stock bajo
+            </span>
+
+            <input
+                type="checkbox"
+                id="notificacionStock"
+                checked
+            >
+
+        </div>
+
+
+        <div class="switch">
+
+            <span>
+                Promociones
+            </span>
+
+            <input
+                type="checkbox"
+                id="notificacionPromociones"
+            >
+
+        </div>
+
+
+        <div class="switch">
+
+            <span>
+                Ventas realizadas
+            </span>
+
+            <input
+                type="checkbox"
+                id="notificacionVentas"
+                checked
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="btnGuardarNotificaciones"
+        >
+            Guardar preferencias
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+                   ZONA DE SEGURIDAD
+====================================================== -->
+
+<section class="danger-zone">
+
+    <h2>
+
+        <i class="fa-solid fa-triangle-exclamation"></i>
+
+        Zona de seguridad
+
+    </h2>
+
+
+    <p>
+
+        Las siguientes acciones son importantes y pueden
+        afectar el funcionamiento de la tienda.
+
+    </p>
+
+
+    <div class="acciones">
+
+
+        <button
+            type="button"
+            class="cerrar"
+            id="btnCerrarSesion"
+        >
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Cerrar sesión
+
+        </button>
+
+
+        <button
+            type="button"
+            class="eliminar"
+            id="btnDesactivarTienda"
+        >
+
+            <i class="fa-solid fa-power-off"></i>
+
+            Desactivar tienda
+
+        </button>
+
+
+    </div>
+
+</section>
+
+</div>
+
+<!-- ========================================================= JAVASCRIPT ========================================================== -->
+
+<script src="{{ url_for('static', filename='js/configuracion_adm.js') }}"></script>
+
 {% endblock %}
+
+<script src="{{ url_for('static', filename='js/configuracion_adm.js') }}"></script>
+
+<script>
+    console.log("========================================");
+    console.log("PRUEBA DESDE CONFIGURACION_ADM.HTML");
+    console.log("EL HTML LLEGO HASTA EL SCRIPT");
+    console.log("========================================");
+</script>
